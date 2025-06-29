@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Batch Prepare</title>
+    <style>
+        .form-check-input {
+            position: relative !important;
+        }
+
+        label {
+            /*font-size: 12px !important;*/
+        }
+
+        .form-control {
+            /*font-size: 12px !important;*/
+            padding: 5px 2px;
+        }
+
+        .md-datepicker-input {
+            width: 120px;
+        }
+
+        .input-height {
+            width: 230px !important;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.5);
+        }
+
+        .machine_new table th,
+        .machine_new table td {
+            border: 1px solid #9f9f9f !important;
+            padding: 5px 7px !important;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .control-label {
+            /*text-align:left;*/
+        }
+
+        .select2-selection__choice {
+            color: green !important;
+            font-size: 12px;
+        }
+
+        .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+            background: whitesmoke;
+            z-index: 1001;
+        }
+
+        .auto-complete-repeat {
+            /* padding:2px !important;
+        margin:2px !important;*/
+            font-size: 12px !important;
+        }
+
+        .auto-complete-div-multi-wrapper {
+            font-size: 15px;
+        }
+
+        .auto-complete-div-multi-wrapper {
+            background-color: white !important;
+        }
+
+        .planAuto {
+            border-style: solid;
+            border-width: 1px;
+            border-color: lightgrey;
+            border-radius: 4px;
+        }
+
+        .plan {
+            width: 230px;
+            display: inline;
+            font-size: 16px;
+            font-weight: bold;
+            color: green;
+            /*float: right;*/
+        }
+
+        .btn-dropdown {
+            width: 211px;
+            border-color: none;
+            font-size: 12px;
+        }
+
+        .dropdown-batch {
+            border-width: 0.1px;
+            border-style: solid;
+            border-radius: 5px;
+            border-color: gray;
+            font-size: 12px;
+        }
+        /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+        .btn:hover {
+            color: inherit;
+        }
+
+        .table-scroll tbody {
+            max-height: 1000px !important;
+        }
+
+        .button {
+            border-radius: 4px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            width: 85px;
+            padding: 4px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        .custom_tbl {
+            table-layout: fixed;
+        }
+
+            .custom_tbl th, .custom_tbl td {
+                border: 1px solid #555 !important;
+                vertical-align: middle !important;
+                padding: 10px 0 !important;
+            }
+
+            .custom_tbl thead {
+                position: sticky;
+                top: 0;
+                z-index: 6;
+            }
+
+        .dropdown-menu {
+            z-index: 5;
+        }
+
+        .custom_tbl td {
+            font-size: 12px;
+        }
+
+        .custom_tbl tbody tr:nth-child(2n+1) {
+            background: #cae3e7;
+        }
+
+        .custom_tbl td.input {
+            color: #333 !important;
+            padding: 0 5px !important;
+            position: relative;
+        }
+
+            .custom_tbl td.input input {
+                display: block;
+                /* border: 1px solid; */
+                background: #fff;
+                color: #333 !important;
+                padding: 5px;
+                border: none;
+                width: 100%;
+                height: 35px;
+                border-radius: 3px;
+            }
+
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+            background: #364865 !important;
+        }
+
+            .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+                /*background: #fff !important;*/
+                color: #333 !important;
+            }
+
+        /*.custom_tbl tr:hover td {
+            background: #364865 !important;
+            cursor: default;
+            color: white;
+        }*/
+
+        .md-datepicker-input-container {
+            width: 100%;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: inherit;
+        }
+
+        .btn-disabled {
+            background-color: silver;
+        }
+        .w-auto {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: clip;
+        }
+      /*  tbody:hover,
+        tr.hover,
+        th.hover,
+        td.hover,
+        tr.hoverable:hover {
+            background-color: #e6f9ff;
+        }*/
+    </style>
+</head>
+<body>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Batch Prepare</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Batch Prepare</li>
+                </ol>
+            </div>
+
+            <div class="card-body">
+                <!--input form-->
+                <div class="row row-cols-md-auto align-items-center mb-5">
+                    <div class="col-md-3 col-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">Unit Name</label>
+                            <select class="form-control input-height col-md-8" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadProcessData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">From</label>
+                            <md-datepicker ng-model="FromDate" ng-change="LoadProcessData();" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">To</label>
+                            <md-datepicker ng-model="ToDate" ng-change="LoadProcessData();" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex">
+                        <input type="button" style="width:110px;" class="button btn-lg" ng-value="Processing==true?'Processing':'Show'" ng-class="disabledShow==true?'btn-disabled':'btn-primary'" ng-disabled="disabledShow" ng-click="showData()" />
+                    </div>
+                    <div class="col-md-3 d-flex">
+                        <div style="margin-left:40%;" class="d-flex gap-5">
+                            <input type="radio" class="form-check-input" style="scale:2" ng-model="RMode" ng-init="RMode='RG'" ng-value="'RG'" name="rdoBatchPrepare">&nbsp; Regular
+                            <input type="radio" style="margin-left:15px; scale:2" class="form-check-input" ng-model="RMode" ng-value="'RP'" name="rdoBatchPrepare"> &nbsp; Reprocess
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-md-auto align-items-center mb-5">
+                    <div class="col-md-3 col-6">
+                        <input type="text" ng-model="MachineN" class="form-control" placeholder="Machine No Here...">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <div style=" background: #b0e0e6; padding: 10px;" }>
+            <form class="form-inline" style="padding-bottom:2px">
+                <div class="col-sm-6" style="padding-left:0px;">
+                    <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                </div>
+                <div class="col-sm-6">
+                    <span style="color:green; float:right;">Total Records: {{totalItems}} </span>
+                </div>
+            </form>
+            <div style="width:100%; overflow:auto; max-height:600px;">
+                <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                    <thead class="bg">
+                        <tr>
+                            <th style="width:60px;">Action&nbsp;</th>
+                            <th style="width: 40px;">Sl</th>
+                            <th ng-click="sort('BatchNo')" style="width:130px;"> Batch No
+                                <!--<span ng-click="sort('BatchNo')">Batch No</span>-->
+                                <!--<br />
+                                <input type="checkbox" ng-change="BatchBehavior('Y')" ng-model="chkYes" />&nbsp;&nbsp;Yes&nbsp;
+                                <input type="checkbox" ng-change="BatchBehavior('N')" ng-model="chkNo" />&nbsp;&nbsp;No<br />
+                                <input type="checkbox" ng-change="BatchBehavior('A')" ng-model="chkAll" />&nbsp; All &nbsp;
+                                &nbsp;-->
+                            </th>
+                            <th ng-click="sort('MachineNo')" style="width:75px;">M/C No&nbsp;</th>
+                            <th ng-click="sort('BuyerName')" style=" width: 75px;">Buyer&nbsp;</th>
+                            <th ng-click="sort('JobInfo')" style="width: 115px;">Job&nbsp;</th>
+                            <th ng-click="sort('StyleInfo')" style="width: 115px;">Style &nbsp;</th>
+                            <th ng-click="sort('OrderNo')" style="width: 115px;">Order &nbsp;</th>
+                            <th ng-click="sort('FabricType')" style="width: 115px;">Fab Type &nbsp;</th>
+                            <th ng-click="sort('Composition')" style="width: 300px;">Composition &nbsp;</th>
+                            <th ng-click="sort('ColorName')" style="width: 190px;">Grey Color &nbsp;</th>
+                            <th ng-click="sort('ColorName')" style="width: 190px;">Dyed Color &nbsp;</th>
+                            <th ng-click="sort('LDNo')" style="width: 100px;">LDNo &nbsp;</th>
+                            <th ng-click="sort('RN')" style="width: 100px;">RN &nbsp;</th>
+                            <th ng-click="sort('YarnType')" style="width: 180px;">Yarn Type &nbsp;</th>
+                            <th ng-click="sort('YarnCount')" style="width: 180px;">Yarn Count &nbsp;</th>
+                            <th ng-click="sort('DeliveryDate')" style="width: 100px;">Delivery Date &nbsp;</th>
+                            <th ng-click="sort('MatchingWith')" style="width: 80px;">Matching With &nbsp;</th>
+                            <th ng-click="sort('Enzyme')" style="width: 80px;">Enzyme &nbsp;</th>
+                            <th ng-click="sort('Process')" style="width: 70px;">Process &nbsp;</th>
+                            <th ng-click="sort('BodyPart')" style="width: 60px;">Body Part&nbsp;</th>
+                            <th ng-click="sort('PlanQty')" style="width: 60px;">Fabric Qty &nbsp;</th>
+                            <th ng-click="sort('TFabQty')" style="width:60px;">Total Fabric Qty &nbsp;</th>                           
+
+                            <th ng-if="currlength.length>5" style=""></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="show"  >
+                    <!--<tbody>-->
+                        <tr ng-class="getRowClass($index)" ng-repeat="dataModel in (BatchPrepareData | filter : search | filter : {MachineNo : MachineN} |orderBy:sortKey:reverse  | orderBy:'Sl' )">
+                            <td style="width:7%;" rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">
+                                <a href="Index#!/BatchCardNew?id={{dataModel.BpmId}}&r=0&u={{Unit.Id}}" ng-show="dataModel.IsPrepared==0?true:false" target="_blank">Prepare</a>
+                                <a href="Index#!/BatchCardNew?id={{dataModel.BpmId}}&r=1&u={{Unit.Id}}" style="color:red;" ng-show="dataModel.IsPrepared==1?true:false" target="_blank">Revise</a>
+                            </td>
+                            <td style="display:none">>{{dataModel.Id}}</td>
+                            <td style="width:5%;" rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">{{dataModel.Sl}}</td>
+                            <td rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">{{dataModel.BatchNo}}</td>
+
+                            <td rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">{{dataModel.MachineNo}}</td>
+                            <td rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">{{dataModel.BuyerName}}</td>
+                            <td>{{dataModel.JobInfo}}</td>
+                            <td>{{dataModel.StyleInfo}}</td>
+                            <td>{{dataModel.OrderNo}}</td>
+                            <td>{{dataModel.FabricType}}</td>
+                            <td>{{dataModel.Composition}}</td>
+                            <td>{{dataModel.GreyColorName}}</td>
+                            <td>{{dataModel.DyedColorName}}</td>
+                            <td>{{dataModel.LDNo}}</td>
+                            <td>{{dataModel.RN}}</td>
+                            <td style=" width: 180px;">
+                                <div class="w-auto">
+                                    {{dataModel.YarnType}}
+                                </div>
+                            </td>
+                            <td style=" width: 180px;">
+                                <div class="w-auto">
+                                    {{dataModel.YarnCount}}
+                                </div>
+                            </td>
+                            <td>{{dataModel.DeliveryDate | date:'MMM dd yyyy':'en-US' }}</td>
+                            <td>{{dataModel.MatchingWith}}</td>
+                            <td>{{dataModel.Enzyme}}</td>
+                            <td>{{dataModel.Process}}</td>
+                            <td>{{dataModel.BodyPart}}</td>
+                            <td>{{dataModel.PlanQty}}</td>
+                            <td rowspan="{{rowSpan(dataModel)}}" ng-if="showEl(dataModel)">{{dataModel.TotalFabQty}}</td>
+                        </tr>
+                    <!--</tbody>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

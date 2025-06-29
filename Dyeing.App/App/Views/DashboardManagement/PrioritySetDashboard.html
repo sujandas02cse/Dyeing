@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header">
+                <h1>Priority Set Dashboard</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Dashboard Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Priority Set Dashboard</li>
+                </ol>
+            </div>
+            <div class="card-body">
+                <form id="form" class=" col-md-12 align-items-center mb-5" name="form" ng-keypress="keyPressHandler($event)">
+                    <div class="row mb-5">
+                        <div class="col-md-4 row">
+                            <div class="col-md-2">  
+                                <label class="control-label">
+                                    Unit:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class="col-md-10 center">
+                                <select class="form-control" select2="" name="unit"
+                                        data-ng-model="Unit"
+                                        ng-change="FindMachine()"
+                                        ng-options="item as item.Name for item in UnitList">
+                                    <option value="" ng-required="true">Select Unit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-md-3">
+                                <label class="control-label">
+                                    Machine:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class="col-md-9 center">
+                                <select class="form-control" select2="" name="Machine"
+                                        data-ng-model="Machine"
+                                        ng-change="GetPriorityData()"
+                                        ng-options="item as item.MachineInfo for item in MachineList">
+                                    <option value="" ng-required="true">Select Mechine</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-md-12">
+                        <div style=" background: #b0e0e6; padding: 10px;" }>
+                            <div class="form-inline" style="padding-bottom:2px">
+                                <div class="col-sm-6" style="padding-left:0px;">
+                                    <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                                </div>
+                                <!--<div class="col-sm-6">
+                                    <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{PriorityData}} </span>
+                                </div>-->
+                            </div>
+                            <div style="width:100%; overflow:auto; max-height:600px;">
+                                <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                                    <thead class="bg">
+                                        <tr>
+                                            <th>Sl</th>
+                                            <th>Batch No</th>
+                                            <th>Buyer &nbsp;</th>
+                                            <th>Job &nbsp;</th>
+                                            <th>Style &nbsp;</th>
+                                            <th>Order &nbsp;</th>
+                                            <th>Color &nbsp;</th>
+                                            <th>Store Issued &nbsp;</th>
+                                            <th>M/C No &nbsp;</th>
+                                            <th>Position Set&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="dataModel in (PriorityData | filter : search | orderBy : PositionSet)">
+                                            <td>{{$index+1}}</td>
+                                            <td class="d-none">{{dataModel.Sl}}</td>
+                                            <td>{{dataModel.BatchNo}}</td>
+                                            <td>{{dataModel.BuyerName}}</td>
+                                            <td>{{dataModel.JobInfo}}</td>
+                                            <td>{{dataModel.StyleInfo}}</td>
+                                            <td>{{dataModel.OrderInfo}}</td>
+                                            <td>{{dataModel.ColorName}}</td>
+                                            <td>{{dataModel.StoreIssued}}</td>
+                                            <td>{{dataModel.MachineNo}}</td>
+                                            <td>{{dataModel.PrioritySet}}</td>
+                                            <td class="d-none">
+                                                <!--<select class="custom-width" select2="" name="Select" ng-model="dataModel.PrioritySet"
+                                                        ng-change="GetPriorityDataChange(dataModel.Sl,dataModel.PrioritySet)"
+                                                        ng-options="item as item for item in SetCountList">
+                                                    <option value="" ng-required="true">Select</option>
+                                                </select>-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<md-dialog aria-label="PlanOthersOpDialog" style="width:90%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Others Batch Data</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <table border="1" style="width:100%;">
+                    <tr>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Matching With:
+                                </label>
+                                <div class="col-md-7">
+                                    <select ng-model="Head.MfcId"
+                                            ng-options="a.id as a.name for a in MatchingInfo"
+                                            class="form-control input-height"
+                                            ng-required="true">
+                                        <option value="" selected>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-4">
+                                    Process Flow:
+                                </label>
+                                <div class="col-md-8">
+                                    <div ng-dropdown-multiselect="" ng-required="true" options="DyeingPFList" width="200" selected-model="DProcess"
+                                         checkboxes="true" extra-settings="setting2"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-4">
+                                    Others Fab. Operation:
+                                </label>
+                                <div class="col-md-8">
+                                    <div ng-dropdown-multiselect="" options="OFabOpList" width="200" selected-model="OFabOperation"
+                                         checkboxes="true" extra-settings="setting2"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Shade Name:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="Head.ShadeName" placeholder="Shade Name" class="form-control input-height" />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Recipe No:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="Head.RecipeNo" placeholder="Recipe No" class="form-control input-height" />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Turnig:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="Head.Tuning" placeholder="Turnig" class="form-control input-height" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Loading Time:
+                                </label>
+                                <div class="col-md-7">
+                                    <!--<md-time-picker ng-model="Head.TimeFrom" message="message"></md-time-picker>-->
+                                    <input type="time" ng-model="Head.LTime" ng-change="calcTimeDiff()"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Un-loading Time:
+                                </label>
+                                <div class="col-md-7">
+                                    <!--<md-time-picker ng-model="Head.TimeFrom" message="message"></md-time-picker>-->
+                                    <input type="time" ng-model="Head.ULTime" ng-change="calcTimeDiff()"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group row col-md-12">
+                                <label class="control-label col-md-5">
+                                    Total Time:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="Head.TotalTime" placeholder="Total Time" ng-disabled="true" class="form-control input-height" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="row" style="float:right !important;margin-top:20px;margin-bottom:20px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+           
+</form>
+</md-dialog>

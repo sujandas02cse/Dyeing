@@ -1,0 +1,367 @@
+﻿md-input-container .md-input {
+    height: 20px;
+}
+md-toast {
+    margin-left: 50% !important;
+    top: 10%;
+    position: fixed;
+    opacity: 1.5;
+}
+.md-dialog-container {
+    z-index: 1100;
+}
+.button {
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    width: 100px;
+    padding: 12px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.card-head {
+    text-align: center;
+}
+
+/***********************************************************************
+
+						[32. BADGE ]
+						
+***********************************************************************/
+
+.badge {
+    font-size: 11px !important;
+    height: 18px;
+    color: #fff;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    border-radius: 12px !important;
+    text-shadow: none !important;
+    text-align: center
+}
+
+.list-group-item > .badge {
+    float: right;
+    margin-left: 5px;
+}
+
+.badge.badge-roundless {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important
+}
+
+.badge.badge-empty {
+    display: inline-block;
+    padding: 0;
+    min-width: 8px;
+    height: 8px;
+    width: 8px
+}
+
+.badge-default {
+    background-color: #bac3d0
+}
+
+.badge-primary {
+    background-color: #337ab7
+}
+
+.badge-info {
+    background-color: #659be0
+}
+
+.badge-success {
+    background-color: #36c6d3
+}
+
+.badge-danger {
+    background-color: #ed6b75
+}
+
+.badge-warning {
+    background-color: #F1C40F
+}
+
+.nav.nav-pills > li > a > .badge,
+.nav.nav-stacked > li > a > .badge {
+    margin-top: -2px
+}
+
+.dropdown-menu > li > a > .badge {
+    position: absolute;
+    margin-top: 1px;
+    right: 3px;
+    display: inline;
+    padding: 4px 6px 2px
+}
+
+.dropdown-menu.badge-roundless {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important
+}
+
+.badge {
+    padding: 4px 6px 2px
+}
+/****************************************************************************
+
+						[33. SCROLL TO TOP ]
+								
+*****************************************************************************/
+
+.scroll-to-top {
+    padding: 11px;
+    border-radius: 4px;
+    background: #1c262f;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    z-index: 10001;
+    display: none;
+    right: 10px
+}
+
+.scroll-to-top > i {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    opacity: .6;
+    filter: alpha(opacity=60)
+}
+
+.scroll-to-top:hover {
+    cursor: pointer
+}
+
+.scroll-to-top:hover > i {
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+
+.page-footer-fixed .page-container {
+    margin-bottom: 20px !important
+}
+/*********************************************************************
+
+					[34. FOOTER ]
+
+**********************************************************************/
+
+.page-footer .page-footer-inner {
+    color: #98a6ba;
+}
+
+.page-footer-fixed .page-footer {
+    background-color: #28303b;
+}
+
+.page-footer-fixed.page-footer-fixed-mobile .page-container {
+    margin-bottom: 0px !important
+}
+
+.page-footer {
+    padding: 15px 5px;
+    font-size: 13px;
+    background-color: #222c3c;
+}
+
+.page-footer:after,
+.page-footer:before {
+    content: " ";
+    display: table
+}
+
+.page-footer .page-footer-inner {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+.page-footer-fixed.page-footer-fixed-mobile .page-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    bottom: 0
+}
+
+.page-footer-fixed.page-footer-fixed-mobile.sidemenu-container-fixed .page-footer {
+    margin-left: 0 !important
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.page-footer{
+    height:50px !important;
+}
+
+/****************************************************/
+
+.input-height {
+    height: 45px !important;
+}
+.control-label{
+    text-align:right;
+}
+.content-header {
+    background-color:powderblue;
+}
+md-checkbox .md-container {
+    height: 36px !important;
+}
+
+.table-scroll thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tbody {
+    max-height: 300px;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-scroll tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table-scroll td {
+    height: 47px;
+}
+
+.ui-helper-center {
+    text-align: center;
+}
+
+
+
+/*Fixed Header*/
+.table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+    background: #2F4F4F !important;
+    cursor: default;
+    color: white;
+}
+
+.table-text > thead:first-child > tr:first-child > th {
+    text-align: center;
+}
+
+.card .table-text td {
+    text-align: center;
+}
+
+.logo-image {
+    height: 128%;
+    width: 17%;
+}
+
+    .logo-image:focus {
+        outline: none;
+        border: 0;
+    }
+
+.logo-image {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .1s ease-in-out;
+}
+
+    .logo-image:hover {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+.bg {
+    /*background-image: url("../Images/Tablebackground.jpg");
+    background-repeat: repeat-x;*/
+/*    background: linear-gradient(to bottom, #93cede 0%,#75bdd1 41%,#49a5bf 100%);
+    color: white;*/
+}
+.bg {
+    background: #65b4ca;
+    color: white;
+}
+
+table > thead.bg > tr > th:focus {
+    outline: none;
+    border: 0;
+}
+
+
+/*Chips style start*/
+md-chips.md-default-theme md-chip, md-chips md-chip {
+    background: rgb(255,64,129);
+    color: #ffffff;
+}
+
+    md-chips.md-default-theme md-chip md-icon, md-chips md-chip md-icon {
+        color: rgb(255, 168, 168);
+    }
+
+    md-chips.md-default-theme md-chip.md-focused, md-chips md-chip.md-focused {
+        background: rgb(63,81,181);
+        color: #ffffff;
+    }
+
+/*Chips style end*/
+
+.radio-label {
+    vertical-align: top;
+}
+
+.radio-input {
+    display: inline-block;
+    vertical-align: top;
+}
+
+fieldset {
+    text-align: center;
+}
+
+input[type=radio] {
+    border: 1px;
+    width: 6%;
+    height: 1.4em;
+}
+
+.field_set {
+    border: 1px solid #999;
+    border-radius: 8px;
+    padding: 10px 10px 10px 5px;
+}
+.touchHeight {
+    height: 46px !important;
+    font-size: 15px !important;
+}
+.touchFont {    
+    font-size: 25px !important;
+}

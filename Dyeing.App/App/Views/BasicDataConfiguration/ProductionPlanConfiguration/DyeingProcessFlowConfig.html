@@ -1,0 +1,117 @@
+﻿<body ng-controller="DyeingProcessFlowConfigController">
+    <div class="content-header sty-one">
+        <h1>Dyeing Process Flow Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing Process Flow Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:550px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row" style="height:40px;">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Name Of Process :
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.NameOfProcess" placeholder="Name Of The Process" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="height:30px;">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Priority :
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Model.Priority"
+                                    ng-options="n for n in [] | range:1:21"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="">1 to 20</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" style="height:30px;">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Is Active:
+                            <span class="required">  </span>
+                        </label>
+                        <div class="col-md-1">
+                            <md-checkbox ng-model="Model.IsActive" aria-label="Checkbox 1" class="input-height" ng-checked="true">
+                            </md-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.DpfcId" />
+                </div>
+            </div>
+        </form>
+
+        <!--------View/Edit Part------->
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('NameOfProcess')">
+                            Name Of Process&nbsp;
+                        </th>
+                        <th>
+                            Priority&nbsp;
+                        </th>
+                        <th ng-click="sort('IsActive')">IsActive &nbsp;</th>
+                        <th style="width:15%;">Action&nbsp;</th>
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in ProcessFlow.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) |orderBy:sortKey:reverse|filter:search as currlength">
+                        <td style="display:none">{{dataModel.DpfcId}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.NameOfProcess}}</td>
+                        <td> {{dataModel.Priority}}</td>
+                        <td> {{dataModel.IsActive}}</td>
+
+                        <td style="width:15%;">
+                            <img name="edit" class="logo-image" ng-click="GetProcessFlowInfoByID(dataModel)" src="/Content/img/editicon.png" />
+                            <img name="delete" style="margin-left: 7%;" ng-click="actionDialog('Delete',dataModel)" class="logo-image" src="/Content/img/deleteicon.png">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+        </uib-pagination>
+
+    </div>
+
+</body>
+

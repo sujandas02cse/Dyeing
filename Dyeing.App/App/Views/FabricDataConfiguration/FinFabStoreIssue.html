@@ -1,0 +1,354 @@
+﻿<style>
+
+    table {
+        border: 1px solid #333;
+    }
+
+        table th, table td {
+            border: 1px solid #333 !important;
+            padding: 3px !important;
+        }
+
+    .section_1 table th {
+        text-align: right;
+    }
+
+    table th, table td {
+        text-align: center;
+    }
+
+    .sign_box {
+        border: 1px solid #333 !important;
+        height: 100px;
+    }
+
+        .sign_box p {
+            text-align: center;
+            text-decoration: underline;
+        }
+
+            .sign_box p b {
+                color: #000;
+            }
+
+    textarea {
+        height: 50px !important;
+        width: 100%;
+        /*resize:none;*/
+    }
+
+    thead {
+        height: 35px !important;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    input[type='checkbox'] {
+        scale: 1.3
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+    /*    .table-head td {
+        border: none !important;
+    }
+    .table-head th {
+        border: none !important;
+    }*/
+    /* Target radio buttons and text near the top */
+
+    /* Strongest selector for deeply-included content */
+
+    /* Enlarge radio buttons */
+    /* Enlarge all radio buttons */
+    .finfab-radio-wrapper input[type="radio"] {
+        transform: scale(3.6);
+        margin-right: 0px;
+        vertical-align: middle;
+    }
+
+    .finfab-radio-wrapper label {
+        font-size: 18px;
+        font-weight: 500;
+        margin-right: 5px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        /* font-size: 18px;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;*/
+    }
+</style>
+
+
+<body ng-controller="FinFabStoreIssue">
+    <div class="content-header sty-one">
+        <h1>Finished Fabric Floor To Store Issue</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Fabric Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Finished Fabric Floor To Store Issue</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:700px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="finfab-radio-wrapper">
+                <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>
+
+            </div>
+
+
+
+            <div style="margin-left:40%;" class="d-flex gap-5">
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()" ng-model="Mode" ng-value="'N'" name="optradio">New  &nbsp;&nbsp;
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()" ng-model="Mode" ng-value="'M'" name="optradio">Modify
+
+            </div>
+            <hr />
+            <div class="form-group row">
+                <div class="col-md-4" ng-show="Mode=='N'?true:false">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            <strong>Batch No:</strong>
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <!--ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"-->
+                            <input type="text" ng-model="Batch" typeahead-on-select="GetDataByBatch()"
+                                   uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   placeholder="Batch No" class="form-control input-height plan" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" ng-show="Mode=='M'?true:false">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            <strong>Tracking No:</strong>
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <!--ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"-->
+                            <input type="text" ng-model="Tracking" typeahead-on-select="GetDataByTracking()"
+                                   uib-typeahead="item as item.TrackingNo for item in TrackingList | filter: {TrackingNo:$viewValue} | limitTo:8"
+                                   placeholder="Tracking No" class="form-control input-height plan" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5 clsHeight">
+                            Compacting:
+                        </label>
+                        <div class="col-md-7">
+                            <select ng-model="master.CompTime"
+                                    ng-disabled="Mode=='N'?false:true"
+                                    ng-change="changeCompTime()"
+                                    ng-options="a.id as a.name for a in CompactingTime"
+                                    class="form-control input-height clsHeight"
+                                    ng-required="true">
+                                <option value="" selected>Select</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" ng-show="TrackingNo.length>1">
+                    <span style="color:green; font-weight:bold; font-size:18px; font-style:italic; float:right;">Tracking No # {{TrackingNo}}</span>
+                </div>
+            </div>
+
+            <!--<div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>-->
+            <!--<input type="hidden" ng-model="Model.PHeadNo" />-->
+            <div class="row section_1">
+                <div class="col-md-4">
+                    <table class="table-head" style="width:100%;">
+                        <tr>
+                            <th>Buyer:</th>
+                            <td><input class="form-control" ng-model="master.BuyerName" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Job No:</th>
+                            <td><input class="form-control" ng-model="master.JobInfo" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Order No:</th>
+                            <td><input class="form-control" ng-model="master.OrderNo" type="text" name="name" disabled /></td>
+                        </tr>
+
+                        <tr>
+                            <th>Color:</th>
+                            <td><input class="form-control" ng-model="master.Color" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Fabric Type:</th>
+                            <td><input class="form-control" ng-model="master.FabType" type="text" name="name" disabled /></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table class="table-head" style="width:100%;">
+                        <tr>
+                            <th>Batch No:</th>
+                            <td><input class="form-control" ng-model="master.BatchNo" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Date:</th>
+                            <td><input class="form-control" ng-model="master.CurrDate" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Req. Dia:</th>
+                            <td><input class="form-control" ng-model="master.FDia" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Req. GSM:</th>
+                            <td><input class="form-control" ng-model="master.FGSM" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Lot No:</th>
+                            <td><input class="form-control" ng-model="master.YarnLot" type="text" name="name" disabled /></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table class="table-head" style="width:100%;">
+                        <tr>
+                            <th>Batch Qty:</th>
+                            <td colspan="2"><input class="form-control" ng-model="master.BatchQty" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Finish Qty:</th>
+                            <td colspan="2"><input class="form-control" ng-model="master.FinishQty" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Process Loss:</th>
+                            <td colspan="2"><input class="form-control" ng-model="master.ProcessLoss" type="text" name="name" disabled /></td>
+                        </tr>
+                        <tr>
+                            <th>Total Qty:</th>
+                            <td><b>{{TotalKg}} Kg</b></td>
+                            <td><b>{{TotalYds}} Yds</b></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <!--<div class="col-md-2">
+                    <table class="table">
+                        <tr>
+                            <td colspan="2" class="text-center"><b>Total Qty</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>42.00 Kg</b></td>
+                            <td><b>171.24 Yds</b></td>
+                        </tr>
+                    </table>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+            
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed">
+                        <thead class="bg">
+                            <tr>
+                                <th><input type="checkbox" ng-change="ChangeCheckM()" ng-model="IsCheck" /></th>
+                                <!--<th>S/L</th>-->
+                                <th>Roll</th>
+                                <th>Dia"</th>
+                                <th>GSM</th>
+                                <th>Kg</th>
+                                <th>Yds</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in details">
+                                <td><input type="checkbox" name="name" ng-checked="obj.IsCheck" ng-change="ChangeCheck()" ng-model="obj.IsCheck" /></td>
+                                <!--<td>{{$index+1}}</td>-->
+                                <td>{{obj.RollNo}}</td>
+                                <!--< /td>-->
+                                <td>{{obj.ActualDia}}</td>
+                                <td>{{obj.ActualGSM}}</td>
+                                <td>{{obj.RollWeight}}</td>
+                                <td>{{obj.RollWeightYds}}</td>
+                                <td>
+                                    <textarea class="clstextArea" ng-model="obj.Remarks"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed">
+                        <thead class="bg">
+                            <tr>
+                                <th><input type="checkbox" name="name" ng-change="ChangeCheckM1()" ng-model="IsCheck1" /></th>
+                                <!--<th>S/L</th>-->
+                                <th>Roll</th>
+                                <th>Dia"</th>
+                                <th>GSM</th>
+                                <th>Kg</th>
+                                <th>Yds</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in details1">
+                                <td><input type="checkbox" name="name" ng-checked="obj.IsCheck" ng-change="ChangeCheck()" ng-model="obj.IsCheck" /></td>
+                                <!--<td>{{$index+1}}</td>-->
+                                <td>{{obj.RollNo}}</td>
+                                </
+                                td
+                                <td>{{obj.ActualDia}}</td>
+                                <td>{{obj.ActualGSM}}</td>
+                                <td>{{obj.RollWeight}}</td>
+                                <td>{{obj.RollWeightYds}}</td>
+                                <td>
+                                    <textarea class="clstextArea" ng-model="obj.Remarks"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          
+            
+    <!--<div class="row mt-5">
+                <div class="col-md-3">
+                    <div class="sign_box">
+                        <p><b>Inspected By</b></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="sign_box">
+                        <p><b>Check By</b></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="sign_box">
+                        <p><b>Received By</b></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="sign_box">
+                        <p><b>Authorized By</b></p>
+                    </div>
+                </div>
+            </div>-->
+        </form>
+
+    </div>
+
+</body>
+

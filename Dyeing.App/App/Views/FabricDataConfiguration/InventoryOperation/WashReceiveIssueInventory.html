@@ -1,0 +1,342 @@
+﻿<body ng-controller="WashReceiveIssueInventoryController">
+    <div class="content-header sty-one">
+        <h1>Wash Receive & Issue Inventory</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Fabric Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Inventory Operation</a></li>
+            <li><i class="fa fa-angle-right"></i> Wash Receive & Issue Inventory</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">            
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Tracking No
+                            <!--<span class="required" style="color:red"> * </span>-->
+                        </label>
+                        <div class="col-md-6">
+                            <!--<input type="text" ng-model="Model.TrackingNo" class="form-control input-height" ng-blur="ShowData(Model.TrackingNo)"/>-->
+                            <md-autocomplete name="Tracking"
+                                             md-selected-item="Model.selectedName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-selected-item-change="ShowData()"
+                                             md-items="item in querySearch(searchName,'Name')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <input type="hidden" ng-model="HidTrackingID" class="form-control input-height" size="20" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">                      
+                        
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">                       
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Cutting No
+                        </label>
+                        <div class="col-md-6">
+                            <div class="form-group row" style="height:30px;">
+                                <md-checkbox ng-model="CuttingNo" aria-label="Checkbox 1" class="input-height" ng-disabled="true"></md-checkbox>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Body Part
+                        </label>
+                        <div class="col-md-4">
+                            <div class="form-group row" style="height:30px;">
+                                <md-checkbox ng-model="BodyPartNo" aria-label="Checkbox 2" class="input-height" ng-disabled="true"></md-checkbox>
+                            </div>                                                  
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="display:inline; font-size:12px;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="OtherOpPopup($event)">
+                                <span style=" width:200px; height:50px;">Dispatch Generation</span>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Buyer No
+                        </label>
+                        <div class="col-md-6">
+                            <!--<input type="text" ng-model="Model.BuyerID" class="form-control input-height"  size="20"/>-->
+                            <md-autocomplete name="Buyer"
+                                             md-selected-item="Model.selectedBuyer"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchBuyerName"
+                                             md-selected-item-change="LoadJob()"
+                                             md-items="itemA in queryBuyerSearch(searchBuyerName,'Name')"
+                                             md-item-text="itemA.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchBuyerName" md-highlight-flags="^i">{{itemA.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchBuyerName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <input type="hidden" ng-model="HidBuyerID" class="form-control input-height" size="20" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Job No
+                        </label>
+                        <div class="col-md-4">
+                            <!--<input type="text" ng-model="Model.JobID" class="form-control input-height"  size="20"/>-->
+
+                            <md-autocomplete name="Job"
+                                             md-selected-item="Model.selectedJob"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchJobName"
+                                             md-selected-item-change="LoadOrder()"
+                                             md-items="itemB in queryJobSearch(searchJobName,'Name')"
+                                             md-item-text="itemB.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchJobName" md-highlight-flags="^i">{{itemB.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchJobName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <input type="hidden" ng-model="HidJobID" class="form-control input-height" size="20" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Order No
+                        </label>
+                        <div class="col-md-5">
+                            <!--<input type="text" ng-model="Model.OrderID" class="form-control input-height"  size="20"/>-->
+
+                            <md-autocomplete name="Order"
+                                             md-selected-item="Model.selectedOrder"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchOrderName"
+                                             md-selected-item-change="LoadColor()"
+                                             md-items="itemC in queryOrderSearch(searchOrderName,'Name')"
+                                             md-item-text="itemC.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchOrderName" md-highlight-flags="^i">{{itemC.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchOrderName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <input type="hidden" ng-model="HidOrderID" class="form-control input-height" size="20" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Color
+                        </label>
+                        <div class="col-md-5">
+                            <!--<input type="text" ng-model="Model.ColorID" class="form-control input-height" size="20" ng-blur="ShowDataOth()"/>-->
+                            <md-autocomplete name="Color"
+                                             md-selected-item="Model.selectedColor"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchColorName"
+                                             md-selected-item-change="ShowDataOth()"
+                                             md-items="itemD in queryColorSearch(searchColorName,'Name')"
+                                             md-item-text="itemD.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchColorName" md-highlight-flags="^i">{{itemD.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchColorName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                            <input type="hidden" ng-model="HidColorID" class="form-control input-height" size="20" />
+
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+            <div style="width:100%; overflow:auto;">
+                <table style="font-size:12px;" class="table table-bordered bordered table-striped table-condensed table-scroll">
+                    <thead class="" style="position: sticky; top: 0; background-color:#218895;">
+                        <tr style="text-align:center;">
+                            <th style="width:40px; vertical-align:middle"><md-checkbox ng-model="chk" aria-label="Checkbox 3" ng-change="chkAll()" class="input-height"></md-checkbox></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Buyer Name</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Job Info</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Order No</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Item Name</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Color</font></th>
+                            <th style="width:100px; vertical-align:text-top;" ng-hide="CuttingNo"><font color="white">Cutting No</font></th>
+                            <th style="width:100px; vertical-align:text-top;" ng-hide="BodyPartNo"><font color="white">Body Part</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">UOM</font></th>
+                            <th style="width:90px; vertical-align:text-top;"><font color="white">Size</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">T. Rcv Qty</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">T. Rcv Bundle</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">T. Issue Qty</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">T. Issue Bundle</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Rcv Qty</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Rcv Bundle</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Issue Qty</font></th>
+                            <th style="width:100px; vertical-align:text-top;"><font color="white">Issue Bundle</font></th>
+                            <th style="width: 0.2%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in Details">
+                            <td style=" width: 30px; text-align:center">
+                                <div ng-if=" (obj.totalRecQty==obj.TotalIssueQtyValue) && (obj.totalRecQty!=0 && obj.TotalIssueQtyValue!=0)">
+                                    <md-checkbox ng-model="obj.IsActiveRow" aria-label="Checkbox 4"></md-checkbox>
+                                </div>
+                                <div ng-if=" obj.totalRecQty!=obj.TotalIssueQtyValue ||  (obj.totalRecQty==0 && obj.TotalIssueQtyValue==0)">
+                                    <md-checkbox ng-model="obj.IsActiveRow" ng-change="enableTxtBox($index)" aria-label="Checkbox 4"></md-checkbox>
+                                </div>
+
+                            </td>
+                            <td style="width: 100px; text-align:center">
+                                {{obj.BuyerName}}
+                            </td>
+                            <td style="width: 100px; text-align:center">
+                                {{obj.JobInfo}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{obj.OrderNo}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{obj.ItemName}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{obj.ItemColorName}}
+                            </td>
+                            <td align="center" ng-hide="CuttingNo" style="width: 100px;">
+                                {{obj.CuttingNo}}
+                            </td>
+
+                            <td align="center" ng-hide="BodyPartNo" style="width: 100px;">
+                                {{obj.BodyPart}}
+                            </td>
+                            <td align="center" ng-hide="checked" style="width: 100px;">
+                                {{obj.UOMNAME}}
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                {{obj.ItemSizeName}}
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                {{obj.totalRecQty}}
+                            </td>
+
+                            <td align="center" style="width: 100px;">
+                                {{obj.TotalRcvBundle}}
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                {{obj.TotalIssueQtyValue}}
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                {{obj.TotalIssueBundleQtyValue}}
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                <input type="text" name="RcvQty{{$index}}" ng-model="obj.RcvQty" ng-value="obj.RcvQty" class="form-control input-height" style="text-align:center;" ng-disabled="!obj.isEditing" ng-blur="RecQtyCheck($index)" />
+                                <input type="hidden" name="HiddenRcvQty{{$index}}" ng-model="obj.HiddenRcvQty" ng-value="obj.HiddenRcvQty" class="form-control input-height" style="text-align:center;" />
+                            </td>
+                            <td align="center" style="width: 100px;">
+                                <input type="text" name="RcvBundle{{$index}}" ng-model="obj.RcvBundle" ng-value="obj.RcvBundle" class="form-control input-height" style="text-align:center;" ng-disabled="!obj.isEditing" />
+                            </td>
+
+                            <td style="width: 100px;">
+                                <input type="text" name="totalIssueQty{{$index}}" ng-model="obj.totalIssueQty" ng-value="obj.totalIssueQty" class="form-control input-height" style="text-align:center;" ng-disabled="!obj.isEditing" ng-blur="IssueQtyCheck($index)" />
+                            </td>
+                            <td style="width: 100px;">
+                                <input type="text" name="TotalIssueBundleQty{{$index}}" ng-model="obj.TotalIssueBundleQty" ng-value="obj.TotalIssueBundleQty" class="form-control input-height" style="text-align:center;" ng-disabled="!obj.isEditing" />
+                            </td>
+
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+               
+
+
+        </form>
+
+    </div>
+
+</body>
+

@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Batch Plan</title>
+    <style>
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+        table th,
+        table td {
+            font-size: smaller;
+            text-align: center;
+            vertical-align: middle !important;
+            border: 1px solid #cbcbcb !important;
+        }
+        .data_tbl {
+            position: relative;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .data_tbl thead {
+            position: sticky;
+            /* position: absolute; */
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .MPlanDialog {
+            max-width: 95%;
+        }
+        .MPlanDialog .table-modal td {
+            padding: 5px !important;
+            font-size: 10px;
+        }
+        .MPlanDialog .table-modal td input {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Batch Plan</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Batch Plan</li>
+                </ol>
+            </div>
+
+            <div class="card-body">
+                <!--input form-->
+                <form class="row row-cols-md-auto align-items-center mb-5">
+                    <div class="col-md-3 col-4">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Unit:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadBuyerData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-4 ml-3">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Buyer:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="Buyer"
+                                    data-ng-model="Buyer"
+                                    ng-change="LoadProcessData()"
+                                    ng-options="item as item.BuyerName for item in BuyerList">
+                                <option value="" ng-required="true">Select Buyer</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <div class="card mt-5">
+            <div class="card-header sty-one">
+                <form class="form-inline" style="padding-bottom:2px">
+                    <div class="col-sm-2" style="padding-left:0px;">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                    </div>
+                    <div class="col-md-8 col-8">
+                        <button class="btn btn-lg btn-info" ng-click="MPlanPopup($event)">
+                            Action Popup
+                        </button>
+                    </div>
+                    <div class="col-md-2 col-2" style="font-weight:bolder; color:green;"> Total Records: {{PlanData.length}}</div>
+                </form>
+            </div>
+
+            <div class="data_tbl table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">
+                                <label class="control control--checkbox"></label>
+                            </th>
+                            <th>Buyer</th>
+                            <th>Job</th>
+                            <th>Style</th>
+                            <th>Order</th>
+                            <th>Grey Color</th>
+                            <th>Dyed Color</th>
+                            <th>Lab Dip No</th>
+                            <th>Fabric Type</th>
+                            <th>Composition</th>
+                            <th>Dia</th>
+                            <th>GSM</th>
+                            <th>Yarn Type</th>
+                            <th>Yarn Count</th>
+                            <th>Order Type</th>
+                            <th>Shipment Date</th>
+                            <th>Dyeing Commitment Start Date</th>
+                            <th>Dyeing Commitment End Date</th>
+                            <!--<th>LD No</th>-->
+                            <th>RN No</th>
+                            <th class="d-none">Special Finish</th>
+                            <th>Required Fabric Quantity</th>
+                            <th>Already Planned Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="getRowClass($index)"
+                            ng-repeat="dataModel in (PlanData | filter : search)">
+                            <td>
+                                <label class="control control--checkbox">
+                                    <input ng-click="checkJob(dataModel)" ng-model="dataModel.chkJob" type="checkbox" ng-init="dataModel.chkJob=false" class="js-check-all">
+                                </label>
+                            </td>
+                            <td>{{dataModel.BuyerName}}</td>
+                            <td>{{dataModel.JobNo}}</td>
+                            <td>{{dataModel.StyleNo}}</td>
+                            <td>{{dataModel.OrderNo}}</td>
+                            <td>{{dataModel.GreyColor}}</td>
+                            <td>{{dataModel.Color}}</td>
+                            <td>
+                                <input class="form-control" style="width: 200px;" type="text" name="name" ng-model="dataModel.LabDipNo" />
+                            </td>
+                            <td>{{dataModel.FabricType}}</td>
+                            <td>{{dataModel.Composition}}</td>
+                            <td>{{dataModel.Dia}}</td>
+                            <td>{{dataModel.GSM}}</td>
+                            <td>{{dataModel.YarnType}}</td>
+                            <td>{{dataModel.YarnCount}}</td>
+                            <td>{{dataModel.OrderType}}</td>
+                            <td>{{dataModel.ShipmentDate}}</td>
+                            <td>{{dataModel.CStartDate}}</td>
+                            <td>{{dataModel.CEndDate}}</td>
+                            <!--<td>{{dataModel.LDNo}}</td>-->
+                            <td>
+                                {{dataModel.RNNo}}
+                            </td>
+                            <td class="d-none"><button class="btn btn-warning" ng-click="SpFinishPopup($event,dataModel.InitInfoId)">Pop Up</button></td>
+                            <!--{{dataModel.Process}}-->
+                            <td>{{dataModel.ReqFabQty}}</td>
+                            <td>{{dataModel.AlreadyPlannedQty}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                
+            </div>
+
+            <!--popup tbl-->
+            <!--Buttons-->
+            <!--<div class="text-center py-5">
+                <button class="btn btn-lg btn-success">Save</button>
+                <button class="btn btn-lg btn-danger">Close</button>
+            </div>-->
+
+        </div>
+    </div>
+</body>
+</html>

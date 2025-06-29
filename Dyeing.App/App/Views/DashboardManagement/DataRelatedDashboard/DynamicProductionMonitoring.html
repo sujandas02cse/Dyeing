@@ -1,0 +1,371 @@
+﻿<style>
+    .table-scroll tbody {
+        max-height: 3000px !important;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width: 230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .table-scroll tbody {
+        max-height: 1000px !important;
+    }
+
+    .button-search {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    .custom_tbl {
+        table-layout: fixed;
+    }
+
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+        }
+
+    .dropdown-menu {
+        z-index: 5;
+    }
+
+    .custom_tbl td {
+        font-size: 12px;
+    }
+
+   /* .custom_tbl tbody tr:nth-child(2n+1) {
+        background: #cae3e7;
+    }*/
+
+    .custom_tbl td.input {
+        color: #333 !important;
+        padding: 0 5px !important;
+        position: relative;
+    }
+
+        .custom_tbl td.input input {
+            display: block;
+            /* border: 1px solid; */
+            background: #fff;
+            color: #333 !important;
+            padding: 5px;
+            border: none;
+            width: 100%;
+            height: 35px;
+            border-radius: 3px;
+        }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+        /*background: #fff !important;*/
+        color: #333 !important;
+    }
+
+    .custom_tbl tr:hover td {
+        background: #364865 !important;
+        cursor: default;
+        color: white;
+    }
+
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-input {
+        transform: scale(1.2);
+    }
+
+    .f-24{
+        font-size: 24px;
+    }
+
+    .f-18{
+        font-size: 18px;
+    }
+</style>
+<div>
+    <div class="content-header sty-one">
+        <h1>Dynamic Production</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Dashboard Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Data Related Dashboard</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Card Dashboard</li>
+        </ol>
+    </div>
+
+    <div></div>
+
+    <div class="card card-body" style="padding:0; ">
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Unit:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="Date" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" style="width:110px;" class="button-search btn-lg" ng-value="Processing==true?'Processing':'Search'" ng-class="disabledShow===true?'btn-disabled':'btn-primary'" ng-disabled="disabledShow" ng-click="LoadingData()" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img ng-show="ProductionData.length>0?true:false" ng-click="exportToExcel(ProductionData)" style="height: 48px; margin-left:40%; cursor:pointer" alt="download floor status data" src="../../../../Content/img/exceldownload.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <!--<form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>-->
+
+        <div style="border: 0.25px solid #ffffff; padding: 10px; margin-bottom: 10px;">
+            <div class="form-group-row">
+                <div class="col-md-12">
+                    <div style="margin-left:40%;" class="d-flex gap-5">
+                        <input type="radio" class="form-check-input" name="radioAll" ng-model="Issue" ng-value="'All'" ng-init="Issue='All'">
+                        <label>&nbsp; All</label>
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" name="radioIssue" ng-model="Issue" ng-value="'WithIssue'">
+                        <label>&nbsp; With Fabric Issue</label>
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" name="radioWithoutIssue" ng-model="Issue" ng-value="'WithOutIssue'">
+                        <label>&nbsp; Without Fabric Issue</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div style="width: 100%; overflow: auto; max-height: 600px;">
+            <table id="dynamicProductionReport" class="table table-bordered bordered table-text table-hover custom_tbl">
+                <thead class="bg">
+                    <tr >
+                        <td colspan="16" ng-class="f-24"><h2>Dyanmic Production Report</h2></td>
+                        <td colspan="4" ng-class="f-18"><h3>Date : {{currentDate}}</h3></td>
+                    </tr>
+                    <tr>
+                        <th>M/C &nbsp;</th>
+                        <th>Priority &nbsp;</th>
+                        <th>Buyer &nbsp;</th>
+                        <th>Style &nbsp;</th>
+                        <th>Order  &nbsp;</th>
+                        <th>Job &nbsp;</th>
+                        <th>Batch No &nbsp;</th>
+                        <th>Batch Create Date &nbsp;</th>
+                        <th>Fabric Issue Date &nbsp;</th>
+                        <th>Ship Date &nbsp;</th>
+                        <th>Color &nbsp;</th>
+                        <th>Fab Type &nbsp;</th>
+                        <th>GSM  &nbsp;</th>
+                        <th>Dia &nbsp;</th>
+                        <th>Lab Dip No. &nbsp;</th>
+                        <th>Plan Qty &nbsp;</th>
+                        <th>Actual Qty &nbsp;</th>
+                        <th>Yarn Lot &nbsp;</th>
+                        <th>Special Instruction &nbsp;</th>
+                        <th>Remarks&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="{{showColor(obj)}}" ng-repeat="obj in (ProductionData  |orderBy:sortKey:reverse )">
+                        <td style="background:white !important" ng-if="showData(obj)" rowspan="{{rowSpan(obj)}}">{{obj.MachineNo}} &nbsp;</td>
+                        <td>{{obj.PriorityNo}} &nbsp;</td>
+                        <td>{{obj.BuyerName}} &nbsp;</td>
+                        <td>{{obj.StyleInfo}} &nbsp;</td>
+                        <td>{{obj.OrderInfo}} &nbsp;</td>
+                        <td>{{obj.JobInfo}} &nbsp;</td>
+                        <td>{{obj.BatchNo}} &nbsp;</td>
+                        <td>{{obj.BatchDate}} &nbsp;</td>
+                        <td>{{obj.FabricIssueDate}} &nbsp;</td>
+                        <td>{{obj.ShipmentDate}} &nbsp;</td>
+                        <td>{{obj.Color}} &nbsp;</td>
+                        <td>{{obj.FabricType}} &nbsp;</td>
+                        <td>{{obj.FGSM}} &nbsp;</td>
+                        <td>{{obj.FDia}} &nbsp;</td>
+                        <td>{{obj.LabDipNo}} &nbsp;</td>
+                        <td>{{obj.PlanQty}} &nbsp;</td>
+                        <td>{{obj.ActualQty}} &nbsp;</td>
+                        <td>{{obj.YarnLot}} &nbsp;</td>
+                        <td>{{obj.Specialinstruction}} &nbsp;</td>
+                        <td>{{obj.Remarks}} &nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+

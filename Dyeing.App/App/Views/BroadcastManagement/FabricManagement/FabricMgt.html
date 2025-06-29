@@ -1,0 +1,174 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 500px;
+        width: 250px;
+    }
+
+    .radio-label {
+        vertical-align: top;
+    }
+
+    .radio-input {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    fieldset {
+        text-align: center;
+    }
+
+
+    .required {
+        color: red !important;
+    }
+
+    .single-line {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* Remove appearance but keep them circular with proper dimensions */
+    input[type=radio] {
+        width: 1.4em !important; /* Adjust the width */
+        height: 1.4em !important; /* Adjust the height */
+        display: inline-block; /* Keep them inline */
+        vertical-align: middle !important; /* Ensure alignment with labels */
+        border-radius: 50%; /* Make the radio button circular */
+        border: 2px solid #ccc; /* Add a border */
+        background-color: white; /* Set background color */
+        cursor: pointer;
+        margin-right: 10px; /* Add space between the radio and label */
+        appearance: none; /* Reset the default radio button appearance */
+    }
+
+        /* Add hover effect for radio buttons */
+        input[type=radio]:hover {
+            border-color: #888; /* Darker border on hover */
+        }
+
+        /* Styling the checked radio button */
+        input[type=radio]:checked {
+            background-color: #007bff; /* Fill color when selected */
+            border-color: #007bff;
+        }
+
+    /* Ensure labels align correctly */
+    .radio-label, .form-check-label {
+        display: inline-block;
+        margin-left: 10px; /* Space between radio and label */
+        vertical-align: middle; /* Align label with radio button */
+        white-space: nowrap; /* Prevent labels from breaking lines */
+    }
+
+    /* Use flexbox to ensure alignment of radio buttons and labels */
+    .custom-radio {
+        display: flex;
+        align-items: center; /* Vertically center radio and label */
+    }
+</style>
+
+<body ng-controller="FabricMgtController as ctrl">
+
+    <div class="content-header sty-one">
+        <h1>Fabric Management</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Broadcast Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Fabric Management</a></li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:auto;">
+
+        <div class="form-group row" style="margin-top:5px;">
+        </div>
+        <div class="radio-container">
+            <div class="form-group row justify-content-center">
+                <div class="col-md-6">
+                    <div class="radio-group">
+
+                        <div class="custom-radio">
+                            <input type="radio" id="oldOption" class="form-check-input" name="batchType" ng-model="batchType" ng-value="'Old'" ng-init="batchType='Old'" ng-click="checkOld()">
+                            <label for="oldOption" class="form-check-label radio-label">Old</label>
+                        </div>
+
+                        <div class="custom-radio">
+                            <input type="radio" id="newOption" class="form-check-input" name="batchType" ng-model="batchType" ng-value="'New'" ng-click="checkNew()">
+                            <label for="newOption" class="form-check-label radio-label">New</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="card card-body" style="min-height:500px;">
+            <form id="form" name="form" class="form-horizontal" ng-init="rpt={}">
+                <div class="form-body">
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Group Name:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="rpt.GroupName" ng-readonly="controlProp == 0" ng-init="rpt.GroupName='Masco Group'" name="GroupName" placeholder="Group Name" disabled class="form-control input-height" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Report Name:
+                                </label>
+                                <div class="col-md-7">
+                                    <select ng-model="rpt.ReportingId"
+                                            ng-options="x.ReportingId as x.ReportName for x in rptInfoList"
+                                            class="form-control input-height"
+                                            ng-change="GetParmInfo()"
+                                            ng-required="true">
+                                        <option value="" selected>Select Report Name</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <span id="genUI"></span>
+                    </div>
+
+                    <div class="form-actions col-md-10 offset-2">
+                        <div ng-include src="'../../App/Views/Shared/_LayoutReportButton.html'"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+</body>

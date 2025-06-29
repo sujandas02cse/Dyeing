@@ -1,0 +1,19 @@
+﻿<div class="welcome_pg">
+    <div class="card_wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3" ng-click="getDataByMenuId($index)" ng-repeat="menu in BoxMenuData| orderBy: 'BPriority'">
+                    <div class="card_box icon_wrap" ng-show="menu.PageName==''?true:false">
+                        <i class="{{menu.ImageFileName}}"></i>
+                        <h3>{{menu.ManuName}}</h3>
+                    </div>
+                    <a class="card_box icon_wrap" ng-hide="menu.PageName==''?true:false" href="#!/{{menu.PageName}}">
+                        <i class="{{menu.ImageFileName}}"></i>
+                        <h3>{{menu.ManuName}}</h3>
+                    </a>
+                </div>                       
+            </div>
+        </div>
+    </div>
+</div>
+

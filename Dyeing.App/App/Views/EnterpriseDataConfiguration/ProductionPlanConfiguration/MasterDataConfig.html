@@ -1,0 +1,424 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 200px;
+        width: 190px;
+    }
+
+    .dropdown-menu {
+        min-width: 12rem;
+        width: 190px;
+        max-height: 175px !important;
+        overflow: auto;
+        /*min-height:250px !important;*/
+    }
+
+        .dropdown-menu dropdown-menu-form {
+            height: 350px;
+        }
+
+    p {
+        background: lightblue;
+    }
+
+    table {
+        margin-bottom: 10px;
+    }
+
+    p {
+        border: 1px solid #333;
+    }
+
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 5px 0;
+        cursor: pointer;
+    }
+
+    table:hover {
+        /*background: #495057;*/
+    }
+
+    .machine_new table th img {
+        width: 30px;
+        margin: 5px;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+    }
+
+    .md-datepicker-input {
+        width: 180px;
+    }
+
+    .input-height {
+        height: initial !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .ace-responsive-menu > li > a {
+        padding: 5px !important;
+    }
+
+    .content {
+        padding: 0 !important;
+    }
+
+    table th, table td {
+        font-size: 11px;
+        padding: 0 !important;
+    }
+
+    .field_set p {
+        height: 22.5px;
+        font-size: 12px;
+        margin: 1px;
+        background: inherit !important;
+        text-align: left;
+    }
+    .field_set p.remark{
+        /*width:180px;*/
+        height:60px;
+    }
+        .field_set p textarea {
+            width: 180px;
+        }
+        .new_btn {
+            background: #60c3cd;
+            position: fixed;
+            top: 50%;
+        }
+
+    .mod_btn {
+        background: #60c3cd;
+        position: fixed;
+        top: 60%;
+    }
+
+    .new_btn,
+    .mod_btn {
+        background: #93cede;
+        width: 100px;
+        padding: 5px;
+        right: 0;
+    }
+
+        .new_btn input,
+        .mod_btn input {
+            width: 35px;
+        }
+
+    .btn-action img {
+        width: 30px;
+    }
+
+     .md-dialog-content input[type=text] {
+        /*padding: 0 !important;*/
+        /*width: 125px;*/
+    }
+    .dataConfig input {
+        padding: 0 !important;
+        width: 180px;
+        outline: none;
+        border: 0px solid grey;
+        line-height: 19px;
+    }
+    
+    .td-head {
+        height: 30px;
+        background: #4ea8c1;
+        line-height: 30px;
+        border: 1px solid #423f3f;
+    }
+
+        .td-head b {
+            color: #fff;
+            font-size: 13px;
+        }
+
+    p span.btn-sm {
+        height: 20px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+
+    .select_unit {
+        text-align: left;
+        font-size: 12px;
+    }
+
+    select {
+        height: 24px !important;
+    }
+
+        select.form-control {
+            padding: 0px;
+        }
+    .select2-container--default.select2-container--open {
+        font-size: 12px;
+    }
+    .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+        padding: 2px 0px;
+    }
+    .select2-container .select2-selection--single {
+        height: 22px;
+
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 22px;
+        padding-right: 15px;
+    }
+    .select2-container {
+        /* width: -webkit-fill-available !important; */
+        width: 180px !important;
+    }
+    .select2-container--default{
+  
+    }
+</style>
+<div>
+    <!--<div class="content-header sty-one">
+        <h1>Dyeing Master Data Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing Master Data Configuration</li>
+        </ol>
+    </div>-->
+
+    <div class="card card-body" style="padding:0">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Master={}">
+            <!--<fieldset class="field_set" style="">
+                <div style="margin: auto;" ng-init="Mode='N'">
+                    <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'N'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+                    <span class="radio-label">Modify</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'R'" type="radio" style="margin-right:5%;" name="Mode" value="Modify" />
+                </div>
+            </fieldset>-->
+            <div class="btn_group">
+                <div class="new_btn">
+                    <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'N'" type="radio" name="Mode" value="New" />
+                </div>
+                <div class="mod_btn">
+                    <span class="radio-label">Modify</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'R'" type="radio" style="margin-right:5%;" name="Mode" value="Modify" />
+                </div>
+            </div>
+
+            <fieldset class="field_set" style="padding:0 10px;">
+                <div class="select_unit row">
+                    <label class="col-sm-2" style="text-align:right;">Name of Unit: </label>
+                    <div class="col-sm-3">
+
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+
+
+                        <!--<input type="text" typeahead-Open-On-Focus typeahead-min-length="0" ng-model="Unit" class="form-control"
+                        placeholder="Select Unit"
+                        uib-typeahead="item as item.Name for item in UnitList | filter: {Name:$viewValue}"
+                        typeahead-editable="false" ng-required="true">-->
+                    </div>
+
+                    <!--<select class="form-control">
+                        <option value="javascript">JavaScript</option>
+                        <option value="php">PHP</option>
+                    </select>-->
+                </div>
+                <div style="max-width: 100%; overflow-x: auto;">
+                    <table class="dataConfig">
+                        <tr style="display:flex;">
+                            <td style="width: 140px !important;">
+                                <div class="td-head" style="height:30px;"> <b>Data Field</b></div>
+                                <p>Buyer</p>
+                                <p>Job</p>
+                                <p>Style</p>
+                                <p>Order</p>
+                                <p>Shipment date</p>
+                                <p>Booking date</p>
+                                <p>Fabric Name</p>
+                                <p>Color Name</p>
+                                <p>Dia Part</p>
+                                <p>Finish Dia</p>
+                                <p>Order Qty</p>
+                                <p>Req Greige Qty</p>
+                                <p>Target Delivery Date</p>
+                                <p>Full Greige req date</p>
+                                <p>Dyeing date</p>
+                                <p>L/D No</p>
+                                <p>Enzyme</p>
+                                <p>Dyeing Process Flow</p>
+                                <p>Others fabric operation</p>
+                                <p>Others</p>
+                                <p>Dyeing factory</p>
+                                <p>Inhouse factory name</p>
+                                <p>Outer factory name</p>
+                                <p>Order status</p>
+                                <p class="remark">Remarks</p> 
+                            </td>
+                            <td ng-repeat="obj in Details">
+                                <div class="btn-action">
+                                    <img value='d' ng-click="actionDialog1('DuplicateRow',$index)" src="../../../Content/img/duplicate.png" />
+                                    <img ng-hide="($index>0 || Mode=='R')?true:false" ng-click="actionDialog1('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                    <img ng-click="actionDialog1('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                </div>
+
+                                <p>
+                                    <select class="form-control" select2="" name="Buyer" ng-init="obj.Buyer = options[0]"
+                                            data-ng-model="obj.Buyer"
+                                            ng-options="item as item.BuyerName for item in BuyerList"
+                                            ng-change="getDataByBuyer($index)" ng-required="true">
+                                        <option value="">Select Buyer</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select class="form-control" select2="" ng-init="obj.JobId = options[0]"
+                                            data-ng-model="obj.JobId"
+                                            ng-change="getDataByJob($index)"
+                                            ng-options="item.Id as item.DisplayName for item in JobList[$index]" ng-required="true">
+                                        <option value="" selected>Select Job</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select class="form-control" select2="" name="style" ng-init="obj.StyleId = options[0]"
+                                            data-ng-model="obj.StyleId"
+                                            ng-change="getDataByStyle($index)"
+                                            ng-options="item.Id as item.DisplayName for item in StyleList[$index]" ng-required="true">
+                                        <option value="" selected>Select Style</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <select class="form-control" select2="" name="order" ng-init="obj.OrderId = options[0]"
+                                            data-ng-model="obj.OrderId"
+                                            ng-change="getDataByOrder($index)"
+                                            ng-options="item.Id as item.DisplayName for item in OrderList[$index]" ng-required="true">
+                                        <option value="" selected>Select Order</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <md-datepicker type="date" name="ShipDate" ng-model="obj.ShipDate" md-placeholder="Enter date" md-hide-icons="calendar" ng-required="true"></md-datepicker>
+                                </p>
+                                <p>
+                                    <md-datepicker name="BookingDate" ng-model="obj.BookingDate" md-placeholder="Enter date" md-hide-icons="calendar" ng-required="true" md-open-on-focus></md-datepicker>
+                                </p>
+                                <p style="position:relative">
+                                    <select class="form-control" select2="" name="order" ng-init="obj.FabricName = options[0]"
+                                            data-ng-model="obj.FabricName"
+                                            ng-change="getDiaInfoByFabric($index)"
+                                            ng-options="item as item.DisplayName for item in FabricNameAll[$index]">
+                                        <option value="" selected>Select Fabric</option>
+                                    </select>
+                                    <span ng-click="NewFabricDialog($event, $index)" class="btn btn-primary btn-sm" style="position: absolute;right: 1px;height:21px;">New</span>
+                                </p>
+                                <p>
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.Color" class="form-control input-height" placeholder="Color"
+                                           uib-typeahead="item as item.name for item in ColorListAll | filter: {name:$viewValue} | limitTo:8"
+                                           typeahead-editable="false" ng-required="true">
+                                </p>
+                                <p>
+                                    <select ng-model="obj.DiaPart"
+                                            ng-options="a.Id as a.Name for a in DiaPartList"
+                                            class="form-control">
+                                        <!-- <option value="" selected>Select</option> ng-init="obj.DiaPart = options[0]"-->
+                                    </select>
+                                </p>
+                                <p>
+                                    <input type="text" ng-model="obj.FinishDia" />
+                                </p>
+                                <p>
+                                    <input type="number" ng-model="obj.OrderQty" />
+                                </p>
+                                <p>
+                                    <input type="number" ng-model="obj.RGreigeQty" />
+                                </p>
+                                <p>
+                                    <md-datepicker name="TDelvDate" ng-model="obj.TDelvDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                </p>
+                                <p>
+                                    <md-datepicker name="FGReqDate" ng-model="obj.FGReqDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+
+                                </p>
+                                <p>
+                                    <md-datepicker name="DyeingEndDate" ng-model="obj.DyeingEndDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                </p>
+                                <p>
+                                    <input type="text" ng-model="obj.LDNo" />
+                                </p>
+                                <p>
+                                    <!-- ng-init="obj.Enzyme = options[0]" <option value="" selected>Select</option>-->
+                                    <select ng-model="obj.Enzyme"
+                                            ng-options="a.Id as a.Name for a in EnzStatusList"
+                                            class="form-control">
+                                    </select>
+                                </p>
+                                <p style="text-align:center;">
+                                    <span class="btn btn-primary btn-sm" ng-click="DProcessFlow($event, $index)">
+                                        <i class="fa fa-angle-right"></i> Button
+                                    </span>
+                                </p>
+
+                                <p style="text-align:center;">
+                                    <span class="btn btn-primary btn-sm" ng-click="FabOperationPopup($event, $index)">
+                                        <i class="fa fa-angle-right"></i> Button
+                                    </span>
+                                </p>
+
+                                <p style="text-align:center;">
+                                    <span class="btn btn-primary btn-sm" ng-click="OtherOpPopup($event, $index)">
+                                        <i class="fa fa-angle-right"></i> Others
+                                    </span>
+                                </p>
+                                <!--ng-init="obj.DyeingFactory = options[0]" <option value="" ng-selected="true">Select</option>-->
+                                <p>
+                                    <select ng-model="obj.DyeingFactory"
+                                            ng-change="changeDFac($index)"
+                                            ng-options="a.Id as a.Name for a in DyeingFactory"
+                                            class="form-control input-height">
+                                    </select>
+                                </p>
+                                <p>
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="0" ng-model="obj.InhouseFac" class="form-control input-height"
+                                           placeholder="Inhouse Factory"
+                                           uib-typeahead="item as item.Name for item in UnitList | filter: {Name:$viewValue}"
+                                           typeahead-editable="false" ng-disabled="OuterFactory[$index]" ng-required="InhouseFac[$index]">
+                                </p>
+                                <p>
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="0" ng-model="obj.OuterFactory" class="form-control input-height"
+                                           placeholder="Borrower Party"
+                                           uib-typeahead="item as item.Name for item in BorrowerPartyList | filter: {Name:$viewValue}"
+                                           typeahead-editable="true" ng-disabled="InhouseFac[$index]" ng-required="OuterFactory[$index]">
+                                </p>
+                                <!--ng-init="obj.OrderStatus = options[0]" <option value="" selected>Select</option>-->
+                                <p>
+                                    <select ng-model="obj.OrderStatus"
+                                            ng-options="a.Id as a.Name for a in OrderStatusList"
+                                            class="form-control">
+                                    </select>
+                                </p>
+                                <p style="height:61px;">
+                                    <textarea rows="3" ng-model="obj.Remarks"></textarea>
+                                </p>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </fieldset>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Master.MppmId" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+

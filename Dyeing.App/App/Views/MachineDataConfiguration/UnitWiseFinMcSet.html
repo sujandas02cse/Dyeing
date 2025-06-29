@@ -1,0 +1,148 @@
+﻿<div ng-controller="UnitWiseFinMcController">
+    <div class="content-header sty-one">
+        <h1>Unit Wise Finishing Machine Set</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Machine Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Machine Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Unit Wise Finishing Machine Set</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Unit:
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.Unit" typeahead-editable="false"
+                               uib-typeahead="item as item.Name for item in UnitList | filter: {Name:$viewValue} | limitTo:8" 
+                                   placeholder="Select Unit" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Machine Brand:
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.Brand" placeholder="Brand" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Machine Type:
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.McType" typeahead-editable="false" uib-typeahead="item as item.MachineEng for item in MachineType | filter: {MachineEng:$viewValue} | limitTo:8"
+                                   placeholder="Select Machine Type" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Machine Model:
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.Model" placeholder="Model" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Machine No:
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.MachineNo" placeholder="Machine No" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Is Active:
+                            <span class="required">  </span>
+                        </label>
+                        <div class="col-md-1">
+                            <md-checkbox ng-model="Model.IsActive" ng-checked="true" aria-label="Checkbox 1" class="input-height">
+                            </md-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.Id" />
+                </div>
+            </div>
+        </form>
+
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('Unit')">Unit&nbsp;</th>
+                        <th ng-click="sort('MachineType')">Machine Type&nbsp;</th>
+                        <th ng-click="sort('MachineNo')">Machine No&nbsp;</th>
+                        <th ng-click="sort('Model')">Machine Model&nbsp;</th>
+                        <th ng-click="sort('Brand')">Machine Brand&nbsp;</th>
+                        <th ng-click="sort('IsActive')">IsActive &nbsp;</th>
+                        <th style="width:15%;">Action&nbsp;</th>                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in (MachineInfo | filter : search |orderBy:sortKey:reverse)">
+                        <td style="display:none">{{dataModel.Id}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.Unit}}</td>
+                        <td> {{dataModel.MachineType}}</td>
+                        <td> {{dataModel.MachineNo}}</td>
+                        <td> {{dataModel.Model}}</td>
+                        <td> {{dataModel.Brand}}</td>
+                        <td> {{dataModel.IsActive}}</td>
+
+                        <td style="width:15%;">
+                            <img name="edit" class="logo-image" ng-click="GetMachineInfoByID(dataModel)" src="../../Content/img/editicon.png" />
+                            <img name="delete" style="margin-left: 7%;" ng-click="actionDialog('Delete',dataModel)" class="logo-image" src="../../Content/img/deleteicon.png" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+

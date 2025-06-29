@@ -1,0 +1,316 @@
+﻿
+
+        <md-dialog aria-label="BatchConfigFinish" style="width:60%;height:650px;"   >
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <!--<h2>Others Fabric Operation</h2>-->
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                            <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+
+                <md-dialog-content>
+                    <div class="md-dialog-content" style="height:600px" >
+                        <div class="finish_wrap">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table">
+                                        <tr>
+                                            <th><h5>Tube Finish</h5></th>
+
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>De watering</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td>M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtSpeed" /></td>
+                                            <td>P.Pressure:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtPressure" /></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Stretching %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtStreching" /></td>
+                                            <td style="width:100px;">Before Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtBeforeWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtOverFeed" /></td>
+                                            <td>After Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:100px;">Frame width %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtFrameWidth" /></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>Dryer</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td>M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDrySpeed" /></td>
+                                            <td>After Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryOverFeed" /></td>
+                                            <td>After GSM:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryAfterGSM" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tempreature:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryTempreature1" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryTempreature2" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryTempreature3" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shrinkage %:</td>
+                                            <td><input class="form-control" text="text" placeholder="L" name="name" value="" ng-model="machineFins.TubeDryShrinkageL" /></td>
+                                            <td><input class="form-control" text="text" placeholder="W" name="name" value="" ng-model="machineFins.TubeDryShrinkageW" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>Compactor</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:90px;">M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompSpeed" /></td>
+                                            <td>Temperature:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompTemperature" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed  %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompOverfeed" /></td>
+                                            <td>Set Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompSetWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lower Shoe:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompLowerShoe" /></td>
+                                            <td>After Width</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Upper Shoe:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompUpperShoe" /></td>
+                                            <td>After GSM</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompAfterGSM" /></td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table">
+                                        <tr>
+                                            <th><h5>Open Finish</h5></th>
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>De Watering & Shitting</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td>M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenDeSpeed" /></td>
+                                            <td>P.Pressure:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenDePressure" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenDeOverfeed" /></td>
+                                            <td>After Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenDeAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>Stenter</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td>M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenSpeed" /></td>
+                                            <td>Set Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenSetWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenOverfeed" /></td>
+                                            <td>After Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tempreature:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenTempreature1" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenTempreature2" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" readonly ng-model="machineFins.OpenStenTempreature3" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shrinkage %:</td>
+                                            <td><input class="form-control" text="text" placeholder="L" name="name" value="" ng-model="machineFins.OpenStenShrinkageL" /></td>
+                                            <td><input class="form-control" text="text" placeholder="W" name="name" value="" ng-model="machineFins.OpenStenShrinkageW" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>After GSM:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterGSM1" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterGSM2" /></td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterGSM3" /></td>
+                                        </tr>
+                                    </table>
+                                    <table class="table">
+                                        <tr>
+                                            <th colspan="4"><h5>Compactor</h5></th>
+                                        </tr>
+                                        <tr>
+                                            <td>M/C Speed:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompSpeed" /></td>
+                                            <td style="width:100px;">Before Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompBeforeWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Over feed %:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompOverfeed" /></td>
+                                            <td>After Width:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompAfterWidth" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temperature:</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompTemperature" /></td>
+                                            <td>After GSM</td>
+                                            <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompAfterGSM" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                            <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="finish_wrap">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <tr>
+                                            <th><h5>Result of Finishing</h5></th>
+                                        </tr>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Final Width:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinalWidth" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Final GSM:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinalGSM" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Grey Weight:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultGreyWeight" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Finished Weight:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinishedWeight" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>No of Rolls:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultNoofRolls" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>Shrinkage %:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultShrinkage" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Spirality:</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultSpirality" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Process Loss (Kg):</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultProcessLoss" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Princess Loss (%):</td>
+                                                    <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultPrincessLoss" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                                    <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div style="width:200px; margin:auto;padding-top:50px;">
+
+                                        <p style="text-decoration:overline;background:transparent;"><b>Finishing Signature</b></p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div style="width:200px; margin:auto;padding-top:50px;">
+
+                                        <p style="text-decoration:overline;background:transparent;"><b>Authorized Signature</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </md-dialog-content>
+                <md-dialog-actions layout="row">
+                    <div class="col-md-6">
+                        <!--<a ui-sref="tutorials.view({tutorialAlias: tutorial.alias})">Start tutorial</a>-->
+                        <md-button class="md-accent" ng-click="NewInspection()">New Inspection</md-button>
+                    </div>
+                    <div class="col-md-1">
+                        <md-button class="md-raised md-primary" ng-click="hide()">OK</md-button>
+                       
+                    </div>
+                    <div class="col-md-5"></div>
+                </md-dialog-actions>
+            </form>
+        </md-dialog>
+
+       
+ 

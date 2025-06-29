@@ -1,0 +1,118 @@
+﻿<style>
+    md-input-container {
+        margin: 10 10 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsKpa {
+        padding-left: 0px;
+        text-align: center;
+    }
+    .chkBox{
+        height: 0px !important;
+    }
+    md-checkbox {
+        margin-bottom: 0px !important;
+    }
+</style>
+<body ng-controller="PointHeadWiseFaultConfigController">
+    <div class="content-header sty-one">
+        <h1>Point Head Wise Fault Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Inspection Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Point Head Wise Fault Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Point Head Name:
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="PointHead"
+                                             md-selected-item="master.selectedHead"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchHead"
+                                             md-selected-item-change="selectedHeadChange(item)"
+                                             md-items="item in querySearch(searchHead)"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="180">
+                                <md-item-template>
+                                    <span md-highlight-text="searchHead" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchHead}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+        </form>
+
+        <!--------View/Edit Part------->
+        <div>
+            <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed">
+                <thead class="bg">
+                    <tr>
+                        <th style="text-align:center">
+                            
+                            <md-checkbox ng-model="chk" aria-label="Checkbox 1" ng-change="chkAll()" class="input-height">
+                            </md-checkbox>
+                        </th>
+                        <th style="display:none">NameID</th>
+                        <th style="text-align:center">FaultName</th>
+                        <th style="text-align:center">Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="obj in details">
+                        <td style="text-align:center">
+                            <md-checkbox ng-model="obj.IsActive" aria-label="Checkbox 1" class="input-height" aria-checked="true">
+                            </md-checkbox>
+                        </td>
+                        <td style="display:none"> {{obj.NameID}}</td>
+
+                        <td>
+                            <input type="text" style="text-align:center" name="FaultName{{$index}}" ng-model="obj.FaultName" readonly ng-class="FaultName{{$index}}" class="form-control input-height viewonly" />
+                        </td>
+                        <td>
+                            <input type="text" style="text-align:center" name="PriorityNo{{$index}}" ng-model="obj.PriorityNo" readonly ng-class="PriorityNo{{$index}}" class="form-control input-height viewonly" />
+                        </td>
+                       
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+

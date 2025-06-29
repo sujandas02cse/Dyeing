@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>Stenter M/C Operation Configuration</title>
+
+    <style>
+        .md-datepicker-input {
+            max-width: 200px;
+            width: 190px;
+        }
+
+        .dropdown-menu {
+            min-width: 12rem;
+            /*min-height:250px !important;*/
+        }
+
+            .dropdown-menu dropdown-menu-form {
+                height: 350px;
+            }
+
+        p {
+            background: lightblue;
+        }
+
+        table {
+            /*margin-bottom: 10px;*/
+        }
+
+        .finish_wrap {
+            border-top: 1px solid #777;
+            border-bottom: 1px solid #777;
+        }
+
+            .finish_wrap table {
+                margin-bottom: 0px;
+            }
+
+                .finish_wrap table th,
+                .finish_wrap table td {
+                    border: 1px solid #9f9f9f !important;
+                    padding: 5px 7px !important;
+                    font-size: 12px;
+                }
+
+                .finish_wrap table th {
+                    text-align: center;
+                }
+
+                .finish_wrap table td:nth-child(2) {
+                }
+
+        table:hover {
+            /*background: #495057;*/
+        }
+
+        .machine_new table th img {
+            width: 30px;
+            margin: 5px;
+        }
+
+        .form-control {
+            font-size: 20px !important;
+        }
+        .control-label {
+            font-size: 20px;
+            font-weight: bold;
+            align-self: center;
+        }
+        .md-datepicker-input {
+            width: 120px;
+        }
+        .input-height {
+            height: 50px !important;
+        }
+
+    /*    .input-height {
+            height: initial !important;
+        }*/
+
+        .input-height {
+            height: 85px !important;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.5);
+        }
+        @media only screen and (min-height: 769px) {
+            .card-body {
+                height: calc(100vh - 210px);
+            }
+
+            .input-height {
+                height: 75px !important;
+            }
+
+            .control-label {
+                font-size: 25px;
+                font-weight: bold;
+                align-self: center;
+            }
+
+            .form-control {
+                font-size: 25px !important;
+            }
+        }
+        .dropdown-menu > li > a {
+            font-size: 25px !important;
+        }
+        /* added  by Sujan Das*/
+
+        /*.radio-label {
+            vertical-align: middle;
+        }
+
+        .radio-input {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        fieldset {
+            text-align: center;
+        }
+
+        input[type=radio] {
+            width: 6%;
+            height: 1.4em;
+        }
+
+        .required {
+            color: red !important;
+        }
+
+        .radio-group {
+            margin-bottom: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;*/ /* Adjust the gap between radio buttons */
+        /*}
+
+        .radio-label {
+            margin-left: 40px;*/ /* Adjust the space between radio button and label text */
+        /*}
+
+        .radio-container {
+            padding: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .unit {
+            padding: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }*/
+    </style>
+</head>
+<body ng-controller="StenterOperationConfigController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Stenter M/C Operation Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Machine Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i>Stenter M/C Operation Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <!--Updated by Sujan Das on 17-March-2025-->
+            <!--<div class="radio-container">
+        <div style="margin: 0px;" class="form-group row justify-content-center">
+            <div class="col-md-6">
+                <div class="radio-group">
+
+                    <div class="custom-radio">
+                        <input type="radio" id="bulkOption" class="m-0 form-check-input" name="batchType" ng-model="batchType" ng-value="'Bulk'" ng-init="batchType='Bulk'" ng-click="checkBulk()">
+                        <label for="bulkOption" class="form-check-label radio-label">Bulk</label>
+                    </div>
+
+                    <div class="custom-radio">
+                        <input type="radio" id="newOption" class="m-0 form-check-input" name="batchType" ng-model="batchType" ng-value="'New'" ng-click="checkNew()">
+                        <label for="newOption" class="form-check-label radio-label">New</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="unit">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label class="control-label col-md-4">
+                    Unit:
+                    <span class="required" style="color:red"> * </span>
+                </label>
+                <select class="form-control col-md-4" select2="" name="unit"
+                        data-ng-model="Unit"
+                        ng-change="LoadProcessData()"
+                        ng-options="item as item.Name for item in UnitList">
+                    <option value="" ng-required="true">Select Unit</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>
+
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <!--<input type="text" id="tags" ng-keyup="complete()" ng-model="batchFins.BatchNo" placeholder="Batch No" class="form-control input-height" />-->
+                            <input type="text" id="batch" auto-focus ng-model="McOperation.BatchNo" typeahead-on-select="getDataByBatchId()" placeholder="Batch No.."
+                                   class="form-control input-height"
+                                   ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"
+                                   typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"
+                                   typeahead-editable="false" ng-required="true">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Buyer:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.BuyerName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            M/C No:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.MachineNo"
+                                   ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"
+                                   typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                   typeahead-editable="false" class="form-control input-height clsHeight" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Job:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.JobName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Style:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.StyleName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Order:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.OrderName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Color:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.ColorName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <label class="control-label col-md-2 clsHeight">
+                            Fabric Name:
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" ng-model="McOperation.Fabric" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Batch Start:
+                        </label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" disabled ng-model="McOperation.StartTime" style="height:55px">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Batch End:
+                        </label>
+                        <div class="col-md-8">
+
+                            <input class="form-control"
+                                   ng-model="McOperation.EndTime" type="text" disabled style="height:55px">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5 clsHeight">
+                            Stenter:
+                        </label>
+                        <div class="col-md-7">
+                            <select ng-model="McOperation.CompTime"
+                                    ng-change="getDataByBatchId()"
+                                    ng-options="a.id as a.name for a in CompactingTime"
+                                    class="form-control input-height clsHeight"
+                                    ng-required="true">
+                                <option value="" selected>Select</option>
+                                <!--<option value="1">1st Time</option>
+                        <option value="2">2nd Time</option>
+                        <option value="3">3rd Time</option>-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MachinePlan</title>
+    <style>
+        .loa {
+            cursor: wait;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height:520px;
+            overflow-y:auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .tbl-w {
+            background: antiquewhite !important;
+        }
+        .tbl-g {
+            background: #1adf22 !important;
+        }
+        /*.control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+            .control input:checked ~ .control__indicator:after {
+                display: block;
+                color: #fff;
+            }
+        .control--checkbox .control__indicator:after {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -52%);
+            -ms-transform: translate(-50%, -52%);
+            transform: translate(-50%, -52%);
+        }
+
+        .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+            background: transparent;
+        }
+            .control__indicator:after {
+                font-family: 'icomoon';
+                content: '\e5ca';*/
+        /*content: "\e013";*/
+        /*position: absolute;
+                display: none;
+            }
+        .control input:checked ~ .control__indicator {
+            border: 2px solid #007bff;
+            background: #007bff;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="col-md-12" ng-class="{'loa': isLoading}">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Initial Information</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Initial Information</li>
+                </ol>
+            </div>
+            
+            <div class="card-body">
+                <!--input form-->
+                <form class="row row-cols-md-auto align-items-center mb-5">
+                    <div class="col-md-3 col-4">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Unit:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadBuyerData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-4 ml-3">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Buyer:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="Buyer"
+                                    data-ng-model="Buyer"
+                                    ng-change="LoadProcessData()"
+                                    ng-options="item as item.BuyerName for item in BuyerList">
+                                <option value="" ng-required="true">Select Buyer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-4 ml-3">
+                        <div class="row">
+                            <!--<a ng-click="sendData()" class="btn btn-lg btn-primary" href="Index#!/InitialPlan">Action Button</a>-->
+                            <a ng-click="sendData()" class="btn btn-lg btn-primary text-white">Action Button</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <div class="card mt-5">
+            <div class="card-header sty-one">
+                <form class="form-inline" style="padding-bottom:2px">
+                    <div class="col-sm-6" style="padding-left:0px;">
+                        <input type="text" ng-model="search" ng-change="searchFilter()"  class="form-control" placeholder="Search Here...">
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color:green; float:right;">Total Count: {{allInitialData.length === nan ? 0 : allInitialData.length}} </span>
+                    </div>
+                </form>
+            </div>
+            <div class="data_tbl table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">
+                                <label class="control control--checkbox">
+                                    <input ng-click="allChecking()" ng-model="allCheck" type="checkbox" class="js-check-all">
+                                    <!--<div class="control__indicator"></div>-->
+                                </label>
+                            </th>
+                            <th>Buyer</th>
+                            <th style="width:200px!important;">Job No</th>
+                            <th>Style</th>
+                            <th>Order</th>
+                            <th>Booking Date</th>
+                            <th>Shipment Date</th>
+                            <th>Grey Color</th>
+                            <th>Dyed Color</th>
+                            <th>Fabric Type</th>
+                            <th>Composition</th>
+                            <th>GSM</th>
+                            <th>Dia</th>
+                            <th>Order Qty</th>
+                            <th>Required Greige Qty</th>
+                            <th class="bg-danger text-white">Knitting Commitment Start date</th>
+                            <th class="bg-danger text-white">Knitting Commitment End date</th>
+                            <th class="bg-success text-white">Knitting Comment</th>
+                            <th>Required Dyed Qty</th>
+                            <th>Order Type</th>
+                            <th>Booking Month</th>
+                            <th>Booking Year</th>
+                            <th>Shipment Month</th>
+                            <th>Shipment Year</th>
+                            <th>Dyeing Unit</th>
+                            <th>Garments Unit</th>
+                            <th>Special Finish</th>
+                        </tr>
+                <!--<tr >
+                    <th></th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>Knt</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>Knt</th>
+                    <th>Knt</th>
+                    <th>Knt</th>
+                    <th>MM</th>
+                    <th>MIS</th>
+                    <th>MIS</th>
+                    <th>MIS</th>
+                    <th>MIS</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                    <th>MM</th>
+                </tr>-->
+                    </thead>
+                    <tbody>
+                        <tr ng-class="getRowClass($index)"
+                            ng-repeat="dataModel in (allInitialData | filter : search)">
+                            <td>
+                                <label class="control control--checkbox">
+                                    <input ng-click="checking(dataModel.initId)" ng-model="dataModel.Active" type="checkbox" class="js-check-all">
+                                    <!--<input ng-click="checking($index)" ng-model="dataModel.Active" type="checkbox" class="js-check-all" />-->
+                                </label>
+                            </td>
+                            <td class="hide">{{$index+1}}</td>
+                            <td>{{dataModel.Buyer}}</td>
+                            <td>{{dataModel.JobNo}}</td>
+                            <td>{{dataModel.Style}}</td>
+                            <td>{{dataModel.OrderNo}}</td>
+                            <td>{{dataModel.BookingDate | date:'dd-MM-yy':'en-US'}}</td>
+                            <td>{{dataModel.ShipmentDate | date:'dd-MM-yy':'en-US'}}</td>
+                            <td>{{dataModel.GreyColor}}</td>
+                            <td>{{dataModel.DyedColor}}</td>
+                            <td>{{dataModel.FabricType}}</td>
+                            <td>{{dataModel.Composition}}</td>
+                            <td>{{dataModel.GSM}}</td>
+                            <td>{{dataModel.Dia}}</td> <!--DIa-->
+                            <td rowspan="1">{{dataModel.OrderQty}}</td>
+                            <td rowspan="1">{{dataModel.RequiredGridgeQty}}</td>
+                            <td>{{dataModel.KnittingCommitMentStartDate | date:'dd-MM-yy':'en-US'}}</td>
+                            <td>{{dataModel.KnittingCommitMentEndDate | date:'dd-MM-yy':'en-US'}}</td>
+                            <td>{{dataModel.KnittingComments}}</td>
+                            <td>{{dataModel.RequiredDyedQty}}</td>
+                            <td>{{dataModel.OrderType}}</td>
+                            <td>{{dataModel.BookingMonth}}</td>
+                            <td>{{dataModel.BookingYear}}</td>
+                            <td>{{dataModel.ShippingMonth}}</td>
+                            <td>{{dataModel.ShippingYear}}</td>
+                            <td>{{dataModel.DyeingUnitName}}</td>
+                            <td>{{dataModel.GarmentsName}}</td>
+                            <td>{{dataModel.SpecialFinishList}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+            </uib-pagination>-->
+        </div>
+    </div>
+</body>
+</html>

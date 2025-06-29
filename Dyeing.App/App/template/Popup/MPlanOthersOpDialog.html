@@ -1,0 +1,120 @@
+﻿<md-dialog aria-label="PlanOthersOpDialog" style="width:75%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Production Plan Others Operation</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Body Part:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="ddl.bodyPart" placeholder="Body Part" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1" 
+                                       uib-typeahead="item as item.BodyPart for item in BodyPartList | filter: {BodyPart:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Color Type:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="ddl.ColorType" placeholder="Color Type" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1"
+                                       uib-typeahead="item as item.ColorTypeName for item in ColorTypeList | filter: {ColorTypeName:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Color Shade:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="ddl.ColorShade" placeholder="Color Shade" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1"
+                                       uib-typeahead="item as item.ColorShade for item in ColorShadeList | filter: {ColorShade:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Color Specification:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="ddl.colorSpec" placeholder="Color Specification" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1"
+                                       uib-typeahead="item as item.Name for item in ColorSpecList | filter: {Name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Pantone No:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-5">
+                                <input type="text" ng-model="ddl.PantonNo" placeholder="Pantone No" on-model-change="setPType()" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1"
+                                       uib-typeahead="item as item.name for item in PantoneList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">                               
+                            </div>
+                            <div class="col-md-3">     
+                                <input type="text" ng-model="ddl.PantonType" placeholder="Type" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="0"
+                                       uib-typeahead="item.Id as item.label for item in PantoneTypeList | filter: {label:$viewValue}"
+                                       typeahead-editable="false">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                AOP Background:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="ddl.AOPBg" placeholder="AOP Background" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1"
+                                       uib-typeahead="item as item.Name for item in AOPBackground | filter: {Name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">                    
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

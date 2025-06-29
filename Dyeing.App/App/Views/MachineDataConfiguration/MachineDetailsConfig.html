@@ -1,0 +1,470 @@
+﻿ 
+<style>
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsKpa {
+        padding-left: 0px;
+        text-align: center;
+    }
+</style>
+<body ng-controller="MachineDetailsConfigController">
+    <div class="content-header sty-one">
+        <h1>Machine Details Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Machine Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Machine Details Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Machine Id:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.MachineNo" placeholder="Machine Id" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Machine Name:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="MachineName"
+                                             md-selected-item="selectedName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-items="item in querySearch(searchName,'Name')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Machine Type:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="MachineType"
+                                             md-selected-item="selectedType"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchType"
+                                             md-items="item in querySearch(searchType,'Type')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchType" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchType}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Machine Brand:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="MachineBrand"
+                                             md-selected-item="selectedBrand"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchBrand"
+                                             md-items="item in querySearch(searchBrand,'Brand')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchBrand" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchBrand}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Machine Model:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="MachineModel"
+                                             md-selected-item="selectedModel"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchModel"
+                                             md-items="item in querySearch(searchModel,'Model')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchModel" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchModel}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Country Of Origin:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.CountryOfOrigin" placeholder="Country of Origin" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Serial No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.SerialNo" placeholder="Serial No" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Capacity:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-5">
+                            <md-autocomplete name="MachineCapacity"
+                                             md-selected-item="selectedCapacity"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchCapacity"
+                                             md-items="item in querySearch(searchCapacity,'Capacity')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-require-match
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchModel" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchCapacity}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                        <div class="col-md-2">
+                            <span>kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Cycle Time:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.CycleTime" placeholder="Cycle Time" class="form-control input-height" required />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" placeholder="Min." class="form-control input-height clsKpa" disabled="disabled" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            No of Cycle.:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.NoOfCycle" placeholder="No of Cycle." class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Main Pump Speed:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.MainPumpSpeed" placeholder="Main Pump Speed" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Winch Speed:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.WinchSpeed" placeholder="Winch Speed" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            No of Nozzle:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Model.NoOfNozzle"
+                                    ng-options="n for n in [] | range:1:50"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="">1 to 50</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            No of Motor:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Model.NoOfMotor"
+                                    ng-options="n for n in [] | range:1:50"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="">1 to 50</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Power:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.Power" placeholder="Power" class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Supply Pressure:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.SupplyPressure" placeholder="Supply Pressure" class="form-control input-height" required />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" placeholder="Kpa" class="form-control input-height clsKpa" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Com. Air Pressure:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.CAirPressure" placeholder="Com. Air Pressure" class="form-control input-height" required />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" placeholder="Kpa" class="form-control input-height clsKpa" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Design Temp.:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" ng-model="Model.DesignTemperature" placeholder="Design Temp." class="form-control input-height" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Steam Pressure:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.SteamPressure" placeholder="Steam Pressure" class="form-control input-height" required />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" placeholder="Kpa" class="form-control input-height clsKpa" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Asset No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="MachineAsset"
+                                             md-selected-item="selectedAsset"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchAsset"
+                                             md-items="item in querySearch(searchAsset,'Asset')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchAsset" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchAsset}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Unit.:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="UnitName"
+                                             md-selected-item="selectedUnitName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchUnit"
+                                             md-items="item in querySearch(searchUnit,'Unit')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="180">
+                                <md-item-template>
+                                    <span md-highlight-text="searchUnit" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchUnit}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.MDId" />                    
+                </div>
+            </div>
+        </form>
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('MachineNo')">
+                            Machine Id&nbsp;
+                        </th>
+                        <th ng-click="sort('MachineType')">Machine Type&nbsp;</th>
+                        <th ng-click="sort('ItemBrandName')">Machine Brand&nbsp;</th>
+                        <th ng-click="sort('MachineModel')">Machine Model&nbsp;</th>
+                        <th ng-click="sort('SerialNo')">Serial No &nbsp;</th>
+                        <th ng-click="sort('CountryOfOrigin')">Country of Origin &nbsp;</th>
+                        <th style="width:15%;">Action&nbsp;</th>
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in MachineDetailsInfo |orderBy:sortKey:reverse|filter:search as currlength">
+                        <td style="display:none">{{dataModel.MDId}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.MachineNo}}</td>
+                        <td> {{dataModel.MachineType}}</td>
+                        <td> {{dataModel.ItemBrandName}}</td>
+                        <td> {{dataModel.MachineModel}}</td>
+                        <td> {{dataModel.SerialNo}}</td>
+                        <td> {{dataModel.CountryOfOrigin}}</td>
+                        <td style="width:15%;">
+                            <img name="edit" class="logo-image" ng-click="GetMachineDetailByID(dataModel)" src="/Content/img/editicon.png" />
+                            <img name="delete" style="margin-left: 7%;" ng-click="actionDialog('Delete',dataModel)" class="logo-image" src="/Content/img/deleteicon.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+
+    </div>
+</body>
+
+
+

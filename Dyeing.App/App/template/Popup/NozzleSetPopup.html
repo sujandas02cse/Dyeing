@@ -1,0 +1,68 @@
+﻿<md-dialog aria-label="NozzleSetDialog" style="width:70%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Nozzle Set</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <div class="form-group row machine_new">
+                    <table style="width: 95%; margin: auto;" class="table">
+                        <tr>
+                            <th width="200"></th>
+                            <th width="150">Nozzle No</th>
+                            <th width="150">Qty</th>
+                            <th width="150">Trolley No</th>
+                            <th width="150">Barcode</th>
+                            <th width="150">Back</th>
+                            <th width="150">Browse</th>
+                            <th width="150">Is Manual</th>
+                        </tr>
+                        <tr ng-repeat="obj in Nozzle">
+                            <td width="50" style=" padding: 0px !important;vertical-align: middle;">
+                                <img width="30" ng-click="actionDialog1('AddRowNozzle',$index)" src="../../../Content/img/add.png" />
+                                <img width="30" ng-click="actionDialog1('DeleteRowNozzle',$index)" src="../../../Content/img/delete.png" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="obj.NozzleNo" placeholder="Nozzle No" ng-disabled="true" class="form-control input-height"
+                                       ng-required="true">
+                            </td>
+                            <td>
+                                <input type="number" ng-model="obj.Qty" ng-disabled="!obj.IsManual" placeholder="Qty" class="form-control input-height" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="obj.TrolleyNo" class="form-control input-height"
+                                       typeahead-min-length="1" uib-typeahead="item as item.name for item in TrolleyList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" placeholder="Trolley No" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="obj.Barcode" ng-disabled="obj.IsManual" ng-enter="GetQtyByBarcode($index)" placeholder="Barcode" class="form-control input-height" ng-required="true" />
+                            </td>
+                            <td>
+                                <input type="button" ng-model="obj.Back" value="Back" ng-click="BackQty($index)" />
+                            </td>
+                            <td>
+                                <input type="file" on-read-file="getBarcodeData($content, $index)" />
+                            </td>
+                            <td>
+                                <input type="checkbox" ng-model="obj.IsManual" ng-change="changeIsManual($index)" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--<pre>{{ content }}</pre>-->
+
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

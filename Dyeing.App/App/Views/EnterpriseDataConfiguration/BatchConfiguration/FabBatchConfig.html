@@ -1,0 +1,356 @@
+﻿
+<style>
+    /*Chips start*/
+    .errors {
+        font-size: 12px;
+        color: #dd2c00;
+        margin-top: 10px;
+    }
+
+    .md-dialog-content-body p {
+        overflow-wrap: break-word;
+    }
+
+    .custom-chips md-chip {
+        position: relative;
+    }
+
+        .custom-chips md-chip .md-chip-remove-container {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            margin-right: 0;
+            height: 24px;
+        }
+
+            .custom-chips md-chip .md-chip-remove-container button.barcodechip {
+                position: relative;
+                height: 24px;
+                width: 24px;
+                line-height: 30px;
+                text-align: center;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 50%;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                transition: background 0.15s linear;
+                display: block;
+            }
+
+                .custom-chips md-chip .md-chip-remove-container button.barcodechip md-icon {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate3d(-50%, -50%, 0) scale(0.7);
+                    color: white;
+                    fill: white;
+                }
+
+                .custom-chips md-chip .md-chip-remove-container button.barcodechip:hover, .custom-chips md-chip .md-chip-remove-container button.barcodechip:focus {
+                    background: rgba(255, 0, 0, 0.8);
+                }
+
+    .custom-chips md-chips-wrap.md-removable md-chip md-chip-template {
+        padding-right: 5px;
+    }
+    /*Chips end*/
+    .flex-border-m {
+        border-style: solid;
+        border-color: #cdcdcd;
+        border-width: 1px 0px 1px 1px;
+    }
+
+    .flex-border-mt {
+        border-style: solid;
+        border-color: #cdcdcd;
+        border-width: 0px 1px 1px 0px;
+    }
+
+    .flex-border-cl {
+        border-style: solid;
+        border-color: #cdcdcd;
+        border-width: 0px 0px 1px 0px;
+        /*height: 30px;*/
+      
+    }
+
+    .flex-area {
+        text-align: center;
+        line-height: 2;
+        font-size: 75% !important;
+        font-style: normal;
+    }
+
+    .selected-btn {
+        padding: 2px;
+        font-size: 20px;
+        color: #ffffff !important;
+        background-color: green !important;
+    }
+    .loaderSt{
+        margin-left:9em !important;
+        height:0px !important;
+
+    }
+</style>
+<body ng-controller="DyeingBatchConfigFabricController as ctrl">
+
+    <div class="content-header sty-one">
+        <h1>Dyeing Batch Configuration(Fabric)</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing Batch Configuration(Fabric)</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Head={}">
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <md-datepicker ng-model="BatchDate" md-placeholder="Enter date"
+                                           md-hide-icons="calendar" required md-open-on-focus ng-disabled="true"></md-datepicker>
+                            <input type="hidden" ng-model="Head.ProcessMode" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            DPP No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+
+                            <input type="text" ng-model="PlanNo" placeholder="Plan No" class="form-control input-height"
+                                   typeahead-on-select="onSelectByPlan($item)"
+                                   typeahead-Open-On-Focus typeahead-min-length="0" uib-typeahead="item as item.PlanNo for item in PlanBatchList | filter: {PlanNo:$viewValue} | limitTo:8"
+                                   typeahead-editable="false">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Batch No:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="BatchNo" placeholder="Batch No" class="form-control input-height"
+                                   typeahead-on-select="onSelectByBatch($item)"
+                                   typeahead-Open-On-Focus typeahead-min-length="0"
+                                   uib-typeahead="item as item.BatchNo for item in PlanBatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   typeahead-editable="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Buyer:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.BuyerName" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Job:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.JobNo" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Style:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.StyleNo" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Order:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.OrderNo" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            M/C No:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.MachineNo" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Capacity:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.CapacityName" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Nozzle:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.NoOfNozzle" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            LD No:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="Head.LDNo" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button ng-disabled="PlanNo ?  false  : true" class="md-raised"
+                           ng-click="Head.ProcessMode=1;removable=0;loadPorcessBarcodes(1);"
+                           ng-class="{'selected-btn': Head.ProcessMode == 1}">Auto Nozzle From Stock</md-button>
+                <md-button ng-disabled="PlanNo ?  false  : true" class="md-raised"
+                           ng-click="Head.ProcessMode=2;reloadNozzle();removable=0;loadPorcessBarcodes(2);showTabDialog();" ng-class="{'selected-btn': Head.ProcessMode == 2}">Barcode Data Nozzle</md-button>
+                <md-button ng-disabled="PlanNo ?  false  : true" class="md-raised"
+                           ng-click="Head.ProcessMode=3;reloadNozzle();removable=0;" ng-class="{'selected-btn': Head.ProcessMode == 3}">Individual Nozzle</md-button>
+                <md-button ng-disabled="PlanNo ?  false  : true" class="md-raised"
+                           ng-click="removable=1;" ng-class="{'selected-btn': removable==1}">Remove Roll From Nozzle</md-button>
+
+            </section>
+            <div style="float:left;width:100%;margin-left:0px !important;" class="row">
+                <section class="col-md-4" style="padding:6px !important;margin-top:20px !important;" ng-repeat="obj in Details">
+                    <!--ng-repeat="n in [] | range:0:Head.NoOfNozzle"-->
+                    <div layout="row" class="flex-area" >
+                        <div flex="60" class="padded" md-whiteframe="1" style="border:1px solid #cdcdcd;height:35px;font-size:15px;font-weight:600;">
+                            Nozzle -{{$index+1}}
+                        </div>
+                    </div>
+                    <div class="padded" md-whiteframe="3">
+                        <article layout="row" class="flex-area">
+
+                            <div flex="60" class="flex-border-m">
+                                <div flex class="flex-border-cl">
+                                    Barcode
+                                </div>
+                                <div style="max-height:150px; overflow-y:scroll;overflow-x:hidden;">
+
+                                    <md-progress-circular ng-if="Head.ProcessMode!=0 && Head.ProcessMode!=3" ng-disabled="!IsLoaderActive" class="md-accent loaderSt" md-diameter="40"></md-progress-circular>
+
+                                    <md-chips class="custom-chips" ng-model="obj.varcodeObjs" readonly="readonly" md-add-on-blur='true' md-on-remove="deleteChip($chip,obj.NozzleNo,$index)"
+                                              md-transform-chip="newBarcode($chip,obj.NozzleNo,$index)" md-removable="removable" placeholder="Add Barcodes"
+                                              input-aria-label="Barcodes">
+
+                                        <md-chip-template>
+                                            <span style="font-size:14px;">
+                                                <strong> {{$chip.FBarcodeGenId}}[{{$chip.BarCodeQty}}]</strong><!--[{{$index}}]-->
+                                            </span>
+                                        </md-chip-template>
+
+                                        <button md-chip-remove class="md-primary barcodechip" aria-label="Remove {{$chip}}">
+                                            <md-icon md-svg-icon="md-close"></md-icon>
+                                        </button>
+                                    </md-chips>
+                                </div>
+                            </div>
+
+                            <div flex="20" style="border:1px solid #cdcdcd;">
+                                <div flex class="flex-border-cl">
+                                    Nozzle Capacity
+                                </div>
+                                <div flex class="flex-border-cl">
+                                    {{(Head.CapacityName/Head.NoOfNozzle)| round}}
+                                </div>
+                                <div flex class="flex-border-cl">
+                                    Fabric Weight
+                                </div>
+                                <div flex class="flex-border-cl">
+
+                                    {{(obj.FabricWeight -- obj.ManualWeight) | round}}
+                                </div>
+                                <div flex class="flex-border-cl">
+                                    Balance
+                                </div>
+                                {{((Head.CapacityName/Head.NoOfNozzle) - obj.FabricWeight - obj.ManualWeight).toFixed(2)}}
+                            </div>
+                            <div flex="20" style="border-style: solid;border-color:#cdcdcd; border-width: 1px 1px 0px 0px;">
+                                <div style="position:relative;margin-top:60px;">
+                                    Trolley No.
+                                    <select style="font-size:12px !important" name="TncId{{$index}}" ng-model="obj.TncId"
+                                            ng-options="x.id as x.name for x in TrollyList"
+                                            class="form-control input-height"
+                                            required>
+                                        <option value="" disabled selected>Select Trolley</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </article>
+                        <div layout="row" style="height:35px;">
+
+                            <div flex="60" class="flex-border-mt" style="border-width: 0px 1px 1px 1px;">
+
+                                <h6 style="text-align:center;line-height:2;">Manual</h6>
+                            </div>
+                            <div flex="20" class="flex-border-mt">
+                                <input style="height:35px !important;text-align:center;" type="text" ng-model="obj.ManualWeight" class="form-control input-height" />
+
+                            </div>
+
+                            <div flex="20" class="flex-border-mt">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Head.FabBatchMId" />
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>

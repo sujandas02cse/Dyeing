@@ -1,0 +1,131 @@
+﻿<style>
+    md-toolbar{
+        min-height:40px !important;
+    }
+    .md-toolbar-tools{
+        height:250px !important;
+    }
+    md-dialog{
+        width:80% !important;
+    }
+    md-dialog-actions{
+        margin-right:30% !important;
+    }
+    md-dialog .md-dialog-content {
+        padding: 14px;
+    }
+    .md-autocomplete-suggestions-container  {
+        z-index: 9999999999999 !important;
+    }
+</style>   
+<md-dialog aria-label="Save Information">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <!--<h4 style="margin-left:35%;">{{model.Header}}</h4>-->
+            <h5 style="margin-left:35%;">Shift Details</h5>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <img src="../../Content/img/close_icon.png" height="25" width="25" style="margin-top: 26%;" />
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div>
+                <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll">
+                    <thead class="bg">
+                        <tr>
+                            <th style="width:5%;">SL</th>
+                            <th style="width:12%;">Date</th>
+                            <th style="display:none">MwMPdId</th>
+                            <th style="display:none">MwMPcId</th>
+                            <th style="display:none">Employee Id</th>
+                            <th>Employee Id</th>
+                            <th>Shift</th>
+                            <th>M/C No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="text-align: center;" ng-repeat="d in dChildV|orderBy:sortKey:reverse|filter:Model.Search as CurrRec">
+                            <td style="width:5%"> {{$index + 1}}</td>
+                            <td style="width:12%;"> {{d.DDate}}</td>
+                            <td style="display:none"> {{d.MwMPdId}}</td>
+                            <td style="display:none"> {{d.MwMPcId}}</td>
+                            <td>
+                                <md-autocomplete flex required
+                                                 name="DEmp{{$index}}"
+                                                 md-input-minlength="1"
+                                                 md-no-cache="ctrl.noCache"
+                                                 md-selected-item="d.selectedDEmp"
+                                                 md-search-text="searchDEm"
+                                                 md-items="item in querySearchD(searchDEm,'EmpId')"
+                                                 md-item-text="item.display"
+                                                 md-min-length="0"
+                                                 md-require-match
+                                                 md-floating-label="Emp Code?">
+                                    <md-item-template>
+                                        <span md-highlight-text="searchDEm">{{item.display}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No states matching "{{searchDEm}}" were found.
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </td>
+                            <td>
+                                <md-autocomplete flex required
+                                                 name="DShift{{$index}}"
+                                                 md-input-minlength="1"
+                                                 md-no-cache="ctrl.noCache"
+                                                 md-selected-item="d.selectedDShift"
+                                                 md-search-text="searchDShift"
+                                                 md-items="item in querySearchD(searchDShift,'shift')"
+                                                 md-item-text="item.display"
+                                                 md-min-length="0"
+                                                 md-require-match
+                                                 md-floating-label="Shift Name?">
+                                    <md-item-template>
+                                        <span md-highlight-text="searchDShift">{{item.display}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No states matching "{{searchDShift}}" were found.
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </td>
+                            <td>
+                                <md-autocomplete flex required
+                                                 name="DMcNo{{$index}}"
+                                                 md-input-minlength="1"
+                                                 md-no-cache="ctrl.noCache"
+                                                 md-selected-item="d.selectedDMcNo"
+                                                 md-search-text="searchDMcNo"
+                                                 md-items="item in querySearchD(searchDMcNo,'mcNo')"
+                                                 md-item-text="item.display"
+                                                 md-min-length="0"
+                                                 md-require-match
+                                                 md-floating-label="m/c No?">
+                                    <md-item-template>
+                                        <span md-highlight-text="searchDMcNo">{{item.display}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No states matching "{{searchDMcNo}}" were found.
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-1">
+            <md-button class="md-raised md-primary" ng-click="OK()">OK</md-button>
+        </div>
+        <div class="col-md-5"></div>
+        <!--<md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>-->
+    </md-dialog-actions>
+</md-dialog>

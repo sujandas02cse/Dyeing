@@ -1,0 +1,39 @@
+﻿<style>
+    md-toolbar{
+        min-height:30px !important;
+    }
+    .md-toolbar-tools{
+        height:30px !important;
+    }
+    md-dialog{
+        width:450px !important;
+    }
+    md-dialog-actions{
+        margin-right:30% !important;
+    }
+
+</style>   
+ <md-dialog aria-label="Confirmation Dialog">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h5 style="margin-left:33%;margin-top:3%;">{{model.Header}}</h5>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Cancel" ng-click="cancel()">
+                    <img src="../../Content/img/close_icon.png" height="15" width="20" style="margin-top:9%;margin-left:1%" />
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p style="text-align:center;margin-bottom: 0%;margin-top: 2%; font-size:14px;"><strong>{{model.message}} </strong></p>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+                <span flex></span>    
+                <md-button class="md-raised md-primary" aria-label="{{model.btnText}}" ng-click="action(model.Mode)">{{model.btnText}}</md-button>        
+                <md-button class="md-raised md-warn" aria-label="No" ng-click="cancel()">No</md-button>
+               
+        </md-dialog-actions>
+    </md-dialog>

@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Initial Plan</title>
+    <style>
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .loa {
+            cursor: wait;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="col-md-12" ng-class="{'loa': isLoading}">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Initial Plan</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Initial Plan</li>
+                </ol>
+            </div>
+
+            <div class="card-body">
+                <!--input form-->
+                <form class="row row-cols-md-auto align-items-center mb-5">
+                    <div class="col-md-3 col-4">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Unit:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadBuyerData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-4 ml-3">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Buyer:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="Buyer"
+                                    data-ng-model="Buyer"
+                                    ng-change="LoadProcessData()"
+                                    ng-options="item as item.BuyerName for item in BuyerList">
+                                <option value="" ng-required="true">Select Buyer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 ml-3 col-sm-4">
+                        <div class="row">
+                            <!--<a ng-click="sendData()" class="btn btn-lg btn-primary" href="Index#!/BatchPlan">Action Button</a>-->
+                            <a ng-click="sendData()" class="btn btn-lg btn-primary text-white">Action Button</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <div class="card mt-5">
+            <div class="card-header sty-one">
+                <form class="form-inline" style="padding-bottom:2px">
+                    <div class="col-sm-6" style="padding-left:0px;">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search Job Here...">
+                    </div>
+                    <div class="col-sm-6 " style="padding-left:0px;">
+                        <label class="float-right">Total Count : {{allInitialData.length}}</label>
+                    </div>
+                </form>
+            </div>
+
+            <div ng-class="{ 'wait-cursor': loading }" class="data_tbl table-responsive">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">
+                                <label class="control control--checkbox">
+                                    <input ng-click="allChecking()" ng-model="allCheck" type="checkbox" class="js-check-all">
+                                    <!--<div class="control__indicator"></div>-->
+                                </label>
+                            </th>
+                            <th>Buyer</th>
+                            <th>Job No</th>
+                            <th>Style</th>
+                            <th>Order</th>
+                            <th>Booking Date</th>
+                            <th>Shipment Date</th>
+                            <th>Grey Color</th>
+                            <th>Dyed Color</th>
+                            <th>Fabric Type</th>
+                            <th>Composition</th>
+                            <th>GSM</th>
+                            <th>Dia</th>
+                            <th>Order Qty</th>
+                            <th class="bg-success text-white">Knitting Comment</th>
+                            <th class="bg-danger text-white">Knitting Commitment Start date</th>
+                            <th class="bg-danger text-white">Knitting Commitment End date</th>
+                            <th>Yarn Brand</th>
+                            <th>Yarn Count</th>
+                            <th>Yarn Type</th>
+                            <th>Yarn Lot</th>
+                            <th>Required Greige Qty</th>
+                            <th>Knitting Production Qty</th>
+                            <th class="bg-secondary text-white">Grey Inhouse Qty</th>
+                            <th class="bg-danger text-white">Actual Greige Inhouse Balance</th>
+                            <th class="bg-info text-white">Greige Required Date</th>
+                            <th>Actual Inhouse Date</th>
+                            <th>Required Dyed Qty</th>
+                            <th class="bg-warning">Dyeing Commitment Start Date</th>
+                            <th class="bg-warning">Dyeing Commitment End Date</th>
+                            <th class="bg-warning">Dyeing Comments</th>
+                            <th class="bg-warning">Lab Dip No</th>
+                            <th class="bg-warning">Lab Dip Status</th>
+                            <th>Order Type</th>
+                            <th>Booking Month & Year</th>
+                            <th>Shipment Month & Year</th>
+                            <th>Dyeing completion Month</th>
+                            <th>Dyeing completion Year</th>
+                            <th>Dyeing completion Week</th>
+                            <th>Dyeing Unit</th>
+                            <th>Garments Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="getRowClass($index)"
+                            ng-repeat="dataModel in (allInitialData | filter : search)">
+                            <td>
+                                <label class="control control--checkbox">
+                                    <input ng-click="checking($index)" ng-model="dataModel.Active" type="checkbox" class="js-check-all">
+                                </label>
+                            </td>
+                            <td class="hide">{{$index}}</td>
+                            <td class="hide">{{dataModel.Id}}</td>
+                            <td>{{dataModel.BuyerName}}</td>
+                            <td>{{dataModel.JobInfo}}</td>
+                            <td>{{dataModel.StyleInfo}}</td>
+                            <td>{{dataModel.OrderNo}}</td>
+                            <td>{{dataModel.BookingDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.ShipmentDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.GreyColor}}</td>
+                            <td>{{dataModel.DyedColor}}</td>
+                            <td>{{dataModel.FabricType}}</td>
+                            <td>{{dataModel.Composition}}</td>
+                            <td>{{dataModel.GSM}}</td>
+                            <td>{{dataModel.Dia}}</td>
+                            <td>{{dataModel.OrderQty}}</td>
+                            <td>{{dataModel.KnittingComponents}}</td>
+                            <td>{{dataModel.KnittingCommitMentStartDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.KnittingCommitMentEndDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.YarnBrand}}</td>
+                            <td>{{dataModel.YarnCount}}</td>
+                            <td>{{dataModel.YarnType}}</td>
+                            <td>{{dataModel.YarnLot}}</td>
+                            <td>{{dataModel.ReqGQty}}</td>
+                            <td>{{dataModel.KnittingProQty}}</td>
+                            <td>{{dataModel.GreyIHQty}}</td>
+                            <td>{{dataModel.ActualGreyInHouseBalance | number:2 }}</td>
+                            <td>{{dataModel.GreReqDate }}</td>
+                            <!--<td>{{dataModel.GreReqDate | date:'dd-MM-yy'}}</td>-->
+                            <td>{{dataModel.ActualInhouseDate | date:'dd-MM-yy'}}</td>
+                            <td>{{dataModel.RequiredDyedQty | number : 2}}</td>
+                            <td>{{dataModel.DyeingCommitmentSDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.DyeingCommitmentEDate | date:'dd MMMM yyyy'}}</td>
+                            <td>{{dataModel.DyeingRemarks}}</td>
+                            <td>{{dataModel.LabDipNo}}</td>
+                            <td>{{dataModel.LabDipStatus}}</td>
+                            <td>{{dataModel.OrderType}}</td>
+                            <td>{{dataModel.BookingMandY}}</td>
+                            <td>{{dataModel.ShipMandY}}</td>
+                            <td>{{dataModel.DyeingCompletionMonth}}</td>
+                            <td>{{dataModel.DyeingCompletionYear}}</td>
+                            <td>{{dataModel.DyeingCompletionWeek}}</td>
+                            <td>{{dataModel.DyeingUnitName}}</td>
+                            <td>{{dataModel.GarmentsUnit}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

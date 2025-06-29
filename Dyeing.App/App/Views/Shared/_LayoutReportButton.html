@@ -1,0 +1,29 @@
+﻿<div class="row" style="margin-bottom: 4%; margin-top: 2%;">
+
+    <div class="buttons" style="margin-left:9%" ng-cloak>
+
+
+        <button type="button" class="pulseWord" style="position: absolute; margin-left: 6%;" ng-click="form.$valid && ReportView('Word')">
+            <span class="Word">{{btnWordView}}</span>
+        </button>
+
+        <button type="button" class="pulseExcel" style="position: absolute; margin-left: 14%;" ng-click="form.$valid && ReportView('Excel')">
+            <span class="Excel">{{btnExcelView}}</span>
+        </button>        
+
+        <button type="submit" class="pulsePdf" style="position: absolute; margin-left: 22%;" ng-click="form.$valid && ReportView('PDF')">
+            <span class="Pdf">{{btnPDFView}}</span>
+        </button>
+
+
+        <button class="pulseRefresh" style="position: absolute; margin-left: 30%;" ng-click="Refresh()" type="button" id="btnRefresh">
+            <span class="Refresh">{{btnRefresh}}</span>
+        </button>
+
+        <button class="pulseClose" style="position: absolute; margin-left: 38%;" ng-click="Close()" id="btnClose">
+            <span class="Close">{{btnClose}}</span>
+        </button>
+    </div>
+</div>
+
+

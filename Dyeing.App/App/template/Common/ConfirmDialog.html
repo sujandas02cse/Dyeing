@@ -1,0 +1,53 @@
+﻿<style>
+    md-toolbar {
+        min-height: 40px !important;
+    }
+
+    .md-toolbar-tools {
+        height: 25px !important;
+    }
+
+    md-dialog {
+        width: 400px !important;        
+    }
+
+    md-dialog-actions {
+        margin-right: 30% !important;
+    }
+
+    md-dialog .md-dialog-content {
+        padding: 14px;
+    }
+</style>
+<div class="CusDialog">
+    <md-dialog aria-label="Save Information">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--<h4 style="margin-left:35%;">{{model.Header}}</h4>-->
+
+                <h4 style="margin-left:35%;margin-top: 7%;">Confirm Message</h4>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <img src="../../Content/img/close_icon.png" height="25" width="25" style="margin-top: 26%;" />
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p style="text-align:center;margin-bottom: 0%;margin-top: 2%;"><strong>{{model.message}} </strong></p>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+
+            <div class="col-md-5">
+                <md-button class="md-raised md-primary" ng-click="Yes()">Yes</md-button>
+            </div>
+            <div class="col-md-5">
+                <md-button class="md-raised md-warn" ng-click="No()">No</md-button>
+            </div>
+
+        </md-dialog-actions>
+    </md-dialog>
+</div>

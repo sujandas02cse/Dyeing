@@ -1,0 +1,38 @@
+﻿
+<style>
+    td {
+        /*padding:0px !important;*/
+    }
+</style>
+<md-dialog aria-label="MPlanDialog" style="width:100%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Special Finish</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="openMPlanPopup($event)">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>            
+            <div class="md-dialog-content" style="height:350px">
+                <div class="form-group row">
+                    <div class="col-md-3" ng-repeat="row in sf1">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input type="checkbox" ng-model="row.FabOp" />
+                            </div>
+                            <label class="col-md-10">
+                                {{row.label}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="float:right;margin-top:10px;margin-bottom:10px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="openMPlanPopup($event)" value="Ok" />
+                </div>
+            </div>     
+        </md-dialog-content>
+    </form>
+</md-dialog>

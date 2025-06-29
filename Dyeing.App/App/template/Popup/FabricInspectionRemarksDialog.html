@@ -1,0 +1,42 @@
+﻿<md-dialog aria-label="FabricInspectionRemarks" style="width:40%;height:260px;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--<h2>Others Fabric Operation</h2>-->
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" style="height:120px" ng-controller="FinishFabricInspectionConfigController">
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label class="control-label col-md-2">
+                                Remarks:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-10">
+                                <!--<textarea  ng-model="obj.Remarks" ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+    class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight">-->
+                                <textarea ng-model="master.Remarks" class="col-sm-12" ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-1">
+                <md-button class="md-raised md-primary" ng-click="Ok()">Ok</md-button>
+            </div>
+            <div class="col-md-5"></div>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,142 @@
+﻿<style>
+    .table-modal td {
+        padding: 0px !important;
+    }
+
+    .table-modal thead {
+        z-index: 1200 !important;
+    }
+
+    .popup_tbl {
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+        .popup_tbl table {
+            position: relative;
+        }
+
+        .popup_tbl thead {
+            position: sticky;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+    .modal {
+        z-index: 1000 !important;
+    }
+
+    /* Adjust the z-index of the Select2 dropdown */
+    .select2-container {
+        z-index: 1100 !important;
+        width: 100% !important;
+    }
+
+    .md-datepicker-calendar-pane {
+        z-index: 1200
+    }
+</style>
+<md-dialog aria-label="MPlanDialog" class="MPlanDialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Machine Plan</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="popup_tbl mt-1">
+                    <!--<md-button ng-click="setDatePickerDate()">Set Date</md-button>
+                    <md-datepicker ng-model="FromDate" md-placeholder="From Date" md-hide-icons="calendar"></md-datepicker>
+                    <md-datepicker ng-model="selectedDate"></md-datepicker>-->
+                    <table class="table table-bordered table-modal">
+                        <thead>
+                            <tr class="table-info">
+                                <th colspan="5"><b style="font-size: larger;"></b></th>
+                                <th colspan="10"><b style="font-size:larger">Total Plan Qty: {{totalPlanQty}}</b></th>
+                            </tr>
+                            <tr class="table-warning">
+                                <th></th>
+                                <th style="width:150px;">Batch No</th>
+                                <th style="width:150px;">M/C No</th>
+                                <th>M/C Capacity</th>
+                                <th>Action</th>
+                                <th>Fabric type</th>
+                                <th>Composition</th>
+                                <th>GSM</th>
+                                <th>Body Part</th>
+                                <th>Plan Date</th>
+                                <th>Plan Qty</th>
+                                <th>Total Qty</th>
+                                <th>Enzyme</th>
+                                <!--<th>Special Finish</th>-->
+                                <th>Process</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in chkPlan">
+                                <td class="d-none">{{obj.GroupNo}}</td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <button class="btn  btn-warning" ng-click="copy(obj, $index)">Copy</button>
+                                </td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.BatchNo" />
+                                </td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <select style="width:120px; margin-left:5px; margin-right:5px;"
+                                            class="form-control input-height col-md-8"
+                                            select2="" data-ng-model="obj.Machine" ng-change="MachineChange(obj)"
+                                            ng-options="item as item.MachineNo for item in MachineList">
+                                        <option value="" ng-required="true">Select</option>
+                                    </select>
+                                </td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.MCapacity" />
+                                </td>
+                                <td style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>
+                                <td><input class="form-control" readonly type="text" name="name" ng-model="obj.FabricType" /></td>
+                                <td><input class="form-control" readonly type="text" name="name" ng-model="obj.Composition" /></td>
+                                <td><input class="form-control" readonly type="text" name="name" ng-model="obj.GSM" /></td>
+                                <td>
+                                    <select class="form-control input-height col-md-8" select2="" data-ng-model="obj.BodyPartId"
+                                            ng-options="item.Id as item.BodyPart for item in BodyPartList">
+                                        <option value="" ng-required="true">Select</option>
+                                    </select>
+                                </td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <md-datepicker ng-model="obj.PlanFromDate" md-placeholder="From Date" md-hide-icons="calendar"></md-datepicker> to
+                                    <md-datepicker ng-model="obj.PlanToDate" md-placeholder="To Date" md-hide-icons="calendar"></md-datepicker>
+                                </td>
+                                <td><input class="form-control" type="text" name="name" ng-change="calcTotalPQty(obj)" ng-model="obj.PlanQty" /></td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.TotalQty" />
+                                </td>
+                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <select data-ng-model="obj.Enzyme" class="form-control input-height" select2=""
+                                            ng-options="item.Value as item.Value for item in Enzyme">
+                                        <option value="" ng-required="true" disabled selected>Select</option>
+                                    </select>
+                                </td>
+                                <!--<td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                    <button class="btn btn-warning" ng-model="obj.SpecialFinish" ng-click="SpFinishPopup($event,obj.GroupNo)">Pop Up</button>
+                                </td>-->
+                                <td><input class="form-control" type="text" name="name" ng-model="obj.Process" /></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">
+                    <button class="btn btn-lg btn-success mr-2" ng-click="actionDialog('Save')">Save</button>
+                    <button class="btn btn-lg btn-danger" ng-click="hide()">Close</button>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

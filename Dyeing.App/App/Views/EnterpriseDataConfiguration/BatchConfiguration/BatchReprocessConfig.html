@@ -1,0 +1,98 @@
+﻿<style>
+    input[type=radio] {
+        border: 1px;
+        width: 14px;
+        height: 1em;
+    }
+
+    .custom-table-header{
+        position: sticky;
+        z-index : 0;
+    }
+</style>
+
+<body ng-controller="BatchReprocessConfigController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Batch Reprocess Configurtion</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Reprocess Configurtion </li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">  
+       <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+        <!--Input Section Start-->
+        <div class="form-group">
+            <div class="text-center">
+                <div class="col align-self-center mb-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Unit Name :
+                        </label>
+                        <!--<input type="text" placeholder="Unit Name" class=" col-md-8 form-control">-->
+                        <input type="text" ng-model="Unit" typeahead-min-length="1" uib-typeahead="unit as unit.Name for unit in allUnit | filter : {Name : $viewValue} | limitTo:8"
+                               typeahead-on-select="getUnitVal()" typeahead-editable="false" class="form-control clsHeight col-md-4" placeholder="Unit Name" />
+                        <!--<div class="col-md-7">-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="col align-self-center">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Batch No. :
+                        </label>
+                        <input type="text" ng-model="Batch" typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in allBatch | filter: {BatchNo:$viewValue}  | limitTo:8"
+                               typeahead-on-select="getBatchVal()" typeahead-editable="false" class="form-control clsHeight col-md-4" placeholder="Batch No" required />
+                        <!--<select class=" col-md-8 " ng-options="y.BatchNo for y in allBatch " ng-model="Batch" ></select>-->
+                        <!--<div class="col-md-7">-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.MId"" />
+                </div>
+            </div>
+
+            <div style=" background: #b0e0e6; padding: 10px;" }>
+                <div style="width:100%; overflow:auto; max-height:600px;">
+                    <table class="table table-bordered bordered table-text table-hover custom_tbl" id="myTable">
+                        <thead class="bg custom-table-header sticky-top">
+                            <tr>
+                                <th ng-click="sort('Roll')">Roll</th>
+                                <th ng-click="sort('Quantity')">Quantity</th>
+                                <th ng-click="sort('BodyPart')">BodyPart</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--<tr ng-repeat="dataModel in (BatchProcessingData | filter : search |orderBy:sortKey:reverse)">-->
+                            <tr id="radiobutton" ng-repeat="dataModel in allRollData">
+                                <td style="display : none">{{$index}}</td>
+                                <td  >{{dataModel.RollNo}}</td>
+                                <td>{{dataModel.Qty}}</td>
+                                <td>{{dataModel.BodyPart}}</td>
+                                <td class="d-flex justify-content-md-center ">
+                                    <label class="radio mx-4"> <input type="radio" ng-dblclick="toggleRadio($index)"  ng-change="selectRadio('Reject',$index)" ng-model="dataModel.RStatus" value="Reject" > Reject</label>
+                                    <label class="radio"> <input type="radio" ng-dblclick="toggleRadio($index)"  ng-change="selectRadio('Reprocess',$index)"  ng-model="dataModel.RStatus" value="Reprocess" > Reprocess</label>
+                                </td>
+                                <!--<td>
+                                    <input type="button" value="Get Row Index" ng-click="GetRowIndex($index)" />
+                                </td>-->
+                            </tr>
+                        </tbody>
+                        <!--<button class="btnSelect"  ng-click="save()">
+                            <span >Save</span>
+                        </button>-->
+                    </table>
+                </div>
+                <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+                </uib-pagination>-->
+            </div>
+        </div>
+    </form>
+    </div>
+</body>

@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html ng-app="MascoDyeing">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masco Group - Dyeing Application</title>
+
+    @*<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>*@
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="~/Content/template/dist/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/et-line-font/et-line-font.css">
+
+    <link href="~/Content/css/site.css?ts=@DateTime.Now.ToFileTime()" rel="stylesheet" />
+    <link href="~/Content/css/style.css?ts=@DateTime.Now.ToFileTime()" rel="stylesheet" />
+    <link href="/Content/CSS/Button.css?ts=@DateTime.Now.ToFileTime()" rel="stylesheet" />
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.ico" />
+    <!-- hmenu -->
+
+    <link href="~/Content/css/ace-responsive-menu.css?ts=@DateTime.Now.ToFileTime()" rel="stylesheet" />
+    <link href="~/Content/Library/angular-material.min.css" rel="stylesheet" />
+    <link href="~/Content/Library/Timepicker/md-time-picker.css" rel="stylesheet" />
+
+    <script src="~/Content/template/dist/js/jquery.min.js"></script>
+    <link href="~/Content/template/dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/template/dist/bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap-glyphicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/icomoon@1.0.0/style.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+    <script src="~/Content/js/site.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/Content/js/adminkit.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/Content/js/ace-responsive-menu.js?ts=@DateTime.Now.ToFileTime()"></script>
+
+    <script src="~/Content/library/angular/angular.min.js"></script>
+    <script src="~/Content/library/angular/angular-route.js"></script>
+
+
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/angular-sanitize.min.js"></script>
+    <script src="~/Scripts/angular-resource.min.js"></script>
+
+    @*<script src="~/Content/Library/ui-bootstrap-tpls.min.js"></script>*@
+    <script src="~/Content/ui-bootstrap-tpls.js"></script>
+
+    <script src="~/Content/Library/angular-ui-router.min.js"></script>
+    @*<script src="~/Content/angular-ui-router.min.js"></script>*@
+    <script src="~/Content/Library/angular-ui.min.js"></script>
+    @*<script src="~/Content/Library/multiselect.js?ts=@DateTime.Now.ToFileTime()"></script>*@
+
+    <script src="~/Scripts/angular-aria.min.js"></script>
+    <script src="~/Scripts/angular-messages.min.js"></script>
+    <script src="~/Content/Library/angular-material.min.js"></script>
+    <script src="~/App/app.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/App/upload.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/App/Scripts/Controller/Common.js?ts=@DateTime.Now.ToFileTime()"></script>
+
+    <script src="~/App/App.config.js?ts=@DateTime.Now.ToFileTime()"></script>
+
+    <script src="~/Content/Library/Timepicker/md-time-picker.js"></script>
+    <link href="~/Content/css/icon.css" rel="stylesheet" />
+    <link href="~/Content/library/icon.css" rel="stylesheet" />
+
+    <!-- Moment Library -->
+    <script src="~/Content/Library/moment.min.js"></script>
+    <link href="~/Content/css/componentStyle.css?ts=@DateTime.Now.ToFileTime()" rel="stylesheet" />
+
+    <script src="~/App/Scripts/Directive/multiselect.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/Content/library/lodash.min.js"></script>
+    <script src="~/Content/library/KeyBoard/angular-virtual-keyboard.js"></script>
+    <script src="~/Content/library/KeyBoard/vki-core.js"></script>
+    <link href="~/Content/library/KeyBoard/angular-virtual-keyboard.css" rel="stylesheet" />
+
+    <script src="~/Content/js/angularjs-autocomplete.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.9/alasql.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script>*@
+
+
+    <link href="~/Content/ngPrint.min.css" rel="stylesheet" />
+    <script src="~/Content/ngPrint.min.js"></script>
+
+    @*<link href="components/ngPrint/ngPrint.css">
+        <script src="components/ngPrint/ngPrint.js"></script>*@
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.4/xlsx.core.min.js"></script>*@
+
+    @*<link href="~/Scripts/style.css" rel="stylesheet" />*@
+    @*<script src="~/Content/js/select2/angular-select2.js"></script>*@
+    @*<script src="~/Content/js/select2/angular-select2.min.js?ts=@DateTime.Now.ToFileTime()"></script>*@
+
+    @*<link href="~/Content/js/ui-select/select.min.css" rel="stylesheet" />
+        <script src="~/Content/js/ui-select/select.min.js"></script>*@
+
+    @*@Scripts.Render("~/App/Scripts/Factory")
+        @Scripts.Render("~/App/Scripts/Controller")*@
+
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}?ts=" + DateTime.Now.ToFileTime() + "\"></script>", "~/App/Scripts/Factory")
+    @Scripts.RenderFormat("<script type=\"text/javascript\" src=\"{0}?ts=" + DateTime.Now.ToFileTime() + "\"></script>", "~/App/Scripts/Controller")
+
+</head>
+<body class="skin-blue sidebar-mini">
+    <div class="wrapper boxed-wrapper">
+        <header class="main-header" ng-show="menu">
+            <!-- Logo -->
+            <a href="#" class="logo blue-bg">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img src="~/Content/img/Masco.jpg" alt=""></span>
+                <!-- logo for regular state and mobile devices -->
+
+                <span class="logo-lg"><img src="~/Content/img/Masco.jpg" alt="" style=" height:38px;padding-right: 5px;">Masco Group</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar blue-bg navbar-static-top">
+                <div class="navbar-custom-menu">                
+                    <ul class="nav navbar-nav">
+                        <!-- User notification  -->
+                        <li class="user-profile header-notification">
+                            <a href="#!">
+                                <i class="fa fa-bell-o" style="font-size:20px;"></i> <span class="badge badge-light bookingNotify">0</span>
+                              
+                            </a>
+                            <div class="show-notification">
+                                <ul class="show-notification profile-notification" style="width:80em">
+                                    <li style='max-height:500px;width:100%;overflow:auto;' class="notify-data">
+
+                                        <table class="table table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center">Buyer</th>
+                                                    <th style="text-align:center">Tracking No</th>
+                                                    <th style="text-align:center">Style</th>
+                                                    <th style="text-align:center">Shipment Date</th>
+                                                    <th style="text-align:center">Sample Stage</th>
+                                                    <th style="text-align:center">Details</th>
+                                                    <th style="text-align:center">Report</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="notify-data">
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!-- User Account  -->
+                        <li class="dropdown user user-menu p-ph-res">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @*<img src="@Session["UserImage"]" class="user-image" alt="User Image">*@ <img alt="" class="user-image" src="data:image/jpg;base64,@Session["UserImage"]" />
+                                <span id="UserId" class="hidden-xs">
+                                    <script></script>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="user-header">
+                                    <div class="pull-left user-img"><img height="80" width="60" src="~/Content/img/Masco.jpg" class="img-responsive img-circle" alt="User"></div>
+                                    <p class="text-left">Administrator <small>admin@mascoknit.com</small> </p>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#"><i class="icon-profile-male"></i> My Profile</a></li>
+                                <li role="separator" class="divider"></li>
+
+                                <li><a href="@Url.Action("Logout", "Home")"><i class="fa fa-power-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        </header>
+        <!-- Main Nav -->
+        <div class="main-nav" ng-show="menu">
+            <nav role="navigation">
+                <!-- Menu Toggle btn-->
+                <div class="menu-toggle">
+                    <h3>Menu</h3>
+                    <button type="button" id="menu-btn"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+                <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
+                    @Html.Action("DynamicMenuLoad", "Home")
+                </ul>
+            </nav>
+        </div>
+        <!-- Main Nav -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper content">
+            <!--------------------------------End---------------------------->
+            <!-- Content Header (Page header) -->
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+                <ng-view></ng-view>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- start footer -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @*@DateTime.Now.Year.ToString() &copy; Powered By Department of MIS & SD,
+                <a href="http://www.mascoknit.com" target="_blank">Masco Group</a>*@
+            <span style="color:#0770a9;">Copyright &copy; 2019, </span>
+            @*<span style="color:#f07d24;">MasMinu&nbsp;</span>
+            <span style="color:#ff3019;">Systems Ltd.</span>*@
+            <span style="color:#0770a9"> All rights reserved.</span>
+        </div>
+        <div class="scroll-to-top">
+            <i class="material-icons">eject</i>
+        </div>
+    </div>
+    <!-- end footer -->
+    @*<footer class="main-footer page-footer">
+            @DateTime.Now.Year.ToString() &copy; Powered By Department of MIS & SD,
+            <a href="http://www.mascoknit.com" target="_blank">Masco Group</a>
+        </footer>*@
+
+
+    <!--Plugin Initialization-->
+    <script>
+        $(document).ready(function () {
+            $("#respMenu").aceResponsiveMenu({
+                resizeWidth: '768', // Set the same in Media query
+                animationSpeed: 'fast', //slow, medium, fast
+                accoridonExpAll: false //Expands all the accordion menu on click
+            });
+        });
+
+        $("#UserId").text(window.localStorage.getItem('UserId'));
+
+        LoadCountData()
+        function LoadCountData() {
+
+            var moduleId = 18;
+            //alert(moduleId);
+            $.ajax({
+                type: "POST",
+                url: "/Home/Notifications",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ moduelId: moduleId }),
+                success: function (response) {
+                    try {
+                        
+                        $('.bookingNotify').html(response[0].Count);
+                        //alert(output);
+
+
+
+                        $('#notify-data').empty();
+                        var result = "";
+                        var GroupName = "Masco Group";
+                        var ReportType = "pdf";
+                        var dateValue = "abc";
+                        for (var i = 0; i < response.length; i++) {
+
+                            let date = new Date(+("" + response[i].ShipmentDate).slice(6, 19)).toLocaleString('en-GB', { year: "numeric", day: "2-digit", month: "2-digit" }).split("/").join("-");
+
+                            result += `
+                                    <tr>
+                                        <td style="text-align:center">${response[i].BuyerName}</td>
+                                        <td style="text-align:center">${response[i].JobInfo}</td>
+                                        <td style="text-align:center">${response[i].StyleInfo}</td>
+                                        <td style="text-align:center">${date}</td>
+                                        <td style="text-align:center">${response[i].SampleStage}</td>
+                                        <td style="text-align:center">
+                                            <a href="https://mis-merchant.mascoknit.com/Elemental_BookingTracking/GetAllBookingDataWithJobId?BuyerId=${response[i].BuyerId}&JobId=${response[i].JobId}&StyleId=${response[i].StyleId}&ModuleId=18" target="_blank">
+                                                <i class="fa fa-eye" style="color:#136a8a"></i>
+                                            </a>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <a href='https://mis-merchant.mascoknit.com/BasicOrderBookingOutlineSample/SampleOrderBookingMaster?buyerId=${response[i].BuyerId}&jobId=${response[i].JobId}&StyleId=${response[i].StyleId}&dateValue=""&GroupName=${GroupName}&ReportType=${ReportType}' target="_blank">
+                                                New Booking
+                                            </a> &nbsp; | &nbsp;
+                                            <a href='https://mis-merchant.mascoknit.com/BasicOrderBookingOutlineSample/SampleOrderBookingMasterOtherStage?buyerId=${response[i].BuyerId}&jobId=${response[i].JobId}&StyleId=${response[i].StyleId}&SampleStageId=${response[i].StageSetId}&dateValue=""&GroupName=${GroupName}&ReportType=${ReportType}' target="_blank">
+                                                Other Stage
+                                            </a>
+                                        </td>
+                                    </tr>                          
+                                `;
+                        }
+                        $('#notify-data').append(result);
+
+
+                    } catch (e) {
+                        alert("Output is not valid JSON: " + e);
+                    }
+
+                    //alert(3);
+
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

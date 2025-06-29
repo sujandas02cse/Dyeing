@@ -1,0 +1,52 @@
+﻿<md-dialog aria-label="FabricInspection" style="width:50%;height:300px;">
+    <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--<h2>Others Fabric Operation</h2>-->
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" style="height:150px" ng-controller="FinishFabricInspectionConfigController">
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Roll Weight:
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-required="true" my-keypress class="form-control input-height" ng-virtual-keyboard="{kt: 'Numpad', numberPad: true, size:5}" ng-model="master.FinishWeight" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row" ng-hide="true">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Remarks:
+                                <!--<span class="required"> * </span>-->
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" my-keypress class="form-control input-height" ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}" ng-model="master.Remarks" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="float: right;"><input type="checkbox" id="labSticker" ng-model="master.LabSticker" /> <strong>Lab Sticker Print</strong> </div>
+            </div>            
+        </md-dialog-content>
+        <md-dialog-actions layout="row">       
+            <div class="col-md-2">
+                <md-button class="md-raised md-primary" ng-disabled="btnSaveDisabled" ng-click="form.$valid && actionDialog()">Save</md-button>              
+            </div>
+            <div class="col-md-4"></div>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,528 @@
+﻿<style>
+    .form-check-input {
+        position: relative !important;
+    }
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width:230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+    .table-scroll tbody {
+         max-height: 1000px !important;
+     }
+
+    .button {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+    .custom_tbl {
+        table-layout: fixed;
+    }
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index:6;
+        }
+    .dropdown-menu {
+        z-index: 5;
+    }
+        .custom_tbl td {
+            font-size: 12px;
+        }
+        .custom_tbl tbody tr:nth-child(2n+1) {
+            background: #cae3e7;
+        }
+
+        .custom_tbl td.input {
+            color: #333 !important;
+            padding: 0 5px !important;
+            position:relative;
+        }
+            .custom_tbl td.input input {
+                display: block;
+                /* border: 1px solid; */
+                background: #fff;
+                color: #333 !important;
+                padding: 5px;
+                border: none;
+                width: 100%;
+                height: 35px;
+                border-radius: 3px;
+            }
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+            /*background: #fff !important;*/
+            color:#333 !important;
+        }
+        .custom_tbl tr:hover  td {
+            background: #364865 !important;
+            cursor: default;
+            color: white;
+        }
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .btn-disabled {
+        background-color: silver;
+    }
+
+    @media only screen and (max-width: 480px) {
+        .control-label {
+           text-align:left;
+           margin-bottom:15px;
+        }
+    }
+
+ 
+</style>
+
+<body ng-controller="BatchDataProcessingController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Batch Data Processing</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Data Processing</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        
+        <div>
+            <div class="form-group-row">
+                <div class="col-md-12">
+
+                    <div style="margin-left:40%;" class="d-flex gap-5">
+
+                        <input type="radio" class="form-check-input" name="radioBulk" ng-model="batchType"  ng-value="'Bulk'" ng-init="batchType='Bulk'" ng-click="checkBulk()">&nbsp; Bulk
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" name="radioSample" ng-model="batchType" ng-value="'Sample'" ng-click="checkSample()"> &nbsp; Sample
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div style="margin-left:40%;" class="d-flex gap-5">
+                        <input type="radio" class="form-check-input" ng-model="RMode" ng-value="'RG'" name="Roptradio">&nbsp; Regular
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" ng-model="RMode" ng-value="'RP'" name="Roptradio"> &nbsp; Reprocess
+                    </div>
+                </div>
+                <div class="col-md-6" ng-show="RMode=='RG'">
+                    <div style="margin-left:40%;" class="d-flex gap-5">
+                        <input type="radio" class="form-check-input" ng-model="Mode" ng-value="'V'" name="optradio">&nbsp; Prepare Batch
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" ng-model="Mode" ng-value="'P'" name="optradio">&nbsp; Excel Upload
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div ng-show="RMode=='RG'">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Unit:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <!--<div class="col-md-7">-->
+                            <select class="form-control col-md-8" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadProcessData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="col-md-3" ng-show="Mode=='V'">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                From Date:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <md-datepicker ng-model="FromDate" ng-change="LoadProcessData()" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-show="Mode=='V'">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                To Date:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <md-datepicker ng-model="ToDate" ng-change="LoadProcessData();" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1" ng-show="Mode=='V'">
+                        <div class="row">
+                            <input type="button" style="width:110px;" class="button btn-lg" ng-value="Processing==true?'Processing':'Show'" ng-class="disabledShow==true?'btn-disabled':'btn-primary'" ng-disabled="disabledShow" ng-click="showData()" />
+
+                            <!--<button class="button btn-primary btn-lg" ng-hide="disabledShow" ng-click="showData()">
+                        Show
+                    </button>-->
+                        </div>
+                    </div>
+                    <div class="col-md-1" ng-show="Mode=='V'">
+                        <div class="row">
+                            <img style="height: 48px; margin-left:40%;" ng-show="MismatchData.length>0?true:false" alt="download mismatch data" ng-click="ExportMismatchData()" src="../../../../Content/img/exceldownload.png" />
+                        </div>
+                    </div>
+                </div>
+                <!--<button ng-click="saveAsXlsx()">Save As XLSX</button>-->
+                <hr />
+                <div id="excel" style="margin-left:40%;" ng-show="Mode=='P'">
+                    <input type="file" id="ngexcelfile" />
+
+                    <input type="button" style="padding: 15px; font-size: 15px; margin-top: 50px" class="btn btn-primary" value="Upload & Process Data" ng-click="ReadExcelData()" />
+                </div>
+                <div ng-show="Mode=='V'" style=" background: #b0e0e6; padding: 10px;" }>
+                    <form class="form-inline" style="padding-bottom:2px">
+                        <div class="col-sm-6" style="padding-left:0px;">
+                            <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                        </div>
+                        <div class="col-sm-6">
+                            
+                            <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+                        </div>
+                    </form>
+                    <div style="width:100%; overflow:auto; max-height:600px;">
+                        <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                            <thead class="bg">
+                                <tr>
+                                    <th style="width:60px;">Action&nbsp;</th>
+                                    <th style="width: 40px;">Sl</th>
+                                    <th style="width:130px;">
+                                        <span ng-click="sort('BatchNo')">Batch No</span>
+                                        <br />
+                                        <input type="checkbox" ng-change="BatchBehavior('Y')" ng-model="chkYes" />&nbsp;&nbsp;Yes&nbsp;
+                                        <input type="checkbox" ng-change="BatchBehavior('N')" ng-model="chkNo" />&nbsp;&nbsp;No<br />
+                                        <input type="checkbox" ng-change="BatchBehavior('A')" ng-model="chkAll" />&nbsp; All &nbsp;
+                                        &nbsp;
+                                    </th>
+                                    <th ng-click="sort('McNo')" style="width:75px;">M/C No&nbsp;</th>
+                                    <th ng-click="sort('Buyer')" style=" width: 75px;">Buyer&nbsp;</th>
+                                    <th ng-click="sort('Job')" style="width: 115px;">Job&nbsp;</th>
+                                    <th ng-click="sort('Style')" style="width: 115px;">Style/Order &nbsp;</th>
+                                    <th ng-click="sort('FabType')" style="width: 155px;">Fab Type &nbsp;</th>
+                                    <th ng-click="sort('FabTypeDB')" style="width: 160px;">System Fabric &nbsp;</th>
+                                    <th ng-click="sort('Color')" style="width: 70px;">Color &nbsp;</th>
+                                    <th ng-click="sort('LDNo')" style="width: 100px;">LDNo &nbsp;</th>
+                                    <th ng-click="sort('RN')" style="width: 100px;">RN &nbsp;</th>
+                                    <th ng-click="sort('YarnLot')" style="width: 80px;">Yarn Lot &nbsp;</th>
+                                    <th ng-click="sort('DeliveryDate')" style="width: 100px;">Delivery Date &nbsp;</th>
+                                    <th ng-click="sort('MatchingWith')" style="width: 80px;">Matching With &nbsp;</th>
+                                    <th ng-click="sort('Enzyme')" style="width: 80px;">Enzyme &nbsp;</th>
+                                    <th ng-click="sort('Process')" style="width: 70px;">Process &nbsp;</th>
+                                    <th ng-click="sort('Body')" style="width: 60px;">Body &nbsp;</th>
+                                    <th ng-click="sort('Rib')" style="width: 60px;">Rib &nbsp;</th>
+                                    <th ng-click="sort('BNT')" style="width:60px;">BNT &nbsp;</th>
+                                    <th ng-click="sort('FabQty')" style="width:70px;">FabQty &nbsp;</th>
+                                    <th ng-click="sort('NoOfBatch')" style="width: 70px;">No Of Batch &nbsp;</th>
+                                    <th ng-click="sort('Remarks')" style="width: 100px;">Remarks &nbsp;</th>
+                                    <th ng-click="sort('IsSample')" style="width: 100px;">IsSample &nbsp;</th>
+
+                                    <th ng-if="currlength.length>5" style=""></th>
+                                </tr>
+                            </thead>
+                            <tbody ng-show="show">
+
+                                <!--<tr ng-repeat="dataModel in (BatchProcessingData | filter : search  |orderBy:sortKey:reverse)">-->
+
+                                <tr ng-repeat="dataModel in BatchProcessingData | filter:{ IsSample: batchType } | filter:search | orderBy:sortKey:reverse">
+
+
+                                    <td style="width:7%;">
+                                        <a href="/Home/Index#!/BatchCard{{dataModel.IsSample == 'Sample' ? 'Sample' : '' }}?id={{dataModel.Id}}" target="_blank">Prepare</a>
+                                    </td>
+                                    <td style="display:none">{{dataModel.Id}}</td>
+                                    <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                                    <td ng-bind-html="batchLinkGen(dataModel.BatchNo)" style="width:15%;"></td>
+                                    <td> {{dataModel.McNo}}</td>
+                                    <td> {{dataModel.Buyer}}</td>
+                                    <td> {{dataModel.Job}}</td>
+                                    <td> {{dataModel.Style}}</td>
+                                    <td> {{dataModel.FabType}}</td>
+                                    <td class="input" ng-show="dataModel.fabric.length>1?true:false">
+                                        <input placeholder="Select" ng-model="dataModel.SystemFab" typeahead-on-select="ChangeFabric(dataModel)" uib-typeahead="item as item.name for item in dataModel.fabric | filter: {name:$viewValue} | limitTo:8" />
+                                    </td>
+                                    <td class="input" ng-hide="dataModel.fabric.length>1?true:false">
+                                        <input ng-model="dataModel.SystemFab" typeahead-on-select="ChangeFabric(dataModel)" uib-typeahead="item as item.name for item in dataModel.fabric | filter: {name:$viewValue} | limitTo:8" />
+                                    </td>
+                                    <td> {{dataModel.Color}}</td>
+                                    <td> {{dataModel.LDNo}}</td>
+                                    <td> {{dataModel.RN}}</td>
+                                    <td> {{dataModel.YarnLot}}</td>
+                                    <td> {{dataModel.DeliveryDate}}</td>
+                                    <td> {{dataModel.MatchingWith}}</td>
+                                    <td> {{dataModel.Enzyme}}</td>
+                                    <td> {{dataModel.Process}}</td>
+                                    <td> {{dataModel.Body}}</td>
+                                    <td> {{dataModel.Rib}}</td>
+                                    <td> {{dataModel.BNT}}</td>
+                                    <td> {{dataModel.FabQty}}</td>
+                                    <td> {{dataModel.NoOfBatch}}</td>
+                                    <td> {{dataModel.Remarks}}</td>
+                                    <td>{{dataModel.IsSample}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+            </uib-pagination>-->
+                </div>
+
+                <!--<button ng-click="execute()"> fabric</button>-->
+
+            </div>
+        </div>
+        <div ng-show="RMode=='RP'">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Unit:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <!--<div class="col-md-7">-->
+                        <select class="form-control input-height col-md-8" style="width:287.094px" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-change="LoadProcessData()"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="col-md-3" ng-show="Mode=='V'">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            From Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <md-datepicker ng-model="FromDate" ng-change="LoadProcessData()" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" ng-show="Mode=='V'">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            To Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <md-datepicker ng-model="ToDate" ng-change="LoadProcessData();" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1" ng-show="Mode=='V'">
+                    <div class="row">
+                        <input type="button" style="width:110px;" class="button btn-lg" ng-value="Processing==true?'Processing':'Show'" ng-class="disabledShow==true?'btn-disabled':'btn-primary'" ng-disabled="disabledShow" ng-click="showData()" />
+
+                        <!--<button class="button btn-primary btn-lg" ng-hide="disabledShow" ng-click="showData()">
+                    Show
+                </button>-->
+                    </div>
+                </div>
+                <div class="col-md-1" ng-show="Mode=='V'">
+                    <div class="row">
+                        <img style="height: 48px; margin-left:40%;" ng-show="MismatchData.length>0?true:false" alt="download mismatch data" ng-click="ExportMismatchData()" src="../../../../Content/img/exceldownload.png" />
+                    </div>
+                </div>
+            </div>
+            <div style=" background: #b0e0e6; padding: 10px;" }>
+                <form class="form-inline" style="padding-bottom:2px">
+                    <div class="col-sm-6" style="padding-left:0px;">
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalReprocessItems}} </span>
+                    </div>
+                </form>
+                <div style="width:100%; overflow:auto; max-height:600px;">
+                    <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                        <thead class="bg">
+                            <tr>
+                                <th style="width:60px;">Action&nbsp;</th>
+                                <th style="width: 40px;">Sl</th>
+                                <th style="width:130px;">
+                                    <span  ng-click="sort('BatchNo')">Batch No</span>
+                                    <br />
+                                    <input type="checkbox" ng-change="BatchBehavior('Y')" ng-model="chkYes" />&nbsp;&nbsp;Yes&nbsp;
+                                    <input type="checkbox" ng-change="BatchBehavior('N')" ng-model="chkNo" />&nbsp;&nbsp;No<br />
+                                    <input type="checkbox" ng-change="BatchBehavior('A')" ng-model="chkAll" />&nbsp; All &nbsp;
+                                    &nbsp;
+                                </th>
+                                <th ng-click="sort('McNo')" style="width:75px;">M/C No&nbsp;</th>
+                                <th ng-click="sort('Buyer')" style=" width: 75px;">Buyer&nbsp;</th>
+                                <th ng-click="sort('Job')" style="width: 115px;">Job&nbsp;</th>
+                                <th ng-click="sort('Style')" style="width: 115px;">Style/Order &nbsp;</th>
+                                <th ng-click="sort('Color')" style="width: 70px;">Color &nbsp;</th>
+                                <th ng-click="sort('LDNo')" style="width: 100px;">LDNo &nbsp;</th>
+                                <th ng-click="sort('RN')" style="width: 100px;">RN &nbsp;</th>
+                                <th ng-click="sort('YarnLot')" style="width: 80px;">Yarn Lot &nbsp;</th>
+                                <th ng-click="sort('DeliveryDate')" style="width: 100px;">Delivery Date &nbsp;</th>
+                                <th ng-click="sort('MatchingWith')" style="width: 80px;">Matching With &nbsp;</th>
+                                <th ng-click="sort('Enzyme')" style="width: 80px;">Enzyme &nbsp;</th>
+                                <th ng-click="sort('Process')" style="width: 70px;">Process &nbsp;</th>
+                                <th ng-click="sort('Body')" style="width: 60px;">Body &nbsp;</th>
+                                <th ng-click="sort('Rib')" style="width: 60px;">Rib &nbsp;</th>
+                                <th ng-click="sort('BNT')" style="width:60px;">BNT &nbsp;</th>
+                                <th ng-click="sort('FabQty')" style="width:70px;">FabQty &nbsp;</th>
+                                <th ng-click="sort('NoOfBatch')" style="width: 70px;">No Of Batch &nbsp;</th>
+                                <th ng-click="sort('Remarks')" style="width: 100px;">Remarks &nbsp;</th>
+
+                                <th ng-if="currlength.length>5" style=""></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-show="show">
+                            <tr ng-repeat="dataModel in (BatchReProcessingData | filter : search |orderBy:sortKey:reverse)">
+                                <td style="width:7%;">
+                                    <a href="/Home/Index#!/BatchCardReprocess?id={{dataModel.Id}}"  target="_blank" ng-hide="dataModel.RepStatus>0?true:false">Prepare</a>
+                                    <!--<a ng-show="dataModel.RepStatus>0?true:false">Prepare</a>-->
+                                </td>
+                                <td style="display:none">{{dataModel.Id}}</td>
+                                <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                                <td ng-bind-html="batchLinkGen(dataModel.BatchNo)"  style="width:15%;"> </td>
+                                <!--<td style="width:15%;"> {{dataModel.BatchNo}}</td>-->
+                                <td> {{dataModel.McNo}}</td>
+                                <td> {{dataModel.Buyer}}</td>
+                                <td> {{dataModel.Job}}</td>
+                                <td> {{dataModel.Style}}</td>
+                                <!--<td class="input" ng-show="dataModel.fabric.length>1?true:false">
+        <input placeholder="Select" ng-model="dataModel.SystemFab" typeahead-on-select="ChangeFabric(dataModel)" uib-typeahead="item as item.name for item in dataModel.fabric | filter: {name:$viewValue} | limitTo:8" />
+    </td>
+    <td class="input" ng-hide="dataModel.fabric.length>1?true:false">
+        <input ng-model="dataModel.SystemFab" typeahead-on-select="ChangeFabric(dataModel)" uib-typeahead="item as item.name for item in dataModel.fabric | filter: {name:$viewValue} | limitTo:8" />
+    </td>-->
+                                <td> {{dataModel.Color}}</td>
+                                <td> {{dataModel.LDNo}}</td>
+                                <td> {{dataModel.RN}}</td>
+                                <td> {{dataModel.YarnLot}}</td>
+                                <td> {{dataModel.DeliveryDate}}</td>
+                                <td> {{dataModel.MatchingWith}}</td>
+                                <td> {{dataModel.Enzyme}}</td>
+                                <td> {{dataModel.Process}}</td>
+                                <td> {{dataModel.Body}}</td>
+                                <td> {{dataModel.Rib}}</td>
+                                <td> {{dataModel.BNT}}</td>
+                                <td> {{dataModel.FabQty}}</td>
+                                <td> {{dataModel.NoOfBatch}}</td>
+                                <td> {{dataModel.Remarks}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

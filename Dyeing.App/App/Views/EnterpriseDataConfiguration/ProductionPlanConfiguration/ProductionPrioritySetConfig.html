@@ -1,0 +1,160 @@
+﻿<body ng-controller="ProductionPrioritySetConfigController">
+    <div class="content-header sty-one">
+        <h1>Production Priority Set Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Production Priority Set Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:600px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div class="form-group row" style="height:50px;">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Machine No :
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+
+                            <!--<md-autocomplete name="MachineName"
+                                             md-selected-item="selectedName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-items="item in querySearch(searchName,'Name')"
+                                             md-selected-item-change="getPriorityDetails()"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18"
+                                             ng-required="true">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>-->
+                            <!----hh-->
+
+                            <md-autocomplete name="MachineName"
+                                             md-selected-item="selectedName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-selected-item-change="getPriorityDetails()"
+                                             md-items="item in querySearch(searchName,'Name')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18"
+                                             ng-required="true">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--getProdPrioritySetInfo(master.MId)-->
+            <div class="row" style="height:50px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>                   
+                </div>
+            </div>
+            <br /> <br />
+            <div id="hiddenDiv" style="display:none; width:100%; overflow-x:auto;">
+
+                <table style="width:100%;" class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                    <thead class="bg">
+                        <tr style="text-align:center">
+                            <th style="width:45px;">Sl</th>
+                            <th style="width:110px;">Date</th>
+                            <th style="width:140px;">Plan No</th>
+                            <th style="width:150px;">Batch No</th>
+                            <th style="width:110px;">Buyer</th>
+                            <th style="width:140px;">Job</th>
+                            <th style="width:120px;">Style</th>
+                            <th style="width:130px;">Order</th>
+                            <th style="width:110px;">Ship.Date</th>
+                            <th style="width:80px;">Qty</th>
+                            <th style="width:90px;">Priority</th>
+                            <th ng-if="detail.length>5" style=" width: 0.7%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in detail" style="text-align:center;">
+
+                            <td style="width:45px;">{{$index+1}}</td>
+                            <td style="width:110px;">
+                                {{obj.PDate}}
+                            </td>
+                            <td style="width:140px;">
+                                {{obj.PlanNo}}
+                                <input type="hidden" name="PpscId{{$index}}" ng-model="obj.PpscId" ng-value="obj.PpscId" readonly style="text-align:center">
+                                <input type="hidden" name="MppmId{{$index}}" ng-model="obj.MppmId" ng-value="obj.MppmId" readonly style="text-align:center">
+                                <!--<input type="hidden" name="MId{{$index}}" ng-model="obj.MId" ng-value="obj.MId" readonly style="text-align:center">-->
+                                <input type="hidden" name="MDId{{$index}}" ng-model="obj.MDId" ng-value="obj.MDId" readonly style="text-align:center">
+                                <input type="hidden" name="PlanNo{{$index}}" ng-model="obj.PlanNo" ng-value="obj.PlanNo" readonly style="text-align:center">
+                            </td>
+                            <td style="width:150px;">
+                                {{obj.BatchNo}}
+                                <input type="hidden" name="BatchNo{{$index}}" ng-model="obj.BatchNo" ng-value="obj.BatchNo" readonly style="text-align:center">
+                            </td>
+                            <td style="width:110px;">
+                                {{obj.BuyerName}}
+                            </td>
+                            <td style="width:140px;">
+                                {{obj.Job}}
+                            </td>
+                            <td style="width:120px;">
+                                {{obj.Style}}
+                            </td>
+                            <td style="width:130px;">
+                                {{obj.OrderN}}
+                            </td>
+                            <td style="width:110px;">
+                                {{obj.ShipDate}}
+                            </td>
+                            <td style="width:80px;">
+                                {{obj.PlanQty}}
+                            </td>
+                            <td style="width:90px;"> 
+                                <div>
+                                    <!--ng-change="verifyDuplicate($index)"-->
+
+                                    <select ng-model="obj.PriorityNo"
+                                            ng-options="n for n in [] | range:1:obj.totalItems"
+                                            ng-change="sequenceCreate($index,{{$index+1}},obj.PriorityNo)"
+                                            class="form-control input-height" ng-disabled="isDisabled">
+                                        <option value="">Select</option>
+                                    </select>
+
+                                    <!--<input type="text" name="totalItems{{$index}}" ng-model="obj.totalItems" ng-value="obj.totalItems" readonly style="text-align:center">-->
+
+                                </div>                                                                            
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>          
+
+
+        </form>
+
+        <!--------View/Edit Part------->
+
+
+    </div>
+
+</body>
+

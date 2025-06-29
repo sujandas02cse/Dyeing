@@ -1,0 +1,758 @@
+﻿<style>
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsInspectionInfo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+
+    .clsHeight {
+        /* height: 55px !important; */
+        font-weight: bold;
+        font-size: 13px;
+        color: #084B8A;
+        line-height: 20px;
+    }
+
+    .content {
+        padding: 0px
+    }
+    /*point calculation css*/
+    .clsFault {
+        display: flex;
+        flex-direction: column;
+        width: 157px;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: white;
+        border: 3px solid #E0E6F8;
+    }
+
+    .clsFaultChild {
+        /*background: #e9edf5;*/
+        /*background: #7e9bd5;*/
+        background: #8eb4ff;
+        -webkit-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        -moz-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        border-radius: 7px;
+        padding: 8px;
+    }
+
+    .clsFaultHead {
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #084B8A;
+        position: relative;
+    }
+
+        .clsFaultHead span {
+            position: absolute;
+            right: -7px;
+        }
+
+            .clsFaultHead span .clsBckBtn {
+                width: 100%;
+                height: 100%;
+            }
+
+    .clsMajorMinorChild .clsPoint {
+        margin-top: 10px;
+    }
+    /*.clsPont{
+        border-color:1px  black;
+    }*/
+    .clstextArea {
+        width: 85%;
+        height: 26px;
+    }
+
+    .clsBckBtn {
+        border: none;
+        /*background-color: #673AB7;*/
+        background-color: #f15b5b;
+        width: 15%;
+        height: 26px;
+        font-weight: bold;
+        vertical-align: top;
+        color: #fff;
+    }
+
+    .clsPoint {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .clsPointChild {
+        text-align: center;
+        font-weight: bold;
+        /*height: 30px;*/
+        /*background-color: #E0ECF8;*/
+        /*background-color: #80DEEA;*/
+        background-color: #9fa7d1;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+        padding: 0px;
+    }
+
+    /*.clsMMPointChild {
+        text-align: center;
+        font-weight: bold;
+        height: 30px;
+        background-color: #E2ECF8;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+    }*/
+    .clsMMPointChild {
+        text-align: center;
+        font-weight: bold;
+        /* height: 30px; */
+        background-color: #80CBC4;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+        text-align: center !important;
+        justify-content: center;
+        padding: 2px;
+    }
+
+    textarea:disabled {
+        background: #FFFFFF;
+    }
+
+
+    .clsFaultChild {
+        height: 105px;
+    }
+
+    .clsMajorMinorChild {
+        height: 70px;
+        /*background: #e9eea5;*/
+        background: #81C784;
+        -webkit-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        -moz-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .clsPointChild:hover {
+        background-color: #E0E6F8;
+        cursor: pointer;
+    }
+
+    .clsMMPointChild:hover {
+        background-color: #E0E6F8;
+        cursor: pointer;
+    }
+
+    .clstextArea {
+        color: salmon;
+        font-weight: bold;
+    }
+
+    .clasFab {
+        text-align: center;
+        color: #084B8A;
+        font-weight: bold;
+        background-color: #E0ECF8;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    /* .btn_group {
+        padding-left: 15px;
+        position: fixed;
+        top: 72px;
+         width: 100%;
+         z-index: 9999;
+        right: 25px;
+    }*/
+    .save_btn {
+        position: absolute;
+        right: 6px;
+        bottom: 20px;
+    }
+
+    .btn_group {
+        padding-left: 15px;
+        /* width: 100%; */
+        position: absolute;
+        right: 142px;
+        bottom: 10px;
+    }
+
+        .btn_group input[type="radio"] {
+            /*        width: 35px !important;*/
+            height: 20px !important;
+        }
+
+
+    .new_btn {
+        background: #60c3cd;
+        top: 50%;
+        overflow: auto;
+    }
+
+    .mod_btn {
+        background: #60c3cd;
+        top: 60%;
+    }
+
+    .new_btn,
+    .mod_btn {
+        background: #93cede;
+        width: 90px;
+        padding: 4px 0px;
+        left: 0;
+    }
+
+
+
+
+
+    /* .new_btn input,
+        .mod_btn input {
+            width: 35px;
+        }*/
+
+    .page-footer {
+        display: none;
+    }
+
+    .footer-fixed {
+        width: 100%;
+        z-index: 999;
+        position: fixed;
+        bottom: 0;
+        /*background: powderblue;*/
+        padding: 10px 0;
+    }
+
+        .footer-fixed .button {
+            padding: 12px 0;
+        }
+
+    .batch_data {
+        /*height: 440px;*/
+        /*height: calc(550px - 81px - 141px);*/
+        /*padding: 0 10px;*/
+    }
+    /*.clsMMPointChild:focus{
+        background-color:blue;
+        color:#fff;
+    }*/
+
+    div.active {
+        /*background-color: #3949ab;*/
+        background-color: #ff0707;
+        color: #fff;
+    }
+
+        div.active:hover {
+            background-color: #ff0707;
+            color: #fff;
+        }
+
+    @media (min-width:1367px) {
+        .clsFault {
+            width: 196px;
+        }
+
+        .clsFaultHead {
+            font-size: 14px;
+        }
+
+        .clsInspectionInfo {
+            gap: 20px;
+        }
+
+        .clsMajorMinorChild {
+            height: 80px;
+        }
+
+        .clsMMPointChild {
+            padding: 5px;
+        }
+
+        .clsInspectionInfo:nth-child(2) {
+            padding-top: 25px;
+        }
+
+        .batch_data {
+            /*min-height: 440px;*/
+            /*min-height: 600px;*/
+            /*height: calc(700px - 1px - 141px);*/
+        }
+    }
+
+    .button {
+        padding: 6px !important;
+    }
+
+    input[type="radio"] {
+        width: 35px !important;
+        height: auto !important;
+    }
+
+    .control-label {
+        text-align: right;
+        color: #084B8A;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    /* .input-height{
+        height:33px !important;
+    }*/
+    .btnGroup {
+        position: absolute;
+        right: 17px;
+    }
+        /*   .btnGroup .form-group {
+        position: relative;
+        top: -12px;
+        display: flex;
+        justify-content: end;
+        gap: 6px;
+    }*/
+        .btnGroup .radio_btn {
+            /*        display: flex;
+        align-items: center;
+        gap: 3px;
+        background: #c0aee1;
+        width: 150px;*/
+        }
+
+    .page-batch-entry input[type="radio"] {
+        width: 28px !important;
+        height: 28px !important;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .page-batch-entry label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #084B8A;
+        vertical-align: middle;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+
+    /* Horizontal layout for radio buttons */
+    .radio-horizontal {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        padding: 5px 5px;
+        background: #93cede;
+        border-radius: 5px;
+        width: auto;
+    }
+
+    /* Style for each radio + label pair */
+    .radio-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #084B8A;
+    }
+
+        /* Enlarged radio buttons */
+        .radio-wrapper input[type="radio"] {
+            width: 30px;
+            height: 30px;
+        }
+</style>
+
+<body ng-controller="FinishFabricInspectionConfigController">
+    <div class="card card-body" style="">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <!--<div class="btn_group">
+                <div class="form-group row">
+                    <div class="new_btn px-2">
+                        <span class="radio-label">New</span>
+                        <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'N'">
+                    </div>
+                    <div class="mod_btn">
+                        <span class="radio-label">Modify</span>
+                        <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'R'">
+                    </div>
+                </div>
+            </div>-->
+            <!--Updated by Sujan Das on 17-April-2025 to apply permission-->
+
+
+            <div class="page-batch-entry">
+                <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>
+            </div>
+
+            <div class="card py-3 px-2" style="background: #ccd5e1;position:relative;">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Batch No:
+                            </label>
+                            <div class="col-md-8">
+                                <input type='text' placeholder="Batch No" id="BatchNo" style="width: 74%; display: inline;" auto-focus 
+                                       ng-model="master.BatchNo"
+                                       ng-virtual-keyboard="{kt: 'Numpad', enterSubmit: enterBatchClick, size:5, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+                                       class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()">
+                                <!--<input type="text" ng-model="master.BatchNo" style="width: 74%; display: inline;" placeholder="Batch No" class="form-control input-height clsHeight" ng-show='Batch2' />-->
+                                <div style="display:inline;" class="button btn-info px-4 py-3 mr-1 mb-1 btn-mid" ng-click="Refresh()" role="button" tabindex="0">
+                                    <span class="ng-binding"><i class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                QC M/C:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" disabled ng-model="master.Machine" placeholder="Machine No" class="form-control input-height clsHeight" />
+                                <!--typeahead-Open-On-Focus typeahead-min-length="1" ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}" uib-typeahead="item as item.InspMNo for item in MachineInfo | filter: {InspMNo:$viewValue} | limitTo:8" typeahead-editable="true">-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5 clsHeight">
+                                Buyer:
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" disabled ng-model="master.Buyer" placeholder="Buyer" class="form-control input-height clsHeight" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Job:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" disabled ng-model="master.Job" placeholder="Job" class="form-control input-height clsHeight" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight" style="font-size:13px;">
+                                Style/ Order:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" disabled ng-model="master.Order" placeholder="Order" class="form-control input-height clsHeight" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" ng-show="false">
+                        <div class="row">
+                            <label class="control-label col-md-5 clsHeight">
+                                Length:
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-change="WidthLengthCng()" disabled ng-model="master.Length" class="form-control input-height clsHeight" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Width:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" my-keypress ng-model="master.Width" class="form-control input-height clsHeight" ng-virtual-keyboard="{kt: 'Numpad', numberPad: true, size:5}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5 clsHeight">
+                                Compacting:
+                            </label>
+                            <div class="col-md-7">
+                                <select ng-model="master.CompTime" ng-disabled="RadioMode=='N'?true:false"
+                                        ng-change="changeCompTime()"
+                                        ng-options="a.id as a.name for a in CompactingTime"
+                                        class="form-control input-height clsHeight"
+                                        ng-required="true">
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Body Part:
+                            </label>
+                            <div class="col-md-8">
+                                <select ng-model="master.BodyPart" ng-init="master.BodyPart='Body'"
+                                        ng-options="a.id as a.name for a in BodyPart"
+                                        class="form-control input-height clsHeight"
+                                        ng-required="true">
+                                    <option value="" selected>Select</option>
+                                </select>
+
+                                <!--<select ng-model="master.BodyPart"
+                                        ng-options="a as a.name for a in BodyPart"
+                                        class="form-control input-height clsHeight"
+                                        ng-required="true">
+                                    <option value="" selected>Select</option>
+                                </select>-->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="col-md-3">-->
+
+                    <div class="page-batch-entry">
+                        <div class="btn_group">
+                            <div class="form-group radio-horizontal">
+
+                                <label class="radio-wrapper">
+                                    <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'N'">
+                                    <span class="radio-label" style="margin-left:10px;">New</span>
+                                </label>
+
+
+                                <label class="radio-wrapper">
+
+                                    <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'R'">
+                                    <span class="radio-label" style="margin-left:10px;">Modify</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <button class="button btn-primary save_btn" ng-click="ConfirmSave()">
+                        <i class="fa fa-check mr-2"></i>Save
+                    </button>
+                    <!--</div>-->
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Total Roll:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" style="color:red;" ng-model="master.TotalRoll" disabled class="form-control input-height clsHeight" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4 clsHeight">
+                                Qty Kg:
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" style="color:red;" ng-model="master.TRollWeight" disabled class="form-control input-height clsHeight" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" ng-show="RadioMode=='N'?false:true;">
+                        <div class="row">
+                            <label class="control-label col-md-5 clsHeight">
+                                Roll No:
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="master.Roll" placeholder="Roll No" class="form-control input-height clsHeight"
+                                       typeahead-on-select="ChangeRoll()" ng-virtual-keyboard="{kt: 'Numpad', enterSubmit:ChangeRoll, keyCenter: 4, size:5, customClass: 'myCustomizedVkt'}"
+                                       typeahead-Open-On-Focus typeahead-min-length="1" my-enter="ChangeRoll()"
+                                       uib-typeahead="item as item.DisplayValue for item in RollNoInfo | filter: {DisplayValue:$viewValue} | limitTo:8" typeahead-editable="true">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--<div class="btnGroup">
+                    <div class="form-group row px-5">
+                        <div class="radio_btn col-md-2">
+                            <label class="control-label">Body1</label>
+                            <input type="radio">
+                        </div>
+                        <div class="radio_btn col-md-2">
+                            <label class="control-label">Body2</label>
+                            <input type="radio">
+                        </div>
+                        <div class="radio_btn col-md-2">
+                            <label class="control-label">BNT</label>
+                            <input type="radio">
+                        </div>
+                        <div class="radio_btn col-md-2">
+                            <label class="control-label">Neck</label>
+                            <input type="radio">
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+
+            <div id="div1" style="position:relative;" class="batch_data">
+                <div class="clsInspectionInfo" style="max-height:100%;overflow:auto;background-color:transparent; " ng-show="bodyDisplay">
+                    <div class="clsFault" ng-repeat="obj in details">
+                        <div class="clsFaultChild">
+                            <div class="clsFaultHead">{{obj.FaultName}}</div>
+                            <div>
+                                <textarea class="clstextArea" style="resize:none;" disabled="disabled" ng-model="obj.PointData"></textarea><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index)">
+                            </div>
+                            <div class="row clsPoint">
+                                <div class="col-md-6 clsPointChild" ng-repeat="lobj in obj.lPoints" ng-click="pointClick(lobj.PointValue,$parent.$index)">
+                                    {{lobj.PointName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="clsFault" ng-repeat="obj in majorMinorFault">
+                        <div class="clsMajorMinorChild">
+                            <div class="clsFaultHead">
+                                {{obj.FaultName}}
+                                <span><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index,obj.NameID,'mn')"></span>
+                            </div>
+                            <div class="row clsPoint" id="box{{$index}}">
+                                <div ng-class="{active:isSet({{obj.NameID}},{{$index}})}" ng-click="setMnFault(obj.NameID,$index)"
+                                     class="nav nav-pills col-md-6 clsMMPointChild" ng-repeat="lobj in obj.lPoints">
+                                    {{lobj.PointName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+
+                <div class="clsInspectionInfo" style="max-height:100%;overflow:auto;background-color:transparent; " ng-show="bodyDisplay">
+                  
+                    <div class="clsFault" ng-repeat="obj in majorMinorFault">
+                        <div class="clsMajorMinorChild">
+                            <div class="clsFaultHead">
+                                {{obj.FaultName}}
+                                <span><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index,obj.NameID,'mn')"></span>
+                            </div>
+                            <!--<div>
+                                <textarea class="clstextArea" style="resize:none;" disabled="disabled" ng-model="obj.PointData"></textarea><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index,obj.NameID,'mn')">
+                            </div>-->
+                            <div class="row clsPoint" id="box{{$index}}">
+                                <div ng-class="{active:isSet({{obj.NameID}},{{$index}})}" ng-click="setMnFault(obj.NameID,$index)"
+                                     class="nav nav-pills col-md-6 clsMMPointChild" ng-repeat="lobj in obj.lPoints">
+                                    {{lobj.PointName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="clsInspectionInfo" style="max-height: 100%; overflow: auto; background-color: wheat; padding-bottom: 10px !important; padding-top: 10px; " ng-show="bodyDisplay">
+                    <div class="clsFault" ng-repeat="obj in majorMinorFault">
+                        <div class="clsMajorMinorChild">
+                            <div class="clsFaultHead">{{obj.FaultName}}</div>
+                            <div>
+                                <textarea class="clstextArea" style="resize:none;" disabled="disabled" ng-model="obj.PointData"></textarea><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index,obj.NameID,'mn')">
+                            </div>
+                            <div class="row clsPoint" id="box{{$index}}">
+                                <div ng-class="{active:isSet({{obj.NameID}},{{$index}})}" ng-click="setMnFault(obj.NameID,$index)"
+                                     class="nav nav-pills col-md-6 clsMMPointChild" ng-repeat="lobj in obj.lPoints">
+                                    {{lobj.PointName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <!--<div class="row" ng-show="btmDisplay">
+            <div class="col-md-12 clasFab">{{master.ItemDescription}}</div>
+            </div>-->
+            <div class="row footer-fixed" ng-hide="true">
+                ="
+                <div class="col-md-10" ng-show="false">
+                    <div class="row">
+                        ow
+                        -3
+                        <div class="col-md-3">
+                            la
+                            d-
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight">
+                                    Total Point:
+                                </label>
+
+                                >
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input-height clsHeight" ng-model="TotalPoint" ng-readonly style="color:salmon" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Pts/100 Inch:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control input-height clsHeight" ng-model="Ptsperhundred" ng-readonly style="color:salmon" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-0">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Acceptance Status:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-style="styleAcceptance" class="form-control input-height clsHeight" ng-model="master.Grade" ng-readonly style="color:salmon" />
+                                    <span style="visibility:hidden" ng-model="master.GradeNo"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <label class="control-label  col-md-8 clsHeight">
+                                    C.Approved:
+                                </label>
+                                <div class="col-md-3">
+                                    <md-checkbox aria-label="Checkbox 1" class="input-height" ng-model="master.CommercialApproved">
+                                    </md-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-md-12 d-flex align-items-start" ng-style="{'margin-left':'90%'}">
+                    <button class="button btn-primary" ng-click="ConfirmSave()">
+                        <i class="fa fa-check mr-2"></i>Save
+                    </button>
+                </div>-->
+            </div>
+        </form>
+    </div>
+</body>

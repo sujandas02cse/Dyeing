@@ -1,0 +1,250 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 200px;
+        width: 190px;
+    }
+
+    .dropdown-menu {
+        min-width: 12rem;
+        width: 190px;
+        max-height: 175px !important;
+        overflow: auto;
+        /*min-height:250px !important;*/
+    }
+
+        .dropdown-menu dropdown-menu-form {
+            height: 350px;
+        }
+    .tbl_mde {
+        position: relative;
+        z-index: 0;
+        max-height:450px;
+        /*max-height: clamp(5em,10vh,250px);*/
+        overflow: auto;
+        /* height: 100px;
+        overflow: scroll;*/
+    }
+        .tbl_mde table {
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            border-top: 1px solid #333 !important;
+        }
+        .tbl_mde table tbody {
+            height: 40vh;
+            overflow-y: auto;
+            /*background:#ddd;*/
+            /*display:block;*/
+        }
+        .tbl_mde table th,
+        .tbl_mde table td {
+            font-size: 12px;
+            padding: 5px 0px !important;
+            cursor: pointer;
+            border: 1px solid #333 !important;
+            vertical-align: middle !important;
+        }
+
+  
+    .md-datepicker-input {
+        width: 180px;
+    }
+
+    .content {
+        padding: 0 !important;
+    }
+
+    table th, table td {
+        font-size: 11px;
+        padding: 0 !important;
+    }
+
+
+
+     .md-dialog-content input[type=text] {
+        /*padding: 0 !important;*/
+        /*width: 125px;*/
+    }
+    .dataConfig input {
+        padding: 0 !important;
+        width: 180px;
+    }
+
+    p span.btn-sm {
+        height: 20px;
+        padding: 0 8px;
+        font-size: 13px;
+    }
+
+    .select_unit {
+        text-align: left;
+        font-size: 12px;
+        padding: 5px;
+        margin: 20px;
+    }
+    .select2-container--default.select2-container--open {
+        font-size: 12px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 22px;
+    }
+    .md-datepicker-input-container {
+        border: 1px solid #aaa;
+        border-radius: 4px;
+    }
+    /*select {
+        height: 24px !important;
+    }
+
+        select.form-control {
+            padding: 0px;
+        }
+    .select2-container--default.select2-container--open {
+        font-size: 12px;
+    }
+    .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+        padding: 2px 0px;
+    }
+    .select2-container .select2-selection--single {
+        height: 22px;
+
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 22px;
+        padding-right: 15px;
+    }
+    .select2-container {
+        width: 180px !important;
+    }
+    .select2-container--default{
+  
+    }*/
+</style>
+<div>
+    <!--<div class="content-header sty-one">
+        <h1>Dyeing Master Data Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing Master Data Configuration</li>
+        </ol>
+    </div>-->
+
+    <div class="card card-body" style="padding:0">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Master={}">
+         
+
+            <fieldset class="field_set" style="padding:0 10px;">
+                <div class="select_unit row">
+                    <label class="col-sm-1" style="text-align:right;">Name of Unit: </label>
+                    <div class="col-sm-2">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="master.Unit"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                    
+                    <label class="col-sm-1" style="text-align:right;"> From Date: </label>
+                    <div class="col-sm-2">
+                        <md-datepicker ng-required="true" ng-model="master.FromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                    
+                    <label class="col-sm-1" style="text-align:right;"> To Date: </label>
+                    <div class="col-sm-2">
+                        <md-datepicker ng-required="true" ng-model="master.ToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn-sm w-100 btn-info" ng-click="GetData(master)" >SEARCH</button>
+                    </div>
+                </div>
+                
+                
+              
+                
+
+                <div  class=" tbl_mde" style="max-width: 100%; overflow-x: auto;">
+                    
+                    <table class="table table-striped" id="tblMasterDataEntry">
+                        <thead class="table-light bg sticky-top">
+                        <tr>
+                            <th>Buyer </th>
+                            <th>Job </th>
+                            <th>Style </th>
+                            <th>Order </th>
+                            <th>Shipment date </th>
+                            <th>Booking date </th>
+                            <th>Fabric Name </th>
+                            <th>Color Name </th>
+                            <th>Dia Part </th>
+                            <th>Finish Dia </th>
+                            <th>Order Qty </th>
+                            <th>Req Greige Qty </th>
+                            <th>Target Delivery Date </th>
+                            <th>Full Greige req date </th>
+                            <th>Dyeing End date </th>
+                            <th>L/D No </th>
+                            <th>Enzyme </th>
+                            <th>Dyeing Process Flow </th>
+                            <th>Others fabric operation </th>
+                            <th>Others </th>
+                            <th>Dyeing factory </th>
+                            <th>Inhouse factory name </th>
+                            <th>Outer factory name </th>
+                            <th>Order status </th>
+                            <th>Remarks </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         
+                            <tr ng-repeat="item in MotherDataList">
+                                <td>{{item.BuyerName}} </td>
+                                <td>{{item.JobNme}} </td>
+                                <td>{{item.StyleName}} </td>
+                                <td>{{item.OrderName}} </td>
+                                <td>{{item.ShipDate |date:'yyyy-MM-dd' }} </td>
+                                <td>{{item.BookingDate  |date:'yyyy-MM-dd'}} </td>
+                                <td>{{item.FabricName}} </td>
+
+                                <td>{{item.ColorName}} </td>
+                                <td>{{item.DiaName}} </td>
+                                <td>{{item.FinishDia}} </td>
+                                <td>{{item.OrderQty}} </td>
+                                <td>{{item.RGreigeQty}} </td>
+                                <td>{{item.TDelvDate  |date:'yyyy-MM-dd'}} </td>
+
+                                <td>{{item.FGReqDate |date:'yyyy-MM-dd'}} </td>
+                                <td>{{item.DyeingEndDate |date:'yyyy-MM-dd'}} </td>
+                                <td>{{item.LDNo}} </td>
+                                <td>{{item.Enzyme}} </td>
+                                <td>{{item.DyeingProcessFlow}} </td>
+                                <td>{{item.OtherFabricOperation}} </td>
+                                <td>{{item.Others}} </td>
+                                <td>{{item.DyeingFactory}} </td>
+                                <td>{{item.InhouseFactory}} </td>
+                                <td>{{item.OuterFactory}} </td>
+                                <td>{{item.OrderStatus}}</td>
+
+                                <td>{{item.Remarks}} </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                   
+                </div>
+
+            </fieldset>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutReportButton.html'"></div>
+                  
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+

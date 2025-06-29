@@ -1,0 +1,140 @@
+﻿<style>
+    .unit {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .unit-row {
+        gap: 20px;
+    }
+
+    .unit .control-label {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+
+
+    .unit-select {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 12px 18px;
+        width: 60%; /* Increase width */
+        max-width: 600px;
+        min-width: 300px;
+    }
+
+        .unit-select option {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+    
+    .required {
+        color: red !important;
+    }
+
+    .radio-label {
+        vertical-align: middle;
+    }
+
+    .radio-input {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+
+    fieldset {
+        text-align: center;
+    }
+
+    input[type=radio] {
+        width: 6%;
+        height: 1.4em;
+    }
+
+    .radio-group {
+        margin-bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .radio-label {
+        margin-left: 50px;
+    }
+
+    .radio-container {
+        padding: 5px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-radio {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        gap: 20px;
+    }
+
+    .select2-selection__rendered {
+    font-size: 16px !important;
+    font-weight:600;
+    }
+
+    @media (max-width:768px) {
+        .unit select.form-control {
+            width: 100% !important;
+        }
+    }
+</style>
+
+<div class="radio-container">
+    <div style="margin: 0px;" class="form-group row justify-content-center">
+        <div class="col-md-6">
+            <div class="radio-group">
+                <div class="custom-radio d-flex align-items-center">
+                    <input type="radio" id="bulkOption" class="m-0 form-check-input" name="batchType"
+                           ng-model="$parent.batchType" ng-value="'Bulk'" ng-init="$parent.batchType='Bulk'" 
+                           ng-click="checkBulk()">
+                    <label for="bulkOption" class="form-check-label radio-label">Bulk</label>
+                </div>
+                <div class="custom-radio d-flex align align-items-center">
+                    <input type="radio" id="newOption" class="m-0 form-check-input" name="batchType" 
+                           ng-model="$parent.batchType" ng-value="'New'" ng-click="checkNew()">
+                    <label for="newOption" class="form-check-label radio-label">New</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="unit">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="form-group d-flex align-items-center justify-content-center unit-row">
+                <label class="control-label me-3">
+                    Unit: <span class="required"> * </span>
+                </label>
+                <select class="form-control unit-select" select2="" name="unit"
+                        data-ng-model="$parent.Unit"
+                        ng-change="LoadProcessData()"
+                        ng-options="item as item.Name for item in UnitList">
+                    <option class="custom-font" value="" ng-required="true">Select Unit</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

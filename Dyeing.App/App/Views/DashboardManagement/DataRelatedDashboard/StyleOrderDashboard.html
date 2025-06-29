@@ -1,0 +1,146 @@
+﻿<style>
+    .table-scroll tbody {
+        max-height: 3000px !important;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+</style>
+<div>
+    <div class="content-header sty-one">
+        <h1>Style Order Dashboard</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Dashboard Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Data Related Dashboard</a></li>
+            <li><i class="fa fa-angle-right"></i> Style Order Dashboard</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="padding:0; ">
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Unit:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-change="UnitChange()"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Buyer:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="buyer"
+                                data-ng-model="Buyer"
+                                ng-change="BuyerChange()"
+                                ng-options="item as item.Name for item in BuyerList">
+                            <option value="" ng-required="true">Select Buyer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Job:                        
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="job"
+                                data-ng-model="Job"                                
+                                ng-options="item as item.Name for item in JobList">
+                            <option value="" ng-required="true">Select Job</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        From Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="FromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        To Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="ToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="row">
+                    <button id="btnSearch" class="button btn-primary btn-lg" ng-click="SearchData()">
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="row">
+                    <img style="height: 48px; margin-left:40%;" ng-show="StyleOrderData.length>0?true:false" alt="download mismatch data" ng-click="ExportData()" src="../../../../Content/img/exceldownload.png" />
+                    <!--<button id="btnExport" class="button btn-primary btn-lg" ng-click="ExportData()">
+                        Export
+                    </button>-->
+                </div>
+            </div>
+        </div>
+        <hr />
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('Buyer')" style="width:12%;">Buyer&nbsp;</th>
+                        <th ng-click="sort('Job')">Job&nbsp;</th>
+                        <th ng-click="sort('Style')">Style&nbsp;</th>
+                        <th ng-click="sort('OrderInfo')">Order&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in (StyleOrderData | filter : search |orderBy:sortKey:reverse).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td style="width:12%;"> {{dataModel.Buyer}}</td>
+                        <td> {{dataModel.Job}}</td>
+                        <td> {{dataModel.Style}}</td>
+                        <td> {{dataModel.OrderInfo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+        </uib-pagination>
+
+    </div>
+
+</div>
+

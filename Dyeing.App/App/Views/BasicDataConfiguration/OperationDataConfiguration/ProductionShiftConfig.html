@@ -1,0 +1,133 @@
+﻿<body ng-controller="ProductionShiftConfigController">
+    <div class="content-header sty-one">
+        <h1>Production Shift Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Operation Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Production Shift Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Unit Name:
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="master.UnitId"
+                                    ng-options="a.UnitId as a.UnitEName for a in Unit"
+                                    class="form-control input-height"
+                                    ng-change="setShiftSection()"    
+                                    ng-required="true">
+                                <option value="" selected>Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Shift Type:
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+                            <!--ng-change="getShiftTime(master.ShiftTypeId)"-->
+                            <select ng-model="master.ShiftTypeId"
+                                    ng-options="x.ShiftTypeId as x.ShiftTypeName for x in Shift"
+                                    ng-change="getShiftTime(master.ShiftTypeId)"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Shift</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Operation Section:
+                            <span class="required"> <font color="red"> * </font> </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="master.OscId"
+                                    ng-options="y.OscId as y.SectionName for y in SectionData"
+                                    class="form-control input-height"
+                                    ng-change="getCheckedShift(master.OscId)"
+                                    ng-required="true">
+                                <option value="" selected>Select Section</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <!--<input type="hidden" ng-model="model.ShiftNo" />-->
+                </div>
+            </div>
+            <div id="hiddenDiv" style="display:none;">
+                <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                    <thead class="bg">
+                        <tr>
+                            <th style="width:5%;">Sl</th>
+                            <th style="width:10%;">Select</th>
+                            <th style="width:25%;">Shift Name</th>
+                            <th style="width:20%;">Shift In</th>
+                            <th style="width:20%;">Shift out</th>
+                            <th style="width:20%;">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in detail" style="text-align:center;">
+                            <td style="width:5%;">{{$index+1}}</td>
+                            <td style="width:10%;">
+                                <div ng-if="obj.IsChecked == 1">
+                                    <input type="checkbox" name="IsChecked{{$index}}" ng-model="obj.IsChecked" ng-checked="true" />
+                                </div>
+                                <div ng-if="obj.IsChecked == 0">
+                                    <input type="checkbox" name="IsChecked{{$index}}" ng-model="obj.IsChecked" ng-checked="false" />
+                                </div>                               
+                                <!--<div>
+                                    <input type="checkbox" name="IsChecked{{$index}}" ng-model="obj.IsChecked" ng-checked="false" />
+                                </div>-->
+                            </td>
+                            <td style="width:25%;">
+                                {{obj.ShiftName}}
+                                <input type="hidden" name="ShiftName{{$index}}" ng-model="obj.ShiftName" ng-value="obj.ShiftName" readonly style="text-align:center">
+                            </td>
+                            <td style="width:20%;">
+                                {{obj.ShiftIn}}
+                                <input type="hidden" name="ShiftIn{{$index}}" ng-model="obj.ShiftIn" ng-value="obj.ShiftIn" readonly style="text-align:center">
+                            </td>
+                            <td style="width:20%;">
+                                {{obj.ShiftOut}}
+                                <input type="hidden" name="ShiftOut{{$index}}" ng-model="obj.ShiftOut" ng-value="obj.ShiftOut" readonly style="text-align:center">
+                            </td>
+                            <td style="width:20%;">
+                                {{obj.Category}}
+                                <input type="hidden" name="Category{{$index}}" ng-model="obj.Category" ng-value="obj.Category" readonly style="text-align:center">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </form>
+
+        <!--------View/Edit Part------->       
+
+
+    </div>
+
+</body>
+

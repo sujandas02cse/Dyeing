@@ -1,0 +1,540 @@
+﻿
+<style>
+    label {
+        font-size: 12px !important;
+    }
+
+    input[type=text] {
+        border: none;
+        color: black;
+        font-size: 14px !important;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+        padding: 2px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        height: initial !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .left_tbl,
+    .right_tbl {
+        width: 600px;
+    }
+
+        .left_tbl table,
+        .right_tbl table {
+            width: 100%;
+        }
+
+    table td, th {
+        border: 1px solid #333 !important;
+        padding: 3px 10px !important;
+        vertical-align: middle !important;
+    }
+
+    .left_tbl td:first-child, .right_tbl td:first-child {
+        width: 200px;
+    }
+
+    .sign_box {
+        width: 300px;
+        border-top: 1px solid;
+        margin-top: 40px;
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+
+    .finish_wrap {
+        border-top: 1px solid #777;
+        border-bottom: 1px solid #777;
+    }
+
+        .finish_wrap table {
+            margin-bottom: 0px;
+        }
+
+            .finish_wrap table th,
+            .finish_wrap table td {
+                border: 1px solid #9f9f9f !important;
+                padding: 5px 7px !important;
+                font-size: 12px;
+            }
+
+            .finish_wrap table th {
+                text-align: center;
+            }
+
+            .finish_wrap table td:nth-child(2) {
+            }
+
+    table:hover {
+        /*background: #495057;*/
+    }
+
+    .machine_new table th img {
+        width: 30px;
+        margin: 5px;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        height: initial !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .label-font {
+        font-size: 14px !important;
+    }
+</style>
+
+<body ng-controller="BatchCardNew as ctrl">
+    <div class="content-header sty-one">
+        <h1>Batch Card</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Card</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <div>
+            <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="master={}">
+                <div class="row row-cols-md-auto align-items-center mb-5">
+                    <label class="control-label label-font col-md-4 mb-0">Source Unit</label>
+                    <div class="col-md-4">
+                        <select class="form-control input-height" select2="" name="unit"
+                                data-ng-model="SourceUnit"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="left_tbl">
+                        <table class="table">
+                            <tr>
+                                <td>Job No:</td>
+                                <td>
+                                    {{batch.Job}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Buyer:</td>
+                                <td>{{batch.Buyer}}</td>
+                            </tr>
+                            <tr>
+                                <td>Style No:</td>
+                                <td>{{batch.StyleNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Order No:</td>
+                                <td>{{batch.OrderNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Batch No:</td>
+                                <td>{{batch.BatchNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Loading Time:</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.LoadingTime"
+                                    ng-blur="batch.LoadingTime = $event.target.textContent">
+                                    {{batch.LoadingTime}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Unloading Time:</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.UnloadingTime"
+                                    ng-blur="batch.UnloadingTime = $event.target.textContent">
+                                    {{batch.UnloadingTime}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="right_tbl">
+                        <table class="table">
+                            <tr>
+                                <td>Date</td>
+                                <td>{{batch.BatchDate | date:'dd-MMM-yyyy hh:mm a'}}</td>
+                            </tr>
+                            <tr>
+                                <td>M/C No:</td>
+                                <!--<td>{{batch.McNo}}</td>-->
+                                <td style="padding: 0 10px !important;">
+                                    <input type="text" ng-model="batch.McNo" typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                           typeahead-editable="false" class="form-control input-height clsHeight" required />
+                                </td>
+                            </tr>
+                            <!--<tr>
+                                <td>Greidge Color:</td>
+                                <td>{{batch.GreyColor}}</td>
+                            </tr>-->
+                            <tr>
+                                <td>Shade Name:</td>
+                                <td>{{batch.DyedColor}}</td>
+                            </tr>
+                            <tr>
+                                <td>Lab Dip No:</td>
+                                <td>{{batch.LDNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Enzyme:</td>
+
+                                <td style="padding: 0 10px !important;">
+                                    <select data-ng-model="batch.Enzyme" class="form-control input-height" select2=""
+                                            ng-options="item.Value as item.Value for item in Enzyme">
+                                        <option value="" ng-required="true" disabled selected>Select</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Turning:</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.Turing"
+                                    ng-blur="batch.Turing = $event.target.textContent">
+                                    {{batch.Turing}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Remarks:</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.Remarks"
+                                    ng-blur="batch.Remarks = $event.target.textContent">
+                                    {{batch.Remarks}}
+                                </td>
+                            </tr>
+                        </table>
+                        <span>
+                            <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsPPSample')" ng-model="batch.PPSample" />&nbsp;&nbsp; <strong>PP Sample</strong></span>
+                            <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsCSample')" ng-model="batch.China" />&nbsp;&nbsp; <strong>China</strong></span>
+                            <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsPPSampleOrChina')" ng-model="batch.PPSamplewithChina" />&nbsp;&nbsp; <strong>PP Sample & China</strong></span>
+                            <span style="float:right !important;"
+                                  ng-show="batch.EditOnly !== 'NULL' && batch.EditOnly !== null">
+                                <input type="checkbox"
+                                       ng-model="batch.EditOnly"
+                                       ng-true-value="1"
+                                       ng-false-value="0" />
+                                &nbsp;&nbsp; <strong>Edit Only</strong>
+                            </span>
+                        </span>
+
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div>
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Body Part</th>
+                                <th>Fabric Type</th>
+                                <th>Composition</th>
+                                <th>Yarn Type</th>
+                                <th>Yarn Brand</th>
+                                <th>Yarn Lot</th>
+                                <th>Stitch Length</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in batchDetails">
+                                <td>{{obj.BodyPart}}</td>
+                                <td>{{obj.FabricType}}</td>
+                                <td>{{obj.Composition}}</td>
+                                <td>{{obj.YarnType}}</td>
+                                <td>{{obj.YarnBrand}}</td>
+
+                                <!-- Editable cells with two-way data binding -->
+                                <td ng-attr-contenteditable = "{{ isEditable }}"
+                                    ng-bind="obj.YarnLot"
+                                    ng-blur="obj.YarnLot = $event.target.textContent">
+                                </td>
+                                <td ng-attr-contenteditable = "{{ isEditable }}"
+                                    ng-bind="obj.StitchLength"
+                                    ng-blur="obj.StitchLength = $event.target.textContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <b>Batch Specification:</b>
+                <div>
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Body Part</th>
+                                <th>Plan(In Kg)</th>
+                                <th>Actual (In Kg)</th>
+                                <th>M/C Dia G</th>
+                                <th>Rolls</th>
+                                <th>Identification</th>
+                                <th>F/Dia</th>
+                                <th>G/Dia</th>
+                                <th>F/GSM</th>
+                                <th>G/GSM</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="obj in batchSpec">
+                                <td>{{obj.BodyPart}}</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.PlanQty"
+                                    ng-blur="obj.PlanQty = $event.target.textContent">
+                                    {{obj.PlanQty}}
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.ActualQty"
+                                    ng-blur="updateActualQty(obj, $event.target.textContent)">
+                                    {{obj.ActualQty}}
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.McDiaGauge"
+                                    ng-blur="obj.McDiaGauge = $event.target.textContent">
+                                    {{obj.McDiaGauge}}
+                                </td>
+                                <td>{{obj.Rolls}}</td>
+                                <td>{{obj.Identification}}</td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.FDia"
+                                    ng-blur="obj.FDia = $event.target.textContent">
+                                    {{obj.FDia}}
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.GDia"
+                                    ng-blur="obj.GDia = $event.target.textContent">
+                                    >
+                                    {{obj.GDia}}
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.FGSM"
+                                    ng-blur="obj.FGSM = $event.target.textContent">
+                                    {{obj.FGSM}}
+                                    <!--<input type="text" ng-model="obj.FGSM" class="form-control input-height clsHeight" required />-->
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.GGSM"
+                                    ng-blur="obj.GGSM = $event.target.textContent">
+                                    {{obj.GGSM}}
+                                </td>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="obj.Remarks"
+                                    ng-blur="obj.Remarks = $event.target.textContent">
+                                    {{obj.Remarks}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <th>{{batch.Total}}</th>
+                                <th>{{batch.ActualTotal | number:2}}</th>
+                                <th></th>
+                                <th>{{batch.TotalRolls}}</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <td class="p-4">Process</td>
+                            <td class="p-4 text-center" colspan="5" 
+                                ng-attr-contenteditable = "{{ isEditable }}"
+                                ng-bind="batch.Process"
+                                ng-blur="batch.Process = $event.target.textContent">
+                                {{batch.Process}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="align-middle">Shade</td>
+                            <td>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" ng-model="batch.ShadeOk" ng-change="shadeChange(1)" ng-checked="batch.Shade=='Ok'?true:false" class="form-check-input mr-5">Ok
+                                    </label>
+                                </div>
+                            </td>
+                            <td rowspan="2" class="align-middle text-center">Quality</td>
+                            <td>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" ng-model="batch.QualityOk" ng-checked="batch.Quality=='Ok'?true:false" ng-change="qualityChange(1)" class="form-check-input mr-5">Ok
+                                    </label>
+                                </div>
+                            </td>
+                            <td rowspan="2" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" ng-model="batch.ShadeNOk" ng-checked="batch.Shade=='Not Ok'?true:false" ng-change="shadeChange(0)" class="form-check-input mr-5"> Not Ok
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" ng-model="batch.QualityNOk" ng-checked="batch.Quality=='Not Ok'?true:false" ng-change="qualityChange(0)" class="form-check-input mr-5"> Not Ok
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-5" colspan="1">Note Dyeing:</td>
+                            <td colspan="5" 
+                                ng-attr-contenteditable = "{{ isEditable }}"
+                                ng-bind="batch.NoteDyeing"
+                                ng-blur="batch.NoteDyeing = $event.target.textContent">
+                                {{batch.NoteDyeing}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" rowspan="5">Note Finishing:</td>
+                            <td colspan="3" rowspan="5" 
+                                ng-attr-contenteditable = "{{ isEditable }}"
+                                ng-bind="batch.NoteFinishing"
+                                ng-blur="batch.NoteFinishing = $event.target.textContent">
+                                {{batch.NoteFinishing}}
+                            </td>
+                            <td>Nozzle</td>
+                            <td>Trolley no</td>
+                        </tr>
+                        <tr ng-repeat="obj in nozzleTrolley">
+                            <td contentEditable ng-model="obj.Nozzle"></td>
+                            <td contentEditable ng-model="obj.Trolley" uib-typeahead="item as item.name for item in TrollyInfo | filter: {name:$viewValue} | limitTo:8"></td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <br />
+                <div class="row form-group">
+                    <span class="col-sm-12 text-left">Total Reprocess Roll: 0</span>
+                </div>
+
+                <div>
+                    <table style="width:100% !important;">
+                        <tbody>
+                            <tr>
+                                <td style="height:100px;">Rolls:{{batch.Roll}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                    <div class="offset-md-2 col-md-9">
+                        <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticker</title>
+   <!-- <link rel="stylesheet" href="style2.css"> -->
+   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+    *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 9px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+.wrapper {
+    width: 50mm;
+    height: 50mm;
+    /* border: 1px solid #333; */
+    margin: 0 auto;
+    /* padding: 8px; */
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    padding: 0 5px;
+    height: 38px;
+}
+.header .unit span {
+    /* padding-left: 48px; */
+}
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+.qr_code img {
+    width: 40px;
+    height: 37px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #333;
+    table-layout: fixed;
+}
+table td{
+    border: 1px solid #333;
+    padding: 1px;
+}
+table td:first-child{
+    width: 72px;
+}
+/* .body .left{
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+} */
+   </style>
+</head>
+<body style="display:none;" id="printSticker">
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo">
+                <img src="./img/MascoLogo.png" alt="">
+            </div>
+            
+            <div class="unit">
+                <!-- <span><b>Unit:</b></span>   -->
+                <span><b>Masco Dyeing</b></span>  
+            </div>
+            <div class="qr_code">
+                <img src="./img/qr.png" alt="">
+            </div>
+            
+        </div>
+        <div class="body">
+        
+            <table class="table">
+                <tr>
+                    <td>Buyer:</td>
+                    <td>Target(Australia)</td>
+                </tr>
+                <tr>
+                    <td>Job:</td>
+                    <td>SEL-12786(14)</td>
+                </tr>
+                <tr>
+                    <td>Order/Style:</td>
+                    <td>25897336</td>
+                </tr>
+                <tr>
+                    <td>Batch No:</td>
+                    <td>2308-1443(04)</td>
+                </tr>
+                <tr>
+                    <td>Color:</td>
+                    <td>Tarquish Blue</td>
+                </tr>
+                <tr>
+                    <td>Req. Dia/Width:</td>
+                    <td>68</td>
+                </tr>
+                <tr>
+                    <td>Req GSM:</td>
+                    <td>210 GSM</td>
+                </tr>
+                <tr>
+                    <td>Roll No:</td>
+                    <td>14</td>
+                </tr>
+                <!-- <tr>
+                    <td>Date:</td>
+                    <td></td>
+                </tr> -->
+                <tr>
+                    <td>Roll Weight:</td>
+                    <td>35 kg</td>
+                </tr>
+            </table>
+           
+
+
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<md-dialog aria-label="FinFabFloorToStoreIssueDialog" id="DialogFabricFloor" style="width:750px;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Barcode List</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content >
+            <div class="md-dialog-content" style="padding-left:15px;padding-right:15px;">
+                
+                <div class="form-group row">                  
+                   
+                    <div>
+                        Barcode No : <input type="text" ng-model="BarcodeID" id='txtMyInputBox' />&nbsp; &nbsp;<!--<input type="button" ng-click="Add()" value="Add" />-->
+                        <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="Add()" value="Add" style="background-color:#0D3D2A"/>
+                    </div>
+                    <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                        <thead class="bg">
+                            <tr style="width:100%; height:25px;">
+                                <th style="text-align:center; width:10%;">Sl.</th>
+                                <th style="text-align:center; width:20%;">Action</th>
+                                <th style="text-align:center; width:50%;">Barcode No</th>
+                                <th style="text-align:center; width:20%;">Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="m in InsBarcode">
+                            <tr style="width:100%; height:20px; font-size:13px;">
+                                <td style="text-align:center; width:10%;">{{$index+1}}</td>
+                                <td style="text-align:center;  width:20%;">
+                                    <!--<input type="button" ng-click="Remove($index)" value="Delete" />-->
+                                    <img name="delete" style="margin-left: 7%;" ng-click="Remove($index)" class="logo-image" src="../../Content/img/deleteicon.png" />
+                                </td>
+                                <td style="text-align:center;  width:50%;">
+                                    {{m.BarcodeID}}                                    
+                                </td>
+                                <td style="text-align:center;  width:20%;">
+                                    {{m.BarcodeWeight}}                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>              
+               
+                <div class="row" style="float:right;margin-top:5px;margin-bottom:5px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="Process(barcodes)" value="Process" /> &nbsp;&nbsp;
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Close" style="background-color:#990000"/>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+

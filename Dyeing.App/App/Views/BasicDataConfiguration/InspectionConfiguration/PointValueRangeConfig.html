@@ -1,0 +1,152 @@
+﻿<body ng-controller="PointValueRangeConfigController">
+    <div class="content-header sty-one">
+        <h1>Point Value Range Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Inspection Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Point Value Range Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Point Head:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <select ng-model="Model.PHeadNo"
+                                    ng-options="a.PHeadNo as a.PointHeadName for a in PHeadName"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select System</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            From Value:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="number" ng-hide="Model.PHeadNo==23" ng-model="Model.FromValue" string-to-number placeholder="From Point" class="form-control input-height" ng-change="fromRange()" required />
+                            <input type="text" ng-show="Model.PHeadNo==23" ng-model="Model.FromValue" placeholder="From Point" class="form-control input-height" ng-change="fromRange()" />
+                        </div>
+                    <!--</div>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">-->
+                        <label class="control-label col-md-1" style="padding-left:0px;">
+                            To Value:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="number" ng-hide="Model.PHeadNo==23" ng-model="Model.ToValue" placeholder="To Point" string-to-number class="form-control input-height" ng-change="updateRange()" required />
+                            <input type="text" ng-show="Model.PHeadNo==23" ng-model="Model.ToValue" placeholder="To Point" class="form-control input-height" ng-change="updateRange()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            From - To:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.FromTo" placeholder="" value="{{Model.FromPoint}}-{{Model.ToPoint}}" class="form-control input-height" readonly required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Point:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="Model.Point" placeholder="To Point" string-to-number class="form-control input-height" ng-change="updateRange()" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Is Active:
+                            <span class="required">  </span>
+                        </label>
+                        <div class="col-md-4">
+                            <md-checkbox ng-model="Model.IsActive" aria-label="Checkbox 1" class="input-height" ng-checked="true">
+                            </md-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.PointValueNo" />
+                </div>
+            </div>
+        </form>
+
+
+        <!--------View/Edit Part------->
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('PointHeadName')">
+                            Name Of Point Head&nbsp;
+                        </th>
+                        <th>From - To&nbsp;</th>
+                        <th>Point &nbsp;</th>
+                        <th ng-click="sort('IsActive')">IsActive &nbsp;</th>
+                        <th style="width:15%;">Action&nbsp;</th>
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in PointSysteInfoA.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) |orderBy:sortKey:reverse|filter:search as currlength">
+                        <td style="display:none">{{dataModel.PointValueNo}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.PointHeadName}}</td>
+                        <td> {{dataModel.FromTo}}</td>
+                        <td> {{dataModel.Point}}</td>
+                        <td> {{dataModel.IsActive}}</td>
+                        <td style="width:15%;">
+                            <img name="edit" class="logo-image" ng-click="GetPointValueInfoByID(dataModel)" src="/Content/img/editicon.png" />
+                            <img name="delete" style="margin-left: 7%;" ng-click="actionDialog('Delete',dataModel)" class="logo-image" src="/Content/img/deleteicon.png">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+

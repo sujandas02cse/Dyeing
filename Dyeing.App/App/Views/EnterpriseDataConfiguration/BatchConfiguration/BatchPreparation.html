@@ -1,0 +1,365 @@
+﻿<style>
+    label {
+        font-size: 12px !important;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        height: initial !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+</style>
+
+<body ng-controller="BatchPreparationController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Batch Configuration(Preparation)</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Configuration(Preparation)</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <div class="form-group">
+            <span style="float:right; color:green; font-size:15px; font-style:italic; font-weight:bolder;">{{batchNo}}</span>
+        </div>
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="master={}">
+            <fieldset class="field_set">
+                <div ng-init="Mode='N'">
+
+                    <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'N'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+                    <span class="radio-label">Revise</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'R'" type="radio" style="margin-right:5%;" name="Mode" value="Revise" />
+
+                    <div ng-if="Mode=='R'" style="display: inline-block;">
+                        <label style="font-weight:bold; font-size:15px;" class="control-label pr-0">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <input type="text" ng-model="model.Batch" typeahead-editable="false" typeahead-on-select="getDataByBatch()"
+                               uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                               placeholder="Batch No" class="form-control input-height plan" />
+                    </div>
+                </div>
+            </fieldset>
+            <hr />
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-3 pr-0">
+                            Dyeing Plan No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-9">
+
+                            <!--<select multiple class="full-width" ng-change="PlanSelect()" ui-select2="groupSetup" ng-init="Plan=[151]" ng-model="Plan" data-placeholder="Select Plan">
+                                <option ng-repeat="item in PlanList | orderBy:'PlanNo'" value="{{item.MppmId}}">{{item.PlanNo}}</option>
+                            </select>-->
+                            <!--<select class="form-control" select2
+                                    ng-model="model.Plan"
+                                    multiple
+                                    ng-change="PlanSelect()">
+                                <option value="">Select Plan</option>
+                                <option ng-repeat="item in PlanList" value="{{item.MppmId}}">{{item.PlanNo}}</option>
+                            </select>-->
+                            <!--<div auto-complete-multi placeholder="Select One" source="PlanList" class="planAuto"
+                                 value-changed="planChange(value,0)">
+                                                    ng-options="item.PlanNo for item in PlanList"
+                                <select ng-model="Plan"></select>
+                            </div>-->
+                            <div ng-dropdown-multiselect extra-settings="dropdownSetting" translation-texts="dropdownTextSetting"
+                                 class="dropdown-batch input-height" events="{ onItemSelect: PlanSelect, onItemDeselect:PlanDeselect }"
+                                 options="PlanData" selected-model="Plan"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            M/c No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.MachineNo" placeholder="M/c No" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="control-label col-md-4 pr-0">
+                            Capacity:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.Capacity" placeholder="Capacity" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Nozzle:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.NoOfNozzle" class="form-control input-height" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 pl-0">
+                    <div class="row">
+                        <label class="control-label col-md-4 px-0">
+                            Batch Weight:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="number" ng-model="master.BatchWeight" class="form-control input-height" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-3 pr-0">
+                            Loading Time:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-9">
+                            <input type="time" ng-model="master.PLoadingTime" placeholder="Loading Time" class="form-control input-height" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 pl-0">
+                    <div class="row">
+                        <label class="control-label col-md-4 px-0">
+                            Unloading Time:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="time" ng-model="master.PUnLoadingTime" placeholder="Unloading Time" class="form-control input-height" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="control-label col-md-4 px-0">
+                            Recipe No:
+
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.RecipeNo" placeholder="Recipe No" class="form-control input-height" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="control-label col-md-4 pl-0">
+                            Turing:
+                        </label>
+                        <div class="col-md-4 px-0">
+                            <select ng-model="master.TuringStatus" ng-required="true"
+                                    class="form-control input-height">
+                                <option value="" selected>Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 px-0 pl-1">
+                            <input type="text" ng-model="master.Turing" ng-disabled="master.TuringStatus=='0'?true:false" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Enzyme:
+                        </label>
+                        <div class="col-md-4 px-0">
+                            <select ng-model="master.EnzStatus"
+                                    ng-change="EStatusChange($index)"
+                                    ng-options="a.Id as a.Name for a in EnzStatusList"
+                                    class="form-control input-height">
+                                <option value="" selected>Select</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 px-0 pl-1">
+                            <input type="text" ng-model="master.Enzyme" class="form-control input-height" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Dyeing Process Flow:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <div class="btn btn-primary btn-sm" ng-click="DProcessFlow($event)">
+                                <i class="fa fa-angle-right"></i> Button
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div style="width: 98%; margin-left: 1%;">
+                    <div class="machine_new">
+                        <table class="{{$index%2==0?'bg':''}} table">
+                            <tr>
+                                <th>
+                                    Action
+                                </th>
+                                <th style="width:120px;">Dress Part</th>
+                                <th>Fabrics Name</th>
+                                <!--<th style="width:100px;">M/c Dia</th>-->
+                                <th style="width:120px;">Fin Dia</th>
+                                <th style="width:120px;">Identification</th>
+                                <th style="width:115px;">No Of Roll</th>
+                                <th>Fabric Weight</th>
+                                <th>Nozzle Set</th>
+
+                            </tr>
+                            <tr ng-repeat="obj in Details">
+                                <td>
+                                    <img ng-click="actionDialog1('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                    <img ng-click="actionDialog1('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                </td>
+                                <td>
+                                    <input type="text" typeahead-Open-On-Focus ng-model="obj.DressPart" placeholder="Dress Part"
+                                           class="form-control input-height"
+                                           typeahead-min-length="1" uib-typeahead="item as item.PartName for item in DressPartList | filter: {PartName:$viewValue} | limitTo:8"
+                                           typeahead-editable="true" ng-required="true">
+                                </td>
+                                <td>
+                                    <input type="text" typeahead-Open-On-Focus ng-model="obj.FabricName" placeholder="Fabric Name" class="form-control input-height"
+                                           typeahead-on-select="GetDiaInfo($index)"
+                                           typeahead-min-length="1" uib-typeahead="item as item.DisplayName for item in FabricNameList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                           typeahead-editable="true" ng-required="true">
+                                </td>
+                                <!--<td>
+                                    <input type="text" ng-model="obj.McDia" placeholder="Mc Dia" disabled class="form-control input-height" ng-required="true">
+                                </td>-->
+                                <td>
+                                    <input type="text" ng-model="obj.FinDia" placeholder="Fin Dia" disabled class="form-control input-height" ng-required="true">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="obj.Identification" placeholder="Identification" class="form-control input-height" ng-required="true">
+                                </td>
+                                <td>
+                                    <input type="number" ng-model="obj.NoOfRoll" placeholder="No Of Roll" class="form-control input-height" ng-required="true">
+                                </td>
+                                <td>
+                                    <input type="number" ng-model="obj.FabricWeight" placeholder="FabricWeight" class="form-control input-height" ng-required="true">
+                                </td>
+                                <td>
+                                    <div class="btn btn-primary btn-sm" ng-click="NozzleSet($event, $index)">
+                                        <i class="fa fa-angle-right"></i> Button
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

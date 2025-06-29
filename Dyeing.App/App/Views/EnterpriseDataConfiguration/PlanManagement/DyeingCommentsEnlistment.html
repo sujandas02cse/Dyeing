@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            border-spacing: 15px;
+        }
+        table, th, td {
+            padding: 8px;
+            font-size: 17px;
+        }
+        table td b {
+            padding-left: 15px;
+        }
+        .data_tbl th, .data_tbl td {
+            border: 1px solid #333;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .custom-table-header {
+            position: sticky;
+            z-index: 1;
+        }
+        .md-calendar-day-header {
+            width: 400px;
+        }
+        .md-virtual-repeat-container {
+            overflow: visible !important;
+        }
+        .md-calendar-scroll-mask {
+            width: 400px !important;
+        }
+            .md-virtual-repeat-container .md-virtual-repeat-scroller {
+                width: 400px !important;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Dyeing Comment Enlishment</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Dyeing Comment Enlishment</li>
+                </ol>
+            </div>
+
+            <div class="card-body">          
+                <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+                    <div class="row p-3 row-cols-md-auto align-items-center mb-5">
+                        <div class="col-md-2 col-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label">
+                                    Unit:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <select class="col-md-8 form-control" select2="" name="unit"
+                                        data-ng-model="Unit"
+                                        ng-change="FindBuyer()"
+                                        ng-options="item as item.Name for item in UnitList">
+                                    <option value="" ng-required="true">Select Unit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2  col-6">
+                            <div class="row">
+                                <label class="col-md-4 pr-2 control-label">
+                                    Buyer:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <select class="col-md-8 form-control" select2="" name="unit"
+                                        data-ng-model="Buyer"
+                                        ng-change="FindJob()"
+                                        ng-options="item as item.BuyerName for item in BuyerList">
+                                    <option value="" ng-required="true">Select Buyer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2  col-6">
+                            <div class="row">
+                                <label class="col-md-4 pr-2 control-label">
+                                    JobNo:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <select class="col-md-8 form-control" select2="" name="unit"
+                                        data-ng-model="Job"
+                                        ng-change="FindStyle()"
+                                        ng-options="item as item.JobInfo for item in JobList">
+                                    <option value="" ng-required="true">Select Job</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2  col-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label">
+                                    Style:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <select class="col-md-8  form-control" select2="" name="unit"
+                                        data-ng-model="Style"
+                                        ng-change="FindColor()"
+                                        ng-options="item as item.StyleInfo for item in StyleList">
+                                    <option value="" ng-required="true">Select Style</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2  col-6">
+                            <div class="row">
+                                <label class="col-md-4 control-label">
+                                    Color:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <select class="col-md-8 form-control" select2="" name="unit"
+                                        data-ng-model="Color"
+                                        ng-options="item as item.ColorName for item in ColorList">
+                                    <option value="" ng-required="true">Select Color</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <div class="text-center">
+                                <input type="button" style="width:110px;" class="   button btn-lg btn-primary" value="Show" ng-disabled="disabledShow" ng-click="showData()" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 px-3">
+                        <div class="offset-md-2 col-md-9">
+                            <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                            <input type="hidden" ng-model="Model.MId" />
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-md-auto align-items-center mb-5">
+                        <div class="w-100">
+                            <table class="data_tbl tableFixHead">
+                                <thead class="bg custom-table-header sticky-top">
+                                    <tr>
+                                        <th>Buyer</th>
+                                        <th>Job No</th>
+                                        <th>Style</th>
+                                        <th>Order</th>
+                                        <th>Colour</th>
+                                        <th>Color Type</th>
+                                        <th>Fabric Type</th>
+                                        <th>Composition</th>
+                                        <th>GSM</th>
+                                        <th>Dia</th>
+                                        <th>Commitment From Date</th>
+                                        <th>Commitment To Date</th>
+                                        <th>Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in AllData ">
+                                        <th class="d-none">{{$index}}</th>
+                                        <th class="d-none">{{data.InitInfoId}}</th>
+                                        <th>{{data.BuyerName}}</th>
+                                        <th>{{data.JobInfo}}</th>
+                                        <th>{{data.StyleInfo}}</th>
+                                        <th>{{data.OrderInfo}}</th>
+                                        <th>{{data.ColorName}}</th>
+                                        <th>{{data.ColorTypeName}}</th>
+                                        <th>{{data.FabricType}}</th>
+                                        <th>{{data.Composition}}</th>
+                                        <th>{{data.GSM}}</th>
+                                        <th>{{data.Dia}}</th>
+                                        <th>
+                                            <md-datepicker ng-model="data.CFD" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                        </th>
+                                        <th>
+                                            <md-datepicker ng-model="data.CTD" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                        </th>
+                                        <th>
+                                            <textarea class="form-control" ng-model="data.Comments"></textarea>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td><b>Employee Id</b></td>
+                                    <td>
+                                        <input type="text" class="form-control" name="" value="{{Emp.Id}}" readonly />
+                                    </td>
+                                    <td><b>Name</b></td>
+                                    <td>
+                                        <input type="text" class="form-control" name="" value="{{Emp.Name}}" readonly />
+                                    </td>
+                                    <td><b>Designation</b></td>
+                                    <td>
+                                        <input type="text" class="form-control" name="" value="{{Emp.Designation}}" readonly />
+                                    </td>
+                                    <td><b>Count</b></td>
+                                    <td>
+                                        <div>
+                                            <select class="form-control input-height clsHeight"
+                                                    ng-model="OperationTime"
+                                                    ng-change="getDyeingComments()"
+                                                    ng-options="item as item.name for item in OpsTime">
+                                                <option value="" ng-required="true">Select</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <b>Date & Time</b>
+                                    </td>
+                                    <td>
+                                        <input type="datetime" class="form-control" name="" value="{{Emp.Date | date:'dd-MM-yy h:mm a':'en-US'}}" readonly />
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

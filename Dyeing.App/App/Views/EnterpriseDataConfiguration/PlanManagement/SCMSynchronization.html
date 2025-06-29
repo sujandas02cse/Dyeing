@@ -1,0 +1,73 @@
+﻿<style>
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+
+    .dropdown-multiselect {
+        width: 100%;
+        height: 100%;
+    }
+
+    .dropdown-toggle {
+        width: 100%
+    }
+
+    .btn {
+        font-size: small;
+    }
+
+    .btn-dropdown:hover, button:focus {
+        color: black !important;
+    }
+</style>
+<body ng-controller="SCMSynchronizationController">
+    <div class="content-header sty-one">
+        <h1>SCM Synchronization</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+            <li><i class="fa fa-angle-right"></i> SCMSynchronization</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row" style="height:50px;">
+                <div class="col-md-12">
+                    <div class="row">
+
+
+                        <label class="control-label col-md-2">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Batch"
+                                   uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   placeholder="Batch No" class="form-control input-height plan" />
+                        </div>
+
+
+
+                    </div>
+
+                        <div class="row">
+                            <div class="offset-md-2 col-md-9">
+                                <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+        </form>
+
+    </div>
+
+</body>
+

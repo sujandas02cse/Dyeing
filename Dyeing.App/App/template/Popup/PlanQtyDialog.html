@@ -1,0 +1,65 @@
+﻿<md-dialog aria-label="PlanOthersOpDialog" style="width:70%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Plan Qty</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+               
+                <div class="form-group row">
+                    <table style="width: 95%; margin: auto;">
+                        <tr>
+                            <th></th>
+                            <th style="width:120px;">M/C No</th>
+                            <th>Capacity</th>
+                            <th style="width:100px;">Plan Qty</th>
+                            <th>No Of Batch</th>
+                            <th>Plan Date</th>
+                        </tr>
+                        <tr ng-repeat="obj in Plan">
+                            <td>
+                                <div ng-hide="Mode=='N'?false:true">
+                                    <img ng-click="actionDialog2('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                    <img ng-click="actionDialog2('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="obj.Machine" ng-disabled="Mode=='R'?true:false" typeahead-on-select="SetCapacity($index)" placeholder="Machine No" class="form-control input-height"
+                                       typeahead-Open-On-Focus typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineInfo | filter: {MachineNo:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" ng-required="true">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="obj.Capacity" ng-disabled="true" placeholder="Capacity" class="form-control input-height" />
+                            </td>
+                            <td>
+                                <input type="number" ng-model="obj.PlanQty" placeholder="Plan Qty" class="form-control input-height" ng-required="true" />
+                            </td>
+                            <td>
+                                <select name="obj.NoOfBatch" ng-model="obj.NoOfBatch"
+                                        ng-options="n for n in [] | range:1:51"
+                                        class="form-control input-height">
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </td>
+                            <td>
+                                <md-datepicker name="PlanDate" ng-model="obj.PlanDate" md-placeholder="Enter date" required></md-datepicker>
+                            </td>
+                        </tr>
+                     </table>
+                </div>
+            
+
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">                    
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

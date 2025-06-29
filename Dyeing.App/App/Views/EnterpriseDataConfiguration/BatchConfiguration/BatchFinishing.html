@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>Batch Configuration(Finishing)</title>
+
+    <style>
+        .md-datepicker-input {
+            max-width: 200px;
+            width: 190px;
+        }
+
+        .dropdown-menu {
+            min-width: 12rem;
+            /*min-height:250px !important;*/
+        }
+
+            .dropdown-menu dropdown-menu-form {
+                height: 350px;
+            }
+
+        p {
+            background: lightblue;
+        }
+
+        table {
+            /*margin-bottom: 10px;*/
+        }
+
+        .finish_wrap {
+            border-top: 1px solid #777;
+            border-bottom: 1px solid #777;
+        }
+
+            .finish_wrap table {
+                margin-bottom: 0px;
+            }
+
+                .finish_wrap table th,
+                .finish_wrap table td {
+                    border: 1px solid #9f9f9f !important;
+                    padding: 5px 7px !important;
+                    font-size: 12px;
+                }
+
+                .finish_wrap table th {
+                    text-align: center;
+                }
+
+                .finish_wrap table td:nth-child(2) {
+                }
+
+        table:hover {
+            /*background: #495057;*/
+        }
+
+        .machine_new table th img {
+            width: 30px;
+            margin: 5px;
+        }
+
+        .form-control {
+            font-size: 12px !important;
+        }
+
+        .md-datepicker-input {
+            width: 120px;
+        }
+
+        .input-height {
+            height: initial !important;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body ng-controller="BatchFinishingController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Batch Configuration(Finishing)</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Configuration(Finishing)</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Batch No/QR Code:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <!--<input type="text" id="tags" ng-keyup="complete()" ng-model="batchFins.BatchNo" placeholder="Batch No" class="form-control input-height" />-->
+                            <input type="text" typeahead-Open-On-Focus ng-model="batchFins.Batch" typeahead-on-select="getDataByBatchId()" placeholder="Batch No.."
+                                   class="form-control input-height"
+                                   typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"
+                                   typeahead-editable="true" ng-required="true">
+
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            QR Code:
+                           
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="machineFins.QrCode" placeholder="QR Code" class="form-control input-height" />
+
+                        </div>
+                    </div>
+                </div>-->
+
+                <!--<div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-3 pl-0">
+                            Shade Quality:
+
+                        </label>
+                        <div class="col-md-3">
+                            <input class="form-check-input" type="checkbox" ng-model="machineFins.QualityOk" ng-click="ShadeQuality(1)">
+                            <label class="form-check-label ml-3" for="OK">
+                                Ok
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <input class="form-check-input" type="checkbox" ng-model="machineFins.QualityNotOk" ng-click="ShadeQuality(2)">
+                            <label class="form-check-label ml-3" for="OK">
+                                Not Ok
+                            </label>
+                        </div>
+
+                        <div class="col-md-3">
+                            <input class="form-check-input" type="checkbox" value="" ng-model="machineFins.Rpcs">
+                            <label class="form-check-label ml-3" for="OK">
+                                RPCS
+                            </label>-->
+                            <!--<input hidden type="text" name="userName"
+                                   ng-model="batchFins.UserId"
+                                   ng-model-options="{ getterSetter: true }" />-->
+                           
+
+                           
+                        <!--</div>
+                    </div>
+
+
+                </div>-->
+
+
+            </div>
+
+
+
+            <!--<div class="form-group row">
+                <div class="col-md-5">
+                    <label class="control-label col-md-4" style="margin-left:5%;">
+                        Finishing Recipe:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div style="width: 98%; margin-left: 20%;">
+                        <div class="machine_new">
+                            <table id="tblFinishingRecipe" style="border:none;">
+                                <tr ng-repeat="Recipe in RecipeList">
+                                    <th style="width:90px;">
+                                        <img ng-click="actionDialog1('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                        <img ng-click="actionDialog1('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                    </th>
+                                    <th style="width:50%;">  <textarea type="text" ng-model="Recipe.RecipeDrescription" placeholder="Drescription" class="form-control input-height" /></th>
+                                    <th style="width:2%;"></th>
+                                    <th style="width:23%;"> <input type="text" ng-model="Recipe.Unit" placeholder="Unit" class="form-control input-height" /></th>
+
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+
+            <!--<div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">-->
+                        <!--<label class="control-label col-md-4">
+                        </label>-->
+                        <!--<div class="col-md-8">
+
+                            <h><b>Finishing Parameters</b></h>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="form-group row" style="margin-left: 1%;">
+                <div class="md-dialog-content">
+                    <div class="finish_wrap">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr>
+                                        <th><h5>Tube Finish</h5></th>
+
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>De Watering</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtSpeed" /></td>
+                                        <td>P.Pressure:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtPressure" /></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Stretching %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtStreching" /></td>
+                                        <td style="width:100px;">Before Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtBeforeWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtOverFeed" /></td>
+                                        <td>After Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:100px;">Frame width %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeWtFrameWidth" /></td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>Dryer</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDrySpeed" /></td>
+                                        <td>After Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryOverFeed" /></td>
+                                        <td>After GSM:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryAfterGSM" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempreature:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryTempreature" /></td>
+                                        <td><input class="form-control" text="text" name="name" readonly value="" ng-model="machineFins.TubeDryTempreature2" /></td>
+                                        <td><input class="form-control" text="text" name="name" readonly value="" ng-model="machineFins.TubeDryTempreature3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shrinkage %:</td>
+                                        <td style="width:150px;">
+                                            <div style="display:flex">
+                                                <div style="flex:3;margin-right:3px">
+
+                                                    <input style="" class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryShrinkageL" />
+                                                </div>
+                                                <div style="flex:1">
+                                                    <input style="" class="form-control" text="text" placeholder="L" readonly name="name" value="" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                       
+                                        <td style="width:170px;">
+                                            <div style="display:flex">
+                                                <div style="flex:3;margin-right:3px">
+
+                                                    <input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeDryShrinkageW" />
+                                                </div>
+                                                <div style="flex:1">
+                                                    <input style="" class="form-control" text="text" placeholder="W" readonly name="name" value="" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>Compactor</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:90px;">M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompSpeed" /></td>
+                                        <td>Temperature:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompTemperature" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed  %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompOverfeed" /></td>
+                                        <td>Set Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompSetWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lower Shoe:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompLowerShoe" /></td>
+                                        <td>After Width</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upper Shoe:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompUpperShoe" /></td>
+                                        <td>After GSM</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.TubeCompAfterGSM" /></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr>
+                                        <th><h5>Open Finish</h5></th>
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>De Watering & Shitting</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenWtSpeed" /></td>
+                                        <td>P.Pressure:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenWtPressure" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenWtOverfeed" /></td>
+                                        <td>After Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenWtAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>Stenter</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenSpeed" /></td>
+                                        <td>Set Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenSetWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenOverfeed" /></td>
+                                        <td>After Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempreature:</td>
+                                        <td><input class="form-control" text="text" name="name"  value="" ng-model="machineFins.OpenStenTempreature" /></td>
+                                        <td><input class="form-control" text="text" name="name" readonly value="" ng-model="machineFins.OpenStenTempreature2" /></td>
+                                        <td><input class="form-control" text="text" name="name" readonly value=""  ng-model="machineFins.OpenStenTempreature3" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shrinkage %:</td>
+                                        <td style="width:150px;">
+                                            <div style="display:flex">
+                                                <div style="flex:3;margin-right:3px">
+
+                                                    <input style="" class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenShrinkageL" />
+                                                </div>
+                                                <div style="flex:1">
+                                                    <input style="" class="form-control" text="text" placeholder="L" readonly name="name" value="" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+
+                                        <td style="width:170px;">
+                                            <div style="display:flex">
+                                                <div style="flex:3;margin-right:3px">
+
+                                                    <input style="" class="form-control" text="text" name="name" value=""  ng-model="machineFins.OpenStenShrinkageW" />
+                                                </div>
+                                                <div style="flex:1">
+                                                    <input style="" class="form-control" text="text" placeholder="W" readonly name="name" value="" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>After GSM:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenStenAfterGSM" /></td>
+                                        <td><input class="form-control" text="text" name="name" value="" readonly ng-model="machineFins.OpenStenAfterGSM2" /></td>
+                                        <td><input class="form-control" text="text" name="name" value="" readonly ng-model="machineFins.OpenStenAfterGSM3" /></td>
+                                    </tr>
+                                </table>
+                                <table class="table">
+                                    <tr>
+                                        <th colspan="4"><h5>Compactor</h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td>M/C Speed:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompSpeed" /></td>
+                                        <td style="width:100px;">Before Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompBeforeWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Over feed %:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompOverfeed" /></td>
+                                        <td>After Width:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompAfterWidth" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Temperature:</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompTemperature" /></td>
+                                        <td>After GSM</td>
+                                        <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.OpenCompAfterGSM" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                        <td><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="finish_wrap">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tr>
+                                        <th><h5>Result of Finishing</h5></th>
+                                    </tr>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Final Width:</td>
+                                                <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinalWidth" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Final GSM:</td>
+                                                <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinalGSM" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Grey Weight:</td>
+                                                <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultGreyWeight" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Finished Weight:</td>
+                                                <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultFinishedWeight" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>No of Rolls:</td>
+                                                <td><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultNoofRolls" /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table class="table">
+                                            <tr>
+                                                <td>Shrinkage %:</td>
+                                                <td style="width:150px;">
+                                                    <div style="display:flex">
+                                                        <div style="flex:3;margin-right:3px">
+
+                                                            <input style="" class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultShrinkageL" />
+                                                        </div>
+                                                        <div style="flex:1">
+                                                            <input style="" class="form-control" text="text" placeholder="L" readonly name="name" value="" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                               
+
+                                                <td style="width:170px;">
+                                                    <div style="display:flex">
+                                                        <div style="flex:3;margin-right:3px">
+
+                                                            <input style="" class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultShrinkageW" />
+                                                        </div>
+                                                        <div style="flex:1">
+                                                            <input style="" class="form-control" text="text" placeholder="W" readonly name="name" value="" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>Spirality:</td>
+                                                <td colspan="2"><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultSpirality" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Process Loss (Kg):</td>
+                                                <td colspan="2"><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultProcessLossKg" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Princess Loss (%):</td>
+                                                <td colspan="2"><input class="form-control" text="text" name="name" value="" ng-model="machineFins.ResultProcessLossPercent" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3"><input class="form-control" text="text" readonly name="name" value="" /></td>
+                                              
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                   
+
+                </div>
+
+            </div>
+
+                <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                    <div class="offset-md-2 col-md-9">
+                        <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+
+                    </div>
+                </div>
+
+</form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,321 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 200px;
+        width: 190px;
+    }
+
+    .select_unit {
+        text-align: left;
+        font-size: 12px;
+    }
+
+    select {
+        height: 24px !important;
+    }
+
+    select.form-control {
+        padding: 0px;
+    }
+
+    .select2-container--default.select2-container--open {
+        font-size: 12px;
+    }
+
+    .select2-container {
+        width: 180px !important;
+    }
+
+    .select2-container--default {
+    }
+    div.c {
+        text-align: right;
+    }
+    .txt-width{
+        width:80% !important;
+    }
+</style>
+<body ng-controller="BarcodeConfigController">
+    <div class="content-header sty-one">
+        <h1>Barcode Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Febric Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i>Barcode Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <fieldset class="field_set">
+                <div style="margin: auto;" ng-init="Mode='N'">
+                    <span class="radio-label">Weight Modification</span><input class="radio-input" ng-model="BarcodeData.Mode" ng-change="changeMode('M')" ng-value="'M'" type="radio" style="margin-right:5%;" name="Mode" value="Modification" ng-checked="true" />
+                    <span class="radio-label">Copy Barcode</span><input class="radio-input" ng-model="BarcodeData.Mode" ng-change="changeMode('C')" ng-value="'C'" type="radio" style="margin-right:5%;" name="Mode" value="Copy" />
+                    <span class="radio-label">Generate Barcode</span><input class="radio-input" ng-model="BarcodeData.Mode" ng-change="changeMode('G')" ng-value="'G'" type="radio" style="margin-right:5%;" name="Mode" value="Generate" />
+                    <span class="radio-label">As Per Issue</span><input class="radio-input" ng-model="BarcodeData.Mode" ng-change="changeMode('I')" ng-value="'I'" type="radio" style="margin-right:5%;" name="Mode" value="Issue" />
+                </div>
+            </fieldset>
+            <hr />
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)"  ng-show="show">
+            <fieldset class="field_set" ng-show="show">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Barcode No :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" ng-model="BarcodeNo" placeholder="" class="form-control input-height" id="barcodeNo" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Buyer :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="BarcodeData.BuyerName" placeholder="" class="form-control input-height" required ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Job :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                <input type="text" ng-model="BarcodeData.Job" placeholder="" class="form-control input-height" required ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Order :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" ng-model="BarcodeData.OrderNo" placeholder="" class="form-control input-height" required ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Weight :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="number" ng-model="BarcodeData.Weight" placeholder="" class="form-control input-height" required ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Modify Weight :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                <input id="txtModify" type="number" ng-model="BarcodeData.ModifiedWeight" placeholder="" class="form-control input-height" ng-change="weightChange()" ng-disabled="disableModifiedWeight" ng-class="{'required': true}" ng-required="modify">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Weight Loss :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="number" ng-model="BarcodeData.WeightLoss" placeholder="" class="form-control input-height" ng-disabled="disableWeightLoss" ng-required="weightloss">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Reason :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <select ng-model="ddlSelectedItem.Reason.Id" ng-options="item.Id as item.ReasonName for item in ddlData" ng-change="changeSelectedItem()" class="form-control input-height" ng-disabled="disableReason" id="ddlReason" ng-required="BarcodeData.Mode == 'M'">
+                                    <option value="" label="--Select an item--"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Copy Number :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" ng-model="CopyNumber" placeholder="" class="form-control input-height" ng-disabled="disableCopyNumber" id="copyNumber">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Copy Weight :
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="BarcodeData.CopyWeight" placeholder="" class="form-control input-height" ng-disabled="disableCopyWeight">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.Id" />
+                </div>
+            </div>
+        </form>
+
+        <form  ng-show="!show">
+            <fieldset class="field_set">
+                <h1>AS per Issue</h1>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="select_unit row">
+                                <label class="col-sm-2" style="text-align:right;">Unit: </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" select2="" name="unit"
+                                            ng-model="IssueData.UnitList"
+                                            ng-options="item as item.Name for item in UnitList">
+                                        <option value="" ng-required="true">Select Unit</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    From Date :
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <md-datepicker name="FromDate" ng-change="dateChange()" ng-model="IssueData.FromDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    To Date :
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <md-datepicker name="ToDate" ng-change="dateChange()" ng-model="IssueData.ToDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="select_unit row">
+                                <label class="col-sm-2" style="text-align:right;">Issue: </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" select2="" name="issue"
+                                            ng-model="IssueData.IssueList"
+                                            ng-options="item as item.Name for item in IssueList">
+                                        <option value="" ng-required="true">Select issue</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" id="btnSearch" style="font-size: 20px;" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                        <thead class="bg">
+                            <tr>
+                                <th style="width:5%;">Sl</th>
+                                <th ng-click="sort('BuyerName')">
+                                    Name Of Buyer&nbsp;
+                                </th>
+                                <th ng-click="sort('JobInfo')">Name Of Job&nbsp;</th>
+                                <th ng-click="sort('OrderNo')">Name Of Order&nbsp;</th>
+                                <th>Issue Qty&nbsp;</th>
+                                <th>After Heat Set Qty&nbsp;</th>
+                                <th>Process loss Qty&nbsp;</th>
+                                <th>Consumption (%)&nbsp;</th>
+
+                                <!--<th ng-if="currlength.length>3" style=" width: 0.7%;"></th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dataModel in (HeatSetIssueList | filter : search |orderBy:sortKey:reverse).slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+
+                                <td style="width:5%;" data-id="{{dataModel.Id}}"> {{$index+(currentPage-1)*viewby+1}}</td>
+                                <td> {{dataModel.BuyerName}}</td>
+                                <td> {{dataModel.JobInfo}}</td>
+                                <td> {{dataModel.OrderNo}}</td>
+                                <td ng-model="IssueData.IssueQty"> {{dataModel.IssueQty}}</td>
+                                <td><input my-keypress class="form-control txt-width" ng-change="changeHeatQty(dataModel, $index)" ng-model="IssueData.AfterHeatSetQty[$index]" type="text" id="afterHeatSetQty" /> </td>
+                                <td><input type="text" class="form-control txt-width" ng-model="IssueData.ProcessLossQty[$index]" id="processLossQty" readonly /> </td>
+                                <td><input type="text" class="form-control txt-width" ng-model="IssueData.Consumption[$index]" id="consumption" readonly /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+                </uib-pagination>
+            </fieldset>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutIssueActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.Id" />
+                    <!--<button type="button" class="btn btn-success" id="btnGenBarcode" ng-click="BarcodeGen()">Generate Barcode</button>-->
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!--modal-->
+    <div class="modal fade" id="aModal" tabindex="-1" role="dialog" aria-labelledby="aModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="aModalLabel">Print Barcode</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="popup" style="text-align:center">
+                        <!--<img src="" id="image" />-->
+                        <img ng-src="{{image}}" id="image" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="btnPrint">Print</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+

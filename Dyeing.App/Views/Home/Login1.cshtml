@@ -1,0 +1,142 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="MascoDyeing">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Masco Dyeing-Login</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- v4.0.0-alpha.6 -->
+
+    <link rel="stylesheet" href="~/Content/template/dist/bootstrap/css/bootstrap.min.css">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.ico" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/template/dist/css/style.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/themify-icons/themify-icons.css">
+    <!-- hmenu -->
+    <link rel="stylesheet" href="~/Content/template/dist/plugins/hmenu/ace-responsive-menu.css">
+
+    <!-- jQuery 3 -->
+    <script src="~/Content/template/dist/js/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <!-- v4.0.0-alpha.6 -->
+    <script src="~/Content/template/dist/bootstrap/js/bootstrap.min.js"></script>
+    <!-- template -->
+    <script src="~/Content/template/dist/plugins/hmenu/ace-responsive-menu.js"></script>
+    <!--Plugin Initialization-->
+    <link href="~/Content/css/login-5.min.css" rel="stylesheet" />
+    @*<script src="~/Content/js/login-5.min.js"></script>*@
+
+    <script src="~/Content/library/angular/angular.min.js"></script>
+    <script src="~/Content/library/angular/angular-route.js"></script>
+
+    <script src="~/App/Scripts/Controller/Common.js"></script>
+    <script src="~/App/Scripts/Factory/CommonFactory.js"></script>
+    <script src="~/App/Scripts/Controller/Login.js"></script>
+
+</head>
+<body class=" login" ng-controller="LoginController">
+    <!-- BEGIN : LOGIN PAGE 5-1 -->
+    <div class="user-login-5">
+        <div class="row bs-reset">
+            <div class="col-md-6 bs-reset mt-login-5-bsfix">
+                <div class="login-bg" style="background-image: url(../../Content/img/bg1.jpg)">
+                    @*<img class="login-logo" src="../../Content/img/Masco.jpg" />*@
+                </div>
+            </div>
+            <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+                <div class="login-content">
+                    <img class="login-logo" style="margin:0px;" height="120" width="150" src="../../Content/img/Masco.jpg" />
+                    <h1>Masco Dyeing</h1>
+                    <p> Masco Dyeing Management System is one of the unique dyeing production management system provide flexibility to manage production more effeciently </p>
+                    <form method="post" ng-submit="submitForm()" class="login-form">
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button>
+                            <span>Enter your username and password. </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <input data-ng-model="Login.UserName" ng-change="ClearMsg()" class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Username" name="username" required />
+                            </div>
+                            <div class="col-xs-6">
+                                <input data-ng-model="Login.PassWord" ng-change="ClearMsg()" class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="rem-password">
+                                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                        <input type="checkbox" name="remember" value="1" /> Remember me
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 text-right">
+                                <div class="forgot-password">
+                                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                                </div>
+                                <button class="btn green" type="submit">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- BEGIN FORGOT PASSWORD FORM -->
+                    @*<form class="forget-form" action="javascript:;" method="post">
+                        <h3 class="font-green">Forgot Password ?</h3>
+                        <p> Enter your e-mail address below to reset your password. </p>
+                        <div class="form-group">
+                            <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" />
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                            <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                        </div>
+                    </form>*@
+                    <!-- END FORGOT PASSWORD FORM -->
+                </div>
+                <div class="login-footer">
+                    <div class="row bs-reset">
+                        <div class="col-xs-5 bs-reset">
+                            <ul class="login-social">
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="icon-social-dribbble"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-7 bs-reset">
+                            <div class="login-copyright text-right">
+                                @DateTime.Now.Year.ToString() &copy; Powered By Department of MIS & SD,
+                                <a href="http://www.mascoknit.com" target="_blank">Masco Group</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+
+
+
+</html>

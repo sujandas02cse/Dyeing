@@ -1,0 +1,53 @@
+﻿@foreach (Dyeing.App.Model.MenuOperation.MainMenuOperation objUser in Model)
+{
+    <li>
+        <a href="#">
+            <i class="fa fa-dashboard"></i>
+            <span class="title">@objUser.ManuName</span>
+
+            @*@if (@objUser.ChildMenuNameList.Count > 0)
+                {<span class="arrow open"></span>}*@
+        </a>
+        @if (@objUser.ChildMenuNameList.Count > 0)
+        {
+            <ul>
+                @foreach (var item in @objUser.ChildMenuNameList)
+                {
+                <li>
+                    @*<a href="@Url.Action(@item.PageName, @item.PageFolder)">
+                        <i class="fa fa-bullseye"></i> @item.ManuName_Child
+
+                    </a>*@
+                    <a href="#!/@item.PageName">
+                        <i class="fa fa-bullseye"></i> @item.ManuName_Child
+
+                    </a>
+                    @*<a ui-sref="MachineNameConfig">
+                        <i class="fa fa-bullseye"></i> @item.ManuName_Child
+
+                    </a>*@
+                    @if (@item.ChildChildMenuNameList.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var itemNew in @item.ChildChildMenuNameList)
+                            {
+                                <li>
+                                    @*<a href="@Url.Action(@itemNew.PageName, @itemNew.PageFolder, new { @p = @itemNew.MenuIdChildChild })">
+                            <i class="fa fa-eye"></i> @itemNew.ManuName_ChildChild
+                        </a>*@
+                                    <a href="#!/@itemNew.PageName">
+                                        <i class="fa fa-bullseye"></i> @itemNew.ManuName_ChildChild
+
+                                    </a>
+
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+                }
+            </ul>
+        }
+    </li>
+    
+}

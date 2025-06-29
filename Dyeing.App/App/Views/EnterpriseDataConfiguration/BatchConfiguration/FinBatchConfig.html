@@ -1,0 +1,258 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 200px;
+        width: 190px;
+    }
+
+    .dropdown-menu {
+        min-width: 12rem;
+        /*position: relative;*/
+        /*top: 0px !important;
+        left:0px !important;*/
+        /*min-height:250px !important;*/
+    }
+
+    /*.dropdown-toggle {
+        width: 205px;        
+        border-color: cadetblue;
+    }
+    .main-header .navbar .navbar-nav > li > a {
+        padding: 23px 20px 18px 104px;
+    }*/
+</style>
+<div>
+    <div class="content-header sty-one">
+        <h1>Dyeing Batch Configuration (Finishing)</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing Batch Configuration (Finishing)</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">            
+            <fieldset class="field_set">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Date:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <md-datepicker name="PlanDate" ng-model="FDate" md-placeholder="Enter date"
+                                               md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                DPP No:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="PlanNo" placeholder="Plan No" class="form-control touchHeight"
+                                       typeahead-on-select="getPlanInfoByPlan()" ng-required="true"
+                                       typeahead-min-length="0" uib-typeahead="item as item.PlanNo for item in PlanBatchList | filter: {PlanNo:$viewValue} | limitTo:8"
+                                       typeahead-editable="true" ng-leave="onEnterKeyPress()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Batch No:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="BatchNo" placeholder="Batch No" class="form-control touchHeight"
+                                       typeahead-on-select="getPlanInfoByBatch()" ng-required="true"
+                                       typeahead-min-length="0" uib-typeahead="item as item.BatchNo for item in PlanBatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                       typeahead-editable="true"
+                                       ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-5">
+                                Buyer:
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-disabled="true" ng-model="Head.BuyerName" placeholder="Buyer" class="form-control input-height">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Job:
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-disabled="true" ng-model="Head.JobNo" placeholder="Job No" class="form-control input-height" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Style:
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-disabled="true" ng-model="Head.StyleNo" placeholder="Style No" class="form-control input-height" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Order:
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-disabled="true" ng-model="Head.OrderNo" placeholder="Order No" class="form-control input-height">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row col-md-12">
+                    <div class="col-md-2"></div>
+                    <label class="control-label col-md-2">
+                        Name of Dia Part:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="Head.DiaPart" placeholder="Dia Part" class="form-control touchHeight"
+                               typeahead-on-select="getProcessFlow()" ng-required="true"
+                               typeahead-Open-On-Focus typeahead-min-length="0" uib-typeahead="item as item.name for item in DiaPartList | filter: {name:$viewValue} | limitTo:8"
+                               typeahead-editable="false">
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="form-group row col-md-12 offset-1">                    
+                    <div ng-repeat="obj in ProcessFlowList" style="display:inline; width:90% !important;" ng-click="ProcessWiseSpec($event,obj.id,obj.name1)" 
+                            class="button btn-success round mr-1 mb-1 btn-mid touchHeight col-md-3">
+                        <span><i class="fa fa-magic"></i>{{obj.name1}}</span>
+                    </div>             
+                </div>
+
+                <div class="form-group row col-md-12">
+                    <table border="1" style="width:100%">
+                        <tr>
+                            <td colspan="4" style="font-size:25px;font-weight:bold;">Result of Finishing</td>
+                        </tr>
+                        <tr>
+                            <td><span>Final Width :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.FinalWidth" /></td>
+                            <td><span>Shrinkage (%) :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.Shrinkage" /></td>
+                        </tr>
+                        <tr>
+                            <td><span>Final GSM :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.FinalGSM" /></td>
+                            <td><span>Spirality (%) :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.Spirality" /></td>
+                        </tr>
+                        <tr>
+                            <td><span>Greix Weight :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.GWeight" /></td>
+                            <td><span>Process Loss (kg) :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.ProcessLossKg" /></td>
+                        </tr>
+                        <tr>
+                            <td><span>Finished Weight :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.FWeight" /></td>
+                            <td><span>Process Loss (%) :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.ProcessLossPer" /></td>
+                        </tr>
+                        <tr>
+                            <td><span>No Of Roll :</span> </td>
+                            <td><input type="text" class="form-control touchHeight" ng-model="Head.NoOfRoll" /></td>
+                            <td> </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="form-group row col-md-12">
+                    <label class="control-label col-md-2">
+                        Shade Quality Control:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-2">
+                        <table border="1" style="width:100%;">
+                            <tr>
+                                <td><span>OK</span></td>                                
+                                <td><span>
+                                    <input type="checkbox" ng-change="CheckSQC('OK')" ng-model="Head.OK" />
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-2">
+                        <table border="1" style="width:100%;">
+                            <tr>
+                                <td><span>Not OK</span></td>
+                                <td><span><input type="checkbox" ng-change="CheckSQC('NotOK')" ng-model="Head.NotOK" /></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-2">
+                        <table border="1" style="width:100%;">
+                            <tr>
+                                <td><span>RPCS</span></td>
+                                <td><span><input type="checkbox" ng-model="Head.RPCS" /></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="max-height:200px; min-height:170px; overflow:auto;">
+                    <div class="form-group row col-sm-12" ng-repeat="obj in FRecipeList">
+                        <label class="control-label col-sm-2">
+                            <span ng-show="obj.label">Finishing Recipe :</span>
+                            <span ng-show="obj.label" class="required" style="color:red"> * </span>
+                        </label>
+
+                        <span>
+                            <img ng-click="RemoveRow($index)" ng-model="obj.isPlus" ng-if="obj.isPlus==false?true:false" height="50" width="50" src="../../../Content/img/close_icon.png" />
+                            <img ng-click="AddNew($index)" ng-model="obj.isPlus" ng-if="obj.isPlus" height="50" width="50" src="../../../Content/img/add.png" />
+                            <!--<plus-minus-toggle operation="op1"></plus-minus-toggle>-->
+                        </span>
+                        <div class="col-sm-6" style="display:inline;">
+                            <input type="text" ng-model="obj.RecipeDesc" placeholder="Finishing Recipe" class="form-control touchHeight"
+                                   ng-required="true"
+                                   typeahead-Open-On-Focus typeahead-min-length="0" uib-typeahead="item as item.name for item in FRecipeData | filter: {name:$viewValue} | limitTo:3"
+                                   typeahead-editable="true">
+                            <!--<input type="text" ng-model="obj.RecipeDesc" placeholder="Finishing Recipe" class="form-control touchHeight">-->
+                        </div>
+                        <span style="font-style:italic;">(g/l)</span>
+                    </div>
+                </div>
+                <div class="form-group row col-sm-8 offset-sm-5">
+                    <div style="display:inline; width:250px !important;" ng-click="OthersBatchData($event)" class="button btn-success round mr-1 mb-1 btn-mid touchHeight">
+                        <span><i class="fa fa-magic"></i>Others Batch Data</span>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="offset-sm-2 col-sm-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>                    
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+

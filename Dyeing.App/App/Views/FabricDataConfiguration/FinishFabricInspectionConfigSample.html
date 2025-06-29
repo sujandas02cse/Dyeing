@@ -1,0 +1,748 @@
+﻿<style>
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsInspectionInfo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: flex-start;
+        padding-top: 10px;
+    }
+
+    .clsHeight {
+        /* height: 55px !important; */
+        font-weight: bold;
+        font-size: 13px;
+        color: #084B8A;
+        line-height: 20px;
+    }
+
+    .content {
+        padding: 0px
+    }
+    /*point calculation css*/
+    .clsFault {
+        display: flex;
+        flex-direction: column;
+        width: 157px;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: white;
+        border: 3px solid #E0E6F8;
+    }
+
+
+    .clsFaultChild {
+        /*background: #e9edf5;*/
+        /*background: #7e9bd5;*/
+        background: #8eb4ff;
+        -webkit-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        -moz-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        border-radius: 7px;
+        padding: 8px;
+    }
+
+    .clsFaultHead {
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #084B8A;
+        position: relative;
+    }
+
+        .clsFaultHead span {
+            position: absolute;
+            right: -7px;
+        }
+
+            .clsFaultHead span .clsBckBtn {
+                width: 100%;
+                height: 100%;
+            }
+
+    .clsMajorMinorChild .clsPoint {
+        margin-top: 10px;
+    }
+    /*.clsPont{
+        border-color:1px  black;
+    }*/
+    .clstextArea {
+        width: 85%;
+        height: 26px;
+    }
+
+    .clsBckBtn {
+        border: none;
+        /*background-color: #673AB7;*/
+        background-color: #f15b5b;
+        width: 15%;
+        height: 26px;
+        font-weight: bold;
+        vertical-align: top;
+        color: #fff;
+    }
+
+    .clsPoint {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .clsPointChild {
+        text-align: center;
+        font-weight: bold;
+        /*height: 30px;*/
+        /*background-color: #E0ECF8;*/
+        /*background-color: #80DEEA;*/
+        background-color: #9fa7d1;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+        padding: 0px;
+    }
+
+    /*.clsMMPointChild {
+        text-align: center;
+        font-weight: bold;
+        height: 30px;
+        background-color: #E2ECF8;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+    }*/
+    .clsMMPointChild {
+        text-align: center;
+        font-weight: bold;
+        /* height: 30px; */
+        background-color: #80CBC4;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+        text-align: center !important;
+        justify-content: center;
+        padding: 2px;
+    }
+
+    textarea:disabled {
+        background: #FFFFFF;
+    }
+
+
+    .clsFaultChild {
+        height: 105px;
+    }
+
+    .clsMajorMinorChild {
+        height: 70px;
+        /*background: #e9eea5;*/
+        background: #81C784;
+        -webkit-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        -moz-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .clsPointChild:hover {
+        background-color: #E0E6F8;
+        cursor: pointer;
+    }
+
+    .clsMMPointChild:hover {
+        background-color: #E0E6F8;
+        cursor: pointer;
+    }
+
+    .clstextArea {
+        color: salmon;
+        font-weight: bold;
+    }
+
+    .clasFab {
+        text-align: center;
+        color: #084B8A;
+        font-weight: bold;
+        background-color: #E0ECF8;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+    .save_btn {
+        position: absolute;
+        right: 6px;
+        bottom: 20px;
+    }
+
+    .btn_group {
+        padding-left: 15px;
+        /* width: 100%; */
+        position: absolute;
+        right: 142px;
+        bottom: 10px;
+    }
+
+        .btn_group input[type="radio"] {
+            /*        width: 35px !important;*/
+            height: 20px !important;
+        }
+
+    .new_btn {
+        background: #60c3cd;
+        top: 50%;
+        overflow: auto;
+    }
+
+    .mod_btn {
+        background: #60c3cd;
+        top: 60%;
+    }
+
+    .new_btn,
+    .mod_btn {
+        background: #93cede;
+        width: 90px;
+        padding: 4px 0px;
+        left: 0;
+    }
+
+
+    .page-footer {
+        display: none;
+    }
+
+    .footer-fixed {
+        width: 100%;
+        z-index: 999;
+        position: fixed;
+        bottom: 0;
+        /*background: powderblue;*/
+        padding: 10px 0;
+    }
+
+        .footer-fixed .button {
+            padding: 12px 0;
+        }
+
+    .batch_data {
+    }
+
+
+    div.active {
+        /*background-color: #3949ab;*/
+        background-color: #ff0707;
+        color: #fff;
+    }
+
+        div.active:hover {
+            background-color: #ff0707;
+            color: #fff;
+        }
+
+    @media (min-width:1367px) {
+        .clsFault {
+            width: 196px;
+        }
+
+        .clsFaultHead {
+            font-size: 14px;
+        }
+
+        .clsInspectionInfo {
+            gap: 20px;
+        }
+
+        .clsMajorMinorChild {
+            height: 80px;
+        }
+
+        .clsMMPointChild {
+            padding: 5px;
+        }
+
+        .clsInspectionInfo:nth-child(2) {
+            padding-top: 25px;
+        }
+
+        .batch_data {
+            /*min-height: 440px;*/
+            /*min-height: 600px;*/
+            /*height: calc(700px - 1px - 141px);*/
+        }
+    }
+
+    .button {
+        padding: 6px !important;
+    }
+
+    input[type="radio"] {
+        width: 35px !important;
+        height: auto !important;
+    }
+
+    .control-label {
+        text-align: right;
+        color: #084B8A;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    .btnGroup {
+        position: absolute;
+        right: 17px;
+    }
+
+        .btnGroup .radio_btn {
+        }
+
+    .table td, .table th {
+        padding: 8px;
+    }
+
+    .table input.form-control {
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .custom-radio {
+        display: flex;
+        align-items: center; /* Vertically center the radio button with the text */
+    }
+
+    .radio-label {
+        font-size: 1.5em; /* Adjust font size as needed */
+        font-weight: bold;
+        margin-left: 25px; /* Optional: space between radio button and text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-radio input[type="radio"] {
+        transform: scale(2);
+        margin-right: 100px;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .counting-input, .counting-dropdown {
+        width: 100%; /* Ensure full width in their columns */
+        max-width: 120px; /* Adjust to control the width */
+        display: inline-block;
+    }
+
+    button.btn-primary {
+        width: auto;
+        white-space: nowrap; /* Prevent button text from wrapping */
+    }
+
+    .row.align-items-center {
+        align-items: center; /* Vertically align elements in the row */
+    }
+
+    .col-md-4.pr-0 {
+        padding-right: 5px; /* Adjust spacing between input and button */
+    }
+
+    .col-md-4.pl-0 {
+        padding-left: 5px; /* Adjust spacing between input and button */
+    }
+
+   
+
+</style>
+
+<body ng-controller="FinishFabricInspectionConfigSampleControllerNew">
+    <div class="card card-body" style="">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-body">
+                <div class="radio-container">
+                    <div class="form-group row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="radio-group">
+                                <!-- Bulk Radio Button -->
+                                <div class="custom-radio">
+                                    <input type="radio" id="singleOption" class="form-check-input" name="batchType"
+                                           ng-model="batchType" ng-value="'Single'" ng-init="batchType='Single'"
+                                           ng-change="updateBatchType(batchType)">
+                                    <label for="singleOption" class="form-check-label radio-label">Single Roll</label>
+                                </div>
+                                <!-- Sample Radio Button -->
+                                <div class="custom-radio">
+                                    <input type="radio" id="multipleOption" class="form-check-input" name="batchType"
+                                           ng-model="batchType" ng-value="'Multiple'"
+                                           ng-change="updateBatchType(batchType)">
+                                    <label for="multipleOption" class="form-check-label radio-label">Multiple Roll</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card py-3 px-2" style="background: #ccd5e1;position:relative;">
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight">
+                                    Batch No:
+                                </label>
+                                <div class="col-md-8">
+                                    <input type='text' placeholder="Batch No" id="BatchNo" style="width: 74%; display: inline;" auto-focus ng-model="master.BatchNo"
+                                           ng-virtual-keyboard="{kt: 'Numpad', enterSubmit: enterBatchClick, size:5, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+                                           class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()">
+
+                                    <div style="display:inline;" class="button btn-info px-4 py-3 mr-1 mb-1 btn-mid" ng-click="Refresh()" role="button" tabindex="0">
+                                        <span class="ng-binding"><i class="fa fa-refresh"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Buyer:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" disabled ng-model="master.Buyer" placeholder="Buyer" class="form-control input-height clsHeight" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight">
+                                    Job:
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" disabled ng-model="master.Job" placeholder="Job" class="form-control input-height clsHeight" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight" style="font-size:13px;">
+                                    Style/ Order:
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" disabled ng-model="master.Order" placeholder="Order" class="form-control input-height clsHeight" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row align-items-center">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Counting:
+                                </label>
+                                <div class="col-md-3 pr-0">
+                                    <input type="text"
+                                           ng-show="RadioMode !== 'R'"
+                                           disabled
+                                           ng-model="master.CompTime"
+                                           placeholder="Count"
+                                           class="form-control input-height clsHeight" />
+
+                                    <select ng-show="RadioMode==='R'"
+                                            class="form-control input-height clsHeight"
+                                            ng-model="master.selectedCount"
+                                            ng-options="count.Counting  for count in countList "
+                                            ng-change="LoadQARecord()">
+
+                                        <option value="">Select Count By</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 pl-0">
+                                    <button class="btn btn-primary btn-sm" ng-click="incrementCounting()" ng-show="batchType === 'Multiple' && RadioMode === 'N'">
+                                        Is Next Time QC
+                                    </button>
+
+                                    <select ng-show="RadioMode==='R' && batchType==='Multiple'"
+                                            class="form-control input-height clsHeight"
+                                            ng-model="master.selectedRollNo"
+                                            ng-options="roll.Counting  for roll in RollList "
+                                            ng-change="LoadFaultDetailsByRoll()">
+                                        <option value="">Select Roll</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="btn_group">
+                                <div class="row">
+                                    <span class="radio-label">New</span>
+                                    <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'N'">
+                                    <span class="radio-label">Modify</span>
+                                    <input type="radio" ng-model="RadioMode" ng-click="changeMode()" ng-value="'R'">
+
+                                    <button class="btn btn-primary" ng-click="ConfirmSave()">
+                                        <i class="fa fa-check"></i> Save
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight" style="font-size:13px;">
+                                    Process By:
+                                </label>
+                                <div class="col-md-8">
+                                    <select class="form-control input-height clsHeight"
+                                            ng-model="master.ProcessBySelected"
+                                            ng-options="process.Id as process.DyeingProcessName for process in ProcessBy ">
+                                        <option value="">Select Process By</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight" style="font-size:13px;">
+                                    Given By:
+                                </label>
+                                <div class="col-md-7">
+                                    <select class="form-control input-height clsHeight"
+                                            ng-model="master.GivenBySelected"
+                                            ng-options="given.Id as given.GivenName for given in GivenBy ">
+                                        <option value="">Select Given By</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4" ng-show="showBodyParts">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight" style="font-size:13px;">
+                                    Body Parts:
+                                </label>
+                                <div class="col-md-7">
+                                    <select class="form-control input-height clsHeight"
+                                            ng-model="master.bodyPartForMultiple"
+                                            ng-options="bp.Id as bp.BodyPart for bp in master.BodyPartsMultiple "
+                                            ng-change="LoadIndividualBodyPartDetail()">
+                                        <option value="">Select Body Parts</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" ng-show="showBodyParts">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight" style="font-size:13px;">
+                                    Total Roll:
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" disabled ng-model="master.TotalRoll" placeholder=" Total Roll" class="form-control input-height clsHeight" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" ng-show="showBodyParts">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Total Qty:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" disabled ng-model="master.TRollWeight" placeholder=" Total Qty" class="form-control input-height clsHeight" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+
+                                <div class="col-md-12 text-right">
+                                    <input type="checkbox" id="labSticker" ng-model="master.LabSticker" ng-true-value="1" ng-false-value="0" />
+                                    <strong>Lab Sticker Print</strong>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div ng-if="BodyPart.length > 0" class="form-group row">
+                        <div class="col-md-8 offset-md-2">
+                            <!-- Center the table using Bootstrap grid classes -->
+                            <table class="table table-bordered" style="width: 80%; margin: 0 auto;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%;">Body Part</th>
+                                        <th style="width: 25%;">Weight</th>
+                                        <th style="width: 25%;">Actual Dia</th>
+                                        <th style="width: 25%;">Actual GSM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in BodyPart">
+                                        <td>{{item.BodyPart}}</td>
+                                        <td>
+                                            <input type="number" class="form-control" style="width: 100%;" ng-model="item.Weight"
+                                                   ng-keypress="onlyNumbers($event)" placeholder="Enter weight" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" ng-model="item.ActualDia" style="width: 100%;"
+                                                   ng-pattern="/^\d+(\.\d{1,2})?$/"
+                                                   placeholder="Enter dia"
+                                                   ng-keydown="adjustDia($event,item)"
+                                                   ng-keypress="onlyNumbers($event)" />
+                                            <span ng-show="form.ActualDia.$error.pattern" class="text-danger">Invalid input. Only numbers are allowed.</span>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" ng-model="item.ActualGSM" style="width: 100%;"
+                                                   ng-pattern="/^\d+(\.\d{1,2})?$/" placeholder="Enter GSM" ng-keypress="onlyNumbers($event)" />
+                                            <span ng-show="form.ActualGSM.$error.pattern" class="text-danger">Invalid input. Only numbers are allowed.</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="div1" style="position:relative;" class="batch_data">
+                    <div class="clsInspectionInfo" style="max-height:100%;overflow:auto;background-color:transparent; " ng-show="bodyDisplay">
+                        <div class="clsFault" ng-repeat="obj in details">
+                            <div class="clsFaultChild">
+                                <div class="clsFaultHead">{{obj.FaultName}}</div>
+                                <div>
+                                    <textarea class="clstextArea" style="resize:none;" disabled="disabled" ng-model="obj.PointData"></textarea><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index)">
+                                </div>
+                                <div class="row clsPoint">
+                                    <div class="col-md-6 clsPointChild" ng-repeat="lobj in obj.lPoints" ng-click="pointClick(lobj.PointValue,$parent.$index)">
+                                        {{lobj.PointName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="clsInspectionInfo" style="max-height:100%;overflow:auto;background-color:transparent; " ng-show="bodyDisplay">
+                        <div class="clsFault" ng-repeat="obj in majorMinorFault">
+                            <div class="clsMajorMinorChild">
+                                <div class="clsFaultHead">
+                                    {{obj.FaultName}}
+                                    <span><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick($index,obj.NameID,'mn')"></span>
+                                </div>
+
+                                <div class="row clsPoint" id="box{{$index}}">
+                                    <div ng-class="{active:isSet({{obj.NameID}},{{$index}})}" ng-click="setMnFault(obj.NameID,$index)"
+                                         class="nav nav-pills col-md-6 clsMMPointChild" ng-repeat="lobj in obj.lPoints">
+                                        {{lobj.PointName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row footer-fixed" ng-hide="true">
+                    <div class="col-md-10" ng-show="false">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <label class="control-label col-md-4 clsHeight">
+                                        Total Point:
+                                    </label>
+
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input-height clsHeight" ng-model="TotalPoint" ng-readonly style="color:salmon" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <label class="control-label col-md-5 clsHeight">
+                                        Pts/100 Inch:
+                                    </label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control input-height clsHeight" ng-model="Ptsperhundred" ng-readonly style="color:salmon" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-0">
+                                <div class="row">
+                                    <label class="control-label col-md-5 clsHeight">
+                                        Acceptance Status:
+                                    </label>
+                                    <div class="col-md-7">
+                                        <input type="text" ng-style="styleAcceptance" class="form-control input-height clsHeight" ng-model="master.Grade" ng-readonly style="color:salmon" />
+                                        <span style="visibility:hidden" ng-model="master.GradeNo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <label class="control-label  col-md-8 clsHeight">
+                                        C.Approved:
+                                    </label>
+                                    <div class="col-md-3">
+                                        <md-checkbox aria-label="Checkbox 1" class="input-height" ng-model="master.CommercialApproved">
+                                        </md-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

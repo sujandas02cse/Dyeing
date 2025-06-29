@@ -1,0 +1,31 @@
+﻿<div class="row" style="margin-left:13%; margin-top:2%; margin-bottom:2%;" ng-cloak>
+    <div class="col-md-11 offset-md-1">
+        <button id="btnSave"
+                class="button btn-primary"
+                style="padding-bottom:10px;"
+                ng-show="OperationMode==='New'"
+                ng-click="form.$valid && actionDialog('Save',null)">
+            <i class="fa fa-check"></i>{{btnSave}}
+        </button>
+        <button id="btnUpdate"
+                class="button btn-primary"
+                style="padding-bottom:10px;"
+                ng-show="OperationMode==='Modify'"
+                ng-click="actionDialog('Update',null)">
+            <i class="fa fa-check"></i>{{btnUpdate}}
+        </button>
+
+        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="Refresh()">
+            <span><i class="fa fa-refresh"></i> {{btnRefresh}}</span>
+        </div>
+        <!--<div style="display: inline; padding: 14px; " class="button btn-success round mr-1 mb-1 btn-mid" ng-click="Preview()" ng-show="btnPreviewShow">
+            <span><i class="fa fa-magic"></i>{{btnPreview}}</span>
+        </div>
+        <div style="display: inline;" class="button btn-primary round mr-1 mb-1 btn-mid" ng-click="Print()" ng-show="btnPrintShow">
+            <span><i class="fa fa-print"></i>{{btnPrint}}</span>
+        </div>-->
+        <div style="display:inline;" class="button btn-danger round mr-1 mb-1 btn-mid" ng-click="Close()">
+            <span><i class="fa fa-close"></i>{{btnClose}}</span>
+        </div>
+    </div>
+</div>

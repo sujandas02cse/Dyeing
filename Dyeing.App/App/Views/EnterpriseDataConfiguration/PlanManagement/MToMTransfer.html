@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Batch Prepare Plan</title>
+    <style>
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th, table td {
+                font-size: smaller;
+                border: 1px solid #cbcbcb !important;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .act_btn .btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            font-size: 14px;
+        }
+        /*.control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+            .control input:checked ~ .control__indicator:after {
+                display: block;
+                color: #fff;
+            }
+        .control--checkbox .control__indicator:after {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -52%);
+            -ms-transform: translate(-50%, -52%);
+            transform: translate(-50%, -52%);
+        }
+
+        .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+            background: transparent;
+        }
+            .control__indicator:after {
+                font-family: 'icomoon';
+                content: '\e5ca';*/
+        /*content: "\e013";*/
+        /*position: absolute;
+                display: none;
+            }
+        .control input:checked ~ .control__indicator {
+            border: 2px solid #007bff;
+            background: #007bff;
+        }*/
+
+        .inputClass {
+            pointer-events: none;
+        } 
+    </style>
+</head>
+<body>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Machine to Machine Change</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+                    <li><i class="fa fa-angle-right"></i> Batch Prepare Plan</li>
+                </ol>
+            </div>
+
+            <div class="card-body">
+                <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+                    <div class="row row-cols-md-auto align-items-center mb-5">
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Unit Name</label>
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                        data-ng-model="Unit"
+                                        ng-change="LoadBatchAndMachine()"
+                                        ng-options="item as item.Name for item in UnitList">
+                                    <option value="" ng-required="true">Select Unit</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Batch No</label>
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                        data-ng-model="Batch"
+                                        ng-change="LoadDataByBatch()"
+                                        ng-options="item as item.BatchNo for item in BatchList">
+                                    <option value="" ng-required="true">Select Batch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Buyer</label>
+                                <input type="text"  ng-model="BatchData.BuyerName" value="{{BatchData.BuyerName}}" class=" inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Job</label>
+                                <input type="text" ng-model="BatchData.JobInfo" value="{{BatchData.JobInfo}}" class=" inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-md-auto align-items-center mb-5">
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Style</label>
+                                <input type="text" ng-model="BatchData.StyleInfo" value="{{BatchData.StyleInfo}}" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Order</label>
+                                <input type="text" ng-model="BatchData.OrderInfo" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Color</label>
+                                <input type="text" ng-model="BatchData.ColorName" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Batch Weight</label>
+                                <input type="text" ng-model="BatchData.BatchWeight" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-md-auto align-items-center mb-5">
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Avail Qty</label>
+                                <input type="text" ng-model="BatchData.AvailQty" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">To Qty</label>
+                                <input type="text" ng-model="BatchData.ToQty" class="form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">M/C No</label>
+                                <input type="text" ng-model="BatchData.MachineNo" class="inputClass form-control col-md-8 mb-2 me-sm-2" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">New M/C No</label>
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="NewMc"
+                                        data-ng-model="NewMc"
+                                        ng-options="item as item.MachineNo for item in MachineList">
+                                    <option value="" ng-required="true">Select Machine</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <div class="card mt-5">
+
+            <div class="data_tbl table-responsive">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <td><b>Employee Id</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Id}}" readonly />
+                            </td>
+                            <td><b>Name</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Name}}" readonly />
+                            </td>
+                            <td><b>Designation</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Designation}}" readonly />
+                            </td>
+                            <td><b>Count</b></td>
+                            <td>
+                                <div>
+                                    <select class="form-control input-height clsHeight"
+                                            ng-model="OperationTime"
+                                            ng-change="LoadDataByBatch()"
+                                            ng-options="item as item.name for item in OpsTime">
+                                        <option value="" ng-required="true">Select</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <b>Date &Aacute; Time</b>
+                            </td>
+                            <td>
+                                <input type="datetime" class="form-control" name="" value="{{Emp.Date | date:'dd-MM-yy h:mm a':'en-US'}}" readonly />
+                            </td>
+                        </tr>
+                    </thead>    
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-12 px-3">
+            <div class="offset-md-2 col-md-9">
+                <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                <input type="hidden" ng-model="Model.MId" />
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

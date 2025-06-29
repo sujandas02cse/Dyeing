@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dyeing M/C Operation Configuration</title>
+
+    <style>
+        .md-datepicker-input {
+            max-width: 200px;
+            width: 190px;
+        }
+
+        .dropdown-menu {
+            min-width: 12rem;
+            /*min-height:250px !important;*/
+        }
+
+            .dropdown-menu dropdown-menu-form {
+                height: 350px;
+            }
+
+        p {
+            background: lightblue;
+        }
+
+        table {
+            /*margin-bottom: 10px;*/
+        }
+
+        .finish_wrap {
+            border-top: 1px solid #777;
+            border-bottom: 1px solid #777;
+        }
+
+            .finish_wrap table {
+                margin-bottom: 0px;
+            }
+
+                .finish_wrap table th,
+                .finish_wrap table td {
+                    border: 1px solid #9f9f9f !important;
+                    padding: 5px 7px !important;
+                    font-size: 12px;
+                }
+
+                .finish_wrap table th {
+                    text-align: center;
+                }
+
+                .finish_wrap table td:nth-child(2) {
+                }
+
+        table:hover {
+            /*background: #495057;*/
+        }
+
+        .machine_new table th img {
+            width: 30px;
+            margin: 5px;
+        }
+
+        .form-control {
+            font-size: 12px !important;
+        }
+
+        .md-datepicker-input {
+            width: 120px;
+        }
+
+        .input-height {
+            height: initial !important;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body ng-controller="McOperationConfigController as ctrl">
+    <div class="content-header sty-one">
+        <h1>Dyeing M/C Operation Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Machine Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dyeing M/C Operation Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <!--<input type="text" id="tags" ng-keyup="complete()" ng-model="batchFins.BatchNo" placeholder="Batch No" class="form-control input-height" />-->
+                            <input type="text" typeahead-Open-On-Focus ng-model="McOperation.BatchNo" typeahead-on-select="getDataByBatchId()" placeholder="Batch No.."
+                                   class="form-control input-height"
+                                   typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"
+                                   typeahead-editable="true" ng-required="true">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Buyer:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.BuyerName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            M/C No:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.MachineNo" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Job:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.JobName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Style:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.StyleName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Order:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.OrderName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Color:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="McOperation.ColorName" readonly class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Fabric Name:
+                        </label>
+                        <div class="col-md-8">
+
+                            <select ng-model="McOperation.FabricId"
+                                    ng-options="a.FabricId as a.FabricName for a in Fabrics"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Fabric</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Status:
+                        </label>
+                        <div class="col-md-8">
+
+                            <select ng-model="McOperation.Status"
+                                    ng-options="a.Status as a.Status for a in StatusList"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Status</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Batch Start:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="time" name="startTime" ng-model="McOperation.StartTime" id="startTime">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Batch End:
+                        </label>
+                        <div class="col-md-8">
+
+                            <input type="time" id="endTime" name="appt" ng-model="McOperation.EndTime"
+                                   min="09:00" max="18:00">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+
+                </div>
+            </div>
+
+        </form>
+
+        <div style="display:none;">
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th>Id</th>
+                        <th>Sl</th>
+                        <!--<th ng-click="sort('SpecificationName')">
+                           Specification Name&nbsp;
+                        </th>-->
+                        <th>Batch No.</th>
+                        <th>M/C No.</th>
+                        <th>Buyer</th>
+                        <th>Job</th>
+                        <th>Style</th>
+                        <th>Order</th>
+                        <th>Color</th>
+                        <th>Fabric</th>
+                        <th>Status</th>
+                        <th>Batch Start</th>
+                        <th>Batch End</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in dataLists">
+                        <td style="">{{item.McId}}</td>
+                        <td>{{$index +1}}</td>
+                        <td> {{item.BatchNo}}</td>
+                        <td> {{item.MachineNo}}</td>
+                        <td> {{item.BuyerName}}</td>
+                        <td> {{item.JobName}}</td>
+                        <td> {{item.StyleName}}</td>
+                        <td> {{item.OrderName}}</td>
+                        <td> {{item.ColorName}}</td>
+                        <td> {{item.IFName}}</td>
+                        <td> {{item.Status}}</td>
+                        <td> {{item.BatchStart}}</td>
+                        <td> {{item.BatchEnd}}</td>
+
+                        <td>
+                            <img name="edit" class="logo-image" ng-click="GetMcConfigForEdit(item)" src="/Content/img/editicon.png" />
+                            <!--<img name="delete" style="margin-left: 7%;" ng-click="deleteRecipeRow(item)" class="logo-image" src="/Content/img/deleteicon.png">-->
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>

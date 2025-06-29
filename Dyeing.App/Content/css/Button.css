@@ -1,0 +1,436 @@
+﻿md-toast {
+    margin-left: 50% !important;
+    top: 10%;
+    position: fixed;
+    opacity: 1.5;
+}
+
+.button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    width: 100px;
+    padding: 8px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+
+.card-head {
+    text-align: center;
+}
+
+/*Report Button.............................*/
+
+.pulsePdf {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #dd5c24 0%, #aa4e44 100%);
+}
+
+    .pulsePdf:hover, .pulsePdf:focus {
+        animation: pulsePdf 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/pdficonbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulsePdf {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulsePdf {
+    --hover: #dd5c24;
+}
+
+
+.pulseWord {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #6e8eef 0%, #2f5be0 100%);
+}
+
+    .pulseWord:hover, .pulseWord:focus {
+        animation: pulseWord 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/wordiconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulseWord {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseWord {
+    --hover: #2753d8;
+}
+
+
+.pulseExcel {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #0ea51d 0%, #509b57 100%);
+}
+
+    .pulseExcel:hover, .pulseExcel:focus {
+        animation: pulseExcel 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/exceliconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulseExcel {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseExcel {
+    --hover: #116619;
+}
+
+
+
+button:hover .Word, button:focus .Word {
+    display: none;
+}
+
+button:hover .Excel, button:focus .Excel {
+    display: none;
+}
+
+button:hover .Pdf, button:focus .Pdf {
+    display: none;
+}
+
+button:hover .Refresh, button:focus .Refresh {
+    display: none;
+}
+
+
+
+
+/*.........................................*/
+.fill:hover, .fill:focus {
+    box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+.pulseSave {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #33cc33 0%, #325621 100%);
+}
+
+    .pulseSave:hover, .pulseSave:focus {
+        animation: pulseSave 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/saveiconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: #19bc8b;
+    }
+
+
+@keyframes pulseSave {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseSave {
+    /*--color: #1dcc66;*/
+    --hover: #05bf40;
+    /*#ef8f6e;*/
+}
+
+
+.pulseRefresh {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #26abe0 0%, #20627c 100%);
+}
+
+    .pulseRefresh:hover, .pulseRefresh:focus {
+        animation: pulseRefresh 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/refreshiconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: #1d9dcc;
+    }
+
+
+@keyframes pulseRefresh {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseRefresh {
+    /*--color: #1d9dcc;*/
+    --hover: #1d9dcc;
+}
+
+
+.pulsePreview, pulsePreview:focus {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #e81783 0%, #910d51 100%);
+}
+
+    .pulsePreview:hover, .pulsePreview:focus {
+        animation: pulsePreview 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/Previewiconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulsePreview {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulsePreview {
+    /*--color: #ef6eae;*/
+    --hover: #e81783;
+}
+
+.pulseClose {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #ef1c2a 0%, #930009 100%);
+}
+
+    .pulseClose:hover, .pulseClose:focus {
+        animation: pulseClose 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/closeiconbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulseClose {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseClose {
+    /*--color: #ef6eae;*/
+    --hover: #e00003;
+}
+
+
+.pulseReset {
+    height: 44px;
+    width: 7.15%;
+    border-color: white;
+    color: white;
+    background: linear-gradient(to left, #ef1c2a 0%, #930009 100%);
+}
+
+    .pulseReset:hover, .pulseReset:focus {
+        animation: pulseReset 1s;
+        box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+        background-image: url('../Img/reseticonbutton.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 44px;
+        width: 7.15%;
+        border-color: var(--hover);
+    }
+
+
+@keyframes pulseReset {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.pulseReset {
+    --hover: #e00003;
+}
+
+
+
+button:hover .Save, button:focus .Save {
+    display: none;
+}
+button:hover .Refresh, button:focus .Refresh {
+    display: none;
+}
+button:hover .Preview, button:focus .Preview {
+    display: none;
+}
+button:hover .Close, button:focus .Close {
+    display: none;
+}
+
+button:hover .Reset, button:focus .Reset {
+    display: none;
+}
+
+
+
+
+
+.close:hover, .close:focus {
+    box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
+}
+
+.raise:hover, .raise:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
+.up:hover, .up:focus {
+    box-shadow: inset 0 -3.25em 0 0 var(--hover);
+}
+
+.slide:hover, .slide:focus {
+    box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+
+.offset {
+    box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+}
+
+    .offset:hover, .offset:focus {
+        box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
+    }
+
+.fill {
+    --color: #a972cb;
+    --hover: #cb72aa;
+}
+
+
+
+.close {
+    --color: #ff7f82;
+    --hover: #ffdc7f;
+}
+
+.raise {
+    --color: #ffa260;
+    --hover: #e5ff60;
+}
+
+.up {
+    --color: #e4cb58;
+    --hover: #94e458;
+}
+
+/*.slide {
+    --color: #8fc866;
+    --hover: #66c887;
+}*/
+
+.offset {
+    --color: #19bc8b;
+    --hover: #1973bc;
+}
+
+button {
+    color: var(--color);
+    transition: 0.25s;
+}
+
+    button:hover, button:focus {
+        border-color: var(--hover);
+        color: #fff;
+    }
+
+
+
+button {
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    font-stretch: extra-condensed;
+    /*font-variant: petite-caps;*/
+    /*font-family: monospace;*/
+}
+
+    button:focus {
+        outline: 0;
+    }
+
+h1 {
+    font-weight: 400;
+}
+
+code {
+    color: #e4cb58;
+    font: inherit;
+}
+
+

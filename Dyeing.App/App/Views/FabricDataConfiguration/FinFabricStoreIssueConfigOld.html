@@ -1,0 +1,182 @@
+﻿<body ng-controller="FinFabFloorToStoreIssueConfigController">
+    <div class="content-header sty-one">
+        <h1>Finished Fabric Floor To Store Issue Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Fabric Data Configuration</a></li>            
+            <li><i class="fa fa-angle-right"></i> Finished Fabric Floor To Store Issue Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:700px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+          
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Unit :
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <select ng-model="Model.UnitId"
+                                    ng-options="a.UnitId as a.UnitEName for a in Unit"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Date :
+                        </label>
+                        <div class="col-md-4">
+                            <!--<md-datepicker ng-model="Model.IssueDate" md-placeholder="Date" md-hide-icons="calendar" md-open-on-focus ng-required="true"></md-datepicker>-->
+                            <md-datepicker name="IssueDatea" ng-model="IssueDate" md-placeholder="Enter date"
+                                           md-hide-icons="calendar" required md-open-on-focus ng-disabled="true"></md-datepicker>
+                            <!--<input type="text" class="form-control" ng-model="Model.IssueDate" id="Model.IssueDate" readonly/>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Input Method :
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-5">
+                            <select ng-model="Model.InputMethod"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Method</option>
+                                <option value="1">Barcode</option>
+                                <option value="2">Manual</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Load Barcode Data :
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="file" read-text="onFileSelect($files)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                        </label>
+                        <div class="col-md-4">
+                            <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="OtherOpPopup($event)">
+                                <span>Instant Upload</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <!--<input type="hidden" ng-model="Model.PHeadNo" />-->
+
+                </div>
+            </div>
+
+            <div class="row" style="height:100%; overflow:auto;">
+                <div style="width:100%;">
+
+                    <table style="white-space: nowrap; font-size:13px;" class="table table-bordered bordered table-striped table-condensed table-scroll">
+                        <thead class="bg" style="position: sticky; top: 0;">
+                            <tr style="text-align:center;">
+                                <th style="width:50px;">Sl</th>
+                                <th style="width:100px;">Buyer</th>
+                                <th style="width:200px;">Job</th>
+                                <th style="width:100px;">Style</th>
+                                <th style="width:200px;">Order</th>
+                                <th style="width:100px;">Fabric Name</th>
+                                <th style="width:100px;">GSM</th>
+                                <th style="width:350px;">Yarn</th>
+                                <th style="width:100px;">Fin. Dia</th>
+                                <th style="width:100px;">Color</th>
+                                <th style="width:100px;">Qty</th>
+                                <th style="width:100px;">Roll Count</th>
+                                <th style="width:150px;">Manual Roll Count</th>
+                                <th style="width:150px;">Total Roll Count</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="obj in FabDataList">
+                                <td style="text-align:center; width:50px;"> {{$index + 1}}</td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.BuyerName}}
+                                    <input type="hidden" name="BarcodeId{{$index}}" ng-model="obj.BarcodeId" ng-value="obj.BarcodeId" readonly class="form-control input-height viewonly" style="text-align:center;">
+                                </td>
+                                <td style="text-align:center; width:200px;">
+                                    {{obj.JobInfo}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.StyleInfo}}
+                                </td>
+                                <td style="text-align:center; width:200px;">
+                                    {{obj.OrderNo}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.ItemName}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.ItemSizeName}}
+                                </td>
+                                <td style="text-align:center; width:350px;">
+                                    {{obj.Specification}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.FinishedDia}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.ItemColorName}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.Qty}}
+                                </td>
+                                <td style="text-align:center; width:100px;">
+                                    {{obj.RollCount}}
+                                    <!--<input type="text" name="RollCount{{$index}}" ng-model="obj.RollCount" ng-value="obj.RollCount" readonly class="form-control input-height viewonly" style="text-align:center;">-->
+                                </td>
+                                <td style="text-align:center; width:150px;">
+                                    <center>
+                                        <input type="text" name="ManualRollCount{{$index}}" ng-model="obj.ManualRollCount" ng-value="obj.ManualRollCount" ng-change="getTotal($index)" style="text-align:center; width: 50px; height:30px">
+                                    </center>
+                                </td>
+                                <td style="text-align:center; width:150px;">
+                                    {{obj.TotalRoll}}
+                                    <!--<input type="text" name="TotalRoll{{$index}}" ng-model="obj.TotalRoll" ng-value="obj.TotalRoll" readonly class="form-control input-height viewonly" style="text-align:center;">-->
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</body>
+

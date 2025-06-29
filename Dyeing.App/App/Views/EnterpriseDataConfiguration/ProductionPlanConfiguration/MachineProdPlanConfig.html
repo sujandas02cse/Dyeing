@@ -1,0 +1,712 @@
+﻿<style>
+    .md-datepicker-input {
+        max-width: 200px;
+        width: 190px;
+    }
+
+    .dropdown-menu {
+        min-width: 12rem;
+        /*min-height:250px !important;*/
+    }
+
+        .dropdown-menu dropdown-menu-form {
+            height: 350px;
+        }
+
+    p {
+        background: lightblue;
+    }
+
+    table {
+        margin-bottom:10px;
+    }
+        table:hover{
+            color:#fff;
+        }
+        table th,
+        table td {
+            border: 1px solid #333;
+            font-size: 12px;
+            padding: 5px 0;
+            cursor: pointer;
+        }            
+            table:hover {
+                background: #495057;
+            }
+
+            .machine_new table th img {
+                width: 30px;
+                margin: 5px;
+            }
+    .form-control{
+        font-size:12px !important;
+    }
+    .md-datepicker-input {
+        width: 120px;
+    }
+    .input-height {
+        height: initial !important;
+    }
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+    .md-datepicker-calendar-pane {
+        z-index: 1200
+    }
+</style>
+<div>
+    <div class="content-header sty-one">
+        <h1>Machine Production Plan Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Machine Production Plan Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Master={}">
+            <fieldset class="field_set">
+                <div style="float:left !important; width:50%;" ng-init="Mode='N'">
+                    <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'N'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+                    <span class="radio-label">Revise</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'R'" type="radio" style="margin-right:5%;" name="Mode" value="Revise" />
+                    <span class="radio-label">Halt</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'H'" type="radio" style="margin-right:5%;" name="Mode" value="Halt" />
+                    <span class="radio-label">Unhalt</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'U'" type="radio" style="margin-right:5%;" name="Mode" value="Unhalt" />
+                </div>
+                <!--<div style="width:20%; float:right;" ng-init="BulkSample=''">
+                    <span class="radio-label" style="margin-right:10px;">Bulk</span><input class="radio-input" ng-required="true" ng-model="BulkSample" ng-change="changeBulkSample()" ng-value="'B'" type="radio" style="margin-right:5%;" name="BulkSample" value="Bulk" />
+                    <span class="radio-label" style="margin-right:10px;">Sample</span><input class="radio-input" ng-required="true" ng-model="BulkSample" ng-change="changeBulkSample()" ng-value="'S'" type="radio" style="margin-right:5%;" name="BulkSample" value="Sample" />                    
+                </div>-->
+            </fieldset>
+            <hr />
+            <fieldset class="field_set">
+                <div class="form-group row">
+                    <!--<div class="col-md-3">
+        <div class="row">
+            <label class="control-label col-md-5">
+                Date:
+                <span class="required" style="color:red"> * </span>
+            </label>
+            <div class="col-md-6">
+                <md-datepicker name="PlanDate" ng-model="PlanDate" md-placeholder="Enter date" md-hide-icons="calendar" ng-required="true" md-open-on-focus></md-datepicker>
+            </div>
+        </div>
+    </div>-->
+                    
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Unit:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <select class="form-control" select2="" name="unit"
+                                        data-ng-model="Unit"
+                                        ng-change="UnitChange()"
+                                        ng-options="item as item.Name for item in UnitList">
+                                    <option value="" ng-required="true">Select Unit</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <label class="control-label col-md-4">
+                                Plan No:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-7">
+                                <!--x.ID as x.Name for x in VehicleInfoIn-->
+                                <input type="text" ng-model="PlanNo" ng-disabled="Mode=='N'?true:false" placeholder="Plan No" class="form-control input-height"
+                                       typeahead-on-select="getPlanInfoByPlan()" ng-required="Mode=='N'?false:true"
+                                       typeahead-Open-On-Focus typeahead-min-length="1" uib-typeahead="item as item.PlanNo for item in PlanBatchList | filter: {PlanNo:$viewValue} | limitTo:8"
+                                       typeahead-editable="false">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-5">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Revise Reason:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <div class="col-md-9">
+                                <input type="text" ng-model="ddl.RevReason" ng-disabled="Mode=='R'?false:true" placeholder="Revise Reason" class="form-control input-height"
+                                       ng-required="Mode=='R'?true:false"
+                                       typeahead-Open-On-Focus typeahead-min-length="1" uib-typeahead="item as item.PlanReasonName for item in ReverseReason | filter: {PlanReasonName:$viewValue} | limitTo:8"
+                                       typeahead-editable="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="form-group row">
+                    
+                </div>-->
+
+                <div class="form-group row">
+                    <div style="width: 98%; margin-left: 1%;">
+                        <div class="machine_new">
+                            <table  class="{{$index%2==0?'bg':''}}" ng-repeat="obj in Details">
+                                <tr>
+                                    <th style="width:50px;" rowspan="4" ng-hide="Mode=='N'?false:true">
+                                        <img ng-click="actionDialog1('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                        <img ng-click="actionDialog1('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                    </th>
+                                    <th style="width:120px;">Buyer</th>
+                                    <th>Job</th>
+                                    <th style="width:100px;">Style</th>
+                                    <th style="width:120px;">Order</th>
+                                    <th style="width:120px;">Order status</th>
+                                    <th style="width:115px;">Ship Date</th>
+                                    <th>Fabric Name</th>
+                                    <th>Color</th>
+                                    <th>LD No</th>
+                                    <th>RN No</th>
+                                    <th>Fabric Qty</th>
+                                    <th>Plan Qty</th>
+                                </tr>
+                                <tr>
+                                    <!--<td style="border-bottom:0;border-top:0;"></td>-->
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus ng-model="obj.Buyer" typeahead-on-select="getDataByBuyer($index)" placeholder="Buyer"
+                                               class="form-control input-height"
+                                               typeahead-min-length="1" uib-typeahead="item as item.BuyerName for item in BuyerList | filter: {BuyerName:$viewValue} | limitTo:8"
+                                               typeahead-editable="true" ng-required="true">
+                                    </td>
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus ng-model="obj.Job" typeahead-on-select="getDataByJob($index)" placeholder="Job No" class="form-control input-height"
+                                               typeahead-min-length="0" uib-typeahead="item as item.DisplayName for item in JobList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                               typeahead-editable="false" ng-required="true">
+                                    </td>
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="0" ng-model="obj.Style"
+                                               typeahead-on-select="getDataByStyle($index)" placeholder="Style No" class="form-control input-height"
+                                               uib-typeahead="item as item.DisplayName for item in StyleList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                               typeahead-editable="false">
+                                    </td>
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="0" ng-model="obj.Order" placeholder="Order No" class="form-control input-height"
+                                               typeahead-on-select="getDataByOrder($index)" uib-typeahead="item as item.DisplayName for item in OrderList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                               typeahead-editable="false" ng-required="true">
+                                    </td>
+                                    <td>
+                                        <select ng-model="obj.ProdStatus" ng-required="true"
+                                                ng-disabled="IsDisabledProdStatus"
+                                                class="form-control input-height">
+                                            <option value="" selected>Select Status</option>
+                                            <option value="Bulk">Bulk</option>
+                                            <option value="Sample">Sample</option>
+                                        </select>
+                                    </td>
+                                    <td>   
+                                        <md-datepicker style="width:115px;" name="ShipDate" ng-model="obj.ShipDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                    </td>
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.FabricName" placeholder="Fabric Name" class="form-control input-height"                                               
+                                               uib-typeahead="item as item.DisplayName for item in FabricNameAll | filter: {DisplayName:$viewValue} | limitTo:8" typeahead-editable="false">
+                                    </td>
+                                    <td>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.Color" class="form-control input-height" placeholder="Color"
+                                               uib-typeahead="item as item.name for item in ColorListAll | filter: {name:$viewValue} | limitTo:8"
+                                               typeahead-editable="false" ng-required="true">
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="obj.LDNo" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="LD No" required>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="obj.RNNo" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="RN No" required>
+                                    </td>
+                                    <td>
+                                        <input type="number" ng-model="obj.FabricQty" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Fabrics Qty" required>
+                                    </td>
+                                    <td>
+                                        <div class="btn btn-primary btn-sm" ng-click="PlanQtyPopup($event, $index)">
+                                            <i class="fa fa-angle-right"></i> Plan Qty
+                                        </div>
+                                    </td>                                
+
+                                </tr>
+                                <tr>
+                                    <th>Order Type</th>
+                                    <th>Matching With</th>
+                                    <th>Enzyme</th>
+                                    <th>Enzyme Qty</th>
+                                    <th>Dyeing Process Flow</th>
+                                    <th colspan="2">Others Fabric Operation</th>
+                                    <th>Others</th>
+                                    <th colspan="4">Remarks</th>
+                                    <!--<th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>-->
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <select ng-model="obj.OrderType"                                                
+                                                ng-options="a.Id as a.Name for a in OrderTypeList"
+                                                class="form-control input-height">
+                                            <option value="" selected>Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="obj.MfcId"
+                                                ng-options="a.MfcId as a.NameOfMatching for a in MatchingInfo"
+                                                class="form-control input-height"
+                                                name="matchingInfo_{{$index}}"
+                                                ng-required="true">
+                                            <option value="" selected>Select</option>
+                                        </select> 
+                                    </td>
+                                    <td>
+                                        <select ng-model="obj.EnzStatus"
+                                                ng-change="EStatusChange($index)"
+                                                ng-options="a.Id as a.Name for a in EnzStatusList"
+                                                class="form-control input-height">
+                                            <option value="" selected>Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="obj.Enzyme" ng-disabled="obj.EnzStatus=='0'?true:false" ng-required="obj.EnzStatus=='1'?true:false" placeholder="Enzyme Qty" class="form-control input-height" />
+                                    </td>
+                                    <td>
+                                        <!--div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="DProcessFlow($event)">
+                                            <span><i class="fa fa-angle-right"></i> Dyeing Process Flow</span>
+                                        </div>-->
+                                        <div class="btn btn-primary btn-sm" ng-click="DProcessFlow($event, $index)">
+                                            <i class="fa fa-angle-right"></i> Button
+                                        </div>
+                                    </td>
+                                    <td colspan="2">
+                                        <!--<div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="FabOperationPopup($event)">
+                                            <span><i class="fa fa-angle-right"></i> Others Fabric Operation</span>
+                                        </div>-->
+                                        <div class="btn btn-primary btn-sm" ng-click="FabOperationPopup($event, $index)">
+                                            <i class="fa fa-angle-right"></i> Button
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn btn-primary btn-sm" ng-click="OtherOpPopup($event, $index)">
+                                           <i class="fa fa-angle-right"></i> Others
+                                        </div>
+                                    </td>
+                                    <td colspan="4">
+                                        <input type="text" ng-model="obj.Remarks" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Remarks">
+                                    </td>
+                                    <!--<td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>-->
+                                   
+
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <!--<table class="table table-bordered bordered table-striped table-condensed table-text">                            
+                            <tbody>                                      
+                                <tr class="{{$index%2==0?'bg':''}}" ng-repeat="obj in Details">
+                                    <td>
+                                        <img ng-click="actionDialog1('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                        <img ng-click="actionDialog1('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                    </td>
+                                    <td>
+                                        <p>Buyer</p>
+                                        <input type="text" typeahead-Open-On-Focus ng-model="obj.Buyer" typeahead-on-select="getDataByBuyer()" placeholder="Buyer"
+                                               class="form-control input-height"
+                                               typeahead-min-length="1" uib-typeahead="item as item.BuyerName for item in BuyerList | filter: {BuyerName:$viewValue} | limitTo:8"
+                                               typeahead-editable="true" ng-required="true">
+                                        <br/>
+                                        <p>Matching With</p>
+                                        <select ng-model="obj.MfcId"
+                                                ng-options="a.MfcId as a.NameOfMatching for a in MatchingInfo"
+                                                class="form-control input-height"
+                                                name="matchingInfo_{{$index}}"
+                                                ng-required="true">
+                                            <option value="" selected>Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <p>Job</p>
+                                        <input type="text" typeahead-Open-On-Focus ng-model="obj.Job" typeahead-on-select="getStyleOrderInfo()" placeholder="Job No" class="form-control input-height"
+                                               typeahead-min-length="1" uib-typeahead="item as item.DisplayName for item in JobList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                               typeahead-editable="false" ng-required="true">
+                                        <br />
+                                        <p>Enzyme</p>
+                                        <select ng-model="obj.EnzStatus"
+                                                ng-change="EStatusChange()"
+                                                ng-options="a.Id as a.Name for a in EnzStatusList"
+                                                class="form-control input-height">
+                                            <option value="" selected>Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <p>Style</p>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.Style"
+                                               typeahead-on-select="getOrderInfo()" placeholder="Style No" class="form-control input-height"
+                                               uib-typeahead="item as item.DisplayName for item in StyleList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                               typeahead-editable="false">
+                                        <br />
+                                        <p>Enzyme Qty</p>
+                                        <input type="text" ng-model="obj.Enzyme" ng-disabled="Master.EnzStatus=='0'?true:false" ng-required="Master.EnzStatus=='1'?true:false" placeholder="Enzyme Qty" class="form-control input-height" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Order</p>
+                                                <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.Order" placeholder="Order No" class="form-control input-height"
+                                                       typeahead-on-select="getInfoByOrder()" uib-typeahead="item as item.DisplayName for item in OrderList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                                       typeahead-editable="false" ng-required="true">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>Order Status</p>
+                                                <select ng-model="obj.ProdStatus" ng-required="true"
+                                                        ng-disabled="IsDisabledProdStatus"
+                                                        class="form-control input-height">
+                                                    <option value="" selected>Select Status</option>
+                                                    <option value="Bulk">Bulk</option>
+                                                    <option value="Sample">Sample</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <br />
+                                        <p>Dyeing Process Flow</p>
+                                        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="DProcessFlow($event)">
+                                            <span><i class="fa fa-angle-right"></i> Dyeing Process Flow</span>
+                                        </div>                                        
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p>Ship Date</p>
+                                                <md-datepicker name="ShipDate" ng-model="obj.ShipDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p>Fabric Name</p>
+                                                <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.FabricName" placeholder="Fabric Name" class="form-control input-height"
+                                                       ng-init="FabGSMDisabled=true" ng-disabled="FabGSMDisabled" ng-required="!FabGSMDisabled"
+                                                       uib-typeahead="item as item.name for item in FabricNameAll | filter: {name:$viewValue} | limitTo:8" typeahead-editable="false">
+                                            </div>
+                                        </div>
+                                        
+                                        <br />
+                                        <p>Others Fabric Operation</p>
+                                        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="FabOperationPopup($event)">
+                                            <span><i class="fa fa-angle-right"></i> Others Fabric Operation</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>Color</p>
+                                        <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="obj.Color" class="form-control input-height" placeholder="Color"
+                                               uib-typeahead="item as item.name for item in ColorListAll | filter: {name:$viewValue} | limitTo:8"
+                                               typeahead-editable="false" ng-required="true">
+                                        <br />
+                                        <p>Others</p>
+                                        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="OtherOpPopup($event)">
+                                            <span><i class="fa fa-angle-right"></i> Others</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>LD No</p>
+                                        <input type="text" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Order" required>
+                                        <br />
+                                        <p>Remarks</p>
+                                        <input type="text" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Order" required>
+                                    </td>
+                                    
+                                    <td>
+                                        <p>RN No</p>
+                                        <input type="text" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="RN No" required>
+                                    </td>
+                                    <td>
+                                        <p>Fabric Qty</p>
+                                        <input type="text" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Fabrics Qty" required>
+                                    </td>
+                                    <td>
+                                        <p>Plan Qty</p>
+                                        <input type="text" class="form-control input-height" style="padding: inherit; color: #495057; " placeholder="Plan Qty" required>
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>-->
+
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Loading Type:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <select ng-model="Master.LoadingType"
+                                            ng-change="loadDataByLoadingType()"
+                                            ng-options="a.Id as a.Name for a in LoadingType"
+                                            class="form-control input-height"
+                                            ng-required="true">
+                                        <option value="" selected>Select</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Production Status:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <select ng-model="Master.ProdStatus" ng-required="true"
+                                            ng-disabled="IsDisabledProdStatus"
+                                            class="form-control input-height">
+                                        <option value="" selected>Select Status</option>
+                                        <option value="Bulk">Bulk</option>
+                                        <option value="Sample">Sample</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    M/C No:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="ddl.Machine" typeahead-on-select="SetCapacity()" placeholder="Machine No" class="form-control input-height"
+                                           typeahead-Open-On-Focus typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineInfo | filter: {MachineNo:$viewValue} | limitTo:8"
+                                           typeahead-editable="false" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Capacity:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="Capacity" ng-disabled="true" placeholder="Capacity" class="form-control input-height" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Buyer:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" typeahead-Open-On-Focus ng-model="ddl.Buyer" typeahead-on-select="getDataByBuyer()" placeholder="Buyer"
+                                           class="form-control input-height"
+                                           typeahead-min-length="1" uib-typeahead="item as item.BuyerName for item in BuyerList | filter: {BuyerName:$viewValue} | limitTo:8"
+                                           typeahead-editable="true" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Job:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" typeahead-Open-On-Focus ng-model="ddl.Job" typeahead-on-select="getStyleOrderInfo()" placeholder="Job No" class="form-control input-height"
+                                           typeahead-min-length="1" uib-typeahead="item as item.DisplayName for item in JobList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                           typeahead-editable="false" ng-required="true">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Style:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.Style"
+                                           typeahead-on-select="getOrderInfo()" placeholder="Style No" class="form-control input-height"
+                                           uib-typeahead="item as item.DisplayName for item in StyleList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                           typeahead-editable="false">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Order:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.Order" placeholder="Order No" class="form-control input-height"
+                                           typeahead-on-select="getInfoByOrder()" uib-typeahead="item as item.DisplayName for item in OrderList | filter: {DisplayName:$viewValue} | limitTo:8"
+                                           typeahead-editable="false" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5">
+                                    Ship. Date:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <md-datepicker name="ShipDate" ng-model="Master.ShipDate" md-placeholder="Enter date" md-hide-icons="calendar" required md-open-on-focus></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Color:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.Color" class="form-control input-height" placeholder="Color"
+                                           uib-typeahead="item as item.name for item in ColorListAll | filter: {name:$viewValue} | limitTo:8"
+                                           typeahead-editable="false" ng-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    LD No:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" ng-model="Master.LDNo" placeholder="LD No" class="form-control input-height" ng-required="true" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Matching With:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <select ng-model="Master.MfcId"
+                                            ng-options="a.MfcId as a.NameOfMatching for a in MatchingInfo"
+                                            class="form-control input-height"
+                                            ng-required="true">
+                                        <option value="" selected>Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <label class="control-label col-md-2">
+                                    Fabric Name:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" ng-init="FabDescDisabled=true" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.FabricDesc" placeholder="Fabrics Description"
+                                           ng-disabled="FabDescDisabled" class="form-control input-height"
+                                           ng-required="!FabDescDisabled"
+                                           uib-typeahead="item as item.ItemDescription for item in FabricInfoList | filter: {ItemDescription:$viewValue} | limitTo:8"
+                                           typeahead-editable="false">
+
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.FabricName" placeholder="Fabric Name" class="form-control input-height"
+                                           ng-init="FabGSMDisabled=true" ng-disabled="FabGSMDisabled" ng-required="!FabGSMDisabled"
+                                           uib-typeahead="item as item.name for item in FabricNameAll | filter: {name:$viewValue} | limitTo:8" typeahead-editable="false">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" typeahead-Open-On-Focus typeahead-min-length="1" ng-model="ddl.GSM" placeholder="GSM" class="form-control input-height"
+                                           ng-init="FabGSMDisabled=true" ng-disabled="FabGSMDisabled" ng-required="!FabGSMDisabled"
+                                           uib-typeahead="item as item.name for item in GSMAll | filter: {name:$viewValue} | limitTo:8" typeahead-editable="false">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Plan Qty:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" ng-model="Master.PlanQty" placeholder="Plan Qty" class="form-control input-height" ng-required="true" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-4">
+                                    Enzyme:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="Master.EnzStatus"
+                                            ng-change="EStatusChange()"
+                                            ng-options="a.Id as a.Name for a in EnzStatusList"
+                                            class="form-control input-height">
+                                        <option value="" selected>Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" ng-model="Master.Enzyme" ng-disabled="Master.EnzStatus=='0'?true:false" ng-required="Master.EnzStatus=='1'?true:false" placeholder="Enzyme" class="form-control input-height" />
+                                </div>
+                                <span style="font-style:italic;">(g/l)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-7">
+                                    Dyeing Process Flow:
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <div ng-dropdown-multiselect ng-required="true" options="DyeingPFList" width="200" selected-model="DProcess"
+                                         checkboxes="true" extra-settings="setting2"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="margin-top:10px;">
+                            <div>
+                                <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="FabOperationPopup($event)">
+                                    <span><i class="fa fa-angle-right"></i> Others Fabric Operation</span>
+                                </div>
+                                <span style="padding-right:20px;"></span>
+                                <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="OtherOpPopup($event)">
+                                    <span><i class="fa fa-angle-right"></i> Others</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+</fieldset>
+<div class="row">
+    <div class="offset-md-2 col-md-9">
+        <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+        <input type="hidden" ng-model="Master.MppmId" />
+    </div>
+</div>
+</form>
+   
+</div>
+
+</div>
+

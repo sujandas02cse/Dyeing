@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            border-spacing: 15px;
+        }
+
+        table, th, td {
+            padding: 8px;
+            font-size: 17px;
+        }
+
+            table td b {
+                padding-left: 15px;
+            }
+
+        .form-control {
+            padding: 10px;
+        }
+
+        .data_tbl th, .data_tbl td {
+            border: 1px solid #333;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .btn_group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-gap: 15px;
+        }
+
+            .btn_group button {
+                width: 100px;
+                font-size: 20px !important;
+            }
+
+        .custom-table-header {
+            position: sticky;
+            z-index: 1;
+        }
+
+        .scale {
+            scale: 2;
+            z-index: -1;
+        }
+        .custom-font {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+<body ng-controller="FabricTestApproval as Controller">
+    <div class="content-header sty-one">
+        <h1>Fabric Test Approval</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Approval Management   </a></li>
+            <li><i class="fa fa-angle-right"></i>Fabric Test Approval</li>
+        </ol>
+    </div>
+    <div class="card card-body">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td><b>Unit</b></td>
+                            <td>
+                                <input type="text" ng-model="Unit" typeahead-min-length="1" uib-typeahead="unit as unit.Name for unit in AllUnitData | filter : {Name : $viewValue} | limitTo:8"
+                                       typeahead-on-select="GetBatchNoUnit()" typeahead-editable="false" class="form-control clsHeight " placeholder="Unit" />
+                            </td>
+                            <td><b>Batch No</b></td>
+                            <td>
+                                <input type="text" ng-model="Batch" typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in allBatch | filter: {BatchNo:$viewValue}  | limitTo:8"
+                                       typeahead-on-select="getDataByBatchId()" typeahead-editable="false" class="form-control clsHeight " placeholder="Batch No" required />
+                            </td>
+                            <td><b>Buyer</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.BuyerName}}" readonly /></td>
+
+                        </tr>
+                        <tr>
+                            <td><b>Job</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.JobInfo}}" readonly /></td>
+                            <td><b>Style/Order</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.StyleInfo}}" readonly /></td>
+                            <td><b>Color</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.Color}}" readonly /></td>
+                        </tr>
+                        <tr>
+                            <td><b>Approved Weight</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.ApprovedWeight}}" readonly /></td>
+                            <td><b>Batch Weight</b></td>
+                            <td><input type="text" class="form-control" name="" value="{{BatchData.BatchWeight}}" readonly /></td>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.MId" />
+                </div>
+            </div>
+            <div class="mt-5" style=" overflow:auto; max-height:600px;">
+                <table class="data_tbl tableFixHead">
+                    <thead class="bg custom-table-header sticky-top">
+                        <tr>
+                            <th rowspan="2">Roll No</th>
+                            <th rowspan="2">Required Dia</th>
+                            <th rowspan="2">Actual Dia</th>
+                            <th rowspan="2">Required GSM</th>
+                            <th rowspan="2">Actual GSM</th>
+                            <th rowspan="2">Roll Weight</th>
+                            <th rowspan="2">Body Part</th>
+                            <th colspan="2">Approval</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                OK
+                                <br />
+                                <span>
+                                    <input class="scale" type="checkbox" ng-click="OkCheck()" ng-model="OkAll" />
+                                </span>
+                            </th>
+                            <th>
+                                Not OK
+                                <br />
+                                <span>
+                                    <input class="scale" type="checkbox" ng-click="NotOkCheck()" ng-model="NotOkAll" />
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in RollData">
+                            <td style="display : none">{{$index+1}}</td>
+                            <td>{{obj.RollNo}}</td>
+                            <td>{{obj.RequiredDia}}</td>
+                            <td>{{obj.ActualDia}}</td>
+                            <td>{{obj.RequiredGsm}}</td>
+                            <td>{{obj.ActualGSM}}</td>
+                            <td>{{obj.RollWeight}}</td>
+                            <td>{{obj.BodyPart}}</td>
+                            <td>
+                                <!--<input type="checkbox" ng-model="{{obj.Status}}" value="OK"  ng-change="onItemChange($event.target.value)" checked/>-->
+                                <input class="scale" type="checkbox" ng-model="obj.Ok" ng-change="ChangeState('Ok',$index)" />
+                            </td>
+                            <td>
+                                <input class="scale" type="checkbox" ng-model="obj.NotOk" ng-change="ChangeState('NotOk',$index)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-5 ">
+                <div class="col-md-10 row">
+                    <span class="custom-font pl-3 col-md-3">Commercially Approved</span>
+                    <span class="col-md-1"><input class="scale" type="checkbox" ng-click="CheckState('CAOk')" ng-model="CA" /></span>
+                    <span class="col-md-5"><input class="form-control" type="text" placeholder="Reason" ng-show="CA" ng-model="CAReason" ng-required="CA" /></span>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <table>
+                    <thead>
+                        <tr>
+                            <td><b>Employee Id</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Id}}" readonly />
+                            </td>
+                            <td><b>Name</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Name}}" readonly />
+                            </td>
+                            <td><b>Designation</b></td>
+                            <td>
+                                <input type="text" class="form-control" name="" value="{{Emp.Designation}}" readonly />
+                            </td>
+                            <td><b>Approve Time</b></td>
+                            <td>
+                                <div>
+                                    <select ng-model="Batch.ApproveTime"
+                                            ng-change="getDataByBatchId()"
+                                            ng-options="a.id as a.name for a in ApproveTime"
+                                            class="form-control input-height clsHeight"
+                                            ng-required="true">
+                                        <option value="" selected>Select</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </form>
+
+        <!--<div class="btn_group d-flex justify-content-center mt-5">
+            <button type="button" class="btn btn-primary" >Save</button>
+            <button type="button" class="btn btn-success">Refresh</button>
+            <button type="button" class="btn btn-danger">Close</button>
+        </div>-->
+
+
+
+
+    </div>
+
+</body>
+</html>

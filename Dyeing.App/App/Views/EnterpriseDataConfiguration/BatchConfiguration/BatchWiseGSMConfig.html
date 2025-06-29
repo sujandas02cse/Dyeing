@@ -1,0 +1,245 @@
+﻿<style>
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    .dropdown-multiselect{
+        width: 100%;
+        height : 100%;
+    }
+    .dropdown-toggle{
+        width:100%
+    }
+    .btn{
+        font-size:small;
+    }
+
+    .btn-dropdown:hover, button:focus {
+        color: black !important;
+    }
+</style>
+<body ng-controller="BatchWiseGSMConfigController">
+    <div class="content-header sty-one">
+        <h1>Batch Wise GSM Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Wise GSM Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>
+
+            <div class="form-group row" style="height:50px;">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <!--<md-autocomplete name="BatchNo"
+                                     md-selected-item="selectedBatchNo"
+                                     md-no-cache="ctrl.noCache"
+                                     md-search-text="searchBatchNo"
+                                     md-selected-item-change="selectedBatchChange()"
+                                     md-items="item in querySearch(searchBatchNo,'batch')"
+                                     md-item-text="item.display"
+                                     md-floating-label=" "
+                                     md-min-length="0"
+                                     md-input-minlength="2"
+                                     md-input-maxlength="18"
+                                     ng-required="true">
+                        <md-item-template>
+                            <span md-highlight-text="searchBatchNo" md-highlight-flags="^i">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No states matching "{{searchBatchNo}}" were found.
+                        </md-not-found>
+                    </md-autocomplete>-->
+
+                            <input type="text" ng-model="Batch" typeahead-on-select="BatchChange()"
+                                   uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   placeholder="Batch No" class="form-control input-height plan" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Buyer :
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Model.BuyerName" readonly class="form-control input-height viewonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Job :
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Model.JobInfo" readonly class="form-control input-height viewonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Order :
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Model.OrderNo" readonly class="form-control input-height viewonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Color :
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Model.ItemColorName" readonly class="form-control input-height viewonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Batch Weight :
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="Model.BatchWeight" readonly class="form-control input-height viewonly" />
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="test-keyboard-container">
+            <numeric-keyboard comma-separator="false" confirm-label="'OK'"></numeric-keyboard>
+        </div>-->
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5 clsHeight">
+                            Compacting:
+                        </label>
+                        <div class="col-md-7">
+                            <select ng-model="Model.CompTime"
+                                    ng-change="changeCompTime()"
+                                    ng-options="a.id as a.name for a in CompactingTime"
+                                    class="form-control input-height clsHeight"
+                                    ng-required="true">
+                                <option value="" selected>Select</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5 clsHeight">
+                            Final Comments:
+                        </label>
+                        <div class="col-md-7">
+                            <div ng-dropdown-multiselect
+                                 extra-settings="dropdownSetting"
+                                 translation-texts="dropdownTextSetting"
+                                 class="dropdown-batch input-height"
+                                 events="{onItemSelect : RemarksSelect,
+                                 onItemDeselect : RemarksDeselect}"
+                                 options="PlanData" selected-model="Plan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+            <div class="row" style="overflow:auto;">
+                <div style="width:90%; margin-left:5%;">
+                    <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed">
+                        <thead class="bg">
+                            <tr style="text-align:center;">
+                                <!--<th style="width:10%;">Sl</th>-->
+                                <th style="width:10%;">Roll No</th>
+                                <!--<th style="width:20%;">Barcode No</th>-->
+                                <th style="width:10%;">Required GSM</th>
+                                <th style="width:10%;">Actual GSM</th>
+                                <th style="width:20%;">Variation</th>
+                                <th style="width:20%;">Remarks</th>
+                                <!--<th style="width:10%;">Step</th>-->
+                                <!--<th style="width:10%;">Edit</th>-->
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="obj in Details">
+                                <!--<td style="text-align:center"> {{$index + 1}}</td>-->
+                                <td style="text-align:center">
+                                    {{obj.RollNo}}
+                                </td>
+                                <!--<td style="text-align:center">
+                            {{obj.BarcodeNo}}
+                        </td>-->
+                                <td style="text-align:center">
+                                    <input type="text" name="GSMName{{$index}}" ng-model="obj.ReqGSM" ng-value="obj.ReqGSM" readonly class="form-control input-height viewonly" style="text-align:center;">
+                                    <!--<input type="hidden" name="BgcId{{$index}}" ng-model="obj.BgcId" ng-value="obj.BgcId" readonly class="form-control input-height viewonly" style="text-align:center;">
+                            <input type="hidden" name="FabBatchMId{{$index}}" ng-model="obj.BpmId" ng-value="obj.BpmId" readonly class="form-control input-height viewonly" style="text-align:center;">-->
+                                    <!--<input type="hidden" name="BarcodeId{{$index}}" ng-model="obj.BarcodeId" ng-value="obj.BarcodeId" readonly class="form-control input-height viewonly" style="text-align:center;">-->
+                                </td>
+                                <td>
+
+                                    <!--ng-disabled="IsDisabled"-->
+                                    <!--<input type="number" name="AGSM{{//$index}}" ng-model="obj.AGSM" ng-value="obj.AGSM" class="form-control input-height" style="text-align:center;" ng-change="valVariation($index,obj.AGSM)" required />-->
+                                    <!--ng-virtual-keyboard="{kt: 'Numerico', enterSubmit:enterBatchClick, relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}"-->
+                                    <input type="text" tabindex="{{$index}}" next-focus name="ActualGSM{{$index}}" ng-model="obj.ActualGSM" ng-change="valVariation($index, obj.ActualGSM)" placeholder="Actual GSM" class="form-control input-height"
+                                           ng-pattern="/^[0-9.]{1,7}$/" autocomplete="off" ng-required="true" />
+
+                                </td>
+                                <td>
+                                    <!--ng-if="obj.AGsmId==null?obj.Variation=null:obj.Variation"-->
+                                    <input type="text" name="Variation{{$index}}" ng-model="obj.Variation" ng-value="obj.Variation" readonly class="form-control input-height viewonly" style="text-align:center;" />
+                                </td>
+                                <td>
+                                    <input type="text" name="BodyPart{{$index}}" ng-model="obj.BodyPart" ng-value="obj.BodyPart" readonly class="form-control input-height viewonly" style="text-align:center;" />
+                                </td>
+                                <!--<td>
+                            <input type="text" name="CurStep{{$index}}" ng-model="obj.CurStep" ng-value="obj.StepNo" readonly class="form-control input-height viewonly" style="text-align:center;">
+                            <input type="hidden" name="MaxStep{{$index}}" ng-model="obj.MaxStep" ng-value="obj.StepNo" readonly class="form-control input-height viewonly" style="text-align:center;">
+                        </td>-->
+                                <!--<td align="center">
+
+                            <select name="StepNo{{$index}}"
+                                    ng-model="obj.StepID"
+                                    ng-change="getUpdate($index,obj.StepID,obj.StepNo)"
+                                    ng-options="{{obj.StepNoM}}"
+                                    ng-required="obj.IsRequired"
+                                    class="form-control input-height"></select>
+
+                        </td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+

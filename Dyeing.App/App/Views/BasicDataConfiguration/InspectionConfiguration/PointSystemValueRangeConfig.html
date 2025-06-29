@@ -1,0 +1,143 @@
+﻿<body ng-controller="PointSystemValueRangeConfigController">
+    <div class="content-header sty-one">
+        <h1>Point System Value Range Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Inspection Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Point System Value Range Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Point System Name:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <select ng-model="Model.PointSystemNo"
+                                    ng-options="a.PointSystemNo as a.PointSystemName for a in PSystemName"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select System</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            From Point:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="Model.FromPoint" string-to-number placeholder="From Point" class="form-control input-height" ng-change="fromRange()" required />
+                        </div>
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                    <!--<div class="row">-->
+                        <label class="control-label col-md-1" style="padding-left:0px;">
+                            To Point:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="Model.ToPoint" placeholder="To Point" string-to-number class="form-control input-height" ng-change="updateRange()" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Point Range:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="Model.PointRange" placeholder="" value="{{Model.FromPoint}}-{{Model.ToPoint}}" class="form-control input-height" readonly required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <div class="row">
+                        <label class="control-label col-md-2">
+                            Grade:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <select ng-model="Model.GradeNo" class="form-control input-height" ng-required="true">
+                                <option value="" selected>Select Grade</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="Reject">Reject</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.PointSystemNo" />
+                </div>
+            </div>
+        </form>
+
+
+        <!--------View/Edit Part------->
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div>
+            <table class="table table-bordered bordered table-striped table-condensed table-text table-scroll table-hover">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('PointSystemName')">
+                            Name Of Point System&nbsp;
+                        </th>
+                        <th>Point Range &nbsp;</th>
+                        <th>Grade &nbsp;</th>
+                        <th style="width:15%;">Action&nbsp;</th>
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in PointSysteInfoA.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) |orderBy:sortKey:reverse|filter:search as currlength">
+                        <td style="display:none">{{dataModel.PointSystemNo}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.PointSystemName}}</td>
+                        <td> {{dataModel.PointRange}}</td>
+                        <td> {{dataModel.GradeNo}}</td>
+                        <td style="width:15%;">
+                            <img name="edit" class="logo-image" ng-click="GetPointSystemValueInfoByID(dataModel)" src="/Content/img/editicon.png" />
+                            <img name="delete" style="margin-left: 7%;" ng-click="actionDialog('Delete',dataModel)" class="logo-image" src="/Content/img/deleteicon.png">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+        </uib-pagination>
+    </div>
+
+</body>
+

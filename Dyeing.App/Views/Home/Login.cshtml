@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="MascoDyeing">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Masco Dyeing-Login</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- v4.0.0-alpha.6 -->
+
+    <link rel="stylesheet" href="~/Content/template/dist/bootstrap/css/bootstrap.min.css">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.ico" />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/template/dist/css/style.css?ts=@DateTime.Now.ToFileTime()">
+    <link rel="stylesheet" href="~/Content/template/dist/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/Content/template/dist/css/themify-icons/themify-icons.css">
+    <!-- hmenu -->
+    <link rel="stylesheet" href="~/Content/template/dist/plugins/hmenu/ace-responsive-menu.css">
+
+    <!-- jQuery 3 -->
+    <script src="~/Content/template/dist/js/jquery.min.js"></script>
+    <!-- v4.0.0-alpha.6 -->
+    <script src="~/Content/template/dist/bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/Content/library/bootstrap-combined.min.css" rel="stylesheet" />
+
+    <!-- template -->
+    <script src="~/Content/template/dist/plugins/hmenu/ace-responsive-menu.js"></script>
+    <!--Plugin Initialization-->
+
+    <script src="~/Content/library/angular/angular.min.js"></script>
+    <script src="~/Content/library/angular/angular-route.js"></script>
+
+    <script src="~/Content/library/ui-bootstrap-tpls-0.6.0.js"></script>
+
+    <script src="~/App/Scripts/Controller/Common.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/App/Scripts/Factory/CommonFactory.js?ts=@DateTime.Now.ToFileTime()"></script>
+    <script src="~/App/Scripts/Controller/Login.js?ts=@DateTime.Now.ToFileTime()"></script>   
+    
+    <style>
+        .left {
+            display: none;
+        }
+        .right {
+            display: none;
+        }
+
+    </style>
+</head>
+<body class="form-group row" ng-controller="LoginController" style="margin: 0; clear:both;">
+    <div class="col-md-8" style="padding:0;">
+        
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active" class="slider">
+                <img class="slideImage" ng-src="{{slide.image}}" style="position: relative; top: 0px; height: 100%;" />
+            </slide>
+        </carousel>
+
+        @*<img class="banner" style="width:100%; height:100%; float:left;" src="~/Content/img/slider/2-2.jpg" />*@
+
+    </div>
+    <div class="login-box-body col-md-4">
+        <div class="login-logo">
+            <a href="/Home/Login">
+                <img class="logo" style="width:110px;height:120px;" src="~/Content/img/Masco.jpg" />
+            </a>
+        </div>
+        <p class="login-box-msg" style="font-size:22px; font-weight:bold;">Masco Dyeing</p>
+        <br />
+        <form method="post" ng-submit="submitForm()">
+            <div class="form-group has-feedback">
+                <input type="text" data-ng-model="Login.UserName" id="txtUsername" ng-change="ClearMsg()" class="form-control input-height" ng-required="true" placeholder="User" style="padding-left:5px;">
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" data-ng-model="Login.PassWord" id="txtPass" ng-change="ClearMsg()" class="form-control input-height" ng-required="true" placeholder="Password" style="padding-left:5px;">
+            </div>
+            <div>
+                <div class="form-group row">
+                    <div class="col-xs-8 offset-sm-1 checkbox icheck">
+                        <label>
+                            <input type="checkbox">
+                            Remember Me
+                        </label>
+                    </div>
+                    <div class="col-xs-6" style="padding-left:40px;">
+                        <a href="#" class="pull-right" id="btnForgotPass" ng-click="SendPassword(Login.UserName)" style="font-family: poppins;"><i class="fa fa-lock"></i> Forgot Password?</a>                        
+                    </div>
+
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4 m-t-1">
+                    <button type="submit" id="btnLogin" name="btnLogin" class="btn btn-primary btn-block btn-flat input-height" style="font-family: poppins;">Sign In</button>
+                    <label style=" width: 96%; color:brown; font-size:14px;"><span>{{ Msg }}</span></label>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <!-- /.social-auth-links -->
+
+        <div class="m-t-2">Don't have an account? <a href="#" class="text-center" style="font-family: poppins;">Sign Up</a></div>
+
+    </div>
+    <!-- /.login-box -->
+   
+</body>
+
+</html>

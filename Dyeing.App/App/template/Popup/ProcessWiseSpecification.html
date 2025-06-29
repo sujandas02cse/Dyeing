@@ -1,0 +1,37 @@
+﻿<md-dialog aria-label="SpecificationDialog" style="width:70%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{Process.Name}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="form-group row">
+                    <div ng-repeat="obj in DFSpecList" class="form-group col-md-6">
+                        <div class="row DFSpecList">
+                            <label class="control-label col-md-4">
+                                {{obj.SpecificationName}}
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="Spec[obj.DModel]"  placeholder="{{obj.SpecificationName}}" class="form-control input-height">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row" style="float:right !important;margin-bottom:20px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+                
+
+    </form>
+</md-dialog>

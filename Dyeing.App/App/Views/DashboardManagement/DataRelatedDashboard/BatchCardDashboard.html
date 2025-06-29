@@ -1,0 +1,404 @@
+﻿<style>
+    .table-scroll tbody {
+        max-height: 3000px !important;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width: 230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .table-scroll tbody {
+        max-height: 1000px !important;
+    }
+
+    .button {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    .custom_tbl {
+        table-layout: fixed;
+    }
+
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+        }
+
+    .dropdown-menu {
+        z-index: 5;
+    }
+
+    .custom_tbl td {
+        font-size: 12px;
+    }
+
+    .custom_tbl tbody tr:nth-child(2n+1) {
+        background: #cae3e7;
+    }
+
+    .custom_tbl td.input {
+        color: #333 !important;
+        padding: 0 5px !important;
+        position: relative;
+    }
+
+        .custom_tbl td.input input {
+            display: block;
+            /* border: 1px solid; */
+            background: #fff;
+            color: #333 !important;
+            padding: 5px;
+            border: none;
+            width: 100%;
+            height: 35px;
+            border-radius: 3px;
+        }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+            /*background: #fff !important;*/
+            color: #333 !important;
+        }
+
+    .custom_tbl tr:hover td {
+        background: #364865 !important;
+        cursor: default;
+        color: white;
+    }
+
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-input {
+        transform: scale(1.2);
+    }
+</style>
+<div>
+
+
+    <div class="content-header sty-one">
+        <h1>Batch Card Dashboard</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Dashboard Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Data Related Dashboard</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Card Dashboard</li>
+        </ol>
+    </div>
+
+    <div></div>
+
+    <div class="card card-body" style="padding:0; ">
+
+
+        <div style="border: 0.25px solid #ffffff; padding: 10px; margin-bottom: 10px;">
+            <div class="form-group-row">
+                <div class="col-md-12">
+                    <div style="margin-left:40%;" class="d-flex gap-5">
+
+
+
+
+                        <input type="radio" class="form-check-input" name="radioBulk" ng-model="batchType" ng-value="'Bulk'" ng-init="batchType='Bulk'" ng-click="checkBulk()">&nbsp; Bulk
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" name="radioSample" ng-model="batchType" ng-value="'Sample'" ng-click="checkSample()"> &nbsp; Sample
+                        <input type="radio" style="margin-left:15px;" class="form-check-input" name="radioNewBulk" ng-model="batchType" ng-value="'NewBulk'" ng-click="checkNewBulk()"> &nbsp; New Bulk
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 d-flex">
+            <div style="margin-left:40%;" class="d-flex gap-8">
+
+
+                <!--<input type="radio" class="form-check-input" ng-change="ChangeMode()" style="transform: scale(1.2)" ng-model="RMode" ng-init="RMode='BI'" ng-value="'BI'" name="rdoBatchPrepare">&nbsp;<span style="width:100px; font-size:15px;">Before Issue</span>
+                <input type="radio" ng-change="ChangeMode()" style="margin-left:30px; transform: scale(1.2)" class="form-check-input" ng-model="RMode" ng-value="'AI'" name="rdoBatchPrepare"> &nbsp; <span style="width: 100px; font-size: 15px;">After Issue</span>
+                <input type="radio" ng-change="ChangeMode()" style="margin-left:30px; transform: scale(1.2)" class="form-check-input" ng-model="RMode" ng-value="'PB'" name="rdoBatchPrepare"> &nbsp; <span style="width: 100px; font-size: 15px;">Previous</span>-->
+                <!--<input type="radio" class="form-check-input" ng-change="ChangeMode()" style="scale:1.2"
+                       ng-model="RMode" ng-value="'BI'" name="rdoBatchPrepare" ng-show="showBeforeAfter">
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showBeforeAfter">Before Issue</span>
+
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()" style="margin-left:30px; scale:1.2"
+                       ng-model="RMode" ng-value="'AI'" name="rdoBatchPrepare" ng-show="showBeforeAfter">
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showBeforeAfter">After Issue</span>
+
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()" style="margin-left:30px; scale:1.2"
+                       ng-model="RMode" ng-value="'PB'" name="rdoBatchPrepare" ng-show="showPrevious">
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showPrevious">Previous</span>-->
+
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()"
+                       style="transform: scale(1.2);"
+                       ng-model="RMode" ng-value="'BI'"
+                       name="rdoBatchPrepare" ng-show="showBeforeAfter">
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showBeforeAfter">Before Issue</span>
+
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()"
+                       style="margin-left:30px; transform: scale(1.2);"
+                       ng-model="RMode" ng-value="'AI'"
+                       name="rdoBatchPrepare" ng-show="showBeforeAfter">
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showBeforeAfter">After Issue</span>
+
+                <input type="radio" class="form-check-input" ng-change="ChangeMode()"
+                       style="margin-left:30px; transform: scale(1.2);"
+                       ng-model="RMode" ng-value="'PB'"
+                       name="rdoBatchPrepare" ng-show="showPrevious" checked>
+                &nbsp; <span style="width:100px; font-size:15px;" ng-show="showPrevious">Previous</span>
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Unit:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        From Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="FromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        To Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="ToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" style="width:110px;" class="button btn-lg" ng-value="Processing==true?'Processing':'Show'" ng-class="disabledShow==true?'btn-disabled':'btn-primary'" ng-disabled="disabledShow" ng-click="LoadingData()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+
+        <div style="width: 100%; overflow: auto; max-height: 600px;">
+            <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%;">Sl</th>
+                        <th ng-click="sort('BatchNo')" style="width:12%;">Batch No&nbsp;</th>
+                        <th ng-click="sort('BatchDate')">Batch Date&nbsp;</th>
+                        <th ng-click="sort('McNo')">M/C No&nbsp;</th>
+                        <th ng-click="sort('Buyer')">Buyer&nbsp;</th>
+                        <th ng-click="sort('Job')">Job&nbsp;</th>
+                        <th ng-click="sort('Style')">Style &nbsp;</th>
+                        <th ng-click="sort('Color')">Color &nbsp;</th>
+                        <th ng-click="sort('LDNo')">LDNo &nbsp;</th>
+                        <th ng-click="sort('FabType')">Fab Type &nbsp;</th>
+                        <th ng-click="sort('FabQty')">FabQty &nbsp;</th>
+
+                        <th>IsSample &nbsp;</th>
+
+                        <th style="width:10%;">Action&nbsp;</th>
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in (BatchCardData | filter : search |orderBy:sortKey:reverse)">
+                        <td style="display:none">{{dataModel.BpmId}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td style="width:12%;"> {{dataModel.BatchNo}}</td>
+                        <td> {{dataModel.BatchDate}}</td>
+                        <td> {{dataModel.McNo}}</td>
+                        <td> {{dataModel.Buyer}}</td>
+                        <td> {{dataModel.Job}}</td>
+                        <td> {{dataModel.Style}}</td>
+                        <td> {{dataModel.Color}}</td>
+                        <td> {{dataModel.LDNo}}</td>
+                        <td> {{dataModel.FabType}}</td>
+                        <td> {{dataModel.FabQty}}</td>
+                        <td> {{dataModel.IsSample}}</td>
+
+                        <td style="width:10%;">
+                            <button ng-click="GetDashboardData(dataModel.BpmId, 'B')" class="btn btn-success">Batch Card</button>
+
+                            <button style="margin-top:10px;" ng-click="GetDashboardData(dataModel.BpmId, 'S')" class="btn btn-success">Swatch Card</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,140 @@
+﻿
+<style>
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2 !important;
+    }
+
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsKpa {
+        padding-left: 0px;
+        text-align: center;
+    }
+    .box-toolbar {
+        background: none !important;
+        box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+        color: #333 !important;
+        border-bottom: 1px solid #d0d0d0;
+    }
+    md-checkbox>div>div.md-icon{
+        margin-top:10px;
+    }
+</style>
+<body ng-controller="BuyerWisePointSystemValueConfigController">
+
+    <div class="content-header sty-one">
+        <h1>Buyer Wise Point System Value Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Inspection Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Buyer Wise Point System Value Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Model={}">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Buyer Name:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="BuyerName"
+                                             md-selected-item="selectedBuyer"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="noCache"
+                                             md-items="item in querySearch(noCache,'buyer')"
+                                             md-selected-item-change="selectedItemChange(item,'buyer')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             ng-required="true">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Point System Name:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="PointSystemName"
+                                             md-selected-item="selectedPoint"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-items="item in querySearch(searchName,'psname')"
+                                             md-selected-item-change="selectedItemChange(item,'psname')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             ng-required="true">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" style="border:1px solid #d0d0d0;" ng-cloak>
+                <md-toolbar class="box-toolbar">
+                    <div class="md-toolbar-tools col-md-12">
+                        <div class="md-flex col-md-9" style="text-align:center;">Fabric Name</div>
+                        <div class="md-flex col-md-3" style="text-align:center;">
+                            
+                            <div flex-xs flex="50">
+                                <md-checkbox aria-label="Check All"
+                                             ng-checked="isChecked()"
+                                             md-indeterminate="isIndeterminate()"
+                                             ng-click="toggleAll()">
+                                    <span ng-if="isChecked()">Un-</span>Check All
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </md-toolbar>
+
+                <md-content flex layout-padding class="col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 demo-select-all-checkboxes" flex="100" ng-repeat="item in items">
+                            <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                {{ item.name }}
+                            </md-checkbox>
+                        </div>                        
+                    </div>                    
+                </md-content>
+            </div>
+            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <!--<input type="hidden" ng-model="Head.FfrmId" />-->
+                </div>
+            </div>
+      
+        </form>
+    </div>
+</body>

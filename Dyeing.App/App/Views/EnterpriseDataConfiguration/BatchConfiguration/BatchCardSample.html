@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            border-spacing: 15px;
+        }
+        table th:first-child{
+            width:110px;
+           
+        }
+        .table-bordered {
+            border: none !important;
+        }
+        .table1 .table-bordered th:first-child {
+            border: 1px solid #333 !important;
+        }
+        .table-bordered th:first-child {
+            border: 0px transparent !important;
+        }
+        .table-bordered th, .table-bordered td {
+            border: 0px transparent !important;
+        }
+        table, th, td {
+        }
+       .table th, .table td {
+            border: 1px solid #333 !important;
+            vertical-align: middle;
+        
+        }
+        .table td {
+            text-align: justify;
+        }
+        .table1 .table td{
+            text-align:center;
+        }
+        table td span{
+       /*     padding-left:30px;
+            text-align:right;*/
+        }
+        .custom-table-header {
+            position: sticky;
+            z-index: 1;
+        }
+        .table1 .table td {
+            text-align: center; 
+            vertical-align: middle; 
+        }
+        input[type="text"] {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body ng-controller="BatchCardSampleController">
+    <div class="content-header sty-one">
+        <h1>Swatch Record Card</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Batch Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Data Processing</li>
+        </ol>
+    </div>
+    <div>
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="master={}">
+            <div class="card card-body" style="min-height:500px;">
+              
+                <div class="table1">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Buyer</th>
+                            <td>{{batch[0].Buyer}}</td>
+                            <th>Color</th>
+                            <!--<td>{{batch[0].Color}}</td>-->
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].Color" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <th>Pantone No</th>
+                            <!--<td>{{batch[0].TCX}}</td>-->
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].TCX" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                        </tr>
+                        <tr>
+                            <th>Tracking No</th>
+                            <td>{{batch[0].Job}}</td>
+                            <th>Test Req</th>
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].TestRequirement" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                            <th>The Fabrics Will</th>
+                            <!--<td>{{batch[0].ColourTypes}}</td>-->
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].ColourTypes" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                        </tr>
+                        <tr>
+                            <th>Job No</th>
+                            <!--<td>{{batch[0].SampleStage}}</td>-->
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].SampleStage" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <th>{{batch[0].FabricFor}} Fabrics</th>
+                            <!--<td>{{batch[0].FabType}}</td>-->
+                            <td><input type="text" style="text-align:center" ng-model="batch[0].FabType" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <th>{{batch[0].FabricFor}} Qty</th>
+                            <td>{{batch[0].FabQty}}</td>
+                        </tr>
+                        <tr>
+                            <th>Style No</th>
+
+                            <!--<td>{{batch[0].Style}}</td>-->
+                            <!--<td>
+        <input type="text" ng-model="batch[0].Style" typeahead-min-length="1" uib-typeahead="item as item.StyleNo for item in StyleList | filter: {StyleNo:$viewValue}  | limitTo:8"
+               typeahead-editable="false" class="form-control input-height clsHeight" required />
+    </td>-->
+
+                            <td>
+                                <input type="text"
+                                       ng-model="batch[0].SelectedStyle"
+                                       typeahead-min-length="1"
+                                       uib-typeahead="item as item.Style for item in StyleList | filter: {Style:$viewValue}  | limitTo:8"
+                                       typeahead-editable="false"
+                                       class="form-control input-height clsHeight"
+                                       required />
+                            </td>
+
+                            <th>{{batch[1].FabricFor}} Fabrics</th>
+                            <!--<td>{{batch[1].FabType}}</td>-->
+                            <td><input type="text" style="text-align:center" ng-model="batch[1].FabType" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <th>{{batch[1].FabricFor}} Qty</th>
+                            <td>{{batch[1].FabQty}}</td>
+                        </tr>
+                        <tr>
+                            <th>Batch No</th>
+                            <!--<td>{{batch[0].BatchNo}}</td>-->
+                            <td ng-hide="ReviseNo>0?true:false" contentEditable ng-model="batch[0].BatchNo"></td>
+                            <td ng-show="ReviseNo>0?true:false" ng-model="batch[0].BatchNo">{{batch[0].BatchNo}}</td>
+                            <th>{{batch[2].FabricFor}} Fabrics</th>
+                            <!--<td>{{batch[2].FabType}}</td>-->
+                            <td><input type="text" style="text-align:center" ng-model="batch[2].FabType" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <th>{{batch[2].FabricFor}} Qty</th>
+                            <td>{{batch[2].FabQty}}</td>
+                        </tr>
+                        <tr>
+                            <th>M/C No</th>
+
+                            <td>
+                                <input type="text" ng-model="batch[0].McNo" typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                       typeahead-editable="false" class="form-control input-height clsHeight" required />
+                            </td>
+
+                            <th>Total Roll</th>
+                            <td></td>
+                            <th>Total Qty</th>
+                            <td><strong>{{ getTotalActualQty() | number:2 }}</strong></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">Types of fabrics for Dyeing: <span>Grey / Bleach/ Scouring</span></th>
+                            <th>Treatment</th>
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].Treatment" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                        </tr>
+                        <tr>
+                            <td>Batch Date</td>
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].BatchPreparationDate" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight" ng-required="true"></td>
+
+
+
+                            <td>Delivery Date</td>
+                            <!--<td contentEditable ng-model="batch[0].DeliveryDate"></td>-->
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].DeliveryDate" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <td>Others Date</td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="table2">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th rowspan="4">Yarn & Knitting Details</th>
+                            <td>Yarn Count & Spendex</td>
+                            <td style="font-size: smaller;">
+                                <input type="text" style="text-align:center" ng-model="batch[0].YCountAndSpendex" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight" ng-required="true">
+                            </td>
+                            <th colspan="2">Fabric from- Knitting/ Buffar / Grey Store</th>
+                        </tr>
+                        <tr>
+                            <td>Stitch Length </td>
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].StitchLength" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                            <td>Yarn Brand </td>
+
+                            <!--<td>{{batch[0].YarnSource}}</td>-->
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].YarnSource" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                        </tr>
+                        <tr>
+                            <td>M/C Dia X Gauge</td>
+                            <!--<td>{{batch[0].MCDiaGaug}}</td>-->
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].MCDiaGaug" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                            <td>Yarn Lot</td>
+                            <!--<td>{{batch[0].YarnLot}}</td>-->
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].YarnLot" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            
+
+                        </tr>
+                        <tr>
+                            <td>Grey Dia: <span></span> Grey GSM <span></span></td>
+                            <td>Batch Prepared By: </td>
+                            <td colspan="2">Check By: </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table3">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th rowspan="4">Dyeing Details</th>
+
+
+                            <!--<td>LD No: <span>{{batch[0].LDNo}}</span></td>-->
+
+                            <td>LD No</td>
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].LDNo" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+
+                            <td>Lab Remarks</td>
+                            <td colspan="3"> <input type="text" style="text-align:center" ng-model="batch[0].LabRemarks" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                        </tr>
+                        <tr>
+                            <td>Enzyme</td>
+                         
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].Enzyme" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                            <td>Pre-Treatment</td>
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].PreTreatment" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+                            <td>Unload By:</td>
+                        </tr>
+                        <tr>
+                            <td>Loading Time</td>
+
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].LoadingTime" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+
+
+                            <td>Unload Time</td>
+                           
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].UnloadingTime" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"><b>Note:</b></td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <div class="table3">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th></th>
+                                <td colspan="3"> 
+                                    <span>
+                                        <input type="checkbox" class="ml-4" ng-click="PPorC('IsPPSample')" ng-model="batch[0].IsPPSample" />&nbsp;&nbsp; <strong>PP Sample</strong>
+                                        <input type="checkbox" class="ml-4" ng-click="PPorC('IsCSample')" ng-model="batch[0].IsCSample" />&nbsp;&nbsp; <strong>China</strong>
+
+                                        <input type="checkbox" class="ml-4" ng-click="PPorC('IsDVSample')" ng-model="batch[0].IsDVSample" />&nbsp;&nbsp; <strong>DV Sample</strong>
+                                        <input type="checkbox" class="ml-4" ng-click="PPorC('IsSMSSample')" ng-model="batch[0].IsSMSSample" />&nbsp;&nbsp; <strong>SMS Sample</strong>
+                                        <input type="checkbox" class="ml-4" ng-click="PPorC('IsTestSample')" ng-model="batch[0].IsTestSample" />&nbsp;&nbsp; <strong>Test Sample</strong>
+
+
+
+                                    </span>
+                                    <span style="float:right !important;" ng-show="batch.ReviseNo>0?true:false"><input type="checkbox" ng-model="batch[0].EditOnly" />&nbsp;&nbsp; <strong>Edit Only</strong></span>
+
+                                </td>
+                            </tr>
+                        </table>
+                     </div>
+                    </div>
+
+                    <div class="table4">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th rowspan="11">Finishing Details:</th>
+                                <th class="text-center">Parameter</th>
+                                <th class="text-center">Stenter</th>
+                                <th class="text-center">Dryer</th>
+                                <th class="text-center">Compact Parameter</th>
+                            </tr>
+                            <tr>
+                                <td>Temperature:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>Temperature:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Padder Pressure:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>Set Dia:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Set Dia:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>Pinning:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Pinning:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>M/C Speed:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>Over Feed:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Over Feed:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>Width:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Under Feed:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>GSM:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>Width:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>RE-Com Width:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td>GSM:- <span></span></td>
+                                <td></td>
+                                <td></td>
+                                <td>RE-Com GSM:- <span></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><b>Note:</b> <span></span></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div class="table5">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th rowspan="{{batchSpec.length+1}}"><strong>Batch Specification</strong></th>
+                                <td><strong>Body Part</strong></td>
+                                <td><strong>Plan (In Kg)</strong></td>
+                                <td><strong>Actual (In Kg)</strong></td>
+                                <td><strong>F/Dia</strong></td>
+                                <td><strong>F/GSM</strong></td>
+                                <td><strong>M/C Dia X Gauge</strong></td>
+                            </tr>
+                            <tr ng-repeat="spec in batchSpec">
+                                <td>{{spec.BodyPart}}</td>
+                                <td> <input type="text" ng-model="spec.PlanQty"   typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight" ng-required="true"></td>
+                                <td> <input type="text" ng-model="spec.ActualQty" typeahead-min-length="1" typeahead-editable="false" ng-change="batch[$index].FabQty=spec.ActualQty" class="form-control input-height clsHeight" ng-required="true"></td>
+                                <td> <input type="text" ng-model="spec.FDia"      typeahead-min-length="1" typeahead-editable="false" ng-change="batch[$index].RequiredDia=spec.FDia" class="form-control input-height clsHeight" ng-required="true"></td>
+                                <td> <input type="text" ng-model="spec.FGSM"      typeahead-min-length="1" typeahead-editable="false" ng-change="batch[$index].RequiredGsm=spec.FGSM" class="form-control input-height clsHeight" ng-required="true"></td>
+                                <td> <input type="text" ng-model="spec.McDia"     typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight" ng-required="true"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                                <td style="text-align:center"><strong>{{ getTotalPlanQty() | number:2 }}</strong></td>
+                                <td style="text-align:center"><strong>{{ getTotalActualQty() | number:2 }}</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="table5">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th rowspan="4">Quality Details</th>
+
+                                <td><b>Required Width</b></td>
+                                <!--<td><b>{{batch[0].RequiredDia}}</b></td>-->
+                                <td> <input type="text" style="text-align:center" ng-model="batch[0].RequiredDia" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                                <!--<td><b>Required GSM:{{batch[0].RequiredGsm}}</b></td>-->
+                                <td><b>Required GSM</b></td>
+                                <td> <input type="text" style="text-align:center" ng-model="batch[0].RequiredGsm" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                                <td>Shade: <span></span></td>
+                            </tr>
+                            <tr>
+                                <td><b>Finished Width</b></td>
+                                <td> <b></b></td>
+                                <td> <b>Finished GSM</b></td>
+                                <td colspan="2">Process Types:- <span>Regular/Others</span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Fabric Quality: </td>
+                                <td colspan="2">
+                                    <p style="font-size: 10px;">Before Suided/Brush/Aop Check by- <span></span></p>
+                                    <p>Before Delivery Check by- <span></span></p>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div class="table5">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Test Report</th>
+                                <td colspan="2">Length:</td>
+                                <!--<td></td>-->
+                                <td colspan="2">Width:</td>
+                                <!--<td></td>-->
+                                <td colspan="2">Spirality:</td>
+                                <!--<td></td>-->
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="table6">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Special Note</th>
+                                <!--<td class="text-center">
+                                    {{batch[0].Remarks}}
+                                </td>-->
+                                <td> <input type="text" style="text-align:center" ng-model="batch[0].Remarks" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                    <div class="offset-md-2 col-md-9">
+                        <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    </div>
+            </div>
+</form>
+    </div>
+   
+</body>
+</html>

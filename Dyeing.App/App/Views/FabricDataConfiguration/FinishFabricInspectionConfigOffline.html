@@ -1,0 +1,368 @@
+﻿<style>
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+
+    .dropdown-multiselect {
+        width: 100%;
+        height: 100%;
+    }
+
+    .dropdown-toggle {
+        width: 100%
+    }
+
+    .btn {
+        font-size: small;
+    }
+
+    .btn-dropdown:hover, button:focus {
+        color: black !important;
+    }
+
+
+    .sticky-header th {
+        position: sticky;
+        top: 0;
+        background-color: powderblue;
+        z-index: 10;
+        border-bottom: 2px solid #dee2e6;
+        color: black;
+    }
+
+    .uniform-input {
+        width: 250px; /* Adjust width as needed */
+        /* box-sizing: border-box;*/
+        border: none;
+    }
+    /* Remove hover background */
+    table tr:hover {
+        background-color: transparent !important;
+    }
+
+    /* Remove selected row background if any selection logic is used */
+    table tr.selected,
+    table tr.active,
+    table tr:focus {
+        background-color: transparent !important;
+    }
+
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: powderblue !important;
+        cursor: default;
+        color: white;
+    }
+
+    .error-cell {
+        border: 2px solid red !important;
+        border-color: red;
+    }
+
+    input[type="radio"].form-check-input {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+</style>
+<body ng-controller="FinishFabricInspectionConfigOfflineController">
+    <div class="content-header sty-one">
+        <h1>Finished Fabric Inspection Config Offline (Additional Sticker)</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Plan Management</a></li>
+            <li><i class="fa fa-angle-right"></i> SCMSynchronization</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:800px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>
+
+            <div class="form-group row" style="height:50px;">
+
+
+
+                <div class="col-md-12">
+
+
+                    <div class="row mb-3">
+                        <label class="control-label col-md-2">
+                            Default Compacting Time:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="DCT" class="form-control input-height clsHeight" />
+                        </div>
+
+
+                        <div class="col-md-6 d-flex justify-content-center">
+                            <div class="radio-group d-flex">
+                                <div class="custom-radio d-flex align-items-center me-3">
+                                    <input type="radio" id="newOption" class="m-0 form-check-input" name="modeType"
+                                           ng-model="OperationMode" ng-value="'New'" ng-init="OperationMode='New'" ng-click="onModeChange('New')">
+                                    <label for="newOption" class="form-check-label radio-label ms-1">New</label>
+                                </div>
+                                <div class="custom-radio d-flex align-items-center">
+                                    <input type="radio" id="modifyOption" class="m-0 form-check-input" name="modeType"
+                                           ng-model="OperationMode" ng-value="'Modify'" ng-click="onModeChange('Modify')">
+                                    <label for="modifyOption" class="form-check-label radio-label ms-1">Modify</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mb-3">
+
+                        <label class="control-label col-md-2">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <!--<input type="text" ng-model="Batch"
+                            uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                            placeholder="Batch No" class="form-control input-height plan" />-->
+
+
+                            <input type='text'
+                                   uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   placeholder="Batch No"
+                                   id="BatchNo" style="width: 100%; display: inline;" auto-focus ng-model="BatchNo"
+                                   ng-virtual-keyboard="{kt: 'Numpad', enterSubmit: enterBatchClick, size:5, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+                                   class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()">
+
+                        </div>
+
+
+                        <label class="control-label col-md-2">
+                            Buyer:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Buyer" placeholder="Buyer" class="form-control input-height clsHeight" />
+                        </div>
+
+                        <label class="control-label col-md-2">
+                            Job:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Job" placeholder="Job" class="form-control input-height clsHeight" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="control-label col-md-2">
+                            Style
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Style" placeholder="Style" class="form-control input-height clsHeight" />
+                        </div>
+
+
+                        <label class="control-label col-md-2">
+                            Order:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Order" placeholder="Order" class="form-control input-height clsHeight" />
+                        </div>
+
+                        <label class="control-label col-md-2">
+                            Color:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Color" placeholder="Color" class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <label class="control-label col-md-2">
+                            Body Part
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-1">
+
+                            <!--<input type="text" disabled ng-model="BodyPart" placeholder="BodyPart" class="form-control input-height clsHeight" />-->
+                            <select ng-model="SelectedBodyPart"
+                                    ng-options="a.id as a.name for a in BodyPartList"
+                                    class="form-control input-height clsHeight"
+                                    ng-required="true"
+                                    ng-change="LoadFabricTypeComposition()">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <select id="ddlNumberOfRoll"
+                                    ng-model="SelectedNumberOfRoll"
+                                    ng-options="num for num in NumberOfRollList"
+                                    class="form-control input-height clsHeight"
+                                    ng-required="true"
+                                    ng-disabled="OperationMode==='Modify'"
+                                    ng-change="LoadDiaGSM()">
+                                <option value="">Number Of Roll</option>
+                            </select>
+                        </div>
+
+
+                        <label class="control-label col-md-2">
+                            Fabric Type:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model=" FabricType" placeholder="FabricType" class="form-control input-height clsHeight" />
+                        </div>
+
+                        <label class="control-label col-md-2">
+                            Composition:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+
+                        <div class="col-md-2">
+                            <input type="text" disabled ng-model="Composition" placeholder="Composition" class="form-control input-height clsHeight" />
+                        </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                        <div class="col-md-2"></div> <!-- empty space on left -->
+                        <div class="col-md-2"></div> <!-- empty space on left -->
+                        <div class="col-md-2"></div> <!-- empty space on left -->
+                        <div class="col-md-2"></div> <!-- empty space on left -->
+                        <div class="col-md-2"></div> <!-- empty space on left -->
+                        <!--<div class="col-md-2 text-right">
+                            <label class="checkbox-inline" style="font-weight:bolder;">
+                                <input type="checkbox" ng-model="IsLabStickerChecked" />
+                                Print Lab Sticker
+                            </label>
+                        </div>-->
+
+
+                    </div>
+
+
+                    <div class="row mb-3" ng-show="ShowDiaGsmTable">
+
+                        <div class="row mb-2" ng-show="ShowDiaGsmTable">
+                            <div class="col-md-12 text-right">
+                                <strong>Total Rows: {{TotalRolls}}</strong>
+                            </div>
+                        </div>
+
+                        <!--<div style="width: 100%; overflow: auto; max-height: 300px;">-->
+                        <div class="table-responsive fixed-table" style="width: 100%; max-height: 300px; overflow-y: auto;">
+                            <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                                <thead class="bg sticky-header">
+                                    <tr>
+                                        <th ng-if="OperationMode !=='Modify'">Action</th> <!-- New -->
+                                        <th>Number Of Roll</th>
+                                        <th>Body Part</th>
+                                        <th>Rerquired GSM</th>
+                                        <th>Actual GSM</th>
+                                        <th>Required Dia</th>
+                                        <th>Actual Dia</th>
+                                        <th>Dia Part</th>
+                                        <th>Roll Weight</th>
+                                        <th>Print Lab Sticker</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(index, dataModel) in (DiaGsmDetails || [] | filter : search)">
+                                        <td ng-if="OperationMode !=='Modify'">
+                                            <button type="button" class="btn btn-sm btn-success" ng-click="addRow(index)">+</button>
+                                            <button type="button" class="btn btn-sm btn-danger" ng-click="removeRow(index)">–</button>
+                                        </td>
+                                        <td> {{dataModel.NumberOfRoll}}</td>
+                                        <td> {{dataModel.BodyPart}}</td>
+
+                                        <td> {{dataModel.FGSM}}</td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-model="dataModel.ActualGsm"
+                                                   class="uniform-input"
+                                                   ng-class="{'error-cell': dataModel.hasError && dataModel.hasError.ActualGsm}"
+                                                   placeholder="Enter Actual GSM" />
+                                        </td>
+                                        <td>
+
+                                            <input type="text" ng-model="dataModel.FDia" class="uniform-input" />
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-model="dataModel.ActualDia"
+                                                   class="uniform-input"
+                                                   ng-class="{'error-cell': dataModel.hasError && dataModel.hasError.ActualDia}"
+                                                   placeholder="Enter Actual Dia" />
+                                        </td>
+                                        <td>
+
+                                            <select ng-model="dataModel.FabricDiaPartId"
+                                                    ng-options="option.FabricDiaPartId as option.FabricDiaPartDescription for option in DiaPartList"
+                                                    class="uniform-input"
+                                                    ng-change="handleDiaPartChange(index,dataModel.FabricDiaPartId)"
+                                                    ng-class="{'error-cell': dataModel.hasError && dataModel.hasError.FabricDiaPartId}">
+                                                <option value="">Select Dia Part</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-model="dataModel.RollWeight"
+                                                   class="uniform-input"
+                                                   ng-class="{'error-cell': dataModel.hasError && dataModel.hasError.RollWeight}"
+                                                   placeholder="Enter Roll Weight" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox"
+                                                   ng-model="dataModel.PrintLabSticker"
+                                                   ng-true-value="true"
+                                                   ng-false-value="false" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mb-3">
+                        <div class="offset-md-2 col-md-12">
+                            <div ng-include src="'../../App/Views/Shared/_LayoutActionButtonManualQC.html'"></div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</body>
+

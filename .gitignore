@@ -1,0 +1,40 @@
+# --- .NET specific ---
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]ogs/
+
+## VS Code / Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Dotnet CLI
+.project/
+*.dbmdl
+*.bak
+*.backup
+
+# --- Angular specific ---
+# Node.js dependencies
+node_modules/
+
+# Angular build output
+dist/
+out-tsc/
+
+# Environment files
+src/environments/environment*.ts
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# --- Package folders ---
+packages/

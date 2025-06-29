@@ -1,0 +1,201 @@
+﻿<!--<md-dialog aria-label="OthersFabricOpDialog" style="width:70%;height:420px;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Others Fabric Operation</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>           
+            <div class="md-dialog-content form-group">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="input" class="col-sm-4  control-label">
+                            <strong>Fabric Type: </strong>
+                        </label>
+                        <div class="input-icon right col-sm-8">
+                            <select class="form-control" id="cmbFabType"></select>
+                        </div>
+                    </div>
+                </div>
+               <div class="row">
+                    <div class="form-group">
+                        <label for="input" class="col-sm-4  control-label">
+                            <strong>GSM: </strong>
+                        </label>
+                        <div class="input-icon right col-sm-8">
+                            <select class="form-control" id="cmbGSM"></select>
+                        </div>
+                    </div>
+                </div>
+                <br /> 
+                <div class="row">
+                    <div class="form-group">
+                        <label for="input" class="col-sm-4  control-label">
+                            <strong>Yarn Head: </strong>
+                        </label>
+                        <div class="input-icon right col-sm-8">
+                            <select class="form-control" id="cmbYrnHead"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="input" class="col-xs-4  control-label">
+                            <strong>Composition: </strong>
+                        </label>
+                        <div class="input-icon right col-xs-8">
+                            <input class="form-control" type="text" id="txtComposition" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="visibility:hidden">
+                    <div class="form-group">
+                        <label for="input" class="col-xs-4  control-label">
+                            <strong>Count: </strong>
+                        </label>
+                        <div class="input-icon right col-xs-8">
+                            <input class="form-control" type="text" id="txtComCount" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="input-icon right col-xs-8"></div>
+                        <input type="button" class="col-xs-2 btn btn-success" id="btnAddFab" value="Add" />
+                    </div>
+                </div>
+                <br /> <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="input" class="col-xs-2  control-label">
+                                <strong>New Fabric:</strong>
+                            </label>
+                            <div class="input-icon right col-xs-10">
+                                <input class="form-control" type="text" id="txtNewFabName" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /> <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-success" id="btnGenerateFab" style="width:150px;float:right;" value="Generate Fabric" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="float:right;margin-top:10px;margin-bottom:10px;">
+                <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+            </div>
+            
+        </md-dialog-content>
+    </form>
+</md-dialog>-->
+
+<md-dialog aria-label="OthersFabricOpDialog" style="width:50%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>New Fabric Generation</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label for="input" class="col-sm-4  control-label">
+                                <strong>Fabric Type: </strong>
+                            </label>
+                            <div class="input-icon right col-sm-8">
+                                <input type="text" typeahead-Open-On-Focus ng-model="newFab.FabType" placeholder="Fabric Type" class="form-control input-height"
+                                       typeahead-min-length="0" uib-typeahead="item as item.name for item in FabTypeList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" ng-required="true">                               
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label for="input" class="col-sm-4  control-label">
+                                <strong>GSM: </strong>
+                            </label>
+                            <div class="input-icon right col-sm-8">
+                                <input type="text" typeahead-Open-On-Focus ng-model="newFab.GSM" placeholder="GSM" class="form-control input-height"
+                                       typeahead-min-length="0" uib-typeahead="item as item.name for item in GSMList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" ng-required="true">                               
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label for="input" class="col-sm-4  control-label">
+                                <strong>Yarn Head: </strong>
+                            </label>
+                            <div class="input-icon right col-sm-8">
+                                <input type="text" typeahead-Open-On-Focus ng-model="newFab.YarnHead" typeahead-on-select="getCompositionByHead()" placeholder="Yarn Head" class="form-control input-height"
+                                       typeahead-min-length="0" uib-typeahead="item as item.name for item in YarnHList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label for="input" class="col-sm-4  control-label">
+                                <strong>Composition: </strong>
+                            </label>
+                            <div class="input-icon right col-sm-8">
+                                <input type="text" typeahead-Open-On-Focus ng-model="newFab.Composition" placeholder="Composition" class="form-control input-height"
+                                       typeahead-min-length="0" uib-typeahead="item as item.name for item in CompositionList | filter: {name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-7"></div>
+                            <input type="button" style="max-width:150px;" ng-click="addNewFabric()" class="my-3 col-sm-3 btn btn-success" id="btnAddFab" value="Add" />
+                            <div class="col-sm-1"></div>
+                        </div>
+                    </div>
+                    <br /> <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label for="input" class="col-sm-3  control-label">
+                                <strong>New Fabric:</strong>
+                            </label>
+                            <div class="input-icon right col-sm-9">
+                                <input class="form-control" type="text" ng-model="newFab.NewFabric" id="txtNewFabName" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <input type="button" class="btn btn-success col-sm-3 mt-3" ng-click="genNewFabric()" id="btnGenerateFab" style="max-width:170px;float:right;" value="Generate Fabric" />
+                            <div class="col-sm-4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="float:right;margin-top:10px;margin-bottom:10px;">
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

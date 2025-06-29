@@ -1,0 +1,331 @@
+﻿
+<style>
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsHeight {
+        height: 55px !important;
+        font-weight: bold;
+        color: #084B8A;
+    }
+
+    .content {
+        padding: 0px
+    }
+    /*point calculation css*/
+    .clsFault {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: white;
+        border: 3px solid #E0E6F8;
+    }
+
+    .clsFaultChild {
+        background: #e9edf5;
+        -webkit-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        -moz-box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        box-shadow: 2px 2px 1px 0px rgba(205,223,247,1);
+        border-radius: 7px;
+    }
+
+    .clsFaultHead {
+        text-align: center;
+        font-weight: bold;
+        color: #084B8A;
+    }
+    /*.clsPont{
+        border-color:1px  black;
+    }*/
+    .clstextArea {
+        width: 85%;
+        height: 32px;
+    }
+
+    .clsBckBtn {
+        border: none;
+        background-color: salmon;
+        width: 15%;
+        height: 32px;
+        font-weight: bold;
+        vertical-align: top;
+    }
+
+    .clsPont {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .clsPontChild {
+        text-align: center;
+        font-weight: bold;
+        height: 30px;
+        background-color: #E0ECF8;
+        border: 2px solid #E0E6F8;
+        color: #084B8A;
+        /*padding: 10px;*/
+    }
+
+    textarea:disabled {
+        background: #FFFFFF;
+    }
+
+    .clsFaultChild {
+        height: 150px;
+    }
+
+    .clsPontChild:hover {
+        background-color: #E0E6F8;
+        cursor: pointer;
+    }
+
+    .clstextArea {
+        color: salmon;
+        font-weight: bold;
+    }
+
+    .clasFab {
+        text-align: center;
+        color: #084B8A;
+        font-weight: bold;
+        background-color: #E0ECF8;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+</style>
+<body ng-controller="FinishFabricInsTableConfigController">  
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <!--<div class="col-md-3">
+            <div class="row">
+                <label class="control-label col-md-1 clsHeight" style="border-radius: 40px;border: 2px solid #33d7ff;padding: 20px; width: 200px;height: 150px;color: red; ">{{pageId}}</label>
+                <label class="control-label col-md-3 clsHeight">
+                    Barcode No:
+                </label>
+                <div class="col-md-7">-->
+                <!--<input type='text' placeholder="Barcode No" ng-model="Model.Barcode" ng-virtual-keyboard="{kt: 'US International', relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+        class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" ng-click="barcodeClick">-->
+                <!--<input type='text' placeholder="Barcode No" ng-model="t01" ng-virtual-keyboard="" class="form-control input-height clsHeight" ng-click ="barcodeClick()"/>-->
+                <!--<input type='text' ng-model="yourModel" ng-virtual-keyboard />-->
+                <!--<input type="text" ng-model="t01" ng-virtual-keyboard="" class="ng-isolate-scope ng-pristine ng-valid" vki_attached="true">-->
+                <!--<input type="text" placeholder="Barcode No" ng-model="master.Barcode" class="form-control input-height clsHeight" ng-click="barcodeClick()" ng-disabled="truefalseBarcode" />-->
+                <!--<input type='text' placeholder="Barcode No" ng-model="master.Barcode"
+               ng-virtual-keyboard="{kt: 'US International', enterSubmit:enterBarClick, deadkeysOn:false, showInMobile:true, relative:false, customClass: 'myCustomizedVkt'}"
+               class="form-control input-height clsHeight" ng-disabled="truefalseBar"
+               my-enter="enterBarClick()" ng-change="cngBarClick()" />-->
+                <!--ui-keypress="{'enter':'foo(edItem)'}-->
+                <!--</div>
+        </div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <label class="control-label  col-md-5 clsHeight">
+                Without Barcode:
+            </label>
+            <div class="col-md-3">
+                <md-checkbox ng-model="master.IsWithoutBarcode" aria-label="Checkbox 1" ng-change="ChangeControl()" class="input-height">
+                </md-checkbox>
+            </div>
+        </div>
+    </div>-->
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        Batch No:
+                    </label>
+
+                    <div class="col-md-8">
+                        <input type='text' placeholder="Batch No" style="width: 74%; display: inline;" ng-model="master.BatchNo" ng-virtual-keyboard="{kt: 'US International',enterSubmit:enterBatchClick, relative: false, keyCenter: 4, customClass: 'myCustomizedVkt'}"
+                               class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()" ng-change="cngBatchClick()">
+                        <!--<input type="text" ng-model="master.BatchNo" style="width: 74%; display: inline;" placeholder="Batch No" class="form-control input-height clsHeight" ng-disabled="truefalseBatch" ng-show='Batch2' />-->
+                        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="Refresh()" role="button" tabindex="0">
+                            <span class="ng-binding"><i class="fa fa-refresh"></i></span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        M/C No:
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="Machine" placeholder="Machine No" class="form-control input-height clsHeight"
+                               typeahead-Open-On-Focus typeahead-min-length="0" uib-typeahead="item as item.InspMNo for item in MachineInfo | filter: {InspMNo:$viewValue} | limitTo:8" typeahead-editable="false">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        Buyer:
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="master.BuyerName" readonly class="form-control input-height clsHeight" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        Order:
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" ng-model="master.OrderNo" readonly class="form-control input-height clsHeight" />
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="form-group row">               
+
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Roll:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-8">
+                            <select ng-model="master.RollId" ng-change="GetInfoByRollId(master.RollId)"
+                                    ng-options="x.RollId as x.RollName for x in rollList"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Roll</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Width:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.RollWidth" class="form-control input-height clsHeight" ng-change="WidthLengthCng()" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <label class="control-label col-md-4 clsHeight">
+                            Length:
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" ng-model="master.RollLength" class="form-control input-height clsHeight" ng-readonly="truefalseLength" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="div1" style="height:500px;position:relative;">
+                <div class="row clsInspectionInfo" style="max-height:100%;overflow:auto;background-color:transparent; " ng-show="bodyDisplay">
+                    <!--<div class="row">-->
+                    <!--<table>
+        <tr ng-repeat="people_chunk in details | chunk:6">
+            <td ng-repeat="person in people_chunk">
+                {{person.DyedInspectionDetailID}}
+            </td>
+        </tr>
+    </table>-->
+
+                    <div class="col-md-2 clsFault" ng-repeat="obj in details">
+                        <div class="clsFaultChild">
+                            <div class="clsFaultHead">{{obj.FaultName}}</div>
+                            <div>
+                                <textarea class="clstextArea" disabled="disabled" ng-model="obj.PointData"></textarea><input type="button" class="clsBckBtn" value="←" title="Backspace" ng-click="backSpaceClick(obj.sl)">
+                            </div>
+                            <div class="row clsPont">
+                                <div class="col-md-6 clsPontChild" ng-repeat="lobj in obj.lPoints" ng-click="pointClick(lobj.PointValue,obj.sl)">
+                                    {{lobj.PointName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="row" ng-show="btmDisplay">
+                <div class="col-md-12 clasFab">{{master.ItemDescription}}</div>
+            </div>
+            <div class="row" ng-show="btmDisplay">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-4 clsHeight">
+                                    Total Point:
+                                </label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input-height clsHeight" ng-model="TotalPoint" ng-readonly style="color:salmon" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Pts/100 Inch:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control input-height clsHeight" ng-model="Ptsperhundred" ng-readonly style="color:salmon" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="control-label col-md-5 clsHeight">
+                                    Acceptance Status:
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-style="styleAcceptance" class="form-control input-height clsHeight" ng-model="master.Grade" ng-readonly style="color:salmon" />
+                                    <span style="visibility:hidden" ng-model="master.GradeNo"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <label class="control-label  col-md-8 clsHeight">
+                                    C.Approved:
+                                </label>
+                                <div class="col-md-3">
+                                    <md-checkbox aria-label="Checkbox 1" class="input-height" ng-model="master.CommercialApproved">
+                                    </md-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="button btn-primary" style="padding-bottom:10px;" ng-click="ConfirmSave()">
+                        <i class="fa fa-check"></i>Save
+                    </button>
+                    <div style="display:inline;" class="button btn-danger round mr-1 mb-1 btn-mid" ng-click="Remarks()">
+                        <span><i class="fa fa-print"></i>Remarks</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+
+

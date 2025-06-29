@@ -1,0 +1,288 @@
+﻿<style>
+    /*md-input-container {
+        margin: 0 0 !important;
+    }*/
+    /*.UnitName{
+        margin: 0 0 !important;
+    }
+    .gridSelect{
+        margin: 18px 0;
+    }*/
+    /*::ng-deep .mat-autocomplete-panel {
+        border-radius: 10px;
+        color: rebeccapurple;
+    }*/
+    .viewonly {
+        width: 130px;
+    }
+
+    .UnitName {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .gridSelect {
+        width: 30px;
+    }
+</style>
+<body ng-controller="MachineWiseManPowerConfigController">
+    <div class="content-header sty-one">
+        <h1>Machine Wise Man Power Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Machine Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Machine Wise Man Power Configuration</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            Unit Name:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <md-autocomplete name="UnitName"
+                                             md-selected-item="master.selectedUName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchUName"
+                                             md-selected-item-change="selectedUNameChange(item)"
+                                             md-items="item in querySearch(searchUName,'Unit')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="180">
+                                <md-item-template>
+                                    <span md-highlight-text="searchUName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchUName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            From Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <md-datepicker ng-model="master.FromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+                        <label class="control-label col-md-4">
+                            To Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <md-datepicker ng-model="master.ToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-md-3 col-md-9">
+                    <div class="row">
+                        <!--<div class="col-md-1">-->
+                        <div style="display:inline;" class="button btn-group round mr-1 mb-1 btn-mid" ng-click="form.$valid && Add()">
+                            <span>Add</span>
+                        </div>
+                        <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="Search()">
+                            <span>Search</span>
+                        </div>
+                        <!--</div>-->
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="overflow:auto;">
+                <div style="width:100%;">
+                    <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed">
+                        <thead class="bg">
+                            <tr>
+                                <th>Sl</th>
+                                <th style="width:6%;">Add</th>
+                                <th style="width:6%;">Remove</th>
+                                <th style="display:none">MwMPdId</th>
+                                <th>M/C Type</th>
+                                <th>M/C No</th>
+                                <th>Emp Id</th>
+                                <th>Name</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                                <th>From Shift</th>
+                                <th>To Shift</th>
+                                <th style="width:5%;">Details</th>
+                                <th>Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="obj in details">
+
+                                <td> {{$index + 1}}</td>
+                                <td style="width:6%;">
+                                    <img ng-click="actionDialog('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                </td>
+                                <td style="width:6%;">
+                                    <img ng-click="actionDialog('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                </td>
+                                <td style="display:none"> {{obj.MwMPdId}}</td>
+                                <td>
+                                    <md-autocomplete name="MachineType{{$index}}"
+                                                     md-input-minlength="1"
+                                                     md-no-cache="ctrl.noCache"
+                                                     md-selected-item="obj.selectedMcType"
+                                                     md-search-text="searchMcType"
+                                                     md-items="item in querySearch(searchMcType,'McType')"
+                                                     md-item-text="item.display"
+                                                     md-min-length="0"
+                                                     md-require-match
+                                                     md-floating-label="m/c Type">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchMcType">{{item.display}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No states matching "{{searchMcType}}" were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </td>
+                                <td>
+                                    <md-autocomplete flex
+                                                     name="MachineNo{{$index}}"
+                                                     md-input-minlength="1"
+                                                     md-no-cache="ctrl.noCache"
+                                                     md-selected-item="obj.selectedMcName"
+                                                     md-search-text="searchMcName"
+                                                     md-selected-item-change="selectedMcNameChange($index,item)"
+                                                     md-items="item in querySearch(searchMcName,'McNo')"
+                                                     md-item-text="item.display"
+                                                     md-min-length="0"
+                                                     md-require-match
+                                                     md-floating-label="m/c No">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchMcName">{{item.display}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No states matching "{{searchMcName}}" were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </td>
+                                <td>
+                                    <md-autocomplete flex
+                                                     name="EmpId{{$index}}"
+                                                     md-input-minlength="1"
+                                                     md-no-cache="ctrl.noCache"
+                                                     md-selected-item="obj.selectedEmp"
+                                                     md-search-text="searchForID"
+                                                     md-selected-item-change="selectedEmpItemChange($index,item)"
+                                                     md-items="item in querySearch(searchForID,'EmpId')"
+                                                     md-item-text="item.display"
+                                                     md-min-length="0"
+                                                     md-require-match
+                                                     md-floating-label="Employee ID"
+                                                     md->
+                                        <md-item-template>
+                                            <span md-highlight-text="searchForID">{{item.display}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No states matching "{{searchForID}}" were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </td>
+                                <td>
+                                    <input type="text" name="EmpName{{$index}}" ng-model="obj.EmpName" readonly ng-class="EmpName{{$index}}" class="form-control input-height viewonly" />
+                                </td>
+                                <td>
+                                    <input type="text" name="FromDate{{$index}}" ng-model="obj.FromDate" readonly ng-class="FromDate{{$index}}" class="form-control input-height viewonly" />
+                                </td>
+                                <td>
+                                    <input type="text" name="ToDate{{$index}}" ng-model="obj.ToDate" readonly ng-class="ToDate{{$index}}" class="form-control input-height viewonly" />
+                                </td>
+                                <td>
+                                    <md-autocomplete flex
+                                                     name="FromShift{{$index}}"
+                                                     md-input-minlength="1"
+                                                     md-no-cache="ctrl.noCache"
+                                                     md-selected-item="obj.selectedFromShift"
+                                                     md-search-text="searchFromShift"
+                                                     md-items="item in querySearch(searchFromShift,'FromShift')"
+                                                     md-item-text="item.display"
+                                                     md-min-length="0"
+                                                     md-require-match
+                                                     md-floating-label="From Shift">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchFromShift">{{item.display}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No states matching "{{searchFromShift}}" were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </td>
+                                <td>
+                                    <md-autocomplete flex
+                                                     name="ToShift{{$index}}"
+                                                     md-input-minlength="1"
+                                                     md-no-cache="ctrl.noCache"
+                                                     md-selected-item="obj.selectedToShift"
+                                                     md-search-text="searchForToShift"
+                                                     md-items="item in querySearch(searchForToShift,'ToShift')"
+                                                     md-item-text="item.display"
+                                                     md-min-length="0"
+                                                     md-require-match
+                                                     md-floating-label="To Shift">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchForToShift">{{item.display}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No states matching "{{searchForToShift}}" were found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </td>
+                                <td style="width:5%;">
+                                    <div style="display:inline;" class="button btn-link round mr-1 mb-1 btn-mid" ng-click="Details($index + 1)">
+                                        <span>Details</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="display:inline;" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="UpdateDet()">
+                                        <span>Update</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="master.MwMPId" value="0" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

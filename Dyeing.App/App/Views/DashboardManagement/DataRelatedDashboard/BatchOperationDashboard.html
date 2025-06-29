@@ -1,0 +1,406 @@
+﻿<style>
+    .form-check-input {
+        position: relative !important;
+    }
+
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width: 230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .table-scroll tbody {
+        max-height: 1000px !important;
+    }
+
+    .button {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    .custom_tbl {
+        table-layout: fixed;
+    }
+
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+        }
+
+    .dropdown-menu {
+        z-index: 5;
+    }
+
+    .custom_tbl td {
+        font-size: 12px;
+    }
+
+    .custom_tbl tbody tr:nth-child(2n+1) {
+        background: #cae3e7;
+    }
+
+    .custom_tbl td.input {
+        color: #333 !important;
+        padding: 0 5px !important;
+        position: relative;
+    }
+
+        .custom_tbl td.input input {
+            display: block;
+            /* border: 1px solid; */
+            background: #fff;
+            color: #333 !important;
+            padding: 5px;
+            border: none;
+            width: 100%;
+            height: 35px;
+            border-radius: 3px;
+        }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+            /*background: #fff !important;*/
+            color: #333 !important;
+        }
+
+    .custom_tbl tr:hover td {
+        background: #364865 !important;
+        cursor: default;
+        color: white;
+    }
+
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .btn-disabled {
+        background-color: silver;
+    }
+    .dropdown-menu {
+        z-index: 7;
+    }
+</style>
+<div>
+    <div class="content-header sty-one">
+        <h1>Batch Operation Dashboard</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Dashboard Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Data Related Dashboard</a></li>
+            <li><i class="fa fa-angle-right"></i> Batch Operation Dashboard</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="padding:0; ">
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Unit:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-change="UnitChange()"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                        <!--<input type="text" id="unit" ng-model="Unit" typeahead-on-select="UnitChange()" placeholder="Unit"
+                       class="form-control input-height"
+                       typeahead-min-length="1" uib-typeahead="item as item.Name for item in UnitList | filter: {Name:$viewValue}  | limitTo:8"
+                       typeahead-editable="false" ng-required="true">-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        From Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="FromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        To Date:
+                    </label>
+                    <div class="col-md-7">
+                        <md-datepicker ng-model="ToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Buyer:
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="buyer" ng-model="Buyer" typeahead-on-select="BuyerChange()" placeholder="Buyer"
+                               class="form-control input-height"
+                               typeahead-min-length="1" uib-typeahead="item as item.Name for item in BuyerList | filter: {Name:$viewValue}  | limitTo:8"
+                               typeahead-editable="false" ng-required="true">
+
+                        <!--<select class="form-control" select2="" name="buyer"
+                            data-ng-model="Buyer"
+                            ng-change="BuyerChange()"
+                            ng-options="item as item.Name for item in BuyerList">
+                        <option value="" ng-required="true">Select Buyer</option>
+                    </select>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Job:
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="job" ng-model="Job" placeholder="Job No.."
+                               class="form-control input-height"
+                               typeahead-min-length="1" uib-typeahead="item as item.Name for item in JobList | filter: {Name:$viewValue}  | limitTo:8"
+                               typeahead-editable="false" ng-required="true">
+                        <!--<select class="form-control" select2="" name="job"
+                            data-ng-model="Job"
+                            ng-options="item as item.Name for item in JobList">
+                        <option value="" ng-required="true">Select Job</option>
+                    </select>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Batch:
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="batch" ng-model="Batch" placeholder="Batch No.."
+                               class="form-control input-height"
+                               typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"
+                               typeahead-editable="false" ng-required="true">
+                        <!--<select class="form-control" select2="" name="batch"
+                            data-ng-model="Batch"
+                            ng-options="item as item.BatchNo for item in batchList">
+                        <option value="" ng-required="true">Select Batch</option>
+                    </select>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7">
+                <input type="button" style="width:110px;" class="button btn-lg btn-primary" value="Search" ng-click="SearchData()" />
+            </div>
+        </div>
+        <hr />
+        <form class="form-inline" style="padding-bottom:2px">
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text" ng-model="search" class="form-control input-height" placeholder="Search">
+            </div>
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">Showing From: {{ $index+1+(currentPage-1)*viewby }} of {{totalItems}} </span>
+            </div>
+
+        </form>
+        <div style="width: 100%; overflow: auto; max-height: 600px;">
+            <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                <thead class="bg">
+                    <tr>
+                        <th style="width:50px;">Sl</th>
+                        <th ng-click="sort('Buyer')" style=" width: 100px;">Buyer&nbsp;</th>
+                        <th ng-click="sort('Job')" style=" width: 100px;">Job&nbsp;</th>
+                        <th ng-click="sort('Style')" style=" width: 100px;">Style &nbsp;</th>
+                        <th ng-click="sort('BatchNo')" style="width:120px;">Batch No&nbsp;</th>
+                        <th ng-click="sort('BatchDate')" style=" width: 100px;">Batch Date&nbsp;</th>
+                        <th ng-click="sort('DyeingMcNo')" style=" width: 100px;">Dyeing M/C No&nbsp;</th>
+
+                        <th ng-click="sort('DyBatchStart')" style=" width: 75px;">D.Start Time &nbsp;</th>
+                        <th ng-click="sort('DyBatchEnd')" style=" width: 75px;">D.End Time &nbsp;</th>
+                        <th ng-click="sort('DyNPT')" style=" width: 60px;">NPT <br/> (in Min) &nbsp;</th>
+                        <th ng-click="sort('SlBatchStart')" style=" width: 75px;">Slitting S.Time &nbsp;</th>
+                        <th ng-click="sort('SlBatchEnd')" style=" width: 75px;">Slitting E.Time &nbsp;</th>
+                        <th ng-click="sort('SlNPT')" style=" width: 60px;">NPT <br /> (in Min) &nbsp;</th>
+
+                        <th ng-click="sort('DrBatchStart')" style=" width: 75px;">Dryer S.Time &nbsp;</th>
+                        <th ng-click="sort('DrBatchEnd')" style=" width: 75px;">Dryer E.Time &nbsp;</th>
+                        <th ng-click="sort('DrNPT')" style=" width: 60px;">NPT <br /> (in Min) &nbsp;</th>
+
+                        <th ng-click="sort('StBatchStart')" style=" width: 75px;">Stenter S.Time &nbsp;</th>
+                        <th ng-click="sort('StBatchEnd')" style=" width: 75px;">Stenter E.Time &nbsp;</th>
+                        <th ng-click="sort('StNPT')" style=" width: 60px;">NPT <br /> (in Min) &nbsp;</th>
+
+                        <th ng-click="sort('CoBatchStart')" style=" width: 75px;">Compactor S.Time &nbsp;</th>
+                        <th ng-click="sort('CoBatchEnd')" style=" width: 75px;">Compactor E.Time &nbsp;</th>
+                        <th ng-click="sort('CoNPT')" style=" width: 60px;">NPT <br /> (in Min) &nbsp;</th>
+
+                        <th ng-click="sort('OnlineQcTime')" style=" width: 75px;">Online QC &nbsp;</th>
+                        <th ng-click="sort('TableQcTime')" style=" width: 75px;">Table QC &nbsp;</th>
+                        <th ng-click="sort('GSMTime')" style=" width: 75px;">GSM &nbsp;</th>
+                        <th ng-click="sort('StickerPrint')" style=" width: 75px;">Sticker Print &nbsp;</th>
+                        <th ng-click="sort('StoreRcv')" style=" width: 75px;">Store Rcv &nbsp;</th>
+                        
+                        <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dataModel in (BatchOperationData | filter : search |orderBy:sortKey:reverse)">
+                        <td style="display:none">{{dataModel.BpmId}}</td>
+                        <td style="width:5%;"> {{$index+(currentPage-1)*viewby+1}}</td>
+                        <td> {{dataModel.Buyer}}</td>
+                        <td> {{dataModel.Job}}</td>
+                        <td> {{dataModel.Style}}</td>
+                        <td style="width:12%;"> {{dataModel.BatchNo}}</td>
+                        <td> {{dataModel.BatchDate}}</td>
+                        <td> {{dataModel.DyeingMcNo}}</td>
+
+                        <td> {{dataModel.DyBatchStart}}</td>
+                        <td> {{dataModel.DyBatchEnd}}</td>
+                        <td> {{dataModel.DyNPT}}</td>
+                        <td> {{dataModel.SlBatchStart}}</td>
+                        <td> {{dataModel.SlBatchEnd}}</td>
+                        <td> {{dataModel.SlNPT}}</td>
+
+                        <td> {{dataModel.DrBatchStart}}</td>
+                        <td> {{dataModel.DrBatchEnd}}</td>
+                        <td> {{dataModel.DrNPT}}</td>
+
+                        <td> {{dataModel.StBatchStart}}</td>
+                        <td> {{dataModel.StBatchEnd}}</td>
+                        <td> {{dataModel.StNPT}}</td>
+
+                        <td> {{dataModel.CoBatchStart}}</td>
+                        <td> {{dataModel.CoBatchEnd}}</td>
+                        <td> {{dataModel.CoNPT}}</td>
+
+                        <td> {{dataModel.OnlineQcTime}}</td>
+                        <td> {{dataModel.TableQcTime}}</td>
+                        <td> {{dataModel.GSMTime}}</td>
+                        <td> {{dataModel.StickerPrint}}</td>
+                        <td> {{dataModel.StoreRcv}}</td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+    </uib-pagination>-->
+
+    </div>
+
+</div>
+

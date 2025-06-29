@@ -1,0 +1,280 @@
+﻿
+<style>
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2 !important;
+    }
+    md-input-container {
+        margin: 0 0 !important;
+    }
+
+    md-autocomplete[md-floating-label] {
+        height: 10px;
+    }
+
+    md-autocomplete[md-floating-label] {
+        font-size: small;
+    }
+
+    .clsKpa {
+        padding-left: 0px;
+        text-align: center;
+    }
+    input[type=text] {
+        padding: 0;
+        height: 30px;
+        position: relative;
+        left: 0;
+        outline: none;
+        border: 1px solid #cdcdcd;
+        border-color: rgba(0, 0, 0, .15);
+        background-color: white;
+        font-size: 16px;
+        text-align:center;
+    }
+    
+</style>
+<body ng-controller="FinFabReqConfigController">
+
+    <div class="content-header sty-one">
+        <h1>Finished Fabric Requirement Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Finished Fabric Requirement Configuration</li>
+        </ol>
+    </div>
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)" ng-init="Head={}">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Unit:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select class="form-control" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="UnitChange()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Buyer:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="BuyerName"
+                                             md-selected-item="selectedBuyer"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="noCache"
+                                             md-items="item in querySearch(noCache,'buyer')"
+                                             md-selected-item-change="selectedItemChange(item,'buyer')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Job:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="JobName"
+                                             md-selected-item="selectedJob"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-items="item in querySearch(searchName,'job')"
+                                             md-selected-item-change="selectedItemChange(item,'job')"
+                                             md-item-text="item.display"
+                                             md-floating-label=" "
+                                             md-min-length="0">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Style:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Head.StyleId" select2=""
+                                    ng-options="x.Value as x.DisplayName for x in StyleList"
+                                    ng-change="GetOrderByStyleId()"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Style</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Order:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Head.OrderId" select2=""
+                                    ng-options="x.Value as x.DisplayName for x in OrderList"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Order</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Shipment Date:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <md-datepicker ng-model="Head.ShipmentDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Data Loading Type:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <select ng-model="Head.LoadingType" select2="" ng-change="LoadDetails()"
+                                    class="form-control input-height"
+                                    ng-required="true">
+                                <option value="" selected>Select Type</option>
+                                <option value="1">Manual</option>
+                                <option value="2">Merchandising</option>
+                                <option value="3">Knitting</option>
+                                <option value="4">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Head.FfrmId" />
+                </div>
+            </div>
+            <div class="row" style="overflow-x:auto;">
+                <div style="width:100%;">
+
+                    <table style="white-space: nowrap;" class="table table-bordered bordered table-striped table-condensed table-text">
+                        <thead class="bg">
+                            <tr>
+                                <th style="width:50px;"></th>
+                                <th style="width:220px;"></th>
+                                <th style="width:220px;">Body Part</th>
+                                <th style="width:220px;">Fab. Name</th>
+                                <th style="width:220px;">GSM</th>
+                                <th style="width:220px;">Yarn Composition</th>
+                                <th style="width:220px;">Color</th>
+                                <th style="width:220px;">Color Code</th>
+                                <th style="width:220px;">Pantone No</th>
+                                <th style="width:100px;">Fin. Fab. Req</th>
+                                <th style="width:100px;">Consumption(%)</th>
+                                <th style="width:100px;">GrFabMF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="obj in Details">
+                                <!--ng-class="{viewonly: obj.ViewOnly == true}"-->
+                                <td style="width:50px;">
+                                    {{$index + 1}}
+                                    <input type="hidden" name="FfrdId{{$index}}" ng-model="obj.FfrdId" />
+                                </td>
+                                <td style="width:220px;">
+                                    <img ng-click="actionDialog('AddNewRow',$index)" src="../../../Content/img/add.png" />
+                                    <img ng-click="actionDialog('DeleteRow',$index)" src="../../../Content/img/delete.png" />
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.BodyPartId" uib-typeahead="item as item.name for item in bodyPartList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                   
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.FabNameId" uib-typeahead="item as item.name for item in fabricNameList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+   
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.GSMId" uib-typeahead="item as item.name for item in GSMList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                    
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.YarnCompositionId" uib-typeahead="item as item.name for item in yarnCompositionList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                  
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.ColorId" uib-typeahead="item as item.name for item in colorNameList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                  
+                                </td>
+                                <td style="width:220px;">
+                                    <input type="text" class="input-height" ng-model="obj.ColorCodeId" uib-typeahead="item as item.name for item in colorCodeList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                   
+                                </td>
+                                <td style="width:220px;">
+                                    <div style="width:220px;">
+                                        <input type="text" style="width:160px;float:left;" class="input-height" ng-model="obj.PantonId" uib-typeahead="item as item.name for item in pantonNoList | filter: {name:$viewValue} | limitTo:8" typeahead-Open-On-Focus typeahead-min-length="0" typeahead-editable="false">
+                                        <label name="panton{{$index}}" style="width:50px;margin-left:10px;float:left;" class="form-control input-height">{{obj.PantonId.name1}}</label>
+                                 
+                                    </div>
+                                </td>
+                                <td style="width:100px;">
+                                    <input type="number" min="0" oninput="validity.valid||(value='');" ng-model="obj.FinFabReq" name="FinFabReq{{$index}}" class="form-control input-height" required />
+                                </td>
+                                <td style="width:100px;">
+                                    <input type="number" min="0" oninput="validity.valid||(value='');" ng-model="obj.Consumption" name="Consumption{{$index}}" class="form-control input-height" required />
+                                </td>
+                                <td style="width:100px;">
+                                    <label name="GFabMF{{$index}}" class="form-control input-height">{{obj.FinFabReq--(obj.FinFabReq*(obj.Consumption/100))}}</label>
+                                    <input type="hidden" ng-model="obj.GrFabMF" name="GrFabMF{{$index}}" ng-value="{{obj.FinFabReq--(obj.FinFabReq*(obj.Consumption/100))}}" />
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</body>

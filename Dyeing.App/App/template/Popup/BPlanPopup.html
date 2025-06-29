@@ -1,0 +1,235 @@
+﻿<style>
+    .table-modal td {
+        padding: 0px !important;
+    }
+
+    .table-modal thead {
+        z-index: 1200 !important;
+    }
+
+    .popup_tbl {
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+        .popup_tbl table {
+            position: relative;
+        }
+
+        .popup_tbl thead {
+            position: sticky;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+    .modal {
+        z-index: 100 !important;
+    }
+
+    /* Adjust the z-index of the Select2 dropdown */
+    .select2-container {
+        z-index: 1100 !important;
+        width:100px !important;
+    }
+
+    .md-datepicker-calendar-pane {
+        z-index: 1200
+    }
+    .custom-checkbox {
+        cursor: not-allowed;
+        pointer-events: none;
+        
+    }
+
+    .pointer-none{
+        pointer-events: none;
+    }
+    .pointer-auto{
+        pointer-events: auto;
+    }
+
+    /*.batchno-textarea {
+        overflow-x: auto;*/ /* Enables horizontal scrolling */
+        /*white-space: nowrap;*/ /* Prevents wrapping */
+        /*word-wrap: break-word;
+        white-space: normal;
+    }*/
+</style>
+<md-dialog aria-label="MPlanDialog" class="MPlanDialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Batch Plan</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="popup_tbl mt-1">
+                    <table class="table table-bordered table-modal">
+                        <thead>
+                            <tr class="table-info">
+                                <!--<th colspan="4"><b style="font-size: larger;"></b></th>-->
+                                <th colspan="9" class="text-right"><b style="font-size:larger">Max Batch No: {{BatchData[BatchData.length - 1].BatchNo}}</b></th>
+                                <th colspan="8" class="text-left"><b style="font-size:larger">Total Plan Qty: {{TotalPlanQuatity()}}</b></th>
+                            </tr>
+                            <tr class="table-warning">
+                                <th></th>
+                                <!--<th style="width:150px;">M/C No</th>
+                                <th>M/C Capacity</th>-->
+                                <th colspan="2">Action</th>
+                                <th>Fabric type</th>
+                                <th>Composition</th>
+                                <th>GSM</th>
+                                <th>Dia</th>
+                                <th>Body Part</th>
+                                <th>Plan Date</th>
+                                <th>Plan Qty</th>
+                                <th>Number of Batch</th>
+                                <th>Total Qty</th>
+                                <th>Remarks</th>
+                                <th>Batch No</th>
+                                <th>Enzyme</th>
+                                
+                                <th>Process</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  style="{{showB(obj)}},display:{{showData()}}" ng-repeat="obj in bchkPlan | orderBy: 'GroupNo' ">
+                                <td style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)">
+                                    <button  class="btn  btn-warning" ng-click="copyb(obj)">Copy</button>
+                                </td>
+                                <td style="font-size:xx-large; cursor:pointer;{{showB(obj)}}" ng-click="removeb($index)">&#10799;</td>
+                                <td style="font-size:xx-large; cursor:pointer; {{showB(obj)}}" ng-click="duplicateb(obj, $index)">&#128464;</td>
+                                <td style="{{showB(obj)}}"><input class="form-control" readonly type="text" name="name" ng-model="obj.FabricType" /></td>
+                                <td style="{{showB(obj)}}"><input class="form-control" readonly type="text" name="name" ng-model="obj.Composition" /></td>
+                                <td style="{{showB(obj)}}"><input class="form-control" readonly type="text" name="name" ng-model="obj.GSM" /></td>
+                                <td style="{{showB(obj)}}"><input class="form-control" readonly type="text" name="name" ng-model="obj.Dia" /></td>
+                                <td style="{{showB(obj)}}">
+                                    <select class="form-control input-height col-md-8" select2="" data-ng-model="obj.BodyPartId" ng-change="changeDataModel(chkPlan)"
+                                            ng-options="item.Id as item.BodyPart for item in BodyPartList">
+                                        <option value="" ng-required="true">Select</option>
+                                    </select>
+                                </td>
+                                <td style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)">
+                                    <md-datepicker ng-model="obj.PlanFromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
+                                    <md-datepicker ng-model="obj.PlanToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                </td>
+                                <td style="{{showB(obj)}}"><input class="form-control " type="text" name="name" ng-change="calcTotalPQtyB(obj)" ng-model="obj.PlanQty" /></td>
+                                <td style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" class="hide" ng-model="{{obj.noofBatch}}"></td>
+                                <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" >
+                                    <select ng-model="obj.NoOfBatch" 
+                                            ng-options="n for n in [] | range:1:51"
+                                            class="form-control input-height select2">
+                                        <option value="" disabled selected>Select</option>
+                                    </select>   
+                                    <!--ng-options="n for n in [] | range:1:51"-->
+                                </td>
+                                <td style="{{showB(obj)}}"><input class="form-control" type="text" name="name" readonly  ng-model="obj.TotalQty" /></td>
+                                <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}"><input class="form-control" type="text" name="name" ng-model="obj.Remarks" /></td>
+                                <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
+                                    <textarea class="form-control "
+                                              style="font-size: 10px; width: 110px; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"
+                                              rows="{{rowSpanB(obj)*3}}" name="name" ng-model="obj.BatchNos" readonly />
+                                </td>
+                                <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
+                                    <select data-ng-model="obj.Enzyme" class="form-control input-height" select2=""
+                                            ng-options="item.Value as item.Value for item in Enzyme">
+                                        <option value="" ng-required="true" disabled selected>Select</option>
+                                    </select>
+                                </td>
+                                <!--<td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
+                                    <button class="btn btn-warning" ng-model="obj.SpecialFinish" ng-click="SpFinishPopupBatch($event,$index+1)">
+                                        Pop Up
+                                    </button>
+                                </td>-->
+                                <!--<td><input class="form-control" type="text" name="name" ng-model="obj.SpecialFinish" /></td>-->
+                                <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
+                                    <input class="form-control" type="text" name="name" ng-model="obj.Process" />
+                                </td>
+                                <!--<td><button class="btn  btn-warning" ng-click="duplicate(obj, $index)">Duplicate</button> </td>-->
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr ng-repeat="obj in chkPlan | orderBy: 'GroupNo' ">
+                                <td rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <button class="btn  btn-warning" ng-click="copy(obj)">Copy</button>
+                                    <button class="btn  btn-danger m-1" ng-show="showbtn(obj)" ng-click="delete(obj)">Delete</button>
+                                </td>
+                                <td ng-class="checkForEdit(obj)" style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>
+                                <td ng-class="checkForEdit(obj)" style="font-size:xx-large; cursor:pointer;" ng-click="duplicate(obj, $index)">&#128464;</td>
+                                <td >
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.FabricType" />
+                                </td>
+                                <td>
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.Composition" />
+                                </td>
+                                <td>
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.GSM" />
+                                </td>
+                                <td>
+                                    <input class="form-control" readonly type="text" name="name" ng-model="obj.Dia" />
+                                </td>
+                                <td ng-class="checkForEdit(obj)">
+                                    <select class="form-control input-height col-md-8" select2="" data-ng-model="obj.BodyPartId" ng-change="changeDataModel(chkPlan)"
+                                            ng-options="item.Id as item.BodyPart for item in BodyPartList">
+                                        <option value="" ng-required="true">Select</option>
+                                    </select>
+                                </td>
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <md-datepicker ng-model="obj.PlanFromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
+                                    <md-datepicker ng-model="obj.PlanToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                </td>
+                                <td ng-class="checkForEdit(obj)" style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" class="hide" ng-model="{{obj.noofBatch}}"></td>
+                                <td ng-class="checkForEdit(obj)">
+                                    <input class="form-control" type="text" name="name" ng-change="calcTotalPQty(obj)" ng-model="obj.PlanQty" /></td>
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <select ng-model="obj.NoOfBatch" ng-change="NoOfBatchChange(obj,obj.GroupNo,obj.NoOfBatch,obj.MinBatch,obj.MaxBatch,0)"
+                                            ng-options="n for n in [] | range:0:51"
+                                            class="form-control input-height select2">
+                                        <option value="" disabled selected>Select</option>
+                                    </select>
+                                    <!--ng-options="n for n in [] | range:1:51"-->
+                                </td>
+                                <td><input class="form-control" type="text" name="name" readonly 
+                                           ng-value="obj.TotalQty = (obj.PlanQty && obj.NoOfBatch) ? (obj.PlanQty * obj.NoOfBatch) : 0" ng-model="obj.TotalQty" /></td>
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)"><input class="form-control" type="text" name="name" ng-model="obj.Remarks" /></td>
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <textarea class="form-control  "
+                                              style="font-size: 10px; width: 110px; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"
+                                              rows="{{rowSpan(obj)*3}}" name="name" ng-model="obj.BatchNos" readonly />
+                                </td>
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <select data-ng-model="obj.Enzyme" class="form-control input-height" select2=""
+                                            ng-options="item.Value as item.Value for item in Enzyme">
+                                        <option value="" ng-required="true" disabled selected>Select</option>
+                                    </select>
+                                </td>
+                                <!--<td rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <button class="btn btn-warning" ng-model="obj.SpecialFinish" ng-click="SpFinishPopupBatch($event)">
+                                        Pop Up
+                                    </button>
+
+                                </td>-->
+                                <!--<td><input class="form-control" type="text" name="name" ng-model="obj.SpecialFinish" /></td>-->
+                                <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
+                                    <input class="form-control" type="text" name="name" ng-model="obj.Process" />
+                                </td>
+                                <!--<td><button class="btn  btn-warning" ng-click="duplicate(obj, $index)">Duplicate</button> </td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">
+                    <button class="btn btn-lg btn-success mr-2" ng-click="actionDialog('Save')">Save</button>
+                    <button class="btn btn-lg btn-danger" ng-click="hide()">Close</button>                   
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

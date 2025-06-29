@@ -1,0 +1,44 @@
+﻿<style>
+    md-toolbar{
+        min-height:40px !important;
+    }
+    .md-toolbar-tools{
+        height:25px !important;
+    }
+    md-dialog{
+        width:400px !important;
+    }
+    md-dialog-actions{
+        margin-right:30% !important;
+    }
+    md-dialog .md-dialog-content {
+    padding: 14px;
+}
+</style>   
+ <md-dialog aria-label="Save Information">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <!--<h4 style="margin-left:35%;">{{model.Header}}</h4>-->
+                <h5 style="margin-left:35%;margin-top: 7%;">Message</h5>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <img src="../../Content/img/close_icon.png" height="25" width="25" style="margin-top: 26%;" />
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p style="text-align:center;margin-bottom: 0%;margin-top: 2%; font-size:13px;"><strong>{{model.message}} </strong></p>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+                <div class="col-md-6"></div>       
+                <div class="col-md-1">
+                    <md-button class="md-raised md-primary" ng-click="OK()">OK</md-button>
+                </div>
+                <div class="col-md-5"></div>   
+                <!--<md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>-->
+         </md-dialog-actions>
+    </md-dialog>

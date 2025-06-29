@@ -1,0 +1,155 @@
+﻿<style>
+    .col-xs-4 {
+        /*border: 1px solid #eee;*/
+        padding: 15px;
+    }
+    div.md-container md-ink-ripple {
+        margin-top: 9px;
+    }
+
+    div.md-icon {
+        margin-top: 9px;
+    }
+
+    
+</style>
+
+<body ng-controller="DiaPartWiseDyeingProcessConfigController">
+    <div class="content-header sty-one">
+        <h1>Dia Part Wise Dyeing Process Flow Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Production Plan Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Dia Part Wise Dyeing Process Flow Configuration </li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)"  ng-init="Head={}">
+
+            <div class="form-group row">
+
+
+                <div class="col-md-4" style="margin-left: 27%;margin-bottom: 27px;margin-top: 27px;">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Name of Dia Part:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-6">
+
+
+
+                            <!--<md-autocomplete md-autoselect=true
+                     placeholder="Name of Dia Part?"
+                     md-item-text="item.display"
+                     md-no-cache="ctrl.noCache"
+                     md-items="item in querySearch(searchName,'DiaPartName')"
+                     md-menu-class="autocomplete-custom-template"
+                     md-search-text="searchName"
+                     md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                     md-select-on-match=true
+                     md-match-case-insensitive=true
+                     md-selected-item-change="selectedItemChange(item)"
+                     md-selected-item="selectedName">
+        <md-item-template>
+            <span class="item-title">
+                <span md-highlight-flags="^i" md-highlight-text="ctrl.searchText">
+                    {{item.display}}
+                </span>
+            </span>
+        </md-item-template>
+        <md-not-found>
+            No match found.
+        </md-not-found>
+    </md-autocomplete>-->
+
+
+                            <md-autocomplete flex required
+                                             name="DiaPartName"
+                                             placeholder="Name of Dia Part"
+                                             md-selected-item="selectedName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchName"
+                                             md-menu-class="autocomplete-custom-template"
+                                             md-items="item in querySearch(searchName,'DiaPartName')"
+                                             md-selected-item-change="selectedItemChange(item)"
+                                             md-item-text="item.display"
+                                             md-floating-label="Name of Dia Part?"
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="18">
+                                <md-item-template>
+                                    <span md-highlight-text="searchName" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    No states matching "{{searchName}}" were found.
+                                </md-not-found>
+                                <div ng-message="required">Please Select <b>Dia Part Name</b></div>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div style="margin-left:26%;width:47%;padding-left: 70px;"  class="table table-bordered bordered table-striped table-text table-condensed table-scroll">
+
+
+                <!--<table style="margin-left:26%;width:47%" class="table table-bordered bordered table-striped table-text table-condensed table-scroll">
+
+        <tbody>
+            <tr ng-repeat="Process in ProcessFlow" ng-if="$index % 3 == 0" >
+                <td style="width:10%;">{{$index+1}}</td>
+                <td style="width:20%;">
+
+                    <md-checkbox ng-model="obj.IsActive" aria-label="Checkbox 1" class="input-height">
+                    </md-checkbox>
+
+                </td>
+
+                <td style="width:50%">
+                    <div class="col-xs-4">{{ Process[$index].id }} | {{ Process[$index].NameOfProcess }}</div>
+                    <div class="col-xs-4">{{ Process[$index + 1].id }} | {{ Process[$index + 1].NameOfProcess}}</div>
+                    <div class="col-xs-4">{{ Process[$index + 2].id }} | {{ Process[$index + 2].NameOfProcess }}</div>
+
+                    <input type="text" style="text-align:center;" ng-disabled="true" name="NameOfProcess{{$index}}" ng-model="obj.NameOfProcess" class="form-control input-height" />
+                </td>
+
+        </tbody>
+    </table>-->
+
+
+                <div ng-repeat="Process in Details | orderBy:'NameOfProcess'" ng-if="$index % 3 == 0" class="row">
+
+                    <div ng-if="Details[$index].NameOfProcess != Null" class="col-xs-4" ng-model="Details[$index].DppdId"><md-checkbox style="margin-top: 13px;" ng-model="Details[$index].IsActive">   </md-checkbox> | {{ Details[$index].NameOfProcess }}</div>
+                    <div ng-if="Details[$index + 1].NameOfProcess != Null" class="col-xs-4" ng-model="Details[$index + 1].DppdId"> <md-checkbox style="margin-top: 13px;" ng-model="Details[$index + 1].IsActive">   </md-checkbox>  | {{ Details[$index + 1].NameOfProcess}}</div>
+                    <div ng-if="Details[$index + 2].NameOfProcess != Null" class="col-xs-4" ng-model="Details[$index + 2].DppdId"> <md-checkbox style="margin-top: 13px;" ng-model="Details[$index + 2].IsActive">  </md-checkbox> | {{ Details[$index + 2].NameOfProcess }}</div>
+                </div>
+
+            </div>
+
+          
+
+
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Head.DppId" />
+                </div>
+            </div>
+        </form>
+
+
+       
+
+
+
+     
+
+    </div>
+
+</body>
+

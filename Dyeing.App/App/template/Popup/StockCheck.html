@@ -1,0 +1,202 @@
+﻿<style>
+    .table-modal td {
+        padding: 0px !important;
+    }
+
+    .table-modal thead {
+        z-index: 1200 !important;
+    }
+
+    .popup_tbl {
+        max-height: 400px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+        .popup_tbl table {
+            position: relative;
+        }
+
+        .popup_tbl thead {
+            position: sticky;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+    .modal {
+        z-index: 1000 !important;
+    }
+
+    /* Adjust the z-index of the Select2 dropdown */
+    .select2-container {
+        z-index: 1100 !important;
+        width: 100% !important;
+    }
+
+    .md-datepicker-calendar-pane {
+        z-index: 1200
+    }
+    .StockCheckDialog {
+        max-width: 95%;
+    }
+
+    .table-modal th,
+    .table-modal td {
+        font-size: smaller;
+        text-align: center;
+        vertical-align: middle !important;
+        border: 1px solid #cbcbcb !important;
+    }
+
+</style>
+<md-dialog aria-label="StockCheckDialog" class="StockCheckDialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Stock Check</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--Stock Checkout and Select popup-->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!--input form-->
+                            <div class="row row-cols-md-auto align-items-center mb-5">
+                                <div class="col-md-3 col-6">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Plan Qty</label>
+                                        <input type="text" readonly ng-model="PlanQty" class="form-control col-md-7 mb-2 me-sm-2">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Body</label>
+                                        <input type="text" readonly ng-model="Body" class="form-control col-md-7 mb-2 me-sm-2">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">Neck</label>
+                                        <input type="text" readonly ng-model="Neck" class="form-control col-md-7 mb-2 me-sm-2">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="row">
+                                        <label class="control-label col-md-4">BNT</label>
+                                        <input type="text" readonly ng-model="BNT" class="form-control col-md-7 mb-2 me-sm-2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cols-md-auto align-items-center mb-5">
+                                <div class="col-md-4 col-6">
+                                    <div class="row">
+                                        <label class="control-label col-md-4 mb-2">Source Unit</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control input-height" select2="" name="unit"
+                                                    data-ng-model="SourceUnit"
+                                                    ng-options="item as item.Name for item in UnitList">
+                                                <option value="" ng-required="true">Select Unit</option>
+                                            </select>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="row">
+                                        <!--<span class="col-md-1"></span>-->
+                                        <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsPPSample')" ng-model="StockData[0].PPSample" />&nbsp;&nbsp; <strong>PP Sample</strong></span>
+                                        <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsCSample')" ng-model="StockData[0].China" />&nbsp;&nbsp; <strong>China</strong></span>
+                                        <span class="col-md-4"><input type="checkbox" ng-click="PPorC('IsPPSampleOrChina')" ng-model="StockData[0].PPSamplewithChina" />&nbsp;&nbsp; <strong>PP Sample & China</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-right mt-5">
+                                        <button class="btn btn-lg btn-success" ng-click="SaveRevise()">Save</button>
+                                        <button class="btn btn-lg btn-danger" ng-click="cancel()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Table data list-->
+                    <div class="card mt-5">
+                        <div class="card-header sty-one">                           
+                            <div class="col-sm-3" style="padding-left:0px;">
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search Here...">
+                            </div>                            
+                        </div>
+
+                        <div class="data_tbl table-responsive">
+                            <table class="table table-bordered table-striped table-modal">
+                                <thead>
+                                    <tr class="table-primary">                                       
+                                        <th colspan="2">Action</th>
+                                        <th>Buyer</th>
+                                        <th>Job</th>
+                                        <th>Style</th>
+                                        <th>Order</th>
+                                        <th>Fabric Type</th>
+                                        <th>Composition</th>
+                                        <th>Color</th>
+                                        <th>Dia</th>
+                                        <th>GSM</th>
+                                        <th>Brand</th>
+                                        <th>Lot</th>
+                                        <th>Count</th>
+                                        <th>M/C DiaXGG</th>
+                                        <th>S.L</th>
+                                        <th>Uom</th>
+                                        <th>Stock Qty</th>
+                                        <th>Req Qty</th>
+                                        <th>Body Part</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in StockData">                                       
+                                        <td style="font-size:xx-large; cursor:pointer;" ng-click="copy(obj, $index)">&#128464;</td>
+                                        <td style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>
+                                        <td>{{obj.BuyerName}}</td>
+                                        <td>{{obj.JobInfo}}</td>
+                                        <td>{{obj.StyleInfo}}</td>
+                                        <td>{{obj.OrderNo}}</td>
+                                        <td>{{obj.FabricType}}</td>
+                                        <td>{{obj.Composition}}</td>
+                                        <td>{{obj.ColorName}}</td>
+                                        <td>{{obj.Dia}}</td>
+                                        <td>{{obj.GSM}}</td>
+                                        <td>{{obj.Brand}}</td>
+                                        <td>{{obj.Lot}}</td>
+                                        <td>{{obj.Count}}</td>
+                                        <td>{{obj.McDiaGG}}</td>
+                                        <td>{{obj.SL}}</td>
+                                        <td>{{obj.Uom}}</td>
+                                        <td>{{obj.StockQty}}</td>
+                                        <td>
+                                            <input class="form-control" ng-model="obj.ReqQty" type="number" />
+                                        </td>
+                                        <td>
+                                            <select class="form-control select2 input-height col-md-8" select2="" data-ng-model="obj.BodyPartId"
+                                                    ng-options="item.Id as item.BodyPart for item in BodyPartList">
+                                                <option value="" ng-required="true">Select</option>
+                                            </select>
+                                        </td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

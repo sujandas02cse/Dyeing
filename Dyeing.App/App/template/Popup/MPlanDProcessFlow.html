@@ -1,0 +1,36 @@
+﻿<md-dialog aria-label="PlanOthersOpDialog" style="width:60%;">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Dyeing Process Flow Operation</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close" ng-click="cancel()">
+                    <md-icon md-svg-src="/Content/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+               
+                <div class="form-group row">
+                    <div class="col-md-4" ng-repeat="obj in DyeingPFList">
+                        <div class="row" style="padding:5px;">
+                            <div class="col-md-1">
+                                <input type="checkbox" ng-model="obj.DPFlow"/>
+                            </div>
+                            <label class="col-md-10">
+                                {{obj.label}}
+                            </label>
+                        </div>
+                    </div>                    
+                </div>
+            
+
+                <div class="row" style="float:right;margin-top:20px;margin-bottom:20px;">                    
+                    <input type="button" class="button btn-info round mr-1 mb-1 btn-mid" ng-click="hide()" value="Ok" />
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
