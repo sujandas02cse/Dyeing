@@ -240,7 +240,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public bool PrintLabSticker { get; set; }
         }
 
-        public void SaveStickerPath(string stickerPath, int rollNo, int bpmId)
+        public async Task SaveStickerPath(string stickerPath, int rollNo, int bpmId)
         {
             var parameters = new DynamicParameters();
             parameters.Add(name: "@stickerPath", value: stickerPath, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -248,9 +248,8 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             parameters.Add(name: "@bpmId", value: bpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
 
-            //DatabaseHub.QueryAsync<string>(
-            //       storedProcedureName: @"[dbo].[usp_Update_StickerPath]", parameters: parameters, dbName: DyeingDB);
-            DatabaseHub.ExecuteAsync(storedProcedureName: "[dbo].[usp_Update_StickerPath]",
+           
+           await DatabaseHub.ExecuteAsync(storedProcedureName: "[dbo].[usp_Update_StickerPath]",
                 parameters: parameters,
                 dbName: DyeingDB);
         }
@@ -552,7 +551,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             return result;
         }
 
-        public object FinishFabricInspectionConfigOffline_Save(InspectionMasterSaveOfflineList Obj)
+        public async  Task<object> FinishFabricInspectionConfigOffline_Save(InspectionMasterSaveOfflineList Obj)
         {
             var data = new
 
@@ -562,7 +561,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                 InspectionItems = Obj.DiaGsmDetails.AsTableValuedParameter("dbo.tvp_DyedFabricInspectionOffline",
                             new[] { "ActualDia", "ActualGsm", "BodyPart", "BodyPartId", "BpmId", "DiaPart", "FDia", "FGSM", "FabricDiaPartId", "NumberOfRoll", "RollWeight", "PrintLabSticker" })
             };
-            return DatabaseHub.Query<object, object>(
+            return await DatabaseHub.QueryAsync<object, object>(
                   storedProcedureName: @"[dbo].[usp_SaveUpdate_DyedInspectionOffline]", model: data, dbName: DyeingDB);
         }
 

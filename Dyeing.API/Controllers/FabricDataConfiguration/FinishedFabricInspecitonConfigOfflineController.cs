@@ -8,10 +8,12 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using static Dyeing.API.Models.FabricDataConfiguration.FinishFabricInspectionOnlineModel;
+
 
 namespace Dyeing.API.Controllers.FabricDataConfiguration
 {
@@ -200,27 +202,24 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
 
 
         [System.Web.Http.HttpPost]
-        public IHttpActionResult FinishFabricInspectionConfigOffline_Save(InspectionMasterSaveOfflineList Obj)
+        public async Task<IHttpActionResult> FinishFabricInspectionConfigOffline_Save(InspectionMasterSaveOfflineList Obj)
         {
-
             try
             {
                 try
                 {
-                    //var queryData = "";
-
-                    object queryData = null;
+                     object queryData = null;
 
                     if (Obj.BatchType == "New")
                     {
-                        queryData = new FinishFabricInspectionOnlineModel().FinishFabricInspectionConfigOffline_Save(Obj);
+                        queryData = await Task.Run(()=> new FinishFabricInspectionOnlineModel().FinishFabricInspectionConfigOffline_Save(Obj)) ;
 
-                        queryData = ProcessStickerGenerationAndUpdate(queryData, Obj.BatchNo);
+                        queryData =await Task.Run(()=> ProcessStickerGenerationAndUpdate(queryData, Obj.BatchNo)) ;
 
                     }
                     else if (Obj.BatchType == "Old" || Obj.BatchType == "Bulk")
                     {
-                        queryData = new FinishFabricInspectionOnlineModel().FinishFabricInspectionConfigOffline_SaveBulk(Obj);
+                        queryData =await Task.Run(()=> new FinishFabricInspectionOnlineModel().FinishFabricInspectionConfigOffline_SaveBulk(Obj)) ;
 
                     }
 
@@ -228,8 +227,6 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     {
                         return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
                     }
-
-
 
                     return Ok(queryData);
                 }
@@ -246,21 +243,49 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
 
         }
 
-        private object ProcessStickerGenerationAndUpdate(object queryData, string BatchNo)
+        private async Task<object> ProcessStickerGenerationAndUpdate(object queryData, string BatchNo)
         {
             var rollList = (queryData as IEnumerable<dynamic>)?.ToList();
             if (rollList == null || !rollList.Any())
                 return queryData;
 
-            string path = HttpContext.Current.Server.MapPath("~/images/RollSticker/");
-            string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
-            string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
+            //string path = HttpContext.Current.Server.MapPath("~/images/RollSticker/");
+
+            string path = System.Web.Hosting.HostingEnvironment.MapPath("~/images/RollSticker/");
+
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new InvalidOperationException("Failed to resolve path for ~/images/RollSticker/.");
+            }
+
+            //string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
+            //string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
+
+            // for local testing 
+            //string protocol = "http://";
+            //string baseUrl = "localhost:34605";
+
+            // for local live server
+
+            string protocol = "";
+            string baseUrl = "https://mis-dyeing.mascoknit.com/";
+
+
+
+            if (HttpContext.Current != null)
+            {
+                protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
+                baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
+            }
+
+
             string basePath = (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60")) ?
                 $"{protocol}{baseUrl}/dyeingApi/images/RollSticker/" :
                 $"{protocol}{baseUrl}/images/RollSticker/";
 
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
+            var inspectionModel = new FinishFabricInspectionOnlineModel();
 
 
             FinishFabricInspectionOnlineModel FinishFabricInspectionOnlineModelObj = new FinishFabricInspectionOnlineModel();
@@ -284,7 +309,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     qrCodeImage.Save(file, ImageFormat.Png);
                 }
 
-                FinishFabricInspectionOnlineModelObj.SaveStickerPath(stickerPath, rollNo, bpmId);
+              await inspectionModel.SaveStickerPath(stickerPath, rollNo, bpmId);
             }
 
             return queryData;

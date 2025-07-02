@@ -25,7 +25,7 @@ namespace Dyeing.App
       
          public static string baseURL =
             
-       //"http://192.168.50.60:93/dyeingApi/api/";
+      // "http://192.168.50.60:93/dyeingApi/api/";
 
        // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
 

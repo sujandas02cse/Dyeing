@@ -465,6 +465,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
         }
         public object BatchDataProcessing_SaveUpdate(BatchDataWrapper _obj)
         {
+            
             var data = new
             {              
                 HostIP = getclientIP(),

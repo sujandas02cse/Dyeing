@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDBTest</ConnectString>
+        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -16,7 +16,7 @@
     <DataSet Name="LabSticker">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_LabStickerOffline 1,'7372-01-010',7,'New'</CommandText>
+        <CommandText>usp_rpt_LabStickerOffline 1,'9665-03-028',7,'New'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
