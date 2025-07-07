@@ -16,7 +16,7 @@
     <DataSet Name="InspectionData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_DyedFabInspectionNew 4,NULL,'','',1191,1</CommandText>
+        <CommandText>usp_rpt_DyedFabInspectionNew 4,NULL,NULL,NULL,2934,1</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -1438,7 +1438,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Style/Order No:</Value>
+                                  <Value>Style:</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>8pt</FontSize>

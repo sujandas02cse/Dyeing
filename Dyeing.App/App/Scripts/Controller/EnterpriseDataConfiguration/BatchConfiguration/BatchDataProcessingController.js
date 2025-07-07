@@ -373,7 +373,6 @@
 
                   mcNo = currMc;
                   //let process = exceljson[i]['Process'];
-                  debugger;
                   if ($scope.batchType == "Bulk") {
                     model = {
                       //  #region old code
@@ -467,7 +466,6 @@
                       Remarks: String(exceljson[i]["Remarks"] || "").trim()
                     };
                   } else {
-                    debugger;
                     model = {
                       // #region Basic Info Mapping
                       //SlNo: i,
@@ -639,12 +637,16 @@
                       ).trim(),
                       Enzyme: String(exceljson[i]["Enzyme"] || "").trim(),
                       Process: String(exceljson[i]["Process"] || "").trim(),
-                      Body: parseInt(exceljson[i]["BODY"]) || 0,
-                      Rib: parseInt(exceljson[i]["RIB"]) || 0,
-                      BNT: parseInt(exceljson[i]["BNT"]) || 0,
-                      FabQty: parseInt(exceljson[i]["Total FAB. QTY"]) || 0,
-                      NoOfBatch: parseInt(exceljson[i]["No of Batch"] || 0),
-                      NextBatch: String(
+
+                        Body: parseFloat(exceljson[i]["BODY"]) || 0,
+                        Rib: parseFloat(exceljson[i]["RIB"]) || 0,
+                        BNT: parseFloat(exceljson[i]["BNT"]) || 0,
+
+                      FabQty: parseFloat(exceljson[i]["Total FAB. QTY"]) || 0,
+
+                        NoOfBatch: parseFloat(exceljson[i]["No of Batch"] || 0),
+
+                        NextBatch: String(
                         exceljson[i]["NEXT BATCH"] || ""
                       ).trim(),
                       SedoProg: String(exceljson[i]["Sedo Prog"] || "").trim(),
@@ -679,8 +681,10 @@
                       SL: String(exceljson[i]["S.L"] || "").trim(),
                       MCDiaGaug: String(
                         exceljson[i]["M/C Dia/Gaug"] || ""
-                      ).trim(),
-                      BookingQty: parseInt(exceljson[i]["Booking Qty"]) || 0,
+                        ).trim(),
+
+                      BookingQty: parseFloat(exceljson[i]["Booking Qty"]) || 0,
+
                       BatchPreparationDate: getExcelDate(
                         exceljson[i]["Batch preparation Date"]
                       )
@@ -704,7 +708,6 @@
             document.body.style.cursor = "wait";
 
             if ($scope.batchType === "Bulk") {
-              debugger;
               console.log(obj);
               BatchDataProcessing.BatchDataProcessing_SaveUpdate(obj, function(
                 res

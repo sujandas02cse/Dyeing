@@ -909,7 +909,18 @@
               };
             }
             //console.log("model", model);
-            genSticker(model);
+
+
+              if (status == "Old") {
+                  genSticker(model);
+              }
+              else if (status == "New") {
+                  genStickerNew(model);
+              }
+
+
+
+
             for (var i = 0; i < $scope.details.length; i++) {
               $scope.details[i].PointData = null;
               $scope.details[i].TotalPoint = 0;
@@ -1250,6 +1261,191 @@
       $scope.master.BatchNo = "";
 
       $scope.RadioMode = "N";
-    }
+      }
+
+
+      function genStickerNew(data) {
+          console.log("sticker", data);
+          var printContents =
+              `<div class="wrapper">
+        <div class="header">
+            <div class="logo">
+                <img src="../../../Content/img/Masco.jpg" />               
+            </div>
+
+            <div class="unit">                
+                <span><b>` +
+              data.UnitEName +
+              `</b></span>
+            </div>
+            <div class="qr_code">
+                <img src="` +
+              data.StickerPath +
+              `" />
+            </div>
+
+        </div>
+        <div class="body">
+            <table class="table">
+                <tr>
+                    <td>Buyer:</td>
+                    <td colspan="3">` +
+              data.Buyer +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Job:</td>
+                    <td colspan="3">` +
+              data.Job +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Style:</td>
+                    <td colspan="3">` +
+              data.Order +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Batch No:</td>
+                    <td colspan="3">` +
+              data.BatchNo +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Color:</td>
+                    <td colspan="3">` +
+              data.FabColor +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Fabric Type:</td>
+                    <td colspan="3">` +
+              data.FabType +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Req.Dia:</td>
+                    <td>` +
+              data.ReqDia +
+              `</td>
+                    <td>R.GSM:</td>
+                    <td>` +
+              data.ReqGSM +
+              `</td>
+                </tr>
+                <tr>
+                    <td>Roll No:</td>
+                    <td>` +
+              data.RollNo +
+              " (" +
+              data.BodyPart +
+              ")" +
+              `</td>
+                    <td>R.Wgt:</td>
+                    <td>` +
+              data.FinishWeight +
+              ` kg</td>
+                </tr>               
+            </table>
+        </div>    
+    </div>`;
+          if (data.LabStickerReq == true) {
+              printContents +=
+                  `<div class="wrapper">
+                <div class="header">
+                    <div class="qr_code">
+                        <img src="` +
+                  data.StickerPath +
+                  `" />
+                    </div>                    
+
+                    <div class="unit">                        
+                        <span><b>` +
+                  data.UnitEName +
+                  `</b></span>
+                    </div>
+
+                    <div class="logo">
+                        <img src="../../../Content/img/Masco.jpg" />
+                    </div>
+
+                </div>
+                <div class="body">
+                    <table class="table">
+                        <tr>
+                            <td>Buyer:</td>
+                            <td colspan="3">` +
+                  data.Buyer +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Job:</td>
+                            <td colspan="3">` +
+                  data.Job +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Style:</td>
+                            <td colspan="3">` +
+                  data.Order +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Batch No:</td>
+                            <td colspan="3">` +
+                  data.BatchNo +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Color:</td>
+                            <td colspan="3">` +
+                  data.FabColor +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Fabric Type:</td>
+                            <td colspan="3">` +
+                  data.FabType +
+                  `</td>
+                         </tr>
+                        <tr>
+                            <td>Req.Dia:</td>
+                            <td>` +
+                  data.ReqDia +
+                  `</td>
+                            <td>R.GSM:</td>
+                            <td>` +
+                  data.ReqGSM +
+                  `</td>
+                        </tr>
+                        <tr>
+                            <td>Roll No:</td>
+                            <td>` +
+                  data.RollNo +
+                  " (" +
+                  data.BodyPart +
+                  ")" +
+                  `</td>
+                            <td>B.Wgt:</td>
+                            <td>` +
+                  data.BatchWeight +
+                  ` kg</td>
+                        </tr>               
+                    </table>
+                </div>
+            </div>`;
+          }
+          var popupWin = window.open("", "_blank", "width=auto,height=auto");
+          popupWin.document.open();
+          popupWin.document.write(
+              `<html><head><link href="../../../Content/css/sticker.css" rel="stylesheet" /></head><body onload="window.print()">` +
+              printContents +
+              `</body></html>`
+          );
+          popupWin.document.close();
+          //popupWin.focus();
+          //popupWin.print();
+          //popupWin.close();
+      }
   }
 ]);

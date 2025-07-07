@@ -162,9 +162,15 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/MachineDataConfiguration/CompactingMcOperation.html?' + ts,
             controller: 'CompactingMcOperationController'
         })
+
         .when('/DryerMcOpConfig', {
             templateUrl: '/App/Views/MachineDataConfiguration/DryerMcOpConfig.html?' + ts,
             controller: 'DryerMcOpConfigController'
+        })
+
+        .when('/TumbleDryerMcOpConfig', {
+            templateUrl: '/App/Views/MachineDataConfiguration/TumbleDryerMcOpConfig.html?' + ts,
+            controller: 'TumbleDryerMcOpConfigController'
         })
 
 
