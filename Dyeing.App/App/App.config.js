@@ -2,7 +2,7 @@
 app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $qProvider, $mdDialogProvider, $mdToastProvider, $mdIconProvider) {
     //alert(window.location.href);
 
-    var ts = Date.now();   
+    var ts = Date.now();
 
     $routeProvider
         .when('/', {
@@ -33,9 +33,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             controller: 'MachineCapacityConfigController'
         })
 
-      
-               
-
         //Basic Data Config=>Operation Data Config routing
         .when('/OperationSectionConfig', {
             templateUrl: '/App/Views/BasicDataConfiguration/OperationDataConfiguration/OperationSectionConfig.html?'+ts,
@@ -45,7 +42,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/BasicDataConfiguration/OperationDataConfiguration/ProductionShiftConfig.html?'+ts,
             controller: 'ProductionShiftConfigController'
         })
-        
 
         //Basic Data Config=>Dyeing Batch Config routing
         .when('/FinishingSpecification', {
@@ -68,7 +64,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             controller: 'GSMNameConfigController'
         })
 
-
         //Basic Data Config=> Production Plan Configuration
         .when('/ProcessFlowConfig', {
             templateUrl: '/App/Views/BasicDataConfiguration/ProductionPlanConfiguration/DyeingProcessFlowConfig.html?'+ts,
@@ -86,10 +81,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/BasicDataConfiguration/ProductionPlanConfiguration/DiaPartWiseDyeingProcessConfiguration.html?'+ts,
             controller: 'DiaPartWiseDyeingProcessConfigController'
         })
-        
 
-
-               
         //Basic Data Config=>Inspection Config routing
         .when('/UnitWiseMachine', {
             templateUrl: '/App/Views/BasicDataConfiguration/InspectionConfiguration/UnitWiseInspectionMCConfig.html?'+ts,
@@ -127,7 +119,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/BasicDataConfiguration/InspectionConfiguration/BuyerWisePointSystemValueConfig.html?'+ts,
             controller: 'BuyerWisePointSystemValueConfigController'
         })
-               
 
         //Machine Data Config routing
         .when('/MachineDetailsConfig', {
@@ -167,12 +158,32 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/MachineDataConfiguration/DryerMcOpConfig.html?' + ts,
             controller: 'DryerMcOpConfigController'
         })
+        //new machines
 
         .when('/TumbleDryerMcOpConfig', {
             templateUrl: '/App/Views/MachineDataConfiguration/TumbleDryerMcOpConfig.html?' + ts,
             controller: 'TumbleDryerMcOpConfigController'
         })
 
+        .when('/SqueezerMcOpConfig', {
+            templateUrl: '/App/Views/MachineDataConfiguration/SqueezerMcOpConfig.html?' + ts,
+            controller: 'SqueezerMcOpConfigController'
+        })
+
+        .when('/BrushMcOpConfig', {
+            templateUrl: '/App/Views/MachineDataConfiguration/BrushMcOpConfig.html?' + ts,
+            controller: 'BrushMcOpConfigController'
+        })
+
+        .when('/ShearingMcOpConfig', {
+            templateUrl: '/App/Views/MachineDataConfiguration/ShearingMcOpConfig.html?' + ts,
+            controller: 'ShearingMcOpConfigController'
+        })
+
+        .when('/SuedingMcOpConfig', {
+            templateUrl: '/App/Views/MachineDataConfiguration/SuedingMcOpConfig.html?' + ts,
+            controller: 'SuedingMcOpConfigController'
+        })
 
         //EnterpriseDataConfiguration=>ProductionPlanConfig routing
         .when('/FinFabReqConfig', {
@@ -203,7 +214,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/EnterpriseDataConfiguration/ProductionPlanConfiguration/InitialInformation.html?' + ts,
             controller: 'InitialInformation'
         })
-                     
+
         //EnterpriseDataConfiguration=>BatchConfig routing
         .when('/BatchGSMConfig', {
             templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchWiseGSMConfig.html?'+ts,
@@ -323,7 +334,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             controller: 'CheckRollSend'
         })
 
-       
         //var viewPath = '/InsideMyView';
         //var currentPath = window.location.href.substr(0, window.location.href.indexOf('#') + 1);
         //var fullPath = currentPath + viewPath;
@@ -334,18 +344,17 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/FabricDataConfiguration/FinishFabricInspectionConfig.html?'+ts,
             controller: 'FinishFabricInspectionConfigController'
         })
-      
+
         .when('/FinishFabricInspectionConfig', {
             controller: function () {
                 //$rootScope.menu = false;
-               
-                window.history.back();
-               // window.location = "/Home/Index#!/home";               
-                window.open("/Home/Index#!/FinFabInspConfig", '_blank')                
-            },
-            template: ''           
-        })
 
+                window.history.back();
+               // window.location = "/Home/Index#!/home";
+                window.open("/Home/Index#!/FinFabInspConfig", '_blank')
+            },
+            template: ''
+        })
 
         // Fabric data configuration rounting for sample
 
@@ -359,7 +368,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
                 //$rootScope.menu = false;
 
                 window.history.back();
-                // window.location = "/Home/Index#!/home";               
+                // window.location = "/Home/Index#!/home";
                 window.open("/Home/Index#!/FinFabInspConfigSample", '_blank')
             },
             template: ''
@@ -373,7 +382,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
                 //$rootScope.menu = false;
 
                 window.history.back();
-                // window.location = "/Home/Index#!/home";               
+                // window.location = "/Home/Index#!/home";
                 window.open("/Home/Index#!/FinInspTableConfig", '_blank')
             },
             template: ''
@@ -397,6 +406,10 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
         .when('/FinishFabricInspectionConfigOffline', {
             templateUrl: '/App/Views/FabricDataConfiguration/FinishFabricInspectionConfigOffline.html?' + ts,
             controller: 'FinishFabricInspectionConfigOfflineController'
+        })
+        .when('/FinishedFabricHandoverToStore', {
+            templateUrl: '/App/Views/FabricDataConfiguration/FinishedFabricHandoverToStore.html?' + ts,
+            controller: 'FinishedFHTSController'
         })
 
         //Dashboard Routing
@@ -437,7 +450,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/DashboardManagement/DataRelatedDashboard/DynamicProductionMonitoring.html?' + ts,
             controller: 'DynamicProductionMonitoring'
         })
-        
 
         //BroadcastManagement routing
         .when('/BasicBroadcast', {
@@ -462,7 +474,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
     //    controller: 'MachineNameConfigController'
     //})
     $locationProvider.html5Mode(false).hashPrefix('!')
-
 
     $qProvider.errorOnUnhandledRejections(false);
     $mdDateLocaleProvider.formatDate = function (date) {
@@ -504,7 +515,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
     //    $scope.message = locals.message;
     //}
     function DialogController($scope, $http, $mdDialog, locals) {
-
         $scope.model = locals.model;
         $scope.action = function (mode) {
             $mdDialog.hide(mode);
@@ -523,4 +533,3 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
     //.controller('HomeController', function ($scope) {
     //    $scope.Message = "";
     //})
-

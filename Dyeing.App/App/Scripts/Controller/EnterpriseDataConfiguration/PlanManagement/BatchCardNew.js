@@ -23,13 +23,30 @@
   ) {
     let UnitId = $location.search().u;
     $scope.Enzyme = [{ Value: "Yes" }, { Value: "No" }];
+
+    //UnitList
     BatchCardNew.GetUnitAll($rootScope.UserId, function(data) {
       $scope.UnitList = data;
     });
 
+    //MachineList
     BatchCardNew.GetMachineData(UnitId, function(data) {
+      UnitId = $location.search().u;
       $scope.MachineList = data;
     });
+
+    BatchCardNew.GetTrollyNo(UnitId, function(data) {
+      $scope.TrollyInfo = data;
+    });
+
+    //Show or Hide those Section
+    $scope.ShowProcess = function(unit) {
+      if (unit === 16) {
+        $scope.buildProcessFlowRows();
+        $scope.buildOtherRows();
+        return ($scope.Sh = "Display: Auto");
+      } else return ($scope.Sh = "Display: None");
+    };
 
     //BatchCardNew.GetFinMcByType('Dyeing', function (data) {
     //    $scope.MachineList = data;
@@ -59,6 +76,13 @@
     //    reviseNo = 1;
     //$scope.ReviseNo = reviseNo;
 
+    function NozzleTrollyBatchDataLoad(Bpmid) {
+      BatchCardNew.GetNozzleTrollyBatchData(Bpmid, function(data) {
+        debugger;
+        $scope.nozzleTrolley = data.m_Item1;
+        //$scope.nozzleTrolley = data;
+      });
+    }
 
     $scope.batchSpec = [{}, {}, {}, {}, {}];
     $scope.nozzleTrolley = [{}, {}, {}, {}];
@@ -67,32 +91,74 @@
       $location.search().id,
       $scope.reviseNo,
       function(data) {
+        debugger;
+        NozzleTrollyBatchDataLoad($location.search().id);
         $scope.batch = data.m_Item1[0];
         $scope.batchDetails = data.m_Item2;
         $scope.batchSpec = data.m_Item3;
-        
+        $scope.isEditable = data.m_Item4[0].IsActive === 0 ? true : false;
+        $scope.WaterMark = data.m_Item5;
+        $scope.ProcessFlow = data.m_Item6;
+        $scope.Others = data.m_Item7;
+
+        var check = [$scope.ProcessFlow, $scope.Others].flatMap(arr =>
+          arr.filter(x => x.IsChecked === 1)
+        );
+
+        if (check.length > 0) {
+          BatchCardNew.GetUnitAll($rootScope.UserId);
+          $scope.SourceUnit = $scope.UnitList.find(x => x.Id === 16);
+          $scope.ShowProcess($scope.SourceUnit.Id);
+        }
+        //$scope.buildProcessFlowRows();
+        //$scope.buildOtherRows();
+
         $scope.batch.BpmId = $location.search().id;
         $scope.changePlanQty();
         $scope.changeActualQty();
         let totalRoll = 0;
         angular.forEach($scope.batchSpec, function(item) {
-          totalRoll = totalRoll + item.Rolls === undefined ? 0 : item.Rolls;
+          totalRoll += item.Rolls === undefined ? 0 : item.Rolls;
         });
 
         $scope.batch.TotalRolls = totalRoll;
 
         if (data.m_Item4[0].IsActive === 0) $scope.isEditable = true;
-          else $scope.isEditable = false;
+        else $scope.isEditable = false;
 
-
-        if ($scope.batch.EditOnly === "NULL") { $scope.btnSave = "Save"; }
-          else { $scope.btnSave = "Update"; $scope.batch.EditOnly = 0;}
+        if ($scope.batch.EditOnly === "NULL") {
+          $scope.btnSave = "Save";
+        } else {
+          $scope.btnSave = "Update";
+          $scope.batch.EditOnly = 0;
+        }
       }
     );
 
-    BatchCardNew.GetTrollyNo(12, function(data) {
-      $scope.TrollyInfo = data;
-    });
+    $scope.CheckWater = function(process) {
+      angular.forEach($scope.WaterMark, function(item) {
+        if (item.ProcessName === process) item.IsChecked = 1;
+        else item.IsChecked = 0;
+      });
+    };
+
+    $scope.buildProcessFlowRows = function() {
+      $scope.ProcessFlowRows = [];
+      if (!$scope.ProcessFlow || !$scope.ProcessFlow.length) return;
+
+      for (let i = 0; i < $scope.ProcessFlow.length; i += 4) {
+        $scope.ProcessFlowRows.push($scope.ProcessFlow.slice(i, i + 4));
+      }
+    };
+
+    $scope.buildOtherRows = function() {
+      $scope.OtherRows = [];
+      if (!$scope.Others || !$scope.Others.length) return;
+
+      for (let i = 0; i < $scope.Others.length; i += 4) {
+        $scope.OtherRows.push($scope.Others.slice(i, i + 4));
+      }
+    };
 
     $scope.actionDialog = function(action, dataModel) {
       $mdDialog
@@ -201,16 +267,45 @@
 
     function SaveUpdate() {
       debugger;
+      var process = [
+        $scope.ProcessFlow,
+        $scope.Others,
+        $scope.WaterMark
+      ].flatMap(arr =>
+        arr.filter(x => x.IsChecked === 1).map(item => ({
+          ProcessId: item.ProcessId,
+          BpmId: $scope.batch.Id,
+          UserId: $rootScope.UserId
+        }))
+      );
+
+      debugger;
+      var waterMark = $scope.WaterMark.find(x => x.IsChecked === 1);
+
       var rType = "";
+      rType =
+        waterMark === undefined || waterMark === null
+          ? ""
+          : waterMark.ProcessName === "PP Sample & China"
+            ? "PPC"
+            : waterMark.ProcessName;
 
       if ($scope.batch.ShadeOk) $scope.batch.Shade = "Ok";
       else if ($scope.batch.ShadeNOk) $scope.batch.Shade = "Not Ok";
 
       if ($scope.batch.QualityOk) $scope.batch.Quality = "Ok";
-      else if ($scope.batch.QualityOk) $scope.batch.Quality = "Not Ok";
+      else if ($scope.batch.QualityNOk) $scope.batch.Quality = "Not Ok";
+
       for (t = 0; t < $scope.nozzleTrolley.length; t++) {
-        $scope.nozzleTrolley[t].TrolleyId = $scope.nozzleTrolley[t].Trolley.id;
+        debugger;
+        $scope.nozzleTrolley[t].TrolleyId =
+          $scope.nozzleTrolley[t].Trolley === "" ||
+          $scope.nozzleTrolley[t].Trolley === null ||
+          $scope.nozzleTrolley[t].Trolley === undefined
+            ? 0
+            : $scope.nozzleTrolley[t].Trolley.id;
       }
+
       for (t = 0; t < $scope.batchSpec.length; t++) {
         $scope.batchSpec[t].PlanQty =
           $scope.batchSpec[t].PlanQty == ""
@@ -237,63 +332,77 @@
 
       let obj = {
         BpmId: $scope.batch.Id,
-        UnitId:$scope.batch.DyeingUnitId === undefined ? 0 : $scope.batch.DyeingUnitId,
+        UnitId:
+          $scope.batch.DyeingUnitId === undefined
+            ? 0
+            : $scope.batch.DyeingUnitId,
         //LoadingDate:null,
-        LoadingTime: $scope.batch.LoadingTime === null ? "" : $scope.batch.LoadingTime,
-        UnloadingTime: $scope.batch.UnloadingTime === null ? "" : $scope.batch.UnloadingTime,
+        LoadingTime:
+          $scope.batch.LoadingTime === null ? "" : $scope.batch.LoadingTime,
+        UnloadingTime:
+          $scope.batch.UnloadingTime === null ? "" : $scope.batch.UnloadingTime,
         ShadeName: $scope.batch.Color,
-        //LabdipNo: null,
+        LabdipNo: $scope.batch.LDNo,
         Turing: $scope.batch.Turing === null ? "" : $scope.batch.Turing,
         Enzyme: $scope.batch.Enzyme === null ? "" : $scope.batch.Enzyme,
-        IssueMethod: $scope.batch.IssueMethod === null ? "" : $scope.batch.IssueMethod,
+        IssueMethod:
+          $scope.batch.IssueMethod === null ? "" : $scope.batch.IssueMethod,
         Barcode: $scope.batch.Barcode === null ? "" : $scope.batch.Barcode,
         Roll: $scope.batch.Roll === null ? "" : $scope.batch.Roll,
         Shade: $scope.batch.Shade === null ? "" : $scope.batch.Shade,
         Quality: $scope.batch.Quality === null ? "" : $scope.batch.Quality,
-        NoteDyeing: $scope.batch.NoteDyeing === null ? "" : $scope.batch.NoteDyeing,
-        NoteFinishing: $scope.batch.NoteFinishing === null ? "" : $scope.batch.NoteFinishing,
+        NoteDyeing:
+          $scope.batch.NoteDyeing === null ? "" : $scope.batch.NoteDyeing,
+        NoteFinishing:
+          $scope.batch.NoteFinishing === null ? "" : $scope.batch.NoteFinishing,
         Process: $scope.batch.Process === null ? "" : $scope.batch.Process,
         EditOnly: $scope.batch.EditOnly,
         ReviseNo: $scope.batch.ReviseNo,
         //Reprocess: null,
-        PPSample:  $scope.batchPPSample === undefined ? "" : $scope.batchPPSample,
+        PPSample:
+          $scope.batchPPSample === undefined ? "" : $scope.batchPPSample,
         China: $scope.batchChina === undefined ? "" : $scope.batchChina,
-        PPSampleWithChina: $scope.batchPPSamplewithChina === undefined ? "" : $scope.batchPPSamplewithChina,
+        PPSampleWithChina:
+          $scope.batchPPSamplewithChina === undefined
+            ? ""
+            : $scope.batchPPSamplewithChina,
         SourceUnitId: Source,
         UserId: $rootScope.UserId,
         Remarks: $scope.batch.Remarks,
-        McNo: $scope.batch.McNo.MachineId === undefined  ? $scope.batch.MDId  : $scope.batch.McNo.MachineId,
+        McNo:
+          $scope.batch.McNo.MachineId === undefined
+            ? $scope.batch.MDId
+            : $scope.batch.McNo.MachineId,
         NewBatchSpec: $scope.batchSpec,
         NewBatchCardData: $scope.batchDetails,
-        nozzleTr: $scope.nozzleTrolley
+        NozzleTrolly: $scope.nozzleTrolley,
+        BatchProcessList: process
       };
 
-      $scope.batch.PPSample = $scope.batch.PPSample == 1 ? true : false;
-      $scope.batch.China = $scope.batch.China == 1 ? true : false;
-      $scope.batch.PPSamplewithChina =
-        $scope.batch.PPSamplewithChina == 1 ? true : false;
+      //$scope.batch.PPSample = $scope.batch.PPSample == 1 ? true : false;
+      //$scope.batch.China = $scope.batch.China == 1 ? true : false;
+      //$scope.batch.PPSamplewithChina =
+      //    $scope.batch.PPSamplewithChina == 1 ? true : false;
 
-      if ($scope.batch.PPSample === true) rType = "PPSample";
-      else if ($scope.batch.China === true) rType = "China";
-      else if ($scope.batch.PPSamplewithChina === true) rType = "PPC";
-      else rType = "o";
+      //if ($scope.batch.PPSample === true) rType = "PPSample";
+      //else if ($scope.batch.China === true) rType = "China";
+      //else if ($scope.batch.PPSamplewithChina === true) rType = "PPC";
+      //else rType = "o";
 
       BatchCardNew.BatchData_SaveUpdateNew(obj, function(res) {
         let Unit = Source;
-          if (res.ErrorMsg == null) {
-              $scope.batch.EditOnly = undefined;
-              $rootScope.alert(res.Msg);
-              $window.open(
-                "../DashboardManagement/NewBatchCardReport?BpmId=" +
-                  $scope.batch.Id +
-                  "&&Format=PDF&&rType=" +
-                  rType +
-                  "&&UnitNo=" +
-                  Unit +
-                  "#view = FitH"
-              );
-          
-          
+        if (res.ErrorMsg == null) {
+          $scope.batch.EditOnly = undefined;
+          $rootScope.alert(res.Msg);
+          $window.open(
+            "../DashboardManagement/NewBatchCardReport?BpmId=" +
+              $scope.batch.Id +
+              "&&Format=PDF&&rType=" +
+              rType +
+              "&&UnitNo=" +
+              Unit +
+              "#view = FitH"
+          );
         } else $rootScope.alert(res.ErrorMsg);
       });
     }

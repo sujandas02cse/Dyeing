@@ -229,7 +229,8 @@
                         </label>
                         <div class="col-md-8">
                             <!--<input type="text" id="tags" ng-keyup="complete()" ng-model="batchFins.BatchNo" placeholder="Batch No" class="form-control input-height" />-->
-                            <input type="text" id="batch" auto-focus ng-model="McOperation.BatchNo" typeahead-on-select="getDataByBatchId()" placeholder="Batch No.."
+                            <input type="text" id="batch" auto-focus ng-model="McOperation.BatchNo" 
+                                   typeahead-on-select="getDataByBatchId()" placeholder="Batch No.."
                                    class="form-control input-height"
                                    ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"
                                    typeahead-min-length="1" uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"

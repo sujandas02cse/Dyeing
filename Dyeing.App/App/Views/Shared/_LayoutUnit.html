@@ -1,0 +1,86 @@
+﻿<style>
+    .unit {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .unit-row {
+        gap: 20px;
+    }
+
+    .unit .control-label {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .unit-select {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 12px 18px;
+        width: 60%; /* Increase width */
+        max-width: 600px;
+        min-width: 300px;
+    }
+
+        .unit-select option {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+
+    .required {
+        color: red !important;
+    }
+
+
+
+
+    fieldset {
+        text-align: center;
+    }
+
+
+
+
+    .custom-radio {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        gap: 20px;
+    }
+
+
+
+    @media (max-width:768px) {
+        .unit select.form-control {
+            width: 100% !important;
+        }
+    }
+</style>
+
+
+
+<div class="unit">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="form-group d-flex align-items-center justify-content-center unit-row">
+                <label class="control-label me-3">
+                    Unit: <span class="required"> * </span>
+                </label>
+                <select class="form-control unit-select" select2="" name="unit"
+                        data-ng-model="$parent.Unit"
+                        ng-options="item as item.Name for item in UnitList">
+                    <option class="custom-font" value="" ng-required="true">Select Unit</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

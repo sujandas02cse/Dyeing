@@ -103,27 +103,37 @@
         }
     };
     
-    $scope.checkJob = function (dataModel) {
+    $scope.checkJob = function (dataModel, index, event) {
+
         if (!dataModel.chkJob) {
-            let isExist = $scope.chkPlan.filter(x => x.JobNo == dataModel.JobNo);
-            if ($scope.chkPlan.length == 0 || isExist.length > 0) {
+
+            let isExist = $scope.chkPlan.filter(x => x.JobNo === dataModel.JobNo);
+
+            let isSameColor = $scope.chkPlan.every(x => x.Color === dataModel.Color);
+
+            if ($scope.chkPlan.length == 0 || (isExist.length > 0 && isSameColor )) {
                 dataModel.GroupNo = 1;
                 dataModel.SeqNo = $scope.chkPlan.length + 1;
 
                 dataModel.chkJob = true;
+                event.target.checked = true;
                 $scope.chkPlan.push(dataModel);
-            } else {
+            }
+            else {
                 $rootScope.alert('Please! Select same job row before start Batch Planning....');
-                //dataModel.chkJob = false;
+                dataModel.chkJob = false;
+                event.target.checked = false;
+                //if (index === 1) $scope.PlanData[index].chkJob = false;
             }
         } else {
-            let curIndex = $scope.chkPlan.indexOf(x => x.JobNo == dataModel.JobNo);
+            let curIndex = $scope.chkPlan.indexOf(x => x.JobNo === dataModel.JobNo);
             $scope.chkPlan.splice(curIndex, 1);
+            dataModel.chkJob = false;
+            event.target.checked = false;
         }
 
         checkfixedcopy = JSON.parse(JSON.stringify($scope.chkPlan));
         checkfixed = JSON.parse(JSON.stringify($scope.chkPlan));
-
     }
 
     $scope.duplicate = function (model, indx) {

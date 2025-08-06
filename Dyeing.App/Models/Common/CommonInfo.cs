@@ -24,10 +24,10 @@ namespace Dyeing.App
        // public static string baseURL ="http://"+ Host+ (Host=="localhost"? ":11886":":425")+ "/api/";//"http://localhost:11886/api/";
       
          public static string baseURL =
-            
-      // "http://192.168.50.60:93/dyeingApi/api/";
 
-       // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+          // "http://192.168.50.60:93/dyeingApi/api/";
+
+         //"https://mis-dyeing.mascoknit.com/dyeingApi/api/";
 
         //scheme+"://" + Host + (Host == "localhost" ? ":809/dyeingapi" : ":443/dyeingApi") + "/api/";//
 
@@ -37,8 +37,8 @@ namespace Dyeing.App
 
         #region Dyeing
 
-        //  public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
-        // public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
+        //public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
 

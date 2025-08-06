@@ -141,7 +141,7 @@
                             ng-repeat="dataModel in (PlanData | filter : search)">
                             <td>
                                 <label class="control control--checkbox">
-                                    <input ng-click="checkJob(dataModel)" ng-model="dataModel.chkJob" type="checkbox" ng-init="dataModel.chkJob=false" class="js-check-all">
+                                    <input  ng-click="checkJob(dataModel, $index, $event)" ng-model="dataModel.chkJob" ng-   type="checkbox"  >
                                 </label>
                             </td>
                             <td>{{dataModel.BuyerName}}</td>

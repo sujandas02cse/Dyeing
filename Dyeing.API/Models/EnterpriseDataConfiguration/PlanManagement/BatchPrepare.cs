@@ -66,6 +66,20 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public string StitchLength { get; set; }
         }
 
+        public class BatchProcess
+        {
+            public int ProcessId { get; set; }
+            public int BpmId { get; set; }
+            public string UserId { get; set; }
+        }
+
+        public class NozzleTrolly
+        {
+            public int RowId { get; set; }
+            public int Nozzle { get; set; }
+            public int TrolleyId { get; set; }
+        }
+
         public class BatchCardNew
         {
             public int BpmId { get; set; }
@@ -74,7 +88,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public DateTime? LoadingTime { get; set; }
             public DateTime? UnloadingTime { get; set; }
             public string ShadeName { get; set; }
-            public int? LabdipNo { get; set; }
+            public string LabdipNo { get; set; }
             public string Turing { get; set; }
             public string Enzyme { get; set; }
             public string IssueMethod { get; set; }
@@ -96,8 +110,11 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public string UserId { get; set; }
             public string Remarks { get; set; }
             public int McNo { get; set; }
+
             public List<BatchSpecNew> NewBatchSpec { get; set; }
             public List<BatchCardDataNew> NewBatchCardData { get; set; }
+            public List<BatchProcess> BatchProcessList { get; set; }
+            public List<NozzleTrolly> NozzleTrolly { get; set; }
         }
 
         public class BatchResponseNew
@@ -124,9 +141,10 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                 ReviceNo = reviceno
                 //ReviseNo = ReviseNo
             };
-            return DatabaseHub.MultiQuery<object, object, object,object, object>(
+            return DatabaseHub.MultiQuery<object, object, object, object, object, object, object, object>(
                     storedProcedureName: @"[dbo].[usp_get_BatchCardDataById1]", model: data, dbName: DyeingDB);
         }
+
         public object BatchPrepare_SaveUpdate(BatchPrepareWrapper _obj)
         {
             var data = new
@@ -148,42 +166,79 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
 
         public BatchResponseNew BatchPrepare_SaveUpdateNew(BatchCardNew _obj)
         {
+            object data = null;
+            try
+            {
+                data = new
+                {
+                    BpmId = _obj.BpmId,
+                    HostIp = getclientIP(),
+                    LoadingDate = _obj.LoadingDate,
+                    LoadingTime = _obj.LoadingTime,
+                    UnloadingTime = _obj.UnloadingTime,
+                    ShadeName = _obj.ShadeName,
+                    LabdipNo = _obj.LabdipNo ?? "",
+                    Turing = _obj.Turing,
+                    Enzyme = _obj.Enzyme,
+                    IssueMethod = _obj.IssueMethod,
+                    Barcode = _obj.Barcode,
+                    Roll = _obj.Roll,
+                    Shade = _obj.Shade,
+                    Quality = _obj.Quality,
+                    NoteDyeing = _obj.NoteDyeing,
+                    NoteFinishing = _obj.NoteFinishing,
+                    EditOnly = _obj.EditOnly,
+                    Process = _obj.Process,
+                    ReviseNo = _obj.ReviseNo,
+                    PPSample = _obj.PPSample,
+                    China = _obj.China,
+                    PPsamplewithChina = _obj.PPSampleWithChina,
+                    SourceUnitId = _obj.SourceUnitId,
+                    UserId = _obj.UserId,
+                    Remarks = _obj.Remarks,
+                    McNo = _obj.McNo,
+                    NewBatchSpec = _obj.NewBatchSpec?.AsTableValuedParameter("dbo.tvp_BatchSpecNew1",
+                                new[] { "BpmId", "BodyPartId", "PlanQty", "ActualQty", "McDiaGauge", "Rolls", "Identification", "FDia", "GDia", "FGsm", "GGsm", "Remarks" }),
+                    NewBatchCardData = _obj.NewBatchCardData?.AsTableValuedParameter("dbo.tvp_NewBatchCardData",
+                                new[] { "BpmId", "BodyPartId", "FabricType", "Composition", "YarnType", "YarnBrand", "YarnLot", "StitchLength" }),
+                    BatchProcessList = _obj.BatchProcessList?.AsTableValuedParameter("dbo.tvp_ProcessOptionsType",
+                                new[] { "ProcessId", "BpmId", "UserId" }),
+                    NozzleTrolly = _obj.NozzleTrolly?.AsTableValuedParameter("dbo.tvp_NozzleTrolleyType",
+                                new[] { "RowId", "Nozzle", "TrolleyId" })
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in creating data object: {ex.Message}");
+                throw;
+            }
+
+
+            var result =  DatabaseHub.Query<object, BatchResponseNew>(storedProcedureName: "[dbo].[Usp_SaveUpdate_BatchPrepareNew1]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+
+            if (result == null)
+            {
+                // Handle gracefully - log, throw custom error, return message, etc.
+                throw new Exception("No result returned from stored procedure.");
+            }
+
+            // Proceed safely
+            return result;
+        }
+
+        public object NozzleTrollyBatchDataById(int Bpmid)
+        {
+           
             var data = new
             {
-                BpmId = _obj.BpmId,
-                HostIp = getclientIP(),
-                LoadingDate = _obj.LoadingDate,
-                LoadingTime = _obj.LoadingTime,
-                UnloadingTime = _obj.UnloadingTime,
-                ShadeName = _obj.ShadeName,
-                LabdipNo = _obj.LabdipNo,
-                Turing = _obj.Turing,
-                Enzyme = _obj.Enzyme,
-                IssueMethod = _obj.IssueMethod,
-                Barcode = _obj.Barcode,
-                Roll = _obj.Roll,
-                Shade = _obj.Shade,
-                Quality = _obj.Quality,
-                NoteDyeing = _obj.NoteDyeing,
-                NoteFinishing = _obj.NoteFinishing,
-                EditOnly = _obj.EditOnly,
-                Process = _obj.Process,
-                ReviseNo = _obj.ReviseNo,
-                //Reprocess = null,
-                PPSample = _obj.PPSample,
-                China = _obj.China,
-                PPsamplewithChina = _obj.PPSampleWithChina,
-                SourceUnitId = _obj.SourceUnitId,
-                UserId = _obj.UserId,
-                Remarks = _obj.Remarks,
-                McNo = _obj.McNo,
-                NewBatchSpec = _obj.NewBatchSpec.AsTableValuedParameter("dbo.tvp_BatchSpecNew1",
-                            new[] { "BpmId", "BodyPartId", "PlanQty", "ActualQty", "McDiaGauge", "Rolls", "Identification", "FDia", "GDia", "FGsm", "GGsm","Remarks" }),
-                NewBatchCardData = _obj.NewBatchCardData.AsTableValuedParameter("dbo.tvp_NewBatchCardData",
-                             new[] { "BpmId", "BodyPartId", "FabricType", "Composition", "YarnType", "YarnBrand", "YarnLot", "StitchLength"})
+                BpmId = Bpmid
+                //ReviseNo = ReviseNo
             };
-            
-            return DatabaseHub.Query<object, BatchResponseNew>(storedProcedureName: "[dbo].[Usp_SaveUpdate_BatchPrepareNew1]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+
+            return DatabaseHub.MultiQuery<object,object,object>(
+                    storedProcedureName: @"[dbo].[usp_get_NozzleTrollyBatchDataById]", model: data, dbName: DyeingDB);
         }
         //public object BatchPrepare_SaveUpdate(BatchPrepareWrapper _obj)
         //{

@@ -875,5 +875,24 @@ namespace Dyeing.API.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetTrackingNo(string UnitId)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetTrackingNo(UnitId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
     }
 }

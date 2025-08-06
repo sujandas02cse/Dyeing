@@ -42,6 +42,7 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
                 return InternalServerError(exception: exception);
             }
         }
+
         [HttpGet]
         public IHttpActionResult GetBatchDataById(int Id,int reviceno)
         {
@@ -62,6 +63,7 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
             }
 
         }
+
         [HttpPost]
         public IHttpActionResult BatchPrepare_SaveUpdate(BatchPrepareWrapper _obj)
         {
@@ -148,6 +150,29 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
                 return Ok(_res);
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult NozzleTrollyBatchDataById(int BpmId)
+        {
+            try
+            {
+                var queryData = new BatchPrepare().NozzleTrollyBatchDataById(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
+
         //[HttpPost]
         //public IHttpActionResult BatchPrepare_SaveUpdate(BatchPrepareWrapper _obj)
         //{

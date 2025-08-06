@@ -18,7 +18,15 @@
     }
 
     _obj.GetBatchDataById = function (Id, reviceno, cb) {
-        $http.get(baseApiURL + 'BatchPrepare/GetBatchDataById?Id=' + Id + '&reviceno=' + reviceno ).then(function successCallback(response) {
+        $http.get(baseApiURL + 'BatchPrepare/GetBatchDataById?Id=' + Id + '&reviceno=' + reviceno).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Information....");
+        });
+    }
+
+    _obj.GetNozzleTrollyBatchData = function (BpmId, cb) {
+        $http.get(baseApiURL + 'BatchPrepare/NozzleTrollyBatchDataById?BpmId=' + BpmId ).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Information....");
@@ -29,6 +37,9 @@
         $http.get(baseApiURL + 'CommonAPI/GetTrollyNo?unitId=' + unitId).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
+            debugger
+            Console.log('a', response);
+            debugger
             alert("Error Occured during Load Information....");
         });
     }

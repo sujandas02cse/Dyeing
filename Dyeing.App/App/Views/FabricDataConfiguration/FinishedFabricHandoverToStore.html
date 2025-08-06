@@ -1,0 +1,212 @@
+﻿<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .input-height {
+        height: 38px;
+        width: 230px;
+    }
+
+    .scroll-table-container {
+        width: 100%;
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    .custom_tbl {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+        .custom_tbl th,
+        .custom_tbl td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            background-color: powderblue;
+            color: white;
+            z-index: 100;
+        }
+
+        .custom_tbl tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .custom_tbl tr:hover td {
+            background-color: #364865;
+            color: white;
+        }
+
+    .typeahead.dropdown-menu {
+        z-index: 10 !important;
+    }
+
+    .card-body > div:first-child {
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .table-text > thead:first-child > tr:first-child > th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .input-field {
+        height: 38px;
+        width: 230px;
+    }
+
+    .multi-roll-btn {
+        height: 38px;
+        font-size: 14px;
+        padding: 0 20px;
+    }
+
+    .form-label {
+        white-space: nowrap;
+    }
+
+    .gap-2 {
+        gap: 10px; /* Horizontal gap between label and input */
+    }
+</style>
+
+<body ng-controller="FinishedFHTSController">
+    <div class="content-header sty-one">
+        <h1>Finished Fabric Handover To Store</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Fabric Data Configuration</a></li>
+            <li><i class="fa fa-angle-right"></i> Finished Fabric Handover To Store</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="padding:0; ">
+        <div><br /></div>
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+
+            <div ng-include src="'../../../App/Views/Shared/_LayoutUnit.html'"></div>
+
+            <div class="form-group row" style="margin-bottom: 15px;">
+
+                <!-- Tracking No -->
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="form-label mb-0">
+                            <strong>Tracking No:</strong><span style="color:red"> *</span>
+                        </label>
+                        <input type="text"
+                               ng-model="Tracking"
+                               typeahead-on-select="GetDataByTracking()"
+                               uib-typeahead="item as item.TrackingNo for item in TrackingList | filter: {TrackingNo:$viewValue} | limitTo:8"
+                               placeholder="Tracking No"
+                               class="form-control input-field" />
+                    </div>
+                </div>
+
+                <!-- Single Roll -->
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="form-label mb-0">
+                            <strong>Single Roll:</strong><span style="color:red"> *</span>
+                        </label>
+                        <input type="text"
+                               ng-model="SingleRollStickerNo"
+                               ng-keypress="keyPressHandlerForSingleRoll($event)"
+                               placeholder="Sticker No"
+                               class="form-control input-field" />
+                    </div>
+                </div>
+
+                <!-- Multi Roll Button -->
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                   
+                    <button id="btnMultiRoll"
+                            class="btn btn-info multi-roll-btn"
+                            ng-click="OpenMultiRollPopup()">
+                        <i class="fa fa-plus-circle"></i> Multi Roll
+                    </button>
+                </div>
+            </div>
+
+            <div style="width: 100%; overflow: auto; max-height: 600px;">
+                <table class="table table-bordered bordered table-text table-hover custom_tbl">
+                    <thead class="bg">
+                        <tr>
+                            <th style="width: 2%;"></th>
+                            <th style="width: 2%;">SL</th>
+                            <th style="width: 7%;">Batch No</th>
+                            <th style="width: 3%;">Roll</th>
+                            <th style="width: 10%;">Buyer</th>
+                            <th style="width: 8%;">Style</th>
+                            <th style="width: 10%;">Order</th>
+                            <th style="width: 10%;">Job</th>
+                            <th style="width: 10%;">Color</th>
+                            <th style="width: 14%;">Fab Type</th>
+                            <th style="width: 13%;">Composition</th>
+                            <th style="width: 3%;">Req Dia</th>
+                            <th style="width: 3%;">Req GSM</th>
+                            <th style="width: 3%;">Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="item in PackingList track by $index">
+                            <td>
+                                <button class="btn-adn btn-danger btn-sm" ng-click="removeRow($index)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.BatchNo}}</td>
+                            <td>{{item.RollNo}}</td>
+                            <td>{{item.Buyer}}</td>
+                            <td>{{item.StyleNo}}</td>
+                            <td>{{item.OrderNo}}</td>
+                            <td>{{item.Job}}</td>
+                            <td>{{item.Color}}</td>
+                            <td>{{item.FabType}}</td>
+                            <td>{{item.Composition}}</td>
+                            <td>{{item.RequiredDia}}</td>
+                            <td>{{item.RequiredGSM}}</td>
+                            <td>{{item.Qty}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row mb-3">
+                <div class="offset-md-2 col-md-12">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- Multi Roll Barcode Entry Modal -->
+<div class="modal fade" id="multiRollModal" tabindex="-1" role="dialog" aria-labelledby="multiRollModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="multiRollModalLabel">Enter Multiple Barcodes</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="8" ng-model="MultiRollStickerNo" placeholder="Enter one barcode per line..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" ng-click="MultiRollStickerNo = ''">
+                    CLEAR
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="GetDataByMultiRoll()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -146,198 +146,212 @@
                     if ($scope.batchType == "Bulk") {
                       model = {
                         SlNo: i,
-                        UnitId: exceljson[i]["UnitId"].trim(),
-                        McNo: exceljson[i]["McNo"].trim(),
-                        Buyer: exceljson[i].Buyer.trim(),
-                        Job: exceljson[i]["Job"].trim(),
-                        Style: exceljson[i]["Style"].trim(),
-                        Color: exceljson[i]["Color"].trim(),
-                        LDNo: exceljson[i]["LDNo"].trim(),
+                        UnitId: String(exceljson[i]["UnitId"]).trim(),
+                        McNo: String(exceljson[i]["McNo"]).trim(),
+                        Buyer: String(exceljson[i].Buyer).trim(),
+                        Job: String(exceljson[i]["Job"]).trim(),
+                        Style: String(exceljson[i]["Style"]).trim(),
+                        Color: String(exceljson[i]["Color"]).trim(),
+                        LDNo: String(exceljson[i]["LDNo"]).trim(),
                         RN:
                           exceljson[i]["RN"] == undefined
                             ? ""
-                            : exceljson[i]["RN"].trim(),
+                            : String(exceljson[i]["RN"]).trim(),
                         FabType:
                           exceljson[i]["FabType"] == undefined
                             ? ""
-                            : exceljson[i]["FabType"].trim(),
+                            : String(exceljson[i]["FabType"]).trim(),
                         YarnSource:
                           exceljson[i]["YarnSource"] == undefined
                             ? ""
-                            : exceljson[i]["YarnSource"].trim(),
+                            : String(exceljson[i]["YarnSource"]).trim(),
                         YarnLot:
                           exceljson[i]["YarnLot"] == undefined
                             ? ""
-                            : exceljson[i]["YarnLot"].trim(),
-                        DeliveryDate: exceljson[i]["DeliveryDate"],
+                            : String(exceljson[i]["YarnLot"]).trim(),
+
+                        DeliveryDate: getExcelDate(
+                          exceljson[i]["DeliveryDate"]
+                        ),
+
                         MatchingWith:
                           exceljson[i]["MatchingWith"] == undefined
                             ? ""
-                            : exceljson[i]["MatchingWith"].trim(),
+                            : String(exceljson[i]["MatchingWith"]).trim(),
+
                         Enzyme:
                           exceljson[i]["Enzyme"] == undefined
                             ? ""
-                            : exceljson[i]["Enzyme"].trim(),
+                            : String(exceljson[i]["Enzyme"]).trim(),
+
                         Process:
                           exceljson[i]["Process"] == undefined
                             ? ""
-                            : exceljson[i]["Process"].trim(),
-                        Body: exceljson[i]["Body"],
-                        Rib: exceljson[i]["Rib"],
-                        BNT: exceljson[i]["BNT"],
-                        FabQty: exceljson[i]["FabQty"],
-                        NoOfBatch: exceljson[i]["NoOfBatch"],
+                            : String(exceljson[i]["Process"]).trim(),
+
+                        Body: parseFloat(exceljson[i]["Body"]) || 0,
+                        Rib: parseFloat(exceljson[i]["Rib"]) || 0,
+                        BNT: parseFloat(exceljson[i]["BNT"]) || 0,
+
+                        FabQty: parseFloat(exceljson[i]["FabQty"]) || 0,
+
+                        NoOfBatch: parseInt(exceljson[i]["NoOfBatch"]) || 0,
+
                         Remarks:
                           exceljson[i]["Remarks"] == undefined
                             ? ""
-                            : exceljson[i]["Remarks"].trim()
+                            : String(exceljson[i]["Remarks"]).trim()
                       };
                     } else {
                       model = {
                         SlNo: i,
                         UnitId: $scope.Unit.Id,
                         McNo: mcNo.trim(),
-                        Buyer: exceljson[i]["BUYER"].trim(),
-                        Job: exceljson[i]["JOB NO"].trim(),
-                        Style: exceljson[i]["STYLE/ORDER"].trim(),
-                        Color: exceljson[i]["COLOR"].trim(),
+                        Buyer: String(exceljson[i]["BUYER"]).trim(),
+                        Job: String(exceljson[i]["JOB NO"]).trim(),
+                        Style: String(exceljson[i]["STYLE/ORDER"]).trim(),
+                        Color: String(exceljson[i]["COLOR"]).trim(),
                         BatchNo:
                           exceljson[i]["BATCH NO"] == undefined
                             ? ""
-                            : exceljson[i]["BATCH NO"].trim(),
+                            : String(exceljson[i]["BATCH NO"]).trim(),
                         LDNo:
                           exceljson[i]["LD NO"] == undefined
                             ? ""
-                            : exceljson[i]["LD NO"].trim(),
+                            : String(exceljson[i]["LD NO"]).trim(),
                         RNNo:
                           exceljson[i]["RN No"] == undefined
                             ? ""
-                            : exceljson[i]["RN No"].trim(),
+                            : String(exceljson[i]["RN No"]).trim(),
                         FabType:
                           exceljson[i]["FAB. TYPE"] == undefined
                             ? ""
-                            : exceljson[i]["FAB. TYPE"].trim(),
+                            : String(exceljson[i]["FAB. TYPE"]).trim(),
                         YarnSource:
                           exceljson[i]["YARN SOURCE"] == undefined
                             ? ""
-                            : exceljson[i]["YARN SOURCE"].trim(),
+                            : String(exceljson[i]["YARN SOURCE"]).trim(),
                         YarnLot:
                           exceljson[i]["YARN LOT"] == undefined
                             ? ""
-                            : exceljson[i]["YARN LOT"].trim(),
+                            : String(exceljson[i]["YARN LOT"]).trim(),
                         ShipDate:
                           exceljson[i]["SHIP DATE"] == undefined
                             ? ""
-                            : exceljson[i]["SHIP DATE"].trim(),
+                            : getExcelDate(exceljson[i]["SHIP DATE"]).trim(),
                         DeliveryDate:
                           exceljson[i]["DELIVERY COM. DATE"] == undefined
                             ? ""
-                            : exceljson[i]["DELIVERY COM. DATE"].trim(),
+                            : getExcelDate(
+                                exceljson[i]["DELIVERY COM. DATE"]
+                              ),
                         MatchingWith:
                           exceljson[i]["MATCHING"] == undefined
                             ? ""
-                            : exceljson[i]["MATCHING"].trim(),
+                            : String(exceljson[i]["MATCHING"]).trim(),
                         Enzyme:
                           exceljson[i]["ENZYME"] == undefined
                             ? ""
-                            : exceljson[i]["ENZYME"].trim(),
+                            : String(exceljson[i]["ENZYME"]).trim(),
                         Process:
                           exceljson[i]["PROCESS"] == undefined
                             ? ""
-                            : exceljson[i]["PROCESS"].trim(),
+                            : String(exceljson[i]["PROCESS"]).trim(),
                         Body:
                           exceljson[i]["BODY"] == undefined
                             ? ""
-                            : exceljson[i]["BODY"].trim(),
+                            : parseFloat(exceljson[i]["BODY"]) || 0,
                         Rib:
                           exceljson[i]["RIB"] == undefined
                             ? ""
-                            : exceljson[i]["RIB"].trim(),
+                            : parseFloat(exceljson[i]["RIB"]) || 0,
                         BNT:
                           exceljson[i]["BNT"] == undefined
                             ? ""
-                            : exceljson[i]["BNT"].trim(),
+                            : parseFloat(exceljson[i]["BNT"]) || 0,
                         FabQty:
                           exceljson[i]["TOTAL FAB. QTY"] == undefined
                             ? ""
-                            : exceljson[i]["TOTAL FAB. QTY"].trim(),
+                            : parseFloat(exceljson[i]["TOTAL FAB. QTY"]) || 0,
                         NoOfBatch:
                           exceljson[i]["NO OF BATCH"] == undefined
                             ? ""
-                            : exceljson[i]["NO OF BATCH"].trim(),
+                            : parseFloat(exceljson[i]["NO OF BATCH"]) || 0,
                         NextBatch:
                           exceljson[i]["NEXT BATCH"] == undefined
                             ? ""
-                            : exceljson[i]["NEXT BATCH"].trim(),
+                            : String(exceljson[i]["NEXT BATCH"]).trim(),
                         SedoProg:
                           exceljson[i]["SEDO PROG"] == undefined
                             ? ""
-                            : exceljson[i]["SEDO PROG"].trim(),
+                            : String(exceljson[i]["SEDO PROG"]).trim(),
                         Remarks:
                           exceljson[i]["REMARKS"] == undefined
                             ? ""
-                            : exceljson[i]["REMARKS"].trim(),
+                            : String(exceljson[i]["REMARKS"]).trim(),
                         SampleStage:
                           exceljson[i]["SAMPLE STAGE"] == undefined
                             ? ""
-                            : exceljson[i]["SAMPLE STAGE"].trim(),
+                            : String(exceljson[i]["SAMPLE STAGE"]).trim(),
                         TCX:
                           exceljson[i]["TCX"].trim() == undefined
                             ? ""
-                            : exceljson[i]["TCX"].trim(),
+                            : String(exceljson[i]["TCX"]).trim(),
                         FabricFor:
                           exceljson[i]["FABRIC FOR"] == undefined
                             ? ""
-                            : exceljson[i]["FABRIC FOR"].trim(),
+                            : String(exceljson[i]["FABRIC FOR"]).trim(),
                         RGSM:
                           exceljson[i]["R.GSM"] == undefined
                             ? ""
-                            : exceljson[i]["R.GSM"].trim(),
+                            : String(exceljson[i]["R.GSM"]).trim(),
                         RequiredDia:
                           exceljson[i]["REQUIRED DIA"] == undefined
                             ? ""
-                            : exceljson[i]["REQUIRED DIA"].trim(),
+                            : String(exceljson[i]["REQUIRED DIA"]).trim(),
                         ColourTypes:
                           exceljson[i]["COLOR TYPES"] == undefined
                             ? ""
-                            : exceljson[i]["COLOR TYPES"].trim(),
+                            : String(exceljson[i]["COLOR TYPES"]).trim(),
                         Treatment:
                           exceljson[i]["TREATMENT"] == undefined
                             ? ""
-                            : exceljson[i]["TREATMENT"].trim(),
+                            : String(exceljson[i]["TREATMENT"]).trim(),
                         TestRequirement:
                           exceljson[i]["TEST REQUIREMENT"] == undefined
                             ? ""
-                            : exceljson[i]["TEST REQUIREMENT"].trim(),
+                            : String(exceljson[i]["TEST REQUIREMENT"]).trim(),
                         PreTreatment:
                           exceljson[i]["PRE-TREATMENT"] == undefined
                             ? ""
-                            : exceljson[i]["PRE-TREATMENT"].trim(),
+                            : String(exceljson[i]["PRE-TREATMENT"]).trim(),
                         LabRemarks:
                           exceljson[i]["LAB REMARKS"] == undefined
                             ? ""
-                            : exceljson[i]["LAB REMARKS"].trim(),
+                            : String(exceljson[i]["LAB REMARKS"]).trim(),
                         YCountAndSpendex:
                           exceljson[i]["Y.COUNT & SPENDEX"] == undefined
                             ? ""
-                            : exceljson[i]["Y.COUNT & SPENDEX"].trim(),
+                            : String(exceljson[i]["Y.COUNT & SPENDEX"]).trim(),
                         SL:
                           exceljson[i]["S.L"] == undefined
                             ? ""
-                            : exceljson[i]["S.L"].trim(),
+                            : String(exceljson[i]["S.L"]).trim(),
                         MCDiaGaug:
                           exceljson[i]["M/C DIA/GAUG"] == undefined
                             ? ""
-                            : exceljson[i]["M/C DIA/GAUG"].trim(),
+                            : String(exceljson[i]["M/C DIA/GAUG"]).trim(),
 
                         BookingQty:
                           exceljson[i]["BOOKING QTY"] == undefined
                             ? ""
-                            : exceljson[i]["BOOKING QTY"].trim(),
+                            : parseFloat(exceljson[i]["BOOKING QTY"]) || 0,
                         BatchPreparationDate:
                           exceljson[i]["BATCH PREPARATION DATE"] == undefined
                             ? ""
-                            : exceljson[i]["BATCH PREPARATION DATE"].trim()
+                            : getExcelDate(
+                                exceljson[i]["BATCH PREPARATION DATE"]
+                              )
                       };
                     }
                     $scope.batchData.push(model);
@@ -638,15 +652,15 @@
                       Enzyme: String(exceljson[i]["Enzyme"] || "").trim(),
                       Process: String(exceljson[i]["Process"] || "").trim(),
 
-                        Body: parseFloat(exceljson[i]["BODY"]) || 0,
-                        Rib: parseFloat(exceljson[i]["RIB"]) || 0,
-                        BNT: parseFloat(exceljson[i]["BNT"]) || 0,
+                      Body: parseFloat(exceljson[i]["BODY"]) || 0,
+                      Rib: parseFloat(exceljson[i]["RIB"]) || 0,
+                      BNT: parseFloat(exceljson[i]["BNT"]) || 0,
 
                       FabQty: parseFloat(exceljson[i]["Total FAB. QTY"]) || 0,
 
-                        NoOfBatch: parseFloat(exceljson[i]["No of Batch"] || 0),
+                      NoOfBatch: parseFloat(exceljson[i]["No of Batch"] || 0),
 
-                        NextBatch: String(
+                      NextBatch: String(
                         exceljson[i]["NEXT BATCH"] || ""
                       ).trim(),
                       SedoProg: String(exceljson[i]["Sedo Prog"] || "").trim(),
@@ -681,7 +695,7 @@
                       SL: String(exceljson[i]["S.L"] || "").trim(),
                       MCDiaGaug: String(
                         exceljson[i]["M/C Dia/Gaug"] || ""
-                        ).trim(),
+                      ).trim(),
 
                       BookingQty: parseFloat(exceljson[i]["Booking Qty"]) || 0,
 

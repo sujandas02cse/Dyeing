@@ -135,14 +135,16 @@
 
                             <input type='text'
                                    uib-typeahead="item as item.BatchNo for item in BatchList | filter: {BatchNo:$viewValue} | limitTo:8"
+                                   typeahead-on-select="enterBatchClick()"
                                    placeholder="Batch No"
-                                   id="BatchNo" style="width: 100%; display: inline;" auto-focus ng-model="BatchNo"
+                                   id="BatchNo" 
+                                   style="width: 100%; display: inline;"
+                                   auto-focus 
+                                   ng-model="BatchNo"
                                    ng-virtual-keyboard="{kt: 'Numpad', enterSubmit: enterBatchClick, size:5, keyCenter: 4, customClass: 'myCustomizedVkt'}"
-                                   class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()">
-
+                                   class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" 
+                                   >
                         </div>
-
-
                         <label class="control-label col-md-2">
                             Buyer:
                             <span class="required" style="color:red"> * </span>

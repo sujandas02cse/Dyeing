@@ -16,7 +16,7 @@
     <DataSet Name="LabSticker">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_LabStickerOffline 1,'9665-03-028',7,'New'</CommandText>
+        <CommandText>exec usp_rpt_LabStickerOffline 1,'5456-01-074',7,'New'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

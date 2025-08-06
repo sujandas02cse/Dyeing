@@ -112,7 +112,8 @@
       }
 
     $scope.CompactingTime = [{ id: 1, name: "1st Time" }];
-    $scope.CurrCompTime = 1;
+      $scope.CurrCompTime = 1;
+
     var batchId = 0;
 
     $scope.getDataByBatchId = function() {

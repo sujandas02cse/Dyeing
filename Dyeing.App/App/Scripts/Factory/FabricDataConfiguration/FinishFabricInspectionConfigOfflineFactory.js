@@ -228,6 +228,23 @@
                 );
         };
 
+        _obj.GetMaximumCompactingTime = function (BatchNo, cb) {
+            debugger;
+            $http
+                .get(
+                    baseApiURL +
+                    "FinishedFabricInspecitonConfigOffline/GetMaximumCompactingTime?BatchNo=" +
+                    BatchNo 
+                )
+                .then(
+                    function successCallback(response) {
+                        cb(response.data);
+                    },
+                    function errorCallback(response) {
+                        alert("Error Occured during Load Information....");
+                    }
+                );
+        };
 
 
         return _obj;

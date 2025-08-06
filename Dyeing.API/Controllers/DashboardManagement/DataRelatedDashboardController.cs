@@ -708,6 +708,7 @@ namespace Dyeing.API.Controllers.DashboardManagement
             }
 
         }
+
         [HttpGet]
         public async Task<IHttpActionResult> GetTrolleyNozzleNew(int BpmId)
         {
@@ -728,6 +729,49 @@ namespace Dyeing.API.Controllers.DashboardManagement
                 return InternalServerError(exception: exception);
             }
         }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchCardProcessFlowNewV2(int BpmId)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().GetProcessFlowData(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchCardOthersFlowNewV2(int BpmId)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().GetOthersFlowData(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+
         #endregion
 
 

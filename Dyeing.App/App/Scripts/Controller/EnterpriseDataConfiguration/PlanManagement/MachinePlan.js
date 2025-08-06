@@ -26,7 +26,7 @@
     });
 
     PlanManagement.GetUnitAll($rootScope.UserId, function (data) {
-        debugger
+
         $scope.UnitList = data;
         if ($scope.UnitList.length == 1) {
             $scope.Unit = $scope.UnitList[0];
@@ -46,9 +46,7 @@
         $scope.isLoading = true;
         PlanManagement.GetBuyerByUnit($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
-            debugger
             PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
-                debugger
                 $scope.MachineList = data;
             });
             $scope.isLoading = false;
@@ -113,13 +111,10 @@
                 $scope.chkPlan[i].SeqNo -= 1;
             }
         }
-        debugger
-        console.log(JSON.stringify($scope.chkPlan));
         CalTotalQty(remModel);
     }
 
     $scope.copy = function (model, indx) {
-        debugger
         CalTotalQty(model);
         for (let i = 0; i < $scope.chkPlan.length; i++) {
             let groupNo = parseInt($scope.chkPlan[i].GroupNo);
@@ -127,7 +122,6 @@
                 $scope.chkPlan[i].GroupNo = $scope.chkPlan[i].GroupNo + 1;
             }
         }
-        debugger
         let planData = $scope.chkPlan.filter(x => x.GroupNo == model.GroupNo);
         if (planData.length > 0) {
             for (i = 0; i < planData.length; i++) {              
@@ -151,11 +145,9 @@
             }
             noOfNewBatch++;
         }
-        console.log("copy", $scope.chkPlan)
     }
         
     function CalTotalQty(model) {
-        debugger
         $scope.chkPlan
             .filter(x => x.GroupNo === model.GroupNo)
             .forEach((item, _, filteredItems) => {
@@ -219,7 +211,6 @@
     }
 
     $scope.actionDialog = function (action) {
-        debugger
         if (machineNo.MachineId == null) return;
 
         $mdDialog.show(
@@ -245,7 +236,6 @@
     }
 
     function SaveUpdate() {
-        debugger
         const distinctBpmIds = [...new Set($scope.chkPlan.map(obj => obj.BpmId))];
 
         distinctBpmIds.forEach(function (item) {
@@ -256,7 +246,6 @@
             });
         });
 
-        debugger
         angular.forEach($scope.chkPlan, function (item) {
             let splist = [];
             let sp = item.SpecialFinishList.filter(x => x.FabOp == true);
@@ -270,7 +259,6 @@
 
             item.SpecialFinish = splist;
         });
-        debugger
         let planData = [];
         for (let i = 0; i < $scope.chkPlan.length; i++) {
             let model = angular.copy($scope.chkPlan[i]);
@@ -286,8 +274,7 @@
             Plan: planData
             //Batch: $scope.BatchData
         }
-        console.log("SaveData", JSON.stringify(obj));
-        debugger
+
         PlanManagement.MachinePlan_SaveUpdate(obj, function (res) {
             if (res.ErrorMsg == null) {
                 $scope.LoadProcessData();
@@ -305,10 +292,8 @@
     //Custom Popup
     $scope.MPlanPopup = function (ev) {
         
-        debugger
         PlanManagement.GetBatchPlanByGuid(CurrUniqueId, CurrComId, function (data) {
             $scope.chkPlan = data;
-            console.log("data", $scope.chkPlan);
 
             let lastGroupNo = "", gTotalPQty = 0;
             for (i = 0; i < $scope.chkPlan.length; i++) {
@@ -319,7 +304,7 @@
                 angular.forEach($scope.chkPlan, function (item) {
                     SpecialFinish(item);
                 });
-                console.log('a', $scope.PlanData);
+
                 let a = $scope.PlanData;
 
                 let total = 0;
@@ -460,7 +445,7 @@
         let numberA = [];
         let SfListString = JSON.stringify(SfList); // Convert object to JSON string
         let newList = JSON.parse(SfListString);
-        console.log(newList);
+
         if (model.SpecialFinish) {
             numberA = model.SpecialFinish.split(',').map(Number);
 

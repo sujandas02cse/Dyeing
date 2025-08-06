@@ -823,7 +823,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
         #region New Process Report
         public async Task<ActionResult> NewBatchCardReport(int BpmId, string Format, string rType,int UnitNo)
         {
-            string RptPath = "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
+            string RptPath =UnitNo == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
             string RptType = "";
             if (rType == "PPSample")
                 RptType = "PP";
@@ -831,9 +831,20 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 RptType = "C";
             else if (rType == "PPC")
                 RptType = "PPC";
-            else if (rType == "o")
+            else if (rType == "Organic")
                 RptType = "O";
-
+            else if (rType == "PSI")
+                RptType = "PSI";
+            else if (rType == "First Batch")
+                RptType = "FB";
+            else if (rType == "Trial Batch")
+                RptType = "TB";
+            else if (rType == "Spudi")
+                RptType = "S";
+            else if (rType == "")
+                RptType = "Unknown"; 
+            else
+                RptType = "Unknown";
             //string DataSet = "BatchCard";
             try
             {
@@ -881,7 +892,6 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 dt = new DataTable();
 
                 
-
                 response = await client.GetAsync("DataRelatedDashboard/GetBatchCardSpecificationNewV2?BpmId=" + BpmId);
                 if (response.IsSuccessStatusCode)
                 {
@@ -893,6 +903,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 rpt.DataSources.Add(rs2);
                 dt = new DataTable();
 
+
                 response = await client.GetAsync("DataRelatedDashboard/GetTrolleyNozzleNew?BpmId=" + BpmId);
                 if (response.IsSuccessStatusCode)
                 {
@@ -900,8 +911,31 @@ namespace Dyeing.App.Controllers.DashboardManagement
                     var json = JsonConvert.SerializeObject(_lobj);
                     dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
                 }
-                ReportDataSource rs4 = new ReportDataSource("Nozzle", dt);
+                ReportDataSource rs3 = new ReportDataSource("Nozzle", dt);
+                rpt.DataSources.Add(rs3);
+
+
+                response = await client.GetAsync("DataRelatedDashboard/GetBatchCardProcessFlowNewV2?BpmId=" + BpmId);
+                if (response.IsSuccessStatusCode)
+                {
+                    _lobj = await response.Content.ReadAsAsync<List<object>>();
+                    var json = JsonConvert.SerializeObject(_lobj);
+                    dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
+                }
+                ReportDataSource rs4 = new ReportDataSource("ProcessFlow", dt);
                 rpt.DataSources.Add(rs4);
+
+
+                response = await client.GetAsync("DataRelatedDashboard/GetBatchCardOthersFlowNewV2?BpmId=" + BpmId);
+                if (response.IsSuccessStatusCode)
+                {
+                    _lobj = await response.Content.ReadAsAsync<List<object>>();
+                    var json = JsonConvert.SerializeObject(_lobj);
+                    dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
+                }
+                ReportDataSource rs5 = new ReportDataSource("Others", dt);
+                rpt.DataSources.Add(rs5);
+
 
                 rpt.ReportPath = Server.MapPath(RptPath);
 

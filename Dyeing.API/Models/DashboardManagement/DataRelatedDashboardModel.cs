@@ -483,7 +483,23 @@ namespace Dyeing.API.Models.DashboardManagement
                     storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_updated1]", parameters: parameters, dbName: DyeingDB);
         }
 
+        public Task<IEnumerable<object>> GetProcessFlowData(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewProcessFlowData]", parameters: parameters, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetOthersFlowData(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewOthersFlowData]", parameters: parameters, dbName: DyeingDB);
+        }
 
         #endregion
 

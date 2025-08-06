@@ -404,6 +404,33 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
 
         }
 
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetMaximumCompactingTime(string BatchNo)
+        {
+            try
+            {
+                try
+                {
+                    var queryData = new FinishFabricInspectionOnlineModel().GetMaximumCompactingTime(BatchNo);
 
+                    if (queryData == null)
+                    {
+                        return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                    }
+
+                    return Ok(queryData);
+                }
+                catch (Exception exception)
+                {
+                    return InternalServerError(exception: exception);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

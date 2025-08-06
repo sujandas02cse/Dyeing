@@ -268,6 +268,7 @@
     <Compile Include="Controllers\FabricDataConfiguration\BarcodeConfigController.cs" />
     <Compile Include="Controllers\FabricDataConfiguration\FinFabStoreIssueController.cs" />
     <Compile Include="Controllers\FabricDataConfiguration\FinishedFabricFloorToStoreIssueConfigController.cs" />
+    <Compile Include="Controllers\FabricDataConfiguration\FinishedFabricHandoverToStoreController.cs" />
     <Compile Include="Controllers\FabricDataConfiguration\FinishedFabricInspecitonConfigOfflineController.cs" />
     <Compile Include="Controllers\FabricDataConfiguration\FinishFabricInspectionSampleConfigController.cs" />
     <Compile Include="Controllers\FabricDataConfiguration\FinishFabricInspectionConfigController.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="Controllers\MachineDataConfiguration\MachineWiseManPowerConfigController.cs" />
     <Compile Include="Controllers\EnterpriseDataConfiguration\ProductionPlanConfiguration\MachineProdPlanConfigController.cs" />
     <Compile Include="Controllers\MachineDataConfiguration\McOperationConfigController.cs" />
+    <Compile Include="Controllers\MachineDataConfiguration\McOperationConfigNewController.cs" />
     <Compile Include="Controllers\MachineDataConfiguration\SlittingOperationConfigController.cs" />
     <Compile Include="Controllers\MachineDataConfiguration\StenterOperationConfigController.cs" />
     <Compile Include="Controllers\ProductionPlanConfig\MachineProductionPlanChangeController.cs" />
@@ -339,6 +341,7 @@
     <Compile Include="Models\FabricDataConfiguration\BarcodeConfigModel.cs" />
     <Compile Include="Models\FabricDataConfiguration\FinFabStoreIssueModel.cs" />
     <Compile Include="Models\FabricDataConfiguration\FinishedFabricFloorToStoreIssueModel.cs" />
+    <Compile Include="Models\FabricDataConfiguration\FinishedFabricHandoverToStoreModel.cs" />
     <Compile Include="Models\FabricDataConfiguration\FinishFabricInspectionConfigModel.cs" />
     <Compile Include="Models\FabricDataConfiguration\FinishFabricInspectionOnlineSampleModel.cs" />
     <Compile Include="Models\FabricDataConfiguration\FinishFabricInspectionOnlineModel.cs" />
@@ -350,6 +353,7 @@
     <Compile Include="Models\MachineDataConfiguration\MachineWiseManPowerConfigModel.cs" />
     <Compile Include="Models\EnterpriseDataConfiguration\ProductionPlanConfiguration\MachineProdPlanConfigModel.cs" />
     <Compile Include="Models\MachineDataConfiguration\McOperationConfigModel.cs" />
+    <Compile Include="Models\MachineDataConfiguration\McOperationConfigNewModel.cs" />
     <Compile Include="Models\ProductionPlanConfig\MachineProductionPlanChange.cs" />
     <Compile Include="Models\ProductionPlanConfig\MachineProductionPlanCloseModel.cs" />
     <Compile Include="Models\UserManagement\EncryptDecrypt.cs" />
@@ -483,8 +487,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\CommonMerchandisingApi\" />
     <Folder Include="Views\FinFabStoreIssue\" />
+    <Folder Include="Views\FinishedFabricHandoverToStoreConfig\" />
     <Folder Include="Views\FinishedFabricInspecitonConfigOffline\" />
     <Folder Include="Views\MasterDataDashboard\" />
+    <Folder Include="Views\McOperationConfigNew\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

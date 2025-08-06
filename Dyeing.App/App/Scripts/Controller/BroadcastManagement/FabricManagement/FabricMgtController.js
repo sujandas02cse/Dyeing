@@ -84,7 +84,13 @@
       { MCategory: "Slitting", Desc: "Slitting Machine" },
       { MCategory: "Stenter", Desc: "Stenter Machine" },
       { MCategory: "Dryer", Desc: "Dryer Machine" },
-      { MCategory: "Compacting", Desc: "Compacting Machine" }
+      { MCategory: "Compacting", Desc: "Compacting Machine" },
+      { MCategory: "TumbleDryer", Desc: "Tumble Dryer Machine" },
+      { MCategory: "Squeezer", Desc: "Squeezer Machine" },
+      { MCategory: "Brush", Desc: "Brush Machine" },
+      { MCategory: "Shearing", Desc: "Shearing Machine" },
+      { MCategory: "Sueding", Desc: "Sueding Machine" }
+
     ];
 
     function GenerateUI() {

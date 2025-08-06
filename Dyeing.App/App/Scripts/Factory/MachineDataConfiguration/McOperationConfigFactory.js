@@ -10,26 +10,19 @@
         });
     }
 
-
-    _obj.SaveMcConfigurationDataNew = function (obj, status,cb) {
+    _obj.SaveMcConfigurationDataNew = function (obj, status, cb) {
         debugger;
 
         //$http.post(baseApiURL + 'McOperationConfig/SaveUpdateNew', obj).then(function successCallback(response) {
-
         $http.post(baseApiURL + 'McOperationConfig/SaveUpdateNew?status=' + status, obj).then(function successCallback(response) {
-
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Information....");
         });
     }
 
-
     _obj.GetDataByBatchIdDetail = function (batchId, compTime, operation, cb) {
-
         $http.get(baseApiURL + 'McOperationConfig/GetBatchRelatedData?batchId=' + batchId + '&&compTime=' + compTime + '&&operation=' + operation).then(function successCallback(response) {
-
-
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Information....");
@@ -37,10 +30,7 @@
     }
 
     _obj.GetDataByBatchIdDetailNew = function (batchId, compTime, operation, status, cb) {
-
         $http.get(baseApiURL + 'McOperationConfig/GetBatchRelatedDataNew?batchId=' + batchId + '&&compTime=' + compTime + '&&operation=' + operation + '&&status=' + status).then(function successCallback(response) {
-
-
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Information....");
@@ -55,7 +45,7 @@
         });
     }
 
-    _obj.LoadAllData = function (batchId,cb) {
+    _obj.LoadAllData = function (batchId, cb) {
         $http.get(baseApiURL + 'McOperationConfig/LoadAllData').then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
@@ -80,7 +70,6 @@
         });
     }
 
-
     /*Updated by Sujan Das on 23-March-2025*/
 
     _obj.GetBatchNoListUnitStatusWise = function (batchType, Unit, cb) {
@@ -92,17 +81,12 @@
         });
     }
 
-
     _obj.GetFinMcByTypeUnitWise = function (mcType, Unit, cb) {
         $http.get(baseApiURL + 'McOperationConfig/GetFinMcByTypeUnitWise?Type=' + mcType + '&&unit=' + Unit).then(function successCallback(response) {
-
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Information....");
         });
-
-
-
     }
 
     return _obj;

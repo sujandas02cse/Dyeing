@@ -317,6 +317,20 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                     storedProcedureName: @"[dbo].[usp_get_BatchBodyPart]", parameters: parameters, dbName: DyeingDB);
         }
 
+        public object GetMaximumCompactingTime(string BatchNo)
+        {  
+       
+
+            var parameters = new DynamicParameters();
+       
+            parameters.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_get_MaxCompTimeOfflineQC]", parameters: parameters, dbName: DyeingDB);
+            return result;
+
+
+        }
+
         public IEnumerable<InspectionGrade> GetInspectionGrade(string type, string FilterText)
         {
             var parameters = new DynamicParameters();

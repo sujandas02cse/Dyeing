@@ -542,7 +542,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Types of fabrics for Dyeing:- Grey / Bleach / Sourcing</Value>
+                    <Value>Types of fabrics for Dyeing:- Grey / Heatest Grey / Bleach / Sourcing</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
@@ -556,9 +556,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.50342in</Top>
-            <Left>4.16405in</Left>
+            <Left>2.6342in</Left>
             <Height>0.24028in</Height>
-            <Width>3.93557in</Width>
+            <Width>5.46542in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -780,7 +780,7 @@
             <Top>1.50418in</Top>
             <Left>0.05904in</Left>
             <Height>0.23952in</Height>
-            <Width>4.10641in</Width>
+            <Width>2.57516in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -8317,6 +8317,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox10</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>0.05905in</Left>
               <Height>0.14376in</Height>
               <Width>2.17011in</Width>
@@ -8346,6 +8347,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>2.62147in</Left>
               <Height>0.13958in</Height>
               <Width>3.04312in</Width>
@@ -8387,6 +8389,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>5.98442in</Left>
               <Height>0.13958in</Height>
               <Width>2.1152in</Width>

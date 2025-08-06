@@ -409,5 +409,13 @@ namespace Dyeing.API.Models
             return DatabaseHubRpt.QueryAsync<object>(
                     storedProcedureName: @"[dbo].[usp_get_UnitNameByBatchNew]", parameters: parameter, dbName: DyeingDB);
         }
+
+        public Task<IEnumerable<object>> GetTrackingNo(string UnitId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_TrackingNoByUnit]", parameters: parameter, dbName: DyeingDB);
+        }
     }
 }

@@ -40,7 +40,8 @@
             alert("Error Occured during Loading....");
           }
         );
-    };
+      };
+
     _obj.GetDataByTracking = function(Id, cb) {
       $http
         .get(baseApiURL + "FinFabStoreIssue/GetDataByTracking?Id=" + Id)
