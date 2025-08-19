@@ -295,6 +295,13 @@
                             <input type="radio" id="sampleOption" class="form-check-input" name="batchType" ng-model="batchType" ng-value="'Sample'" ng-click="checkSample()">
                             <label for="sampleOption" class="form-check-label radio-label">Sample</label>
                         </div>
+
+                        <div class="custom-radio">
+                            <input type="radio" id="newOption" class="form-check-input" name="batchType" ng-model="batchType" ng-value="'New'" ng-click="checkNew()">
+                            <label for="newOption" class="form-check-label radio-label">New</label>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -382,7 +389,7 @@
                     <div class="col-sm-6">
 
             <!--<span>Count : {{$scope.FloorStatusData.length}}</span>-->
-                        <span style="color:green; float:right;">Total Batch Weight: {{totalweight}} kg </span>
+                        <span style="color:green; float:right;">Total Batch Weight: {{totalweight|number:2}} kg </span>
                         <span class="ml-3" style="color:green; float:right;">Total No. of Batches : {{TotalRecord}} &emsp; &emsp; </span>
 
                     </div>
@@ -414,8 +421,8 @@
 
 
                                 <!--<th rowspan="2" class="text-center Quantity-custom" colspan="1" ng-click="sort('')" style="width: 80px;">Body&nbsp;</th>
-                                <th rowspan="2" class="text-center " colspan="1" ng-click="sort('')" style="width: 70px;">Neck&nbsp;</th>
-                                <th rowspan="2" class="text-center " ng-click="sort('Body')" style="width: 60px;">BNT&nbsp;</th>-->
+    <th rowspan="2" class="text-center " colspan="1" ng-click="sort('')" style="width: 70px;">Neck&nbsp;</th>
+    <th rowspan="2" class="text-center " ng-click="sort('Body')" style="width: 60px;">BNT&nbsp;</th>-->
                                 <!-- For Bulk -->
                                 <th rowspan="2" ng-if="batchType == 'Bulk'" class="text-center Quantity-custom" colspan="1" style="width: 80px;">Body&nbsp;</th>
                                 <th rowspan="2" ng-if="batchType == 'Bulk'" class="text-center" colspan="1" style="width: 70px;">Neck&nbsp;</th>
@@ -424,6 +431,14 @@
                                 <th rowspan="2" ng-if="batchType == 'Sample'" class="text-center Quantity-custom" colspan="1" style="width: 80px;">Fab1&nbsp;</th>
                                 <th rowspan="2" ng-if="batchType == 'Sample'" class="text-center" colspan="1" style="width: 70px;">Fab2&nbsp;</th>
                                 <th rowspan="2" ng-if="batchType == 'Sample'" class="text-center" colspan="1" style="width: 60px;">Fab3&nbsp;</th>
+
+
+                                <!-- For Bulk -->
+                                <th rowspan="2" ng-if="batchType == 'New'" class="text-center Quantity-custom" colspan="1" style="width: 80px;">Body&nbsp;</th>
+                                <th rowspan="2" ng-if="batchType == 'New'" class="text-center" colspan="1" style="width: 70px;">Neck&nbsp;</th>
+                                <th rowspan="2" ng-if="batchType == 'New'" class="text-center" colspan="1" style="width: 60px;">BNT&nbsp;</th>
+
+
 
 
                                 <th colspan="2" class="text-center " ng-click="sort('Body')">Check <br /> Roll&nbsp;</th>
@@ -451,6 +466,13 @@
                                 <th class="text-center " ng-if="batchType == 'Sample'" ng-click="sort('Body')" style="width: 60px;">Fab2&nbsp;</th>
                                 <th class="text-center " ng-if="batchType == 'Sample'" ng-click="sort('Body')" style="width: 60px;">Fab3&nbsp;</th>
 
+
+                                <!-- For Bulk -->
+                                <th class="text-center " ng-if="batchType == 'New'" ng-click="sort('Body')" style="width: 60px;">Body&nbsp;</th>
+                                <th class="text-center " ng-if="batchType == 'New'" ng-click="sort('Body')" style="width: 60px;">Neck&nbsp;</th>
+                                <th class="text-center " ng-if="batchType == 'New'" ng-click="sort('Body')" style="width: 60px;">BNT&nbsp;</th>
+
+
                             </tr>
                         </thead>
                         <tbody>
@@ -463,6 +485,14 @@
                                 <td ng-if="batchType == 'Sample'">
                                     <a href="/DashboardManagement/SampleBatchCardReport?BpmId={{dataModel.BpmId}}&&Format=PDF&&ReportType=N#view=FitH" target="_blank" alt="">{{dataModel.BatchNo}}</a>
                                 </td>
+                                <td ng-if="batchType === 'New'">
+                                    <a href=""
+                                       ng-href="/DashboardManagement/NewBatchCardReport?BpmId={{dataModel.BpmId}}&Format=PDF&rType=''&UnitNo={{Unit.UnitId}}#view=FitH"
+                                       target="_blank">
+                                        {{dataModel.BatchNo}}
+                                    </a>
+                                </td>
+
 
 
                                 <td> {{dataModel.BuyerName}}</td>

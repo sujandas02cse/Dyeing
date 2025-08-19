@@ -448,6 +448,7 @@
     <Content Include="App\template\Common\CustomToast.html" />
     <Content Include="App\Views\Home\index.html" />
     <Content Include="App\Views\Shared\_LayoutActionButtonManualQC.html" />
+    <Content Include="App\Views\Shared\_LayoutBulkNewRadioButton.html" />
     <Content Include="App\Views\Shared\_LayoutBulkNewSelector.html" />
     <Content Include="App\Views\Shared\_LayoutIssueActionButton.html" />
     <Content Include="App\Views\Shared\_LayoutUnit.html" />

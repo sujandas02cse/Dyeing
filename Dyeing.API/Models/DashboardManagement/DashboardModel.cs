@@ -64,5 +64,17 @@ namespace Dyeing.API.Models.DashboardManagement
             return DatabaseHubRpt.QueryAsync<object>(
             storedProcedureName: @"[dbo].[usp_get_PackingListDashboardNew]", parameters: parameters, dbName: DyeingDB);
         }
+
+
+        public Task<IEnumerable<object>> GetBatchDataFloorStatusNew(int UnitId, DateTime FromDate, DateTime ToDate)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@FromDate", value: FromDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameters.Add(name: "@ToDate", value: ToDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_BatchDataForFloorStatusNew]", parameters: parameters, dbName: DyeingDB);
+        }
+
     }
 }

@@ -204,5 +204,29 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.ApprovalManagement
             return DatabaseHub.Query<object, object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_ShadeApproveData]", model: obj, dbName: DyeingDB);
         }
 
+        public async Task<object> GetAllTypeBatchAprovalDataNew(int BpmId, string ApprovalType, int ApprovalTime)
+        {
+            var Parameter = new DynamicParameters();
+            Parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ApprovalType", value: ApprovalType, dbType: DbType.String, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ApprovalTime", value: ApprovalTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.MultiQueryAsync<object, object, object>(storedProcedureName: @"[dbo].[usp_get_GetBatchDataForApprovalNew]", parameters: Parameter, dbName: DyeingDB);
+        }
+
+
+        public async Task<IEnumerable<Object>> SaveOrUpdateBatchApproveDataNew(ApproveModelMaster approveModelMaster)
+        {
+            var Parameter = new DynamicParameters();
+            Parameter.Add(name: "@User", value: approveModelMaster.User, dbType: DbType.String, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@BpmId", value: approveModelMaster.BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@Process", value: approveModelMaster.Process, dbType: DbType.String, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ApprovedTime", value: approveModelMaster.ApprovedTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ComApprove", value: approveModelMaster.ComApprove, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@Reason", value: approveModelMaster.Reason, dbType: DbType.String, direction: ParameterDirection.Input);
+            Parameter.Add("@RollDataList", approveModelMaster.MyProperty.AsTableValuedParameter("dbo.RollDataForProve",
+                new[] { "InsMasterId", "Status" }));
+            return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_ApprovalDataNew]", parameters: Parameter, dbName: DyeingDB);
+        }
+
     }
 }

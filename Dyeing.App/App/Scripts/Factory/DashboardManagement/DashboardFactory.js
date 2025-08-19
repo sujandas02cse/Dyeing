@@ -147,30 +147,49 @@
         );
     };
 
+    _obj.GetPackingListDataNew = function(flag, unitId, fromDate, toDate, cb) {
+      $http
+        .get(
+          baseApiURL +
+            "Dashboard/GetPackingListDataNew?unitId=" +
+            unitId +
+            "&&fromDate=" +
+            fromDate +
+            "&&toDate=" +
+            toDate +
+            "&&flag=" +
+            flag
+        )
+        .then(
+          function successCallback(response) {
+            cb(response.data);
+          },
+          function errorCallback(response) {
+            alert("Error Occured during Loading Plan No....");
+          }
+        );
+    };
 
-      _obj.GetPackingListDataNew = function (flag, unitId, fromDate, toDate, cb) {
-          $http
-              .get(
-                  baseApiURL +
-                  "Dashboard/GetPackingListDataNew?unitId=" +
-                  unitId +
-                  "&&fromDate=" +
-                  fromDate +
-                  "&&toDate=" +
-                  toDate +
-                  "&&flag=" +
-                  flag
-              )
-              .then(
-                  function successCallback(response) {
-                      cb(response.data);
-                  },
-                  function errorCallback(response) {
-                      alert("Error Occured during Loading Plan No....");
-                  }
-              );
-      };
-
+    _obj.GetFloorStatusNew = function(UnitId, fromDate, toDate, cb) {
+      $http
+        .get(
+          baseApiURL +
+            "Dashboard/GetBatchDataForFloorStatusNew?UnitId=" +
+            UnitId +
+            "&FromDate=" +
+            fromDate +
+            "&toDate=" +
+            toDate
+        )
+        .then(
+          function successCallback(response) {
+            cb(response.data);
+          },
+          function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+          }
+        );
+    };
 
     return _obj;
   }

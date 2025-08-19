@@ -256,5 +256,43 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.ApprovalManagement
                 return InternalServerError(exception: exception);
             }
         }
+
+        public async Task<IHttpActionResult> GetAllApproveBatchDataNew(int BpmId, string ApprovalType, int ApprovalTime)
+        {
+            try
+            {
+                var QueryData = await new ApprovalManagementModel().GetAllTypeBatchAprovalDataNew(BpmId, ApprovalType, ApprovalTime);
+                if (QueryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily Unavaiable"));
+                }
+                return Ok(QueryData);
+            }
+            catch (Exception exc)
+            {
+                return InternalServerError(exception: exc);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> SaveOrUpdateBatchApproveDataNew(ApproveModelMaster approveModelMaster)
+        {
+            try
+            {
+                var queryData = await new ApprovalManagementModel().SaveOrUpdateBatchApproveDataNew(approveModelMaster);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
     }
 }

@@ -176,7 +176,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             var parameter = new DynamicParameters();
             //parameter.Add(name: "@UnitNo", value: UnitNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            return DatabaseHubRpt.QueryAsync<object>(
+            return DatabaseHubRpt.QueryAsyncNew<object>(
                 storedProcedureName: @"[dbo].[usp_get_InitialInfoNew1]", parameter, dbName: DyeingDB);
         }
 

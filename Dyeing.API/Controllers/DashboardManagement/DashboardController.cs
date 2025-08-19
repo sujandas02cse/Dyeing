@@ -125,6 +125,29 @@ namespace Dyeing.API.Controllers.DashboardManagement
             }
         }
 
+        #region DashBoard Floor Status New
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchDataForFloorStatusNew(int UnitId, DateTime FromDate, DateTime Todate)
+        {
+            var FirstDate = FromDate.Date;
+            var LastDate = Todate.AddDays(1).Date.AddMilliseconds(-1);
+            try
+            {
+                var queryData = await new DashboardModel().GetBatchDataFloorStatusNew(UnitId, FirstDate, LastDate);
+                //var data = queryData["Item1"];
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+        #endregion
+
 
     }
 }

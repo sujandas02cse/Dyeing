@@ -124,7 +124,7 @@ namespace Dyeing.API.DBInfo
         /// <returns>A tuple contatining three lists of model class</returns>
         Tuple<IEnumerable<TResult1>, IEnumerable<TResult2>, IEnumerable<TResult3>> MultiQuery<TResult1, TResult2, TResult3>(string storedProcedureName, string dbName);
 
-       
+
         /// <summary>
         /// This method is used to execute Stored Procedure containing multiple queries.
         /// This is the non-asynchronus method, and returns a Tuple of tables serialized into objects of Model class.
@@ -232,5 +232,27 @@ namespace Dyeing.API.DBInfo
         Task<Tuple<IEnumerable<TResult1>, IEnumerable<TResult2>, IEnumerable<TResult3>, IEnumerable<TResult4>, IEnumerable<TResult5>, IEnumerable<TResult6>>> MultiQueryAsync<TResult1, TResult2, TResult3, TResult4, TResult5, TResult6>(string storedProcedureName, DynamicParameters parameters, string dbName);
         Task<Tuple<IEnumerable<TResult1>, IEnumerable<TResult2>, IEnumerable<TResult3>, IEnumerable<TResult4>, IEnumerable<TResult5>, IEnumerable<TResult6>, IEnumerable<TResult7>>> MultiQueryAsync<TResult1, TResult2, TResult3, TResult4, TResult5, TResult6, TResult7>(string storedProcedureName, DynamicParameters parameters, string dbName);
         Task<Tuple<IEnumerable<TResult1>, IEnumerable<TResult2>, IEnumerable<TResult3>, IEnumerable<TResult4>, IEnumerable<TResult5>, IEnumerable<TResult6>, IEnumerable<TResult7>, IEnumerable<TResult8>>> MultiQueryAsync<TResult1, TResult2, TResult3, TResult4, TResult5, TResult6, TResult7, TResult8>(string storedProcedureName, DynamicParameters parameters, string dbName);
+
+        #region new interface for time execption
+        /// <summary>
+        /// This method executes the Stored Procedure, gets the data from execution and returns that data in a list.
+        /// This is a Generic Method, and it returns a list of POCO class.
+        /// </summary>
+        /// <param name="storedProcedureName">Stored Procedure's name. Expected to be a Verbatim String, e.g. @"[Schema].[Stored-Procedure-Name]"</param>
+        /// <param name="parameters">Parameter required for executing Stored Procedure.</param>
+        /// <typeparam name="TResult">This is the type of POCO class that will be sent as pamater and returned. For more info, refer to https://msdn.microsoft.com/en-us/library/vstudio/dd456872(v=vs.100).aspx. </typeparam>
+        /// <returns>Returns a List of POCO class if successfully executed. If any exception is raised, it returns null.</returns>
+        IEnumerable<TResult> QueryNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+
+        /// <summary>
+        /// This method executes the Stored Procedure, gets the data from execution and returns that data in a list.
+        /// This is a Generic Asynchronous Method, and it returns a list of POCO class.
+        /// </summary>
+        /// <typeparam name="TResult">This is the type of POCO class that will be sent as pamater and returned. For more info, refer to https://msdn.microsoft.com/en-us/library/vstudio/dd456872(v=vs.100).aspx. </typeparam>
+        /// <param name="storedProcedureName">Stored Procedure's name. Expected to be a Verbatim String, e.g. @"[Schema].[Stored-Procedure-Name]"</param>
+        /// <param name="parameters">Parameter required for executing Stored Procedure.</param>
+        /// <returns>Returns a List of POCO class if successfully executed. If any exception is raised, it returns null.</returns>
+        Task<IEnumerable<TResult>> QueryAsyncNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+        #endregion
     }
 }
