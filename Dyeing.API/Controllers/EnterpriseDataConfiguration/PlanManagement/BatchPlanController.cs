@@ -97,7 +97,7 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
         [HttpPost]
         public IHttpActionResult SaveUpdate(BatchPlanWrapper _obj)
         {
-             _obj.plan = _obj.plan.Where(x => x.GroupNo != 0).ToList();
+            _obj.plan = _obj.plan.Where(x => x.GroupNo != 0).ToList();
             _obj.plan = _obj.plan.Where(x => x.MPUniqueId != 1).ToList();
             _res = new CommonModel.Response();
             try

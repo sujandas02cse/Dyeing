@@ -183,6 +183,7 @@
     //    $scope.bchkPlan.splice(indx , 0, data);
     //}
     $scope.remove = function (r) {
+        debugger
         let remModel = $scope.chkPlan[r];
 
         // Step 1: Remove the item
@@ -265,10 +266,16 @@
     
 
     $scope.delete = function (model) {
+        debugger
         let Find = $scope.chkPlan.filter(x => x.GroupNo == model.GroupNo);
         let FindIndex = $scope.chkPlan.findIndex(x => x.GroupNo === model.GroupNo);
         
         $scope.chkPlan.splice(FindIndex, Find.length);
+        debugger
+
+        $scope.BatchData = $scope.BatchData.filter(function (item) {
+            return item.GroupNo !== model.GroupNo;
+        });
     }
 
     $scope.showbtn = function (model) {
@@ -350,18 +357,19 @@
     }
 
     $scope.NoOfBatchChange = function (model, modelGroupNo, modelNoOfBatch, modelMinBatch, modelMaxBatch, bit) {
-
         const lastPart = "";
         if (model.GroupNo === $scope.chkPlan[0].GroupNo) {
             PlanManagement.GenBatchNoByJob($scope.Unit.Id, model.JobId, model.NoOfBatch, 9, 0, function (data) {
+
                 totalBatchData = [];
                 // Find the maximum BatchNo
+                debugger
                 const maxBatchNo = data
                     .map(item => item.BatchNo)
                     .sort((a, b) => b.localeCompare(a))[0];
                 const lastPart = maxBatchNo.split('-').pop();
                 let batchno = data;
-
+                debugger
                 angular.forEach(data, function (item) {
                     let obj = {
                         InitInfoId: model.InitInfoId,
@@ -371,8 +379,9 @@
                         MaxBatchCount: lastPart
                     }
                     totalBatchData.push(obj);
-                    $scope.BatchData.push(obj);
+                    
                 });
+
                 model.MaxBatchCount = lastPart;
                 model.BatchNos = totalBatchData.map(item => item.BatchNo).join("\n");
                 let filterModel = $scope.chkPlan.filter(x => x.GroupNo === model.GroupNo);
@@ -380,9 +389,12 @@
                     if (item.GroupNo === model.GroupNo) {
                         item.NoOfBatch = filterModel[0].NoOfBatch;
                         item.MaxBatchCount = filterModel[0].MaxBatchCount;
+                        item.BatchNos = model.BatchNos;
                     }
 
                 });
+                debugger
+                $scope.addBatchDataArray(totalBatchData);
             });
         }
        // else if (model.GroupNo === $scope.chkPlan[0].GroupNo) return;
@@ -408,7 +420,7 @@
                         MaxBatchCount: lastPart
                     }
                     totalBatchData.push(obj);
-                    $scope.BatchData.push(obj);
+                    
                 });
                 model.BatchNos = totalBatchData.map(item => item.BatchNo).join("\n");
                 model.MaxBatchCount = lastPart;
@@ -417,15 +429,40 @@
                     if (item.GroupNo === model.GroupNo) {
                         item.NoOfBatch = filterModel[0].NoOfBatch;
                         item.MaxBatchCount = filterModel[0].MaxBatchCount;
+                        item.BatchNos = model.BatchNos;
                     }
 
                 });
+                debugger
+                $scope.addBatchDataArray(totalBatchData);
             });
         }
 
-
-        
     }
+
+    $scope.addBatchDataArray = function (objArray) {
+
+        if (!objArray || objArray.length === 0) return;
+
+        // Get the group numbers in the new array
+        var newGroupNos = objArray.map(function (obj) { return obj.GroupNo; });
+
+        // Remove all existing objects that have a GroupNo present in the new array
+        for (var i = $scope.BatchData.length - 1; i >= 0; i--) {
+            debugger
+            if (newGroupNos.indexOf($scope.BatchData[i].GroupNo) !== -1) {
+                debugger
+                $scope.BatchData.splice(i, 1);
+            }
+        }
+        debugger
+        // Add all new objects
+        Array.prototype.push.apply($scope.BatchData, objArray);
+
+    };
+
+
+
 
     $scope.TotalPlanQuatity = function () {
         let a = 0;
@@ -490,9 +527,10 @@
 
     $scope.actionDialog = function (action, dataModel) {
         for (let i = 0; i < $scope.chkPlan.length; i++) {
-            const Model = $scope.chkPlan[i];
+            let Model = $scope.chkPlan[i];
             for (let j = 0; j < $scope.chkPlan.length; j++) {
                 if (Model.GroupNo === $scope.chkPlan[j].GroupNo) {
+                    debugger
                     $scope.chkPlan[j].PlanFromDate = toSqlServerDatetimeLocal(Model.PlanFromDate);
                     $scope.chkPlan[j].PlanToDate = toSqlServerDatetimeLocal(Model.PlanToDate);
                     $scope.chkPlan[j].Remarks = Model.Remarks;
@@ -507,6 +545,7 @@
                 LabDipNo: item.LabDipNo
             });
         });
+
         angular.forEach($scope.PlanData.filter(x => x.chkJob == true), function (item) {
             /*Dyed color Object Create*/
             let color = {
@@ -521,7 +560,7 @@
         });
 
         let a = $scope.chkPlan;
-
+        debugger
         angular.forEach($scope.chkPlan, function (item) {
             let obj = {
                 InitInfoId: item.InitInfoId,
@@ -595,6 +634,7 @@
             dyedColor: NewColor,
             LabDipDatas:  labdipData
         }
+        debugger
         PlanManagement.BatchPlan_SaveUpdate(obj, function (res) {
             debugger
             if (res.ErrorMsg == null) {
@@ -909,8 +949,10 @@
     //};
     
     function filterUniqueBatchNo(data) {
+
         const uniqueBatchNos = new Set(); // To track unique BatchNo values
         return data.filter(item => {
+
             if (uniqueBatchNos.has(item.BatchNo)) {
                 return false; // Skip if BatchNo is already in the set
             }
@@ -920,6 +962,7 @@
     };
 
     function toSqlServerDatetimeLocal(dateString) {
+        debugger
         const date = new Date(dateString);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');

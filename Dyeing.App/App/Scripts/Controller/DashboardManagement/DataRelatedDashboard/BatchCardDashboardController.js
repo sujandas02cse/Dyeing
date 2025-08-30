@@ -18,7 +18,10 @@
     $scope.showPrevious = true;
     $scope.showBeforeAfter = false;
     $scope.batchType = "Bulk";
-    $scope.RMode = "PB";
+      $scope.RMode = "PB";
+
+      $scope.FromDate = new Date();
+      $scope.ToDate = new Date();
 
     $scope.checkSample = function() {
       $scope.batchType = "Sample";
@@ -125,13 +128,20 @@
       }
     };
 
-    BatchCardDashboardFactory.GetUnitByUser($rootScope.UserId, function(data) {
-      debugger;
-      $scope.UnitList = data;
-      if ($scope.UnitList.length == 1) {
-        $scope.Unit = $scope.UnitList[0];
-      }
-    });
+    //BatchCardDashboardFactory.GetUnitByUser($rootScope.UserId, function(data) {
+    //  debugger;
+    //  $scope.UnitList = data;
+    //  if ($scope.UnitList.length == 1) {
+    //    $scope.Unit = $scope.UnitList[0];
+    //  }
+    //});
+
+      BatchCardDashboardFactory.GetUnitWithoutUser( function (data) {
+          debugger;
+          $scope.UnitList = data;
+         
+      });
+
 
     BatchCardDashboardFactory.GetDyeingUnitAll(function(data) {
       $scope.ReportingUnit = data;

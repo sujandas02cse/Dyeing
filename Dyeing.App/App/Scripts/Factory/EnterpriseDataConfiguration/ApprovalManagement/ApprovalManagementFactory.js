@@ -189,7 +189,9 @@
             alert("Error Occured during Load Information....");
           }
         );
-    };
+      };
+
+
     _obj.SaveUpdateRFDApproval = function(data, cb) {
       $http
         .post(baseApiURL + "ApprovalManagement/SaveUpdateRFDApproval", data)
@@ -201,7 +203,8 @@
             alert("Error Occured during Saving data....");
           }
         );
-    };
+      };
+
 
     _obj.SaveUpdateShadeApprovalData = function(data, cb) {
       $http
@@ -217,7 +220,8 @@
             alert("Error Occured during Load Information....");
           }
         );
-    };
+      };
+
     _obj.SaveUpdateCRApproval = function(data, cb) {
       $http
         .post(baseApiURL + "ApprovalManagement/SaveUpdateCRApproval", data)
@@ -303,6 +307,81 @@
                   }
               );
       };
+
+      _obj.GetBodypartNew = function (BpmId, cb) {
+          $http
+              .get(
+                  baseApiURL + "ApprovalManagement/GetBodyPartbyBatchNew?BpmId=" + BpmId
+              )
+              .then(
+                  function successCallback(response) {
+                      cb(response.data);
+                  },
+                  function errorCallback(response) {
+                      alert("Error Occured during Load Data....");
+                  }
+              );
+      };
+
+
+      _obj.GetShadeApprovalBatchDataNew = function (
+          BpmId,
+          ApprovalTime,
+          BSpecId,
+          cb
+      ) {
+          $http
+              .get(
+                  baseApiURL +
+                  "ApprovalManagement/GetShadeApproveBatchDataNew?BpmId=" +
+                  BpmId +
+                  "&ApprovalTime=" +
+                  ApprovalTime +
+                  "&BSpecId=" +
+                  BSpecId
+              )
+              .then(
+                  function successCallback(response) {
+                      cb(response.data);
+                  },
+                  function errorCallback(response) {
+                      alert("Error Occured during Loading Batch No....");
+                  }
+              );
+      };
+
+
+      _obj.SaveUpdateShadeApprovalDataNew = function (data, cb) {
+          $http
+              .post(
+                  baseApiURL + "ApprovalManagement/SaveUpdateShadeApprovalDataNew",
+                  data
+              )
+              .then(
+                  function successCallback(response) {
+                      cb(response.data);
+                  },
+                  function errorCallback(response) {
+                      alert("Error Occured during Load Information....");
+                  }
+              );
+      };
+
+
+      _obj.SaveUpdateRFDApprovalNew = function (data, cb) {
+          $http
+              .post(baseApiURL + "ApprovalManagement/SaveUpdateRFDApprovalNew", data)
+              .then(
+                  function successCallback(response) {
+                      cb(response.data);
+                  },
+                  function errorCallback(response) {
+                      alert("Error Occured during Saving data....");
+                  }
+              );
+      };
+
+
 
     return _obj;
   }

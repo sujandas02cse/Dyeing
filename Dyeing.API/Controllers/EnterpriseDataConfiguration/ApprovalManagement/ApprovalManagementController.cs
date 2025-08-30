@@ -220,6 +220,9 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.ApprovalManagement
                 return InternalServerError(exception: exception);
             }
         }
+      
+        
+        
         [HttpPost]
         public IHttpActionResult SaveUpdateCRApproval(CRApproveModel obj)
         {
@@ -293,6 +296,86 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.ApprovalManagement
             }
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBodyPartbyBatchNew(int BpmId)
+        {
+            try
+            {
+                var queryData = await new ApprovalManagementModel().GetBodyPartbyBatchListNew(BpmId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetShadeApproveBatchDataNew(int BpmId, int ApprovalTime, int BSpecId)
+        {
+            try
+            {
+                var queryData = await new ApprovalManagementModel().GetBatchShadeApprovalDataNew(BpmId, ApprovalTime, BSpecId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult SaveUpdateShadeApprovalDataNew(ShadeApproveModel shadeApproveModel)
+        {
+            try
+            {
+                var queryData = new ApprovalManagementModel().SaveUpdateShadeApprovalNew(shadeApproveModel);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IHttpActionResult> SaveUpdateRFDApprovalNew(RFDApproval obj)
+        {
+            try
+            {
+              
+                var queryData = await new ApprovalManagementModel().SaveUpdateRFDApprovalNew(obj);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
 
     }
 }

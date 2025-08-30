@@ -145,5 +145,31 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration
                 return InternalServerError(exception: exception);
             }
         }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetUnitWithoutUser()
+        {
+
+            try
+            {
+               
+
+                var queryData = await new MasterDataDisplayModel().GetUnitWithoutUser();
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
     }
 }

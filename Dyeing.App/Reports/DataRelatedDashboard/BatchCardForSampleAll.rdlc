@@ -410,9 +410,9 @@
             <Value>China</Value>
             <Sizing>Fit</Sizing>
             <Top>2.02704in</Top>
-            <Left>0.05275in</Left>
-            <Height>7.50801in</Height>
-            <Width>8.04697in</Width>
+            <Left>0.06583in</Left>
+            <Height>6.98718in</Height>
+            <Width>8.03389in</Width>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
      Parameters!ReportType.Value = "PP" OR 
@@ -431,9 +431,9 @@
             <Value>PP1</Value>
             <Sizing>Fit</Sizing>
             <Top>2.11321in</Top>
-            <Left>0.05275in</Left>
-            <Height>7.42184in</Height>
-            <Width>8.04684in</Width>
+            <Left>0.06583in</Left>
+            <Height>6.90101in</Height>
+            <Width>8.03376in</Width>
             <ZIndex>1</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
@@ -453,9 +453,9 @@
             <Value>DVSample</Value>
             <Sizing>FitProportional</Sizing>
             <Top>2.2118in</Top>
-            <Left>0.05275in</Left>
-            <Height>7.32325in</Height>
-            <Width>8.04687in</Width>
+            <Left>0.06583in</Left>
+            <Height>6.80242in</Height>
+            <Width>8.03379in</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
@@ -475,9 +475,9 @@
             <Value>DVSample</Value>
             <Sizing>FitProportional</Sizing>
             <Top>2.26388in</Top>
-            <Left>0.05764in</Left>
-            <Height>7.27117in</Height>
-            <Width>8.04687in</Width>
+            <Left>0.06253in</Left>
+            <Height>6.75034in</Height>
+            <Width>8.04198in</Width>
             <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
@@ -497,9 +497,9 @@
             <Value>SMSSample</Value>
             <Sizing>FitProportional</Sizing>
             <Top>2.3453in</Top>
-            <Left>0.05275in</Left>
-            <Height>7.18975in</Height>
-            <Width>8.04687in</Width>
+            <Left>0.06583in</Left>
+            <Height>6.66892in</Height>
+            <Width>8.03379in</Width>
             <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
@@ -519,9 +519,9 @@
             <Value>TestSample</Value>
             <Sizing>FitProportional</Sizing>
             <Top>2.3995in</Top>
-            <Left>0.05764in</Left>
-            <Height>7.13555in</Height>
-            <Width>8.04198in</Width>
+            <Left>0.06583in</Left>
+            <Height>6.61472in</Height>
+            <Width>8.03868in</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!ReportType.Value = "N" OR 
@@ -2452,7 +2452,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Enzyme :</Value>
+                    <Value>Enzyme% :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontSize>9pt</FontSize>
@@ -2471,7 +2471,7 @@
             <Top>3.94463in</Top>
             <Left>0.93607in</Left>
             <Height>0.24565in</Height>
-            <Width>1.25765in</Width>
+            <Width>1.25085in</Width>
             <ZIndex>40</ZIndex>
             <Style>
               <Border>
@@ -2578,10 +2578,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.43612in</Top>
-            <Left>0.93607in</Left>
+            <Top>4.43413in</Top>
+            <Left>0.93962in</Left>
             <Height>0.33172in</Height>
-            <Width>7.16352in</Width>
+            <Width>7.16489in</Width>
             <ZIndex>42</ZIndex>
             <Style>
               <Border>
@@ -2634,7 +2634,7 @@
             <Top>3.70277in</Top>
             <Left>4.0444in</Left>
             <Height>0.24186in</Height>
-            <Width>1.19654in</Width>
+            <Width>1.19306in</Width>
             <ZIndex>43</ZIndex>
             <Style>
               <Border>
@@ -2687,9 +2687,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>3.94463in</Top>
-            <Left>4.0444in</Left>
+            <Left>5.23746in</Left>
             <Height>0.24565in</Height>
-            <Width>1.19689in</Width>
+            <Width>1.06515in</Width>
             <ZIndex>44</ZIndex>
             <Style>
               <Border>
@@ -2793,9 +2793,9 @@
             </Paragraphs>
             <rd:DefaultName>PreTreatment</rd:DefaultName>
             <Top>3.94463in</Top>
-            <Left>5.24094in</Left>
+            <Left>6.30229in</Left>
             <Height>0.24565in</Height>
-            <Width>2.85863in</Width>
+            <Width>1.79728in</Width>
             <ZIndex>46</ZIndex>
             <Style>
               <Border>
@@ -2934,7 +2934,42 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Enzyme.Value, "usp_rpt_SampleBatchPrepMaster")</Value>
+                    <Value xml:space="preserve">     </Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Dye-Bath</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">        </Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Single-Bath    </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">    </Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>No Enzyme</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -2948,9 +2983,9 @@
             </Paragraphs>
             <rd:DefaultName>Enzyme</rd:DefaultName>
             <Top>3.94463in</Top>
-            <Left>2.19372in</Left>
+            <Left>2.19149in</Left>
             <Height>0.24565in</Height>
-            <Width>1.85068in</Width>
+            <Width>3.04597in</Width>
             <ZIndex>49</ZIndex>
             <Style>
               <Border>
@@ -3019,9 +3054,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.79826in</Top>
-            <Left>0.05764in</Left>
-            <Height>2.74615in</Height>
+            <Top>4.80752in</Top>
+            <Left>0.06583in</Left>
+            <Height>2.44383in</Height>
             <Width>0.87044in</Width>
             <ZIndex>50</ZIndex>
             <Style>
@@ -3041,7 +3076,7 @@
                     <Value>Parameter</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>13pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3056,8 +3091,8 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.80752in</Top>
             <Left>0.93607in</Left>
-            <Height>0.22442in</Height>
-            <Width>1.52432in</Width>
+            <Height>0.20359in</Height>
+            <Width>1.316in</Width>
             <ZIndex>51</ZIndex>
             <Style>
               <Border>
@@ -3083,7 +3118,7 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </RightBorder>
-              <VerticalAlign>Middle</VerticalAlign>
+              <VerticalAlign>Top</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
             </Style>
           </Textbox>
@@ -3096,7 +3131,7 @@
                     <Value>Stenter</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>13pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3110,9 +3145,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.80794in</Top>
-            <Left>2.46039in</Left>
-            <Height>0.224in</Height>
-            <Width>1.58401in</Width>
+            <Left>2.25207in</Left>
+            <Height>0.20317in</Height>
+            <Width>1.79233in</Width>
             <ZIndex>52</ZIndex>
             <Style>
               <Border>
@@ -3138,7 +3173,7 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </RightBorder>
-              <VerticalAlign>Middle</VerticalAlign>
+              <VerticalAlign>Top</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
             </Style>
           </Textbox>
@@ -3151,7 +3186,7 @@
                     <Value>Dryer</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>13pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3166,7 +3201,7 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.80752in</Top>
             <Left>4.0444in</Left>
-            <Height>0.22442in</Height>
+            <Height>0.20359in</Height>
             <Width>1.74518in</Width>
             <ZIndex>53</ZIndex>
             <Style>
@@ -3193,7 +3228,7 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </RightBorder>
-              <VerticalAlign>Middle</VerticalAlign>
+              <VerticalAlign>Top</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
             </Style>
           </Textbox>
@@ -3206,7 +3241,7 @@
                     <Value>Compact Parameter</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>13pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3221,7 +3256,7 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>4.80752in</Top>
             <Left>5.78958in</Left>
-            <Height>0.22442in</Height>
+            <Height>0.20359in</Height>
             <Width>2.31011in</Width>
             <ZIndex>54</ZIndex>
             <Style>
@@ -3248,7 +3283,7 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </RightBorder>
-              <VerticalAlign>Middle</VerticalAlign>
+              <VerticalAlign>Top</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
             </Style>
           </Textbox>
@@ -3261,7 +3296,7 @@
                     <Value>Temperature :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3273,10 +3308,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.03194in</Top>
+            <Top>5.01111in</Top>
             <Left>0.93627in</Left>
-            <Height>0.24306in</Height>
-            <Width>1.52412in</Width>
+            <Height>0.22223in</Height>
+            <Width>1.3158in</Width>
             <ZIndex>55</ZIndex>
             <Style>
               <Border>
@@ -3315,7 +3350,7 @@
                     <Value>Padder Pressure :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3327,10 +3362,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.275in</Top>
+            <Top>5.23333in</Top>
             <Left>0.93627in</Left>
-            <Height>0.24062in</Height>
-            <Width>1.52412in</Width>
+            <Height>0.21284in</Height>
+            <Width>1.3158in</Width>
             <ZIndex>56</ZIndex>
             <Style>
               <Border>
@@ -3369,7 +3404,7 @@
                     <Value>Set Dia :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3381,10 +3416,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.51562in</Top>
+            <Top>5.44618in</Top>
             <Left>0.93627in</Left>
-            <Height>0.23992in</Height>
-            <Width>1.52412in</Width>
+            <Height>0.18436in</Height>
+            <Width>1.3158in</Width>
             <ZIndex>57</ZIndex>
             <Style>
               <Border>
@@ -3423,7 +3458,7 @@
                     <Value>Pinning :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3435,10 +3470,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.75693in</Top>
+            <Top>5.63054in</Top>
             <Left>0.93627in</Left>
-            <Height>0.24306in</Height>
-            <Width>1.52412in</Width>
+            <Height>0.20278in</Height>
+            <Width>1.3158in</Width>
             <ZIndex>58</ZIndex>
             <Style>
               <Border>
@@ -3477,7 +3512,7 @@
                     <Value>M/C Speed :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3489,10 +3524,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.99999in</Top>
+            <Top>5.83332in</Top>
             <Left>0.93468in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.52571in</Width>
+            <Height>0.17639in</Height>
+            <Width>1.31739in</Width>
             <ZIndex>59</ZIndex>
             <Style>
               <Border>
@@ -3531,7 +3566,7 @@
                     <Value>Over feed :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3543,10 +3578,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.24582in</Top>
+            <Top>6.00971in</Top>
             <Left>0.93468in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.5257in</Width>
+            <Height>0.18333in</Height>
+            <Width>1.31738in</Width>
             <ZIndex>60</ZIndex>
             <Style>
               <Border>
@@ -3585,7 +3620,7 @@
                     <Value>Under feed :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3597,10 +3632,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.49165in</Top>
-            <Left>0.93329in</Left>
-            <Height>0.2486in</Height>
-            <Width>1.5271in</Width>
+            <Top>6.19304in</Top>
+            <Left>0.9385in</Left>
+            <Height>0.19999in</Height>
+            <Width>1.31357in</Width>
             <ZIndex>61</ZIndex>
             <Style>
               <Border>
@@ -3639,7 +3674,7 @@
                     <Value>Width :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3651,10 +3686,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.74164in</Top>
-            <Left>0.93329in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.5271in</Width>
+            <Top>6.72001in</Top>
+            <Left>0.93468in</Left>
+            <Height>0.17406in</Height>
+            <Width>1.31812in</Width>
             <ZIndex>62</ZIndex>
             <Style>
               <Border>
@@ -3693,7 +3728,7 @@
                     <Value>GSM :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -3705,10 +3740,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.98747in</Top>
-            <Left>0.93329in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.5271in</Width>
+            <Top>6.89407in</Top>
+            <Left>0.93468in</Left>
+            <Height>0.15729in</Height>
+            <Width>1.31814in</Width>
             <ZIndex>63</ZIndex>
             <Style>
               <Border>
@@ -3759,34 +3794,35 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>7.2333in</Top>
-            <Left>0.93271in</Left>
-            <Height>0.31979in</Height>
-            <Width>7.16691in</Width>
+            <Top>7.05135in</Top>
+            <Left>0.9385in</Left>
+            <Height>0.2in</Height>
+            <Width>7.16886in</Width>
             <ZIndex>64</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
+                <Width>0.25pt</Width>
               </Border>
               <TopBorder>
                 <Color>Black</Color>
                 <Style>Solid</Style>
-                <Width>1pt</Width>
+                <Width>0.25pt</Width>
               </TopBorder>
               <BottomBorder>
                 <Color>Black</Color>
                 <Style>Solid</Style>
-                <Width>1pt</Width>
+                <Width>0.25pt</Width>
               </BottomBorder>
               <LeftBorder>
                 <Color>Black</Color>
                 <Style>Solid</Style>
-                <Width>1pt</Width>
+                <Width>0.25pt</Width>
               </LeftBorder>
               <RightBorder>
                 <Color>Black</Color>
                 <Style>Solid</Style>
-                <Width>1pt</Width>
+                <Width>0.25pt</Width>
               </RightBorder>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -3801,7 +3837,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3814,10 +3850,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.03194in</Top>
-            <Left>2.46039in</Left>
-            <Height>0.24306in</Height>
-            <Width>1.58401in</Width>
+            <Top>5.01111in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.22223in</Height>
+            <Width>1.79234in</Width>
             <ZIndex>65</ZIndex>
             <Style>
               <Border>
@@ -3856,7 +3892,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3869,10 +3905,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.275in</Top>
-            <Left>2.46038in</Left>
-            <Height>0.24062in</Height>
-            <Width>1.58402in</Width>
+            <Top>5.23333in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.21284in</Height>
+            <Width>1.79234in</Width>
             <ZIndex>66</ZIndex>
             <Style>
               <Border>
@@ -3911,7 +3947,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3924,10 +3960,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.51562in</Top>
-            <Left>2.46038in</Left>
-            <Height>0.24131in</Height>
-            <Width>1.58402in</Width>
+            <Top>5.44618in</Top>
+            <Left>2.25207in</Left>
+            <Height>0.18436in</Height>
+            <Width>1.79233in</Width>
             <ZIndex>67</ZIndex>
             <Style>
               <Border>
@@ -3966,7 +4002,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -3979,10 +4015,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.75693in</Top>
-            <Left>2.46039in</Left>
-            <Height>0.24306in</Height>
-            <Width>1.58402in</Width>
+            <Top>5.63054in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.20278in</Height>
+            <Width>1.79235in</Width>
             <ZIndex>68</ZIndex>
             <Style>
               <Border>
@@ -4021,7 +4057,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4034,10 +4070,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.99999in</Top>
-            <Left>2.46038in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.58402in</Width>
+            <Top>5.83332in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.17639in</Height>
+            <Width>1.79234in</Width>
             <ZIndex>69</ZIndex>
             <Style>
               <Border>
@@ -4076,7 +4112,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4089,10 +4125,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.24582in</Top>
-            <Left>2.46039in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.58402in</Width>
+            <Top>6.00971in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.18333in</Height>
+            <Width>1.79235in</Width>
             <ZIndex>70</ZIndex>
             <Style>
               <Border>
@@ -4131,7 +4167,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4144,10 +4180,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.49165in</Top>
-            <Left>2.46038in</Left>
-            <Height>0.24999in</Height>
-            <Width>1.58402in</Width>
+            <Top>6.19304in</Top>
+            <Left>2.25206in</Left>
+            <Height>0.20138in</Height>
+            <Width>1.79234in</Width>
             <ZIndex>71</ZIndex>
             <Style>
               <Border>
@@ -4186,7 +4222,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4199,10 +4235,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.74025in</Top>
-            <Left>2.46038in</Left>
-            <Height>0.24722in</Height>
-            <Width>1.58402in</Width>
+            <Top>6.71967in</Top>
+            <Left>2.25279in</Left>
+            <Height>0.1744in</Height>
+            <Width>1.79928in</Width>
             <ZIndex>72</ZIndex>
             <Style>
               <Border>
@@ -4241,7 +4277,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4254,10 +4290,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.98747in</Top>
-            <Left>2.46039in</Left>
-            <Height>0.24583in</Height>
-            <Width>1.58402in</Width>
+            <Top>6.89407in</Top>
+            <Left>2.25283in</Left>
+            <Height>0.15729in</Height>
+            <Width>1.79928in</Width>
             <ZIndex>73</ZIndex>
             <Style>
               <Border>
@@ -4296,7 +4332,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4309,9 +4345,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.03194in</Top>
+            <Top>5.01111in</Top>
             <Left>4.0444in</Left>
-            <Height>0.24306in</Height>
+            <Height>0.22223in</Height>
             <Width>1.74519in</Width>
             <ZIndex>74</ZIndex>
             <Style>
@@ -4351,7 +4387,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4364,9 +4400,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.275in</Top>
+            <Top>5.23333in</Top>
             <Left>4.04441in</Left>
-            <Height>0.24062in</Height>
+            <Height>0.21284in</Height>
             <Width>1.74519in</Width>
             <ZIndex>75</ZIndex>
             <Style>
@@ -4406,7 +4442,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4419,9 +4455,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.51562in</Top>
+            <Top>5.44618in</Top>
             <Left>4.04439in</Left>
-            <Height>0.23714in</Height>
+            <Height>0.18436in</Height>
             <Width>1.74519in</Width>
             <ZIndex>76</ZIndex>
             <Style>
@@ -4461,7 +4497,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4474,9 +4510,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.75276in</Top>
+            <Top>5.63054in</Top>
             <Left>4.04439in</Left>
-            <Height>0.24723in</Height>
+            <Height>0.20278in</Height>
             <Width>1.74519in</Width>
             <ZIndex>77</ZIndex>
             <Style>
@@ -4516,7 +4552,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4529,9 +4565,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.99999in</Top>
+            <Top>5.83332in</Top>
             <Left>4.04439in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.17639in</Height>
             <Width>1.74519in</Width>
             <ZIndex>78</ZIndex>
             <Style>
@@ -4571,7 +4607,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4584,9 +4620,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.24582in</Top>
+            <Top>6.00971in</Top>
             <Left>4.04439in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.18333in</Height>
             <Width>1.74519in</Width>
             <ZIndex>79</ZIndex>
             <Style>
@@ -4626,7 +4662,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4639,9 +4675,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.49165in</Top>
+            <Top>6.19304in</Top>
             <Left>4.04439in</Left>
-            <Height>0.24999in</Height>
+            <Height>0.20138in</Height>
             <Width>1.74519in</Width>
             <ZIndex>80</ZIndex>
             <Style>
@@ -4681,7 +4717,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4694,9 +4730,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.74025in</Top>
-            <Left>4.04439in</Left>
-            <Height>0.24722in</Height>
+            <Top>6.71862in</Top>
+            <Left>4.05206in</Left>
+            <Height>0.17545in</Height>
             <Width>1.74519in</Width>
             <ZIndex>81</ZIndex>
             <Style>
@@ -4736,7 +4772,7 @@
                     <Value />
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -4749,9 +4785,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.98747in</Top>
-            <Left>4.0444in</Left>
-            <Height>0.24583in</Height>
+            <Top>6.89407in</Top>
+            <Left>4.0521in</Left>
+            <Height>0.15729in</Height>
             <Width>1.74519in</Width>
             <ZIndex>82</ZIndex>
             <Style>
@@ -4791,7 +4827,7 @@
                     <Value>Temperature :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -4803,9 +4839,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.03194in</Top>
+            <Top>5.01111in</Top>
             <Left>5.78959in</Left>
-            <Height>0.24306in</Height>
+            <Height>0.22223in</Height>
             <Width>2.3101in</Width>
             <ZIndex>83</ZIndex>
             <Style>
@@ -4845,7 +4881,7 @@
                     <Value>Set Dia :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -4857,9 +4893,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.275in</Top>
+            <Top>5.23333in</Top>
             <Left>5.78957in</Left>
-            <Height>0.24062in</Height>
+            <Height>0.21284in</Height>
             <Width>2.31009in</Width>
             <ZIndex>84</ZIndex>
             <Style>
@@ -4899,7 +4935,7 @@
                     <Value>Pinnng :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -4911,9 +4947,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.51562in</Top>
+            <Top>5.44618in</Top>
             <Left>5.78957in</Left>
-            <Height>0.23714in</Height>
+            <Height>0.18436in</Height>
             <Width>2.31012in</Width>
             <ZIndex>85</ZIndex>
             <Style>
@@ -4953,7 +4989,7 @@
                     <Value>M/C Speed :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -4965,9 +5001,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.75276in</Top>
+            <Top>5.63054in</Top>
             <Left>5.78957in</Left>
-            <Height>0.24723in</Height>
+            <Height>0.20278in</Height>
             <Width>2.31009in</Width>
             <ZIndex>86</ZIndex>
             <Style>
@@ -5007,7 +5043,7 @@
                     <Value>Over feed :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -5019,9 +5055,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>5.99999in</Top>
+            <Top>5.83332in</Top>
             <Left>5.78957in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.17639in</Height>
             <Width>2.31012in</Width>
             <ZIndex>87</ZIndex>
             <Style>
@@ -5061,7 +5097,7 @@
                     <Value>Width :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -5073,9 +5109,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.24582in</Top>
+            <Top>6.00971in</Top>
             <Left>5.78957in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.18333in</Height>
             <Width>2.31012in</Width>
             <ZIndex>88</ZIndex>
             <Style>
@@ -5115,7 +5151,7 @@
                     <Value>GSM :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -5127,9 +5163,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.49165in</Top>
+            <Top>6.19304in</Top>
             <Left>5.78957in</Left>
-            <Height>0.24999in</Height>
+            <Height>0.20138in</Height>
             <Width>2.31012in</Width>
             <ZIndex>89</ZIndex>
             <Style>
@@ -5169,7 +5205,7 @@
                     <Value>RE-Com Width :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -5181,9 +5217,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.74025in</Top>
-            <Left>5.78957in</Left>
-            <Height>0.24722in</Height>
+            <Top>6.71862in</Top>
+            <Left>5.79724in</Left>
+            <Height>0.17545in</Height>
             <Width>2.31012in</Width>
             <ZIndex>90</ZIndex>
             <Style>
@@ -5223,7 +5259,7 @@
                     <Value>RE-Com GSM :</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
@@ -5235,9 +5271,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>6.98747in</Top>
-            <Left>5.78958in</Left>
-            <Height>0.24583in</Height>
+            <Top>6.89407in</Top>
+            <Left>5.79728in</Left>
+            <Height>0.15729in</Height>
             <Width>2.31008in</Width>
             <ZIndex>91</ZIndex>
             <Style>
@@ -5307,9 +5343,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>0.05764in</Left>
-            <Height>0.88567in</Height>
+            <Height>0.79843in</Height>
             <Width>0.87305in</Width>
             <ZIndex>92</ZIndex>
             <Style>
@@ -5342,9 +5378,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>0.93329in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.22083in</Height>
             <Width>1.52531in</Width>
             <ZIndex>93</ZIndex>
             <Style>
@@ -5396,9 +5432,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.35207in</Top>
+            <Top>7.9479in</Top>
             <Left>0.93329in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.2125in</Height>
             <Width>1.52531in</Width>
             <ZIndex>94</ZIndex>
             <Style>
@@ -5450,9 +5486,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.5979in</Top>
+            <Top>8.1604in</Top>
             <Left>0.93329in</Left>
-            <Height>0.39844in</Height>
+            <Height>0.36511in</Height>
             <Width>3.0232in</Width>
             <ZIndex>95</ZIndex>
             <Style>
@@ -5505,9 +5541,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>3.95649in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.22083in</Height>
             <Width>1.0817in</Width>
             <ZIndex>96</ZIndex>
             <Style>
@@ -5559,9 +5595,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.35207in</Top>
+            <Top>7.9479in</Top>
             <Left>3.95649in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.2125in</Height>
             <Width>1.0817in</Width>
             <ZIndex>97</ZIndex>
             <Style>
@@ -5613,9 +5649,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>6.30261in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.22083in</Height>
             <Width>1.79711in</Width>
             <ZIndex>98</ZIndex>
             <Style>
@@ -5667,9 +5703,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.35207in</Top>
+            <Top>7.9479in</Top>
             <Left>6.30229in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.2125in</Height>
             <Width>1.79743in</Width>
             <ZIndex>99</ZIndex>
             <Style>
@@ -5739,9 +5775,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.5979in</Top>
+            <Top>8.1604in</Top>
             <Left>3.95647in</Left>
-            <Height>0.39844in</Height>
+            <Height>0.36511in</Height>
             <Width>4.14322in</Width>
             <ZIndex>100</ZIndex>
             <Style>
@@ -5792,9 +5828,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>RequiedDia</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>2.46038in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.22083in</Height>
             <Width>1.49611in</Width>
             <ZIndex>101</ZIndex>
             <Style>
@@ -5848,9 +5884,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>RGSM</rd:DefaultName>
-            <Top>8.10624in</Top>
+            <Top>7.72708in</Top>
             <Left>5.03819in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.22083in</Height>
             <Width>1.26442in</Width>
             <ZIndex>102</ZIndex>
             <Style>
@@ -5905,9 +5941,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.35207in</Top>
+            <Top>7.9479in</Top>
             <Left>2.46038in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.2125in</Height>
             <Width>1.49611in</Width>
             <ZIndex>103</ZIndex>
             <Style>
@@ -5959,9 +5995,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.35207in</Top>
+            <Top>7.9479in</Top>
             <Left>5.03819in</Left>
-            <Height>0.24583in</Height>
+            <Height>0.2125in</Height>
             <Width>1.26624in</Width>
             <ZIndex>104</ZIndex>
             <Style>
@@ -6014,10 +6050,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.99423in</Top>
-            <Left>0.05275in</Left>
-            <Height>0.26249in</Height>
-            <Width>0.87794in</Width>
+            <Top>8.52551in</Top>
+            <Left>0.05764in</Left>
+            <Height>0.26038in</Height>
+            <Width>0.87305in</Width>
             <ZIndex>105</ZIndex>
             <Style>
               <Border>
@@ -6048,7 +6084,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.99634in</Top>
+            <Top>8.52551in</Top>
             <Left>0.93306in</Left>
             <Height>0.26038in</Height>
             <Width>0.94815in</Width>
@@ -6103,9 +6139,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>8.99722in</Top>
+            <Top>8.52551in</Top>
             <Left>1.88364in</Left>
-            <Height>0.2595in</Height>
+            <Height>0.26038in</Height>
             <Width>1.1323in</Width>
             <ZIndex>107</ZIndex>
             <Style>
@@ -6158,9 +6194,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>9.00042in</Top>
+            <Top>8.52551in</Top>
             <Left>3.01594in</Left>
-            <Height>0.2563in</Height>
+            <Height>0.26038in</Height>
             <Width>0.94055in</Width>
             <ZIndex>108</ZIndex>
             <Style>
@@ -6212,9 +6248,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>9.00042in</Top>
+            <Top>8.52551in</Top>
             <Left>3.95649in</Left>
-            <Height>0.2563in</Height>
+            <Height>0.26038in</Height>
             <Width>1.44488in</Width>
             <ZIndex>109</ZIndex>
             <Style>
@@ -6266,9 +6302,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>9.00042in</Top>
+            <Top>8.52551in</Top>
             <Left>5.40137in</Left>
-            <Height>0.2563in</Height>
+            <Height>0.26038in</Height>
             <Width>0.91027in</Width>
             <ZIndex>110</ZIndex>
             <Style>
@@ -6320,9 +6356,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>9.00042in</Top>
+            <Top>8.52551in</Top>
             <Left>6.31164in</Left>
-            <Height>0.2563in</Height>
+            <Height>0.26038in</Height>
             <Width>1.78805in</Width>
             <ZIndex>111</ZIndex>
             <Style>
@@ -6375,9 +6411,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>9.25672in</Top>
+            <Top>8.78589in</Top>
             <Left>0.05764in</Left>
-            <Height>0.27833in</Height>
+            <Height>0.22833in</Height>
             <Width>0.87305in</Width>
             <ZIndex>112</ZIndex>
             <Style>
@@ -6396,7 +6432,7 @@
                   <TextRun>
                     <Value>=First(Fields!Remarks.Value, "usp_rpt_SampleBatchPrepMaster")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>7pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -6406,9 +6442,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Remarks</rd:DefaultName>
-            <Top>9.25672in</Top>
+            <Top>8.78589in</Top>
             <Left>0.93329in</Left>
-            <Height>0.27833in</Height>
+            <Height>0.22833in</Height>
             <Width>7.16633in</Width>
             <ZIndex>113</ZIndex>
             <Style>
@@ -7046,7 +7082,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.26911in</Height>
+                  <Height>0.24203in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -7059,6 +7095,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>Body Part</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7110,6 +7147,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>Plan Qty</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7161,6 +7199,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>Actual Qty</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7212,6 +7251,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>FDia</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7263,6 +7303,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>GDia</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7314,6 +7355,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>FGSM</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7365,6 +7407,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>GGSM</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7417,6 +7460,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                   <Value>M/C Dia X Gauge</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -7462,7 +7506,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.28578in</Height>
+                  <Height>0.2337in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -7475,6 +7519,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!BodyPart.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7526,6 +7571,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!PlanQty.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7577,6 +7623,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!ActualQty.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7628,6 +7675,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!FDia.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7679,6 +7727,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!GDia.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7730,6 +7779,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!FGSM.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7781,6 +7831,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!GGSM.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7832,6 +7883,7 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                                 <TextRun>
                                   <Value>=Fields!McDia.Value</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -7899,9 +7951,9 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>usp_rpt_SampleBatchSpecification</DataSetName>
-            <Top>7.55135in</Top>
+            <Top>7.25135in</Top>
             <Left>0.93271in</Left>
-            <Height>0.55489in</Height>
+            <Height>0.47573in</Height>
             <Width>7.16686in</Width>
             <ZIndex>126</ZIndex>
             <Style>
@@ -7952,9 +8004,9 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>7.55135in</Top>
+            <Top>7.25135in</Top>
             <Left>0.05905in</Left>
-            <Height>0.54656in</Height>
+            <Height>0.47573in</Height>
             <Width>0.86903in</Width>
             <ZIndex>127</ZIndex>
             <Style>
@@ -8117,15 +8169,375 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>4.00861in</Top>
+            <Left>2.23633in</Left>
+            <Height>0.12214in</Height>
+            <Width>0.10143in</Width>
+            <ZIndex>131</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox11</rd:DefaultName>
+            <Top>4.01456in</Top>
+            <Left>2.98345in</Left>
+            <Height>0.11023in</Height>
+            <Width>0.12069in</Width>
+            <ZIndex>132</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox16</rd:DefaultName>
+            <Top>4.01196in</Top>
+            <Left>3.91426in</Left>
+            <Height>0.11544in</Height>
+            <Width>0.12723in</Width>
+            <ZIndex>133</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox111">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>       Transoft FLA TF-445B (cationic)         Transoft FLA TF-445B (Non-ionic)             Rucofin GWE/mma</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>       King soft EF-150                                   TTK</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.3972in</Top>
+            <Left>2.25279in</Left>
+            <Height>0.32737in</Height>
+            <Width>5.85445in</Width>
+            <ZIndex>134</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox112">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Finishing Chemicals</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.39164in</Top>
+            <Left>0.93792in</Left>
+            <Height>0.32837in</Height>
+            <Width>1.31415in</Width>
+            <ZIndex>135</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+            </Style>
+          </Textbox>
+          <Image Name="Image10">
+            <Source>Embedded</Source>
+            <Value>circle</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>6.45136in</Top>
+            <Left>2.33156in</Left>
+            <Height>0.1088in</Height>
+            <Width>0.11454in</Width>
+            <ZIndex>136</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="Image13">
+            <Source>Embedded</Source>
+            <Value>circle</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>6.57543in</Top>
+            <Left>2.33156in</Left>
+            <Height>0.1088in</Height>
+            <Width>0.11454in</Width>
+            <ZIndex>137</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="Image14">
+            <Source>Embedded</Source>
+            <Value>circle</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>6.45136in</Top>
+            <Left>4.3479in</Left>
+            <Height>0.1088in</Height>
+            <Width>0.11454in</Width>
+            <ZIndex>138</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="Image15">
+            <Source>Embedded</Source>
+            <Value>circle</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>6.57683in</Top>
+            <Left>4.3479in</Left>
+            <Height>0.1088in</Height>
+            <Width>0.11454in</Width>
+            <ZIndex>139</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="Image16">
+            <Source>Embedded</Source>
+            <Value>circle</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>6.43886in</Top>
+            <Left>6.51487in</Left>
+            <Height>0.1088in</Height>
+            <Width>0.11454in</Width>
+            <ZIndex>140</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
-        <Height>9.54373in</Height>
+        <Height>9.02255in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>8.14073in</Width>
+      <Width>8.16207in</Width>
       <Page>
         <PageHeader>
           <Height>1.18417in</Height>
@@ -8317,7 +8729,6 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox10</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>0.05905in</Left>
               <Height>0.14376in</Height>
               <Width>2.17011in</Width>
@@ -8347,7 +8758,6 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>2.62147in</Left>
               <Height>0.13958in</Height>
               <Width>3.04312in</Width>
@@ -8389,7 +8799,6 @@ Len(First(Fields!FabricForThirdPart.Value, "usp_rpt_SampleBatchPrepMasterDetails
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox14</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>5.98442in</Left>
               <Height>0.13958in</Height>
               <Width>2.1152in</Width>
@@ -8564,6 +8973,34 @@ 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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="circle">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAACkAAAAsCAYAAAD4rZFFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEOSURBVFhH7ZDRCoQwDAT9/5/2DJxQ6rTZ2FRQOjAvZ7O73La/gDUyi5SR27Z1HeV2Ao3xvEv4ksqjRpEvqGxUFeklFWSp4L6i4Noe9L7Wo/uCAksj0H1pj+ZXCjodgfJOW4RHZkC5Zgv8QgFmJpRvEvLIGag9l1/p0JwB9Zg10siZKH3vG0kH5kyozyxxRz6B17tGqni9a6SK1/uNkeZMqM8suSzwDrJR+r4z0pwB9Zg12K4cZqD2yCPNTCjfJJrNFGBmQLlmi/BIcwTKO23RbaSg0gh0X9rDbaLA2h70vtZD+jsoOEsF7dUBFYyqor/8Q2VRo8QvDqhY9Q73rgpoSO0o4wkPsEZmsUbmsO8/Al19uBLikFoAAAAASUVORK5CYII=</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="circleNew">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="circle1">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>

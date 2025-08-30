@@ -27,7 +27,7 @@ namespace Dyeing.App
 
           // "http://192.168.50.60:93/dyeingApi/api/";
 
-         //"https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+        // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
 
         //scheme+"://" + Host + (Host == "localhost" ? ":809/dyeingapi" : ":443/dyeingApi") + "/api/";//
 

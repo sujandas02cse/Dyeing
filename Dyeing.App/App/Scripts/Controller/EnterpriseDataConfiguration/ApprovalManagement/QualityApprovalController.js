@@ -42,22 +42,23 @@
           }
         );
       }
-    };
+      };
+
     $scope.$watch("Unit", function(newVal, oldVal) {
       if (newVal) {
         debugger;
 
-          $scope.CA = false;
-          $scope.Batch = "";
-          $scope.allBatch = [];
-          $scope.BatchData = [];
-          $scope.RollData = [];
-          $scope.RollData = [];
-          $scope.OkAll = undefined;
-          $scope.NotOkAll = undefined;
-          defaultUser();
-          $scope.ApproveTime = atDefaultOption;
-          $scope.CAReason = "";
+        $scope.CA = false;
+        $scope.Batch = "";
+        $scope.allBatch = [];
+        $scope.BatchData = [];
+        $scope.RollData = [];
+        $scope.RollData = [];
+        $scope.OkAll = undefined;
+        $scope.NotOkAll = undefined;
+        defaultUser();
+        $scope.ApproveTime = atDefaultOption;
+        $scope.CAReason = "";
 
         $scope.GetBatchNoByUnitNew();
       }
@@ -65,17 +66,17 @@
 
     $scope.$watch("batchType", function(newVal, oldVal) {
       if (newVal) {
-          $scope.CA = false;
-          $scope.Batch = "";
-          $scope.allBatch = [];
-          $scope.BatchData = [];
-          $scope.RollData = [];
-          $scope.RollData = [];
-          $scope.OkAll = undefined;
-          $scope.NotOkAll = undefined;
-          defaultUser();
-          $scope.ApproveTime = atDefaultOption;
-          $scope.CAReason = "";
+        $scope.CA = false;
+        $scope.Batch = "";
+        $scope.allBatch = [];
+        $scope.BatchData = [];
+        $scope.RollData = [];
+        $scope.RollData = [];
+        $scope.OkAll = undefined;
+        $scope.NotOkAll = undefined;
+        defaultUser();
+        $scope.ApproveTime = atDefaultOption;
+        $scope.CAReason = "";
         debugger;
         $scope.GetBatchNoByUnitNew();
       }
@@ -367,8 +368,8 @@
         .toFixed(1);
     };
 
-      $scope.actionDialog = function (action, dataModel) {
-          debugger;
+    $scope.actionDialog = function(action, dataModel) {
+      debugger;
       let appTime = $scope.ApproveTime[$scope.ApproveTime.length - 1].id;
       if (appTime != $scope.Batch.ApproveTime) return;
 
@@ -437,14 +438,14 @@
         ApprovalManagement.SaveUpdateApprovalData(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-              ClearTxt
+            ClearTxt;
           } else $rootScope.alert(res.ErrorMsg);
         });
       } else if ($scope.batchType == "New") {
         ApprovalManagement.SaveUpdateApprovalDataNew(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-              ClearTxt
+            ClearTxt;
           } else $rootScope.alert(res.ErrorMsg);
         });
       }
@@ -452,24 +453,20 @@
 
     $scope.Refresh = function() {
       Refresh();
-      };
+    };
 
+    function ClearTxt() {
+      $scope.CA = false;
+      $scope.Batch = "";
 
-      function ClearTxt() {
-         
-          $scope.CA = false;
-          $scope.Batch = "";
-     
-          $scope.RollData = [];
-          $scope.RollData = [];
-          $scope.OkAll = undefined;
-          $scope.NotOkAll = undefined;
-          defaultUser();
-          $scope.ApproveTime = atDefaultOption;
-          $scope.CAReason = "";
-
-      }
-
+      $scope.RollData = [];
+      $scope.RollData = [];
+      $scope.OkAll = undefined;
+      $scope.NotOkAll = undefined;
+      defaultUser();
+      $scope.ApproveTime = atDefaultOption;
+      $scope.CAReason = "";
+    }
 
     function Refresh() {
       debugger;

@@ -165,5 +165,15 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.ProductionPlanConfigurat
                     storedProcedureName: @"[dbo].[usp_GetBuyerJobOrderForMasterData]", model: data, dbName: DyeingDB);
 
         }
+
+
+        public Task<IEnumerable<object>> GetUnitWithoutUser()
+        {
+            var parameters = new DynamicParameters();
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_UnitWithoutUser]", parameters: parameters, dbName: DyeingDB);
+
+        }
+
     }
 }

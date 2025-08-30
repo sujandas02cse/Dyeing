@@ -228,5 +228,41 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.ApprovalManagement
             return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_ApprovalDataNew]", parameters: Parameter, dbName: DyeingDB);
         }
 
+
+
+        public async Task<object> GetBodyPartbyBatchListNew(int BpmId)
+        {
+            var Parameter = new DynamicParameters();
+            Parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_get_BodyPartbyBpmIdNew]", parameters: Parameter, dbName: DyeingDB);
+        }
+
+
+        public async Task<object> GetBatchShadeApprovalDataNew(int BpmId, int ApprovalTime, int BSpecId)
+        {
+            var Parameter = new DynamicParameters();
+            Parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ApprovalTime", value: ApprovalTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@BSpecId", value: BSpecId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.MultiQueryAsync<object, object, object>(storedProcedureName: @"[dbo].[usp_Get_BatchDataForShadeApprovalNew]", parameters: Parameter, dbName: DyeingDB);
+        }
+
+        public object SaveUpdateShadeApprovalNew(ShadeApproveModel obj)
+        {
+           
+            return DatabaseHub.Query<object, object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_ShadeApproveDataNew]", model: obj, dbName: DyeingDB);
+        }
+
+        public async Task<IEnumerable<Object>> SaveUpdateRFDApprovalNew(RFDApproval obj)
+        {
+            var Parameter = new DynamicParameters();
+            Parameter.Add(name: "@UserId", value: obj.UserId, dbType: DbType.String, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@BpmId", value: obj.BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add(name: "@ApprovedTime", value: obj.ApprovedTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            Parameter.Add("@tvp_RFDApproval", obj.details.AsTableValuedParameter("dbo.tvp_RFDApproval",
+                new[] { "InsMasterId", "QualityApproved", "FabricTestApproved", "ShadeApproved", "RFDApproved" }));
+
+            return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_RFDApprovalNew]", parameters: Parameter, dbName: DyeingDB);
+        }
     }
 }

@@ -229,9 +229,9 @@
 
                         </tr>
                         <tr>
-                            <td>Enzyme</td>
+                            <td>Enzyme %:</td>
                          
-                            <td> <input type="text" style="text-align:center" ng-model="batch[0].Enzyme" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
+                            <td> <input type="text" style="text-align:center" ng-model="batch[0].Enzyme" typeahead-min-length="1" typeahead-editable="false" ng-readonly="true" aria-readonly="true" class="form-control input-height clsHeight"></td>
 
                             <td>Pre-Treatment</td>
                             <td> <input type="text" style="text-align:center" ng-model="batch[0].PreTreatment" typeahead-min-length="1" typeahead-editable="false" class="form-control input-height clsHeight"></td>
@@ -282,7 +282,7 @@
                     <div class="table4">
                         <table class="table table-bordered">
                             <tr>
-                                <th rowspan="11">Finishing Details:</th>
+                                <th rowspan="12">Finishing Details:</th>
                                 <th class="text-center">Parameter</th>
                                 <th class="text-center">Stenter</th>
                                 <th class="text-center">Dryer</th>
@@ -324,12 +324,34 @@
                                 <td></td>
                                 <td>Width:- <span></span></td>
                             </tr>
+
                             <tr>
                                 <td>Under Feed:- <span></span></td>
                                 <td></td>
                                 <td></td>
                                 <td>GSM:- <span></span></td>
                             </tr>
+
+                            <tr>
+                                <td colspan="4">
+                                    <b>Finishing Chemicals:-</b>
+                                    <!--<input type="radio" name="finishingChemicals" style="margin-right:6px;">
+                                    Transoft FLA TF-445B (cationic)
+                                    <input type="radio" name="finishingChemicals" style="margin-right:6px;">
+                                    Transoft FLA TF-445B (Non-ionic)
+
+                                    <input type="radio" name="finishingChemicals" style="margin-right:6px;">
+                                    Rucofin GWE/mma
+
+                                    <input type="radio" name="finishingChemicals" style="margin-right:6px;">
+                                    King soft EF-150
+
+                                    <input type="radio" name="fisnishingChemicals" style="margin-right:6px;">
+                                    TTK-->
+                                </td>
+                            </tr>
+
+
                             <tr>
                                 <td>Width:- <span></span></td>
                                 <td></td>
@@ -345,7 +367,6 @@
                             <tr>
                                 <td colspan="4"><b>Note:</b> <span></span></td>
                             </tr>
-
                         </table>
                     </div>
 

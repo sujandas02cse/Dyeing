@@ -74,6 +74,7 @@
     </div>
     <div class="card card-body">
         <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewRadioButton.html'"></div>
             <div>
                 <table>
                     <thead>
@@ -91,14 +92,14 @@
                             <td><b>Body Part</b></td>
                             <td>
                                 <!--<input type="text" ng-model="BodyPart" typeahead-min-length="1" uib-typeahead="unit as unit.BodyPart for unit in BodyPartlist | filter : {BodyPart : $viewValue} | limitTo:8"
-                                     typeahead-on-select="getDataByBatchId()" typeahead-editable="false" class="form-control clsHeight " placeholder="BodyPart" required/>-->
+                             typeahead-on-select="getDataByBatchId()" typeahead-editable="false" class="form-control clsHeight " placeholder="BodyPart" required/>-->
                                 <select ng-model="BodyPart"
-                                            ng-change="getDataByBatchId()"
-                                            ng-options="unit as unit.BodyPart for unit in BodyPartlist"
-                                            class="form-control input-height clsHeight"
-                                            ng-required="true">
-                                        <option value="" selected>Select</option>
-                                    </select>
+                                        ng-change="getDataByBatchId()"
+                                        ng-options="unit as unit.BodyPart for unit in BodyPartlist"
+                                        class="form-control input-height clsHeight"
+                                        ng-required="true">
+                                    <option value="" selected>Select</option>
+                                </select>
                             </td>
 
 
@@ -137,25 +138,25 @@
                             <td> In-House Approval</td>
                             <td> <input type="checkbox" ng-click="CheckState('InHouseOk')" ng-model="InHouseOk" class="scale" /> </td>
                             <td> <input type="checkbox" ng-click="CheckState('InHouseNotOk')" ng-model="InHouseNotOk" class="scale" /> </td>
-                            <td> <input type="text"  class="form-control" placeholder="Reason" ng-show="InHouseNotOk" ng-required="InHouseNotOk" ng-model="IHAText" /></td>
+                            <td> <input type="text" class="form-control" placeholder="Reason" ng-show="InHouseNotOk" ng-required="InHouseNotOk" ng-model="IHAText" /></td>
                         </tr>
-                        <tr> 
+                        <tr>
                             <td>Garments Approval</td>
                             <td><input type="checkbox" ng-click="CheckState('GAOk')" ng-model="GAOk" class="scale" /></td>
                             <td> <input type="checkbox" ng-click="CheckState('GANotOk')" ng-model="GANotOk" class="scale" /> </td>
-                            <td> <input type="text"  class="form-control" placeholder="Reason" ng-show="GANotOk" ng-required="GANotOk" ng-model="GAText" /></td>
+                            <td> <input type="text" class="form-control" placeholder="Reason" ng-show="GANotOk" ng-required="GANotOk" ng-model="GAText" /></td>
                         </tr>
                         <tr>
                             <td>Merchant Approval</td>
                             <td><input type="checkbox" ng-click="CheckState('MAOk')" ng-model="MAOk" class="scale" /></td>
                             <td> <input type="checkbox" ng-click="CheckState('MANotOk')" ng-model="MANotOk" class="scale" /> </td>
-                            <td> <input type="text"  class="form-control" placeholder="Reason" ng-show="MANotOk" ng-required="MANotOk" ng-model="MAText" /></td>
+                            <td> <input type="text" class="form-control" placeholder="Reason" ng-show="MANotOk" ng-required="MANotOk" ng-model="MAText" /></td>
                         </tr>
-                        <tr> 
+                        <tr>
                             <td>Buyer Approval</td>
                             <td><input type="checkbox" ng-click="CheckState('BAOk')" ng-model="BAOk" class="scale" /></td>
                             <td><input type="checkbox" ng-click="CheckState('BANotOk')" ng-model="BANotOk" class="scale" /></td>
-                            <td> <input type="text"  class="form-control" placeholder="Reason" ng-show="BANotOk" ng-required="BANotOk" ng-model="BAText" /></td>
+                            <td> <input type="text" class="form-control" placeholder="Reason" ng-show="BANotOk" ng-required="BANotOk" ng-model="BAText" /></td>
                         </tr>
                         <tr>
                             <td>Commercial Approval</td>
