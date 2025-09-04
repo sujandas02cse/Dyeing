@@ -50,11 +50,7 @@
     $scope.$watch("Unit", function(newVal, oldVal) {
       if (newVal) {
         debugger;
-        $scope.Batch = "";
-        $scope.allBatch = [];
-        $scope.BatchData = [];
-        $scope.allRollData = [];
-        defaultUser();
+        SaveRefresh();
 
         $scope.GetBatchNoByUnitNew();
       }
@@ -62,11 +58,7 @@
 
     $scope.$watch("batchType", function(newVal, oldVal) {
       if (newVal) {
-        $scope.Batch = "";
-        $scope.allBatch = [];
-        $scope.BatchData = [];
-        $scope.allRollData = [];
-        defaultUser();
+        SaveRefresh();
         $scope.GetBatchNoByUnitNew();
       }
     });
@@ -326,6 +318,7 @@
       debugger;
       var sendData = [];
       let SaveData = $scope.allRollData.filter(x => x.RFDApproved != null);
+
       sendData = SaveData.map(function(obj) {
         return {
           InsMasterId: obj.InsMasterId,
@@ -377,18 +370,10 @@
     }
 
     function SaveRefresh() {
-      //if ($scope.AllUnitData.length == 1) {
-      //  $scope.Unit = $scope.AllUnitData[0];
-      //   $scope.GetDyeingUnit();
-      //  }
-
-      $scope.GetBatchNoByUnitNew();
-
       $scope.Batch = "";
 
       $scope.BatchData = [];
       $scope.allRollData = [];
-      defaultUser();
     }
   }
 ]);

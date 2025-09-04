@@ -252,7 +252,7 @@
                         <div class="col-md-8">
                             <input type="text" ng-model="McOperation.MachineNo"
                                    ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"
-                                   typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                   typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList |  limitTo:8"
                                    typeahead-editable="false" class="form-control input-height clsHeight" required />
                         </div>
                     </div>

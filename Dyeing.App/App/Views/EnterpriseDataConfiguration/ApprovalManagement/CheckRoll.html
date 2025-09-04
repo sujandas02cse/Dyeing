@@ -72,6 +72,7 @@
     </div>
     <div class="card card-body">
         <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewRadioButton.html'"></div>
             <div>
                 <table>
                     <thead>
@@ -97,7 +98,7 @@
                             <td><b>Color</b></td>
                             <td><input type="text" class="form-control" name="" value="{{BatchData.Color}}" readonly /></td>
                         </tr>
-                        <tr>                            
+                        <tr>
                             <td><b>Batch Weight</b></td>
                             <td><input type="text" class="form-control" name="" value="{{BatchData.BatchWeight}}" readonly /></td>
                         </tr>
@@ -113,18 +114,18 @@
                             <td colspan="1" class="custom-width1"></td>
                             <th class="custom-width2">OK</th>
                             <th class="custom-width2">Not OK</th>
-                        </tr>                        
+                        </tr>
                     </thead>
-                    <tbody>                        
+                    <tbody>
                         <tr>
-                            <td >Check Roll Approval</td>
+                            <td>Check Roll Approval</td>
                             <td><input class="scale" type="checkbox" ng-click="CheckState('CROk')" ng-model="CRA" /></td>
                             <td><input class="scale" type="checkbox" ng-click="CheckState('CRNotOk')" ng-model="CRAN" /> </td>
                             <td> <input class="form-control" type="text" placeholder="Reason" ng-show="CRAN" ng-model="CRAReason" ng-required="CRAN" /></td>
                         </tr>
                         <tr>
-                            <td >Commercial Approval</td>
-                            <td><input class="scale" type="checkbox" ng-click="CheckState('CAOk')" ng-model="CA" /></td>                            
+                            <td>Commercial Approval</td>
+                            <td><input class="scale" type="checkbox" ng-click="CheckState('CAOk')" ng-model="CA" /></td>
                             <td colspan="2"> <input class="form-control" type="text" placeholder="Reason" ng-show="CA" ng-model="CAReason" ng-required="CA" /></td>
                         </tr>
                     </tbody>
@@ -148,7 +149,7 @@
                             </td>
                             <td><b>Approve Time</b></td>
                             <td>
-                                <div>                                    
+                                <div>
                                     <select ng-model="Batch.ApproveTime"
                                             ng-change="getDataByBatchId()"
                                             ng-options="a.id as a.name for a in ApproveTime"

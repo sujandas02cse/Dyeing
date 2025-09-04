@@ -1,47 +1,33 @@
-﻿app.controller("BatchCardNew", [
-  "$scope",
-  "$rootScope",
-  "$location",
-  "$mdDialog",
-  "$mdToast",
-  "$q",
-  "$parse",
-  "fileReader",
-  "$window",
-  "BatchCardNew",
-  function(
-    $scope,
-    $rootScope,
-    $location,
-    $mdDialog,
-    $mdToast,
-    $q,
-    $parse,
-    fileReader,
-    $window,
-    BatchCardNew
-  ) {
+﻿app.controller("BatchCardNew", ["$scope","$rootScope","$location","$mdDialog","$mdToast","$q","$parse","fileReader","$window","BatchCardNew",function ($scope, $rootScope, $location, $mdDialog, $mdToast, $q, $parse, fileReader, $window, BatchCardNew) {
+    debugger
+    $scope.UnitId = $location.search().u;
+
     let UnitId = $location.search().u;
     $scope.Enzyme = [{ Value: "Yes" }, { Value: "No" }];
 
     //UnitList
-    BatchCardNew.GetUnitAll($rootScope.UserId, function(data) {
-      $scope.UnitList = data;
+    BatchCardNew.GetUnitAll($rootScope.UserId, function (data) {
+        debugger
+        $scope.UnitList = data;
+        if ($scope.SourceUnit === undefined)
+            $scope.SourceUnit.UnitId = 0;
     });
 
     //MachineList
-    BatchCardNew.GetMachineData(UnitId, function(data) {
-      UnitId = $location.search().u;
+    BatchCardNew.GetMachineData($scope.UnitId, function(data) {
+        $scope.UnitId = $location.search().u;
       $scope.MachineList = data;
     });
 
-    BatchCardNew.GetTrollyNo(UnitId, function(data) {
+    BatchCardNew.GetTrollyNo($scope.UnitId, function (data) {
+        debugger
       $scope.TrollyInfo = data;
     });
 
     //Show or Hide those Section
-    $scope.ShowProcess = function(unit) {
-      if (unit === 16) {
+    $scope.ShowProcess = function (unit) {
+        debugger
+        if ($scope.UnitId === 16) {
         $scope.buildProcessFlowRows();
         $scope.buildOtherRows();
         return ($scope.Sh = "Display: Auto");
@@ -63,9 +49,7 @@
       } else if (type === "IsPPSampleOrChina") {
         $scope.batch.PPSample = false;
         $scope.batch.China = false;
-        $scope.batch.PPSamplewithChina = $scope.batch.PPSamplewithChina
-          ? false
-          : true;
+        $scope.batch.PPSamplewithChina = $scope.batch.PPSamplewithChina ? false : true;
       }
     };
     $scope.reviseNo = $location.search().r;
@@ -87,10 +71,7 @@
     $scope.batchSpec = [{}, {}, {}, {}, {}];
     $scope.nozzleTrolley = [{}, {}, {}, {}];
 
-    BatchCardNew.GetBatchDataById(
-      $location.search().id,
-      $scope.reviseNo,
-      function(data) {
+    BatchCardNew.GetBatchDataById($location.search().id,$scope.reviseNo,function(data) {
         debugger;
         NozzleTrollyBatchDataLoad($location.search().id);
         $scope.batch = data.m_Item1[0];
@@ -100,19 +81,22 @@
         $scope.WaterMark = data.m_Item5;
         $scope.ProcessFlow = data.m_Item6;
         $scope.Others = data.m_Item7;
-
+        debugger
         var check = [$scope.ProcessFlow, $scope.Others].flatMap(arr =>
           arr.filter(x => x.IsChecked === 1)
         );
-
+        debugger
         if (check.length > 0) {
           BatchCardNew.GetUnitAll($rootScope.UserId);
-          $scope.SourceUnit = $scope.UnitList.find(x => x.Id === 16);
-          $scope.ShowProcess($scope.SourceUnit.Id);
+          //$scope.SourceUnit = $scope.UnitList.find(x => x.Id === 16);
+          //$scope.ShowProcess($scope.SourceUnit.Id);
         }
-        //$scope.buildProcessFlowRows();
-        //$scope.buildOtherRows();
-
+        if ($scope.UnitId == 16) {
+            debugger
+            $scope.buildProcessFlowRows();
+            $scope.buildOtherRows();
+        }
+        debugger
         $scope.batch.BpmId = $location.search().id;
         $scope.changePlanQty();
         $scope.changeActualQty();
@@ -142,7 +126,8 @@
       });
     };
 
-    $scope.buildProcessFlowRows = function() {
+    $scope.buildProcessFlowRows = function () {
+        debugger
       $scope.ProcessFlowRows = [];
       if (!$scope.ProcessFlow || !$scope.ProcessFlow.length) return;
 
@@ -151,7 +136,8 @@
       }
     };
 
-    $scope.buildOtherRows = function() {
+    $scope.buildOtherRows = function () {
+        debugger
       $scope.OtherRows = [];
       if (!$scope.Others || !$scope.Others.length) return;
 
@@ -332,10 +318,7 @@
 
       let obj = {
         BpmId: $scope.batch.Id,
-        UnitId:
-          $scope.batch.DyeingUnitId === undefined
-            ? 0
-            : $scope.batch.DyeingUnitId,
+        UnitId: $scope.batch.DyeingUnitId === undefined ? 0 : $scope.batch.DyeingUnitId,
         //LoadingDate:null,
         LoadingTime:
           $scope.batch.LoadingTime === null ? "" : $scope.batch.LoadingTime,
@@ -401,7 +384,7 @@
               rType +
               "&&UnitNo=" +
               Unit +
-              "#view = FitH"
+              "&&DyeingUnit=" + $scope.UnitId +"#view = FitH"
           );
         } else $rootScope.alert(res.ErrorMsg);
       });

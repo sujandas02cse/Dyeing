@@ -42,7 +42,7 @@
           }
         );
       }
-      };
+    };
 
     $scope.$watch("Unit", function(newVal, oldVal) {
       if (newVal) {
@@ -438,14 +438,15 @@
         ApprovalManagement.SaveUpdateApprovalData(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-            ClearTxt;
+            SaveRefresh();
           } else $rootScope.alert(res.ErrorMsg);
         });
       } else if ($scope.batchType == "New") {
         ApprovalManagement.SaveUpdateApprovalDataNew(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-            ClearTxt;
+
+            SaveRefresh();
           } else $rootScope.alert(res.ErrorMsg);
         });
       }
@@ -455,12 +456,13 @@
       Refresh();
     };
 
-    function ClearTxt() {
+    function SaveRefresh() {
       $scope.CA = false;
       $scope.Batch = "";
 
+      $scope.BatchData = [];
       $scope.RollData = [];
-      $scope.RollData = [];
+
       $scope.OkAll = undefined;
       $scope.NotOkAll = undefined;
       defaultUser();
@@ -470,17 +472,17 @@
 
     function Refresh() {
       debugger;
-      //if ($scope.AllUnitData.length == 1) {
-      //  $scope.Unit = $scope.AllUnitData[0];
-      //  /* $scope.GetBatchNoByUnit();*/
-      //  $scope.GetBatchNoByUnitNew();
-      //}
+      if ($scope.AllUnitData.length == 1) {
+        $scope.Unit = $scope.AllUnitData[0];
+        /* $scope.GetBatchNoByUnit();*/
+        $scope.GetBatchNoByUnitNew();
+      }
       $scope.CA = false;
       $scope.Batch = "";
       $scope.allBatch = [];
       $scope.BatchData = [];
       $scope.RollData = [];
-      $scope.RollData = [];
+
       $scope.OkAll = undefined;
       $scope.NotOkAll = undefined;
       defaultUser();

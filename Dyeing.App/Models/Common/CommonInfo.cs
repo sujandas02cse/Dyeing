@@ -37,15 +37,15 @@ namespace Dyeing.App
 
         #region Dyeing
 
-        //public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
-        //public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
+        public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
+        public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
 
         #region DyeingTest
 
-        public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
-        public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
+        //public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
 
         #endregion
 

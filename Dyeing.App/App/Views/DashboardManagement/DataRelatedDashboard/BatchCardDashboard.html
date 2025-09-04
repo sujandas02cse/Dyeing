@@ -365,6 +365,7 @@
                         <th ng-click="sort('FabQty')">FabQty &nbsp;</th>
 
                         <th>IsSample &nbsp;</th>
+                      
 
                         <th style="width:10%;">Action&nbsp;</th>
                         <th ng-if="currlength.length>5" style=" width: 0.7%;"></th>
@@ -387,7 +388,9 @@
                         <td> {{dataModel.IsSample}}</td>
 
                         <td style="width:10%;">
-                            <button ng-click="GetDashboardData(dataModel.BpmId, 'B')" class="btn btn-success">Batch Card</button>
+                            <!--<button ng-click="GetDashboardData(dataModel.BpmId, 'B')" class="btn btn-success">Batch Card</button>-->
+
+                            <button ng-click="GetDashboardDataNew(dataModel.BpmId,dataModel.ProcessName, 'B')" class="btn btn-success">Batch Card</button>
 
                             <button style="margin-top:10px;" ng-click="GetDashboardData(dataModel.BpmId, 'S')" class="btn btn-success">Swatch Card</button>
                         </td>

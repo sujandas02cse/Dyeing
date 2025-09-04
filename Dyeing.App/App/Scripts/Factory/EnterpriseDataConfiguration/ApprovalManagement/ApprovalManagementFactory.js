@@ -234,7 +234,9 @@
           }
         );
     };
-    _obj.SaveUpdateCRSend = function(data, cb) {
+
+
+      _obj.SaveUpdateCRSend = function (data, cb) {
       $http.post(baseApiURL + "ApprovalManagement/SaveUpdateCRSend", data).then(
         function successCallback(response) {
           cb(response.data);
@@ -381,6 +383,31 @@
               );
       };
 
+
+      _obj.SaveUpdateCRApprovalNew = function (data, cb) {
+          $http
+              .post(baseApiURL + "ApprovalManagement/SaveUpdateCRApprovalNew", data)
+              .then(
+                  function successCallback(response) {
+                      cb(response.data);
+                  },
+                  function errorCallback(response) {
+                      alert("Error Occured during Load Information....");
+                  }
+              );
+      };
+
+      _obj.SaveUpdateCRSendNew = function (data, cb) {
+          debugger;
+          $http.post(baseApiURL + "ApprovalManagement/SaveUpdateCRSendNew", data).then(
+              function successCallback(response) {
+                  cb(response.data);
+              },
+              function errorCallback(response) {
+                  alert("Error Occured during Load Information....");
+              }
+          );
+      };
 
 
     return _obj;

@@ -486,11 +486,17 @@
                                     <a href="/DashboardManagement/SampleBatchCardReport?BpmId={{dataModel.BpmId}}&&Format=PDF&&ReportType=N#view=FitH" target="_blank" alt="">{{dataModel.BatchNo}}</a>
                                 </td>
                                 <td ng-if="batchType === 'New'">
-                                    <a href=""
+                                    <!--<a href=""
                                        ng-href="/DashboardManagement/NewBatchCardReport?BpmId={{dataModel.BpmId}}&Format=PDF&rType=''&UnitNo={{Unit.UnitId}}#view=FitH"
                                        target="_blank">
                                         {{dataModel.BatchNo}}
+                                    </a>-->
+                                    <a href=""
+                                       ng-href="/DashboardManagement/NewBatchCardReport?BpmId={{dataModel.BpmId}}&Format=PDF&rType=''&UnitNo={{Unit.UnitId}}&DyeingUnit={{Unit.UnitId}}#view=FitH"
+                                       target="_blank">
+                                        {{dataModel.BatchNo}}
                                     </a>
+
                                 </td>
 
 

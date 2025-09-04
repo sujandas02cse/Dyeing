@@ -264,5 +264,21 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.ApprovalManagement
 
             return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_RFDApprovalNew]", parameters: Parameter, dbName: DyeingDB);
         }
+
+
+        public object SaveUpdateCRApprovalNew(CRApproveModel obj)
+        {
+
+            return DatabaseHub.Query<object, object>(storedProcedureName: @"[dbo].[usp_Save_CheckRollDataNew]", model: obj, dbName: DyeingDB);
+        }
+
+
+
+        public object SaveUpdateCRSendNew(CRSendModel obj)
+        {
+            return DatabaseHub.Query<object, object>(storedProcedureName: @"[dbo].[usp_Save_CheckRollSendNew]", model: obj, dbName: DyeingDB);
+        }
+
+
     }
 }

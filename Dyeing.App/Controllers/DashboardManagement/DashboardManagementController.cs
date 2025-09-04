@@ -821,15 +821,15 @@ namespace Dyeing.App.Controllers.DashboardManagement
 
 
         #region New Process Report
-        public async Task<ActionResult> NewBatchCardReport(int BpmId, string Format, string rType,int UnitNo)
+        public async Task<ActionResult> NewBatchCardReport(int BpmId, string Format, string rType,int UnitNo,int DyeingUnit)
         {
-            string RptPath =UnitNo == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
+            string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
             string RptType = "";
             if (rType == "PPSample")
                 RptType = "PP";
             else if (rType == "China")
                 RptType = "C";
-            else if (rType == "PPC")
+            else if (rType == "PP Sample & China")
                 RptType = "PPC";
             else if (rType == "Organic")
                 RptType = "O";

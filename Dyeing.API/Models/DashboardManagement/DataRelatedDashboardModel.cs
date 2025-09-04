@@ -533,8 +533,12 @@ namespace Dyeing.API.Models.DashboardManagement
             parameters.Add(name: "@UnitId", value: unitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add(name: "@FromDate", value: fromDate, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@ToDate", value: toDate, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            //return DatabaseHubRpt.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkBeforeIssue]", parameters: parameters, dbName: DyeingDB);
+
             return DatabaseHubRpt.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkBeforeIssue]", parameters: parameters, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkBeforeIssueNew]", parameters: parameters, dbName: DyeingDB);
         }
 
 
@@ -544,8 +548,13 @@ namespace Dyeing.API.Models.DashboardManagement
             parameters.Add(name: "@UnitId", value: unitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add(name: "@FromDate", value: fromDate, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@ToDate", value: toDate, dbType: DbType.String, direction: ParameterDirection.Input);
+            
+            //return DatabaseHubRpt.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkAfterIssue]", parameters: parameters, dbName: DyeingDB);
+
+
             return DatabaseHubRpt.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkAfterIssue]", parameters: parameters, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_get_BatchCardDataNewBulkAfterIssueNew]", parameters: parameters, dbName: DyeingDB);
         }
 
 

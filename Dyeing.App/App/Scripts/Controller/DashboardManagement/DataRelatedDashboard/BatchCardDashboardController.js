@@ -18,10 +18,10 @@
     $scope.showPrevious = true;
     $scope.showBeforeAfter = false;
     $scope.batchType = "Bulk";
-      $scope.RMode = "PB";
+    $scope.RMode = "PB";
 
-      $scope.FromDate = new Date();
-      $scope.ToDate = new Date();
+    $scope.FromDate = new Date();
+    $scope.ToDate = new Date();
 
     $scope.checkSample = function() {
       $scope.batchType = "Sample";
@@ -60,11 +60,9 @@
       debugger;
       let RUnitId = 0;
       if ($scope.RUnit) RUnitId = $scope.RUnit.Id;
-        else RUnitId = $scope.Unit.Id;
+      else RUnitId = $scope.Unit.Id;
 
-        if ($scope.batchType == "Bulk")
-
-        {
+      if ($scope.batchType == "Bulk") {
         if (flag == "S")
           $window.open(
             "../DashboardManagement/SwatchCard?BpmId=" +
@@ -85,46 +83,50 @@
               BpmId +
               "&&Format=PDF#view=FitH"
           );
-        }
+      } else if ($scope.batchType == "Sample") {
+        if (flag == "S")
+          $window.open(
+            "../DashboardManagement/SwatchCardSample?BpmId=" +
+              BpmId +
+              "&&RUnitId=" +
+              RUnitId +
+              "&&Format=PDF#view=FitH"
+          );
+        else if ($scope.RMode == "PB") {
+          let reportType = "N";
+          const url = `../DashboardManagement/SampleBatchCardReport?BpmId=${BpmId}&Format=PDF&ReportType=${reportType}#view=FitH`;
 
-        else if ($scope.batchType == "Sample") {
-            if (flag == "S")
-                $window.open(
-                    "../DashboardManagement/SwatchCardSample?BpmId=" +
-                    BpmId +
-                    "&&RUnitId=" +
-                    RUnitId +
-                    "&&Format=PDF#view=FitH"
-                );
-            else if ($scope.RMode == "PB") {
-                let reportType = "N";
-                const url = `../DashboardManagement/SampleBatchCardReport?BpmId=${BpmId}&Format=PDF&ReportType=${reportType}#view=FitH`;
-
-                $window.open(url);
-            }
+          $window.open(url);
         }
-
-        else if ($scope.batchType == "NewBulk") {
-            debugger;
-            if (flag == "S") {
-            debugger;
-            $window.open(
-                "../DashboardManagement/SwatchCardNewBulk?BpmId=" +
-                BpmId +
-                "&&RUnitId=" +
-                RUnitId +
-                "&&Format=PDF#view=FitH"
-            );
+      } else if ($scope.batchType == "NewBulk") {
+        debugger;
+        if (flag == "S") {
+          debugger;
+          $window.open(
+            "../DashboardManagement/SwatchCardNewBulk?BpmId=" +
+              BpmId +
+              "&&RUnitId=" +
+              RUnitId +
+              "&&Format=PDF#view=FitH"
+          );
+        } else if (flag == "B") {
+          //$window.open(
+          //  "../DashboardManagement/NewBatchCardReport?BpmId=" +
+          //    BpmId +
+          //    "&&Format=PDF#view=FitH&&rType=o&&UnitNo=59"
+          //    );
+          debugger;
+          $window.open(
+            "../DashboardManagement/NewBatchCardReport?BpmId=" +
+              BpmId +
+              "&&Format=PDF&&rType=o" +
+              "&&UnitNo=" +
+              RUnitId +
+              "&&DyeingUnit=" +
+              RUnitId +
+              "#view=FitH"
+          );
         }
-          else if (flag == "B") {
-            //$window.open(
-            //  "../DashboardManagement/NewBatchCardReport?BpmId=" +
-            //    BpmId +
-            //    "&&Format=PDF#view=FitH&&rType=o&&UnitNo=59"
-                //    );
-                debugger;
-                $window.open('../DashboardManagement/NewBatchCardReport?BpmId=' + BpmId + '&&Format=PDF&&rType=o' + '&&UnitNo=' + RUnitId + '#view=FitH');
-          }
       }
     };
 
@@ -136,12 +138,10 @@
     //  }
     //});
 
-      BatchCardDashboardFactory.GetUnitWithoutUser( function (data) {
-          debugger;
-          $scope.UnitList = data;
-         
-      });
-
+    BatchCardDashboardFactory.GetUnitWithoutUser(function(data) {
+      debugger;
+      $scope.UnitList = data;
+    });
 
     BatchCardDashboardFactory.GetDyeingUnitAll(function(data) {
       $scope.ReportingUnit = data;
@@ -274,5 +274,82 @@
       $scope.itemsPerPage = num;
       $scope.currentPage = 1; //reset to first page
     };
+
+
+      $scope.GetDashboardDataNew = function (BpmId,ProcessName, flag) {
+          //var BpmId = $scope.BpmId;
+          debugger;
+          let RUnitId = 0;
+          if ($scope.RUnit) RUnitId = $scope.RUnit.Id;
+          else RUnitId = $scope.Unit.Id;
+
+          if ($scope.batchType == "Bulk") {
+              if (flag == "S")
+                  $window.open(
+                      "../DashboardManagement/SwatchCard?BpmId=" +
+                      BpmId +
+                      "&&RUnitId=" +
+                      RUnitId +
+                      "&&Format=PDF#view=FitH"
+                  );
+              else if ($scope.RMode == "PB")
+                  $window.open(
+                      "../DashboardManagement/BatchCardReportN?BpmId=" +
+                      BpmId +
+                      "&&Format=PDF#view=FitH"
+                  );
+              else
+                  $window.open(
+                      "../DashboardManagement/BatchCardReportV2?BpmId=" +
+                      BpmId +
+                      "&&Format=PDF#view=FitH"
+                  );
+          } else if ($scope.batchType == "Sample") {
+              if (flag == "S")
+                  $window.open(
+                      "../DashboardManagement/SwatchCardSample?BpmId=" +
+                      BpmId +
+                      "&&RUnitId=" +
+                      RUnitId +
+                      "&&Format=PDF#view=FitH"
+                  );
+              else if ($scope.RMode == "PB") {
+                  let reportType = "N";
+                  const url = `../DashboardManagement/SampleBatchCardReport?BpmId=${BpmId}&Format=PDF&ReportType=${reportType}#view=FitH`;
+
+                  $window.open(url);
+              }
+          } else if ($scope.batchType == "NewBulk") {
+              debugger;
+              if (flag == "S") {
+                  debugger;
+                  $window.open(
+                      "../DashboardManagement/SwatchCardNewBulk?BpmId=" +
+                      BpmId +
+                      "&&RUnitId=" +
+                      RUnitId +
+                      "&&Format=PDF#view=FitH"
+                  );
+              } else if (flag == "B") {
+                  
+                  debugger;
+                  $window.open(
+                      "../DashboardManagement/NewBatchCardReport?BpmId=" +
+                      BpmId +
+                      "&&Format=" +
+                      'PDF' +
+                      "&&rType=" +
+                      ProcessName+
+                      "&&UnitNo=" +
+                      RUnitId +
+                      "&&DyeingUnit=" +
+                      RUnitId +
+                      "#view=FitH"
+                  );
+              }
+          }
+      };
+
+
   }
 ]);

@@ -73,6 +73,7 @@
     </div>
     <div class="card card-body">
         <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewRadioButton.html'"></div>
             <div>
                 <table>
                     <thead>
@@ -106,9 +107,9 @@
                 </table>
             </div>
 
-            <div style="margin-left:25px !important; margin-top:20px;">          
+            <div style="margin-left:25px !important; margin-top:20px;">
                 <b style="font-size:17px;">Check Roll Send</b>
-                <span><input style="margin-left:25px;" class="scale" type="checkbox" ng-model="RollSend" /></span>  
+                <span><input style="margin-left:25px;" class="scale" type="checkbox" ng-model="RollSend" /></span>
                 <span style="font-weight:bold; margin-left:50px;" ng-show="STShow">Send Time:  {{Batch.ApprovedAt}}</span>
             </div>
             <div class="mt-5">
@@ -129,7 +130,7 @@
                             </td>
                             <td><b>Approve Time</b></td>
                             <td>
-                                <div>                                    
+                                <div>
                                     <select ng-model="Batch.ApproveTime"
                                             ng-change="getDataByBatchId()"
                                             ng-options="a.id as a.name for a in ApproveTime"

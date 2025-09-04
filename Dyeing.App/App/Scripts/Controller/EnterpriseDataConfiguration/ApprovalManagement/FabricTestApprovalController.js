@@ -423,14 +423,14 @@
         ApprovalManagement.SaveUpdateApprovalData(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-            Refresh();
+            SaveRefresh();
           } else $rootScope.alert(res.ErrorMsg);
         });
       } else if ($scope.batchType == "New") {
         ApprovalManagement.SaveUpdateApprovalDataNew(SendObj, function(res) {
           if (res.ErrorMsg == null) {
             $rootScope.alert("Saved Successfully");
-            Refresh();
+            SaveRefresh();
           } else $rootScope.alert(res.ErrorMsg);
         });
       }
@@ -438,7 +438,24 @@
 
     $scope.Refresh = function() {
       Refresh();
-    };
+      };
+
+      function SaveRefresh() {
+
+         
+          $scope.CA = false;
+          $scope.Batch = "";
+
+          $scope.BatchData = [];
+          $scope.RollData = [];
+
+          $scope.OkAll = undefined;
+          $scope.NotOkAll = undefined;
+          defaultUser();
+          $scope.ApproveTime = atDefaultOption;
+          $scope.CAReason = "";
+      }
+
     function Refresh() {
       if ($scope.AllUnitData.length == 1) {
         $scope.Unit = $scope.AllUnitData[0];
@@ -449,7 +466,7 @@
       $scope.allBatch = [];
       $scope.BatchData = [];
       $scope.RollData = [];
-      $scope.RollData = [];
+ 
       $scope.OkAll = undefined;
       $scope.NotOkAll = undefined;
       defaultUser();

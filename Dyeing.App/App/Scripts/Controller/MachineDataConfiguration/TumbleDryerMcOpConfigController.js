@@ -64,6 +64,7 @@
     function loadMachineList() {
         if ($scope.Unit) {
             NewMcOperationConfigFactory.GetFinMcByTypeUnitWise("Tumble", $scope.Unit.UnitId, function (dataNew) {
+                debugger
                 $scope.MachineList = dataNew;
                 if ($scope.MachineList.length == 1) {
                     $scope.McOperation.MachineNo = $scope.MachineList[0];
@@ -105,7 +106,7 @@
                 $scope.McOperation = data.m_Item1[0];
                 $scope.Fabrics = data.m_Item2;
                 $scope.McOperation.BatchNo = { BatchId: batchId, BatchNo: batchNo };
-                $scope.McOperation.MachineNo = $scope.MachineList[0];
+                //$scope.McOperation.MachineNo = $scope.MachineList[0];
 
                 let compTime = parseInt(data.m_Item1[0].CompTime);
                 $scope.CurrCompTime = compTime;
@@ -114,7 +115,7 @@
                 // to keep same as CompactingMcOperationController.js
 
                 //$scope.McOperation.CompTime = compTime;
-
+            $scope.CompactingTime = [{ id: 1, name: "1st Time" }];
                 if (compTime > 1) {
                     for (i = 2; i <= compTime; i++) {
                         let model = {

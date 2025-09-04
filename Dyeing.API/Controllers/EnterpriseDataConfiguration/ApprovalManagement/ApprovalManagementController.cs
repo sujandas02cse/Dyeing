@@ -241,6 +241,8 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.ApprovalManagement
                 return InternalServerError(exception: exception);
             }
         }
+       
+        
         [HttpPost]
         public IHttpActionResult SaveUpdateCRSend(CRSendModel obj)
         {
@@ -364,6 +366,48 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.ApprovalManagement
             {
               
                 var queryData = await new ApprovalManagementModel().SaveUpdateRFDApprovalNew(obj);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult SaveUpdateCRApprovalNew(CRApproveModel obj)
+        {
+            try
+            {
+              //  var queryData = new ApprovalManagementModel().SaveUpdateCRApproval(obj);
+                var queryData = new ApprovalManagementModel().SaveUpdateCRApprovalNew(obj);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult SaveUpdateCRSendNew(CRSendModel obj)
+        {
+            try
+            {
+                
+               var queryData = new ApprovalManagementModel().SaveUpdateCRSendNew(obj);
                 if (queryData == null)
                 {
                     return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
