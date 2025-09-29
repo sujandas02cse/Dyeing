@@ -342,6 +342,8 @@
                     </div>
                 </div>
             </div>
+          
+            
             <div class="form-group row">
                 <div class="col-md-4">
                     <div class="row">
@@ -397,6 +399,7 @@
                                              md-search-text="searchUnit"
                                              md-items="item in querySearch(searchUnit,'Unit')"
                                              md-item-text="item.display"
+                                            md-selected-item-change="GetBuildingsByUnit(item)"
                                              md-floating-label=" "
                                              md-min-length="0"
                                              md-input-minlength="2"
@@ -412,6 +415,79 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Building:
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="BuildingName"
+                                             md-selected-item="selectedBuildingName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchBuilding"
+                                             md-items="item in querySearch(searchBuilding,'Building')"
+                                             md-item-text="item.display"
+                                           md-selected-item-change="GetFloorsByBuilding(item)"
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="180"
+                                             md-require-match
+                                             ng-disabled="!selectedUnitName">
+                                <md-item-template>
+                                    <span md-highlight-text="searchBuilding" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+
+                                <md-not-found>
+                                    <!--No states matching "{{searchBuilding}}" were found.-->
+
+                                    <span ng-if="!selectedUnitName">Choose a Unit first.</span>
+                                    <span ng-if="selectedUnitName">No buildings for "{{searchBuilding}}".</span>
+
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-5">
+                            Floor:
+                        </label>
+                        <div class="col-md-6">
+                            <md-autocomplete name="FloorName"
+                                             md-selected-item="selectedFloorName"
+                                             md-no-cache="ctrl.noCache"
+                                             md-search-text="searchFloor"
+                                             md-items="item in querySearch(searchFloor,'Floor')"
+                                             md-item-text="item.display"
+                                            
+                                             md-floating-label=" "
+                                             md-min-length="0"
+                                             md-input-minlength="2"
+                                             md-input-maxlength="180"
+                                             md-require-match
+                                             ng-disabled="!selectedBuildingName">
+                                <md-item-template>
+                                    <span md-highlight-text="searchFloor" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+
+                                <md-not-found>
+                                    <span ng-if="!selectedBuildingName">Choose a Building first.</span>
+                                    <span ng-if="selectedBuildingName">No Floor for "{{searchFloor}}".</span>
+                                </md-not-found>
+                            </md-autocomplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+
+            </div>
+
+
             <div class="row">
                 <div class="offset-md-2 col-md-9">
                     <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>

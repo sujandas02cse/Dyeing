@@ -359,7 +359,10 @@
         NewBatchSpec: $scope.batchSpec,
         NewBatchCardData: $scope.batchDetails,
         NozzleTrolly: $scope.nozzleTrolley,
-        BatchProcessList: process
+          BatchProcessList: process,
+          RopeNo: $scope.batch.RopeNo === null ? "" : $scope.batch.RopeNo,
+          FabricId: $scope.batch.FabricId === null ? "" : $scope.batch.FabricId
+
       };
 
       //$scope.batch.PPSample = $scope.batch.PPSample == 1 ? true : false;

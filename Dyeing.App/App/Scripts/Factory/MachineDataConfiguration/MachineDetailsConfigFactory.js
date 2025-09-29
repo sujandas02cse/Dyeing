@@ -57,6 +57,26 @@
             alert("Error Occured during Delete Data....");
         });
     }
+
+    _obj.GetBuildingsByUnit = function (Unit, cb) {
+        debugger;
+        $http.get(baseApiURL + 'MachineDetailConfig/GetBuildingsByUnit?Unit=' + Unit).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Building Information....");
+        });
+    }
+
+    _obj.GetFloorsByBuilding = function (Building, cb) {
+        debugger;
+        $http.get(baseApiURL + 'MachineDetailConfig/GetFloorsByBuilding?Building=' + Building).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Building Information....");
+        });
+    }
+
+
     return _obj;
 }]);
 

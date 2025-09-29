@@ -115,6 +115,10 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public List<BatchCardDataNew> NewBatchCardData { get; set; }
             public List<BatchProcess> BatchProcessList { get; set; }
             public List<NozzleTrolly> NozzleTrolly { get; set; }
+
+
+            public string RopeNo { get; set; }
+            public string  FabricId { get; set; }
         }
 
         public class BatchResponseNew
@@ -197,6 +201,10 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                     UserId = _obj.UserId,
                     Remarks = _obj.Remarks,
                     McNo = _obj.McNo,
+
+                    RopeNo=_obj.RopeNo,
+                    FabricId=_obj.FabricId,
+
                     NewBatchSpec = _obj.NewBatchSpec?.AsTableValuedParameter("dbo.tvp_BatchSpecNew1",
                                 new[] { "BpmId", "BodyPartId", "PlanQty", "ActualQty", "McDiaGauge", "Rolls", "Identification", "FDia", "GDia", "FGsm", "GGsm", "Remarks" }),
                     NewBatchCardData = _obj.NewBatchCardData?.AsTableValuedParameter("dbo.tvp_NewBatchCardData",

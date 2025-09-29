@@ -2459,6 +2459,7 @@
                         <Value>=((First(Fields!BatchQuantity.Value, "PackingList")-First(Fields!RollWeight.Value, "PackingList")-First(Fields!PrevDeliveryQty.Value, "PackingList"))/First(Fields!BatchQuantity.Value, "PackingList"))*100</Value>
                         <Style>
                           <FontSize>9pt</FontSize>
+                          <Format>#,0.00;(#,0.00)</Format>
                         </Style>
                       </TextRun>
                       <TextRun>

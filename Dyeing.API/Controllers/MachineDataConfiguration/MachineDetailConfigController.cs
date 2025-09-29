@@ -14,6 +14,7 @@ namespace Dyeing.API.Controllers
     public class MachineDetailConfigController : ApiController
     {
         CommonModel.Response _res = new CommonModel.Response();
+       
         [HttpGet]
         public async Task<IHttpActionResult> GetMachineName(string Catagory)
         {
@@ -34,6 +35,7 @@ namespace Dyeing.API.Controllers
             }
 
         }
+       
         [HttpGet]
         public async Task<IHttpActionResult> GetMachineBrand()
         {
@@ -181,5 +183,49 @@ namespace Dyeing.API.Controllers
                 return Ok(_res);
             }
         }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBuildingsByUnit(string Unit)
+        {
+            try
+            {
+                var queryData = await new MachineDetailsConfigModel().GetBuildingsByUnit(Unit);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetFloorsByBuilding(string Building)
+        {
+            try
+            {
+                var queryData = await new MachineDetailsConfigModel().GetFloorsByBuilding(Building);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
+
     }
 }

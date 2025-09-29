@@ -2042,6 +2042,37 @@ namespace Dyeing.API.DBInfo
                 }
             }
         }
+
+
+        public async Task<IEnumerable<TResult>> QueryAsyncNewV1<TResult>(string storedProcedureName,
+            DynamicParameters parameters, string dbName)
+        {
+            if (!IsStoredProcedureNameCorrect(storedProcedureName))
+            {
+                return null;
+            }
+
+            using (var connection = LiveConnection(dbName))
+            {
+                try
+                {
+                    return await connection.QueryAsync<TResult>(
+                        sql: storedProcedureName,
+                        param: parameters,
+                        commandTimeout: 3000,
+                        commandType: CommandType.StoredProcedure
+                        );
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+                finally
+                {
+                    CloseConnection(connection);
+                }
+            }
+        }
         #endregion
     }
 }

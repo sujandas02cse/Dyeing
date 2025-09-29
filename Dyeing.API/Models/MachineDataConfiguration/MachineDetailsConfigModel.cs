@@ -38,6 +38,10 @@ namespace Dyeing.API.Models
             public string HostIP { get; set; }
             public string UserId { get; set; }
 
+            public string BuildingNo { get; set; }
+            public string FloorNo { get; set; }
+
+
             //
         }
         public class MachineDetailsInfo: MachineDetails
@@ -135,6 +139,23 @@ namespace Dyeing.API.Models
             //parameters.Add(name: "@Type", value: catagory, dbType: DbType.String, direction: ParameterDirection.Input);
             return DatabaseHub.QueryAsync<object>(
                     storedProcedureName: @"[dbo].[usp_GetMachineNo]", dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetBuildingsByUnit(string Unit)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@Unit", value: Unit, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_GetBuildingByUnit]", parameters: parameters, dbName: DyeingDB);
+
+        }
+
+        public Task<IEnumerable<object>> GetFloorsByBuilding(string Building)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@Building", value: Building, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_GetFloorsByBuilding]", parameters: parameters, dbName: DyeingDB);
         }
     }
 }

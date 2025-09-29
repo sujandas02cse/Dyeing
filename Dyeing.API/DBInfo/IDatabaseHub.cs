@@ -253,6 +253,7 @@ namespace Dyeing.API.DBInfo
         /// <param name="parameters">Parameter required for executing Stored Procedure.</param>
         /// <returns>Returns a List of POCO class if successfully executed. If any exception is raised, it returns null.</returns>
         Task<IEnumerable<TResult>> QueryAsyncNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+        Task<IEnumerable<TResult>> QueryAsyncNewV1<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
         #endregion
     }
 }

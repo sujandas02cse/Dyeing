@@ -389,8 +389,10 @@ namespace Dyeing.API.Models.DashboardManagement
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2DataNew]", parameters: parameters, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<object>> GetBatchCardSpecificationNew(int BpmId)
@@ -479,8 +481,11 @@ namespace Dyeing.API.Models.DashboardManagement
             //return DatabaseHub.QueryAsync<object>(
             //        storedProcedureName: @"[dbo].[usp_rpt_PackingListNew]", parameters: parameters, dbName: DyeingDB);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_updated1]", parameters: parameters, dbName: DyeingDB);
+
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_updated1]", parameters: parameters, dbName: DyeingDB);
+                    storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_updated2]", parameters: parameters, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<object>> GetProcessFlowData(int BpmId)
@@ -488,8 +493,16 @@ namespace Dyeing.API.Models.DashboardManagement
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewProcessFlowData]", parameters: parameters, dbName: DyeingDB);
+
+            //return DatabaseHub.QueryAsync<object>(
+            //   storedProcedureName: @"[dbo].[usp_rpt_ShowProcessFlow]", parameters: parameters, dbName: DyeingDB);
+
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewProcessFlowData]", parameters: parameters, dbName: DyeingDB);
+               storedProcedureName: @"[dbo].[usp_rpt_ShowProcessFlowV1]", parameters: parameters, dbName: DyeingDB);
+
+
         }
 
         public Task<IEnumerable<object>> GetOthersFlowData(int BpmId)
@@ -497,8 +510,15 @@ namespace Dyeing.API.Models.DashboardManagement
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewOthersFlowData]", parameters: parameters, dbName: DyeingDB);
+
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardDataNewOthersFlowData]", parameters: parameters, dbName: DyeingDB);
+                storedProcedureName: @"[dbo].[usp_rpt_OthersFlowData]", parameters: parameters, dbName: DyeingDB);
+
+
+
+
         }
 
         #endregion

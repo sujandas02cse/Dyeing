@@ -101,14 +101,30 @@
         color: inherit;
     }
 
-    .left_tbl,
+    /* .left_tbl,
     .right_tbl {
         width: 600px;
+    }*/
+
+    .left_tbl, .right_tbl {
+        width: auto;
     }
+
+
+        /*.left_tbl table,
+        .right_tbl table {
+            width: 100%;
+        }*/
 
         .left_tbl table,
         .right_tbl table {
-            width: 100%;
+            width: auto;
+            table-layout: auto;
+        }
+
+        .right_tbl td, .left_tbl td {
+            white-space: nowrap; /* prevents line breaks inside a cell */
+            padding: 4px 8px; /* tidy spacing */
         }
 
     table td, th {
@@ -117,9 +133,11 @@
         vertical-align: middle !important;
     }
 
-    .left_tbl td:first-child, .right_tbl td:first-child {
+
+
+    /* .left_tbl td:first-child, .right_tbl td:first-child {
         width: 200px;
-    }
+    }*/
 
     .sign_box {
         width: 300px;
@@ -186,9 +204,31 @@
     .label-font {
         font-size: 14px !important;
     }
-    .text-underline{
+
+    .text-underline {
         text-decoration: underline;
     }
+
+    .table-input {
+        width: 100%;
+        height: 28px; /* match your select height */
+        line-height: 1.2;
+        padding: 2px 6px;
+        box-sizing: border-box;
+        border: none; /* keeps only the table cell border visible */
+        background: transparent;
+    }
+
+        .table-input:focus {
+            outline: none;
+        }
+
+    .other-slot.ghost {
+        visibility: hidden; /* reserve space */
+        pointer-events: none; /* no clicks/tab */
+    }
+
+
 </style>
 
 <body ng-controller="BatchCardNew as ctrl">
@@ -261,32 +301,54 @@
                     <div class="right_tbl">
                         <table class="table">
                             <tr>
-                                <td>Date</td>
-                                <td>{{batch.BatchDate | date:'dd-MMM-yyyy hh:mm a'}}</td>
+                                <td>Batch Date</td>
+                                <td>{{batch.BatchDate}}</td>
+
+                                <td>Ship Date</td>
+                                <td>{{batch.ShipmentDate}}</td>
+
                             </tr>
                             <tr>
                                 <td>M/C No:</td>
-                                <!--<td>{{batch.McNo}}</td>-->
+
                                 <td style="padding: 0 10px !important;">
-                                    <input type="text" ng-model="batch.McNo" typeahead-min-length="1" uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
-                                           typeahead-editable="false" class="form-control input-height clsHeight" required />
+                                    <input type="text"
+                                           ng-model="batch.McNo"
+                                           typeahead-min-length="1"
+                                           uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                           typeahead-editable="false"
+                                           class="form-control input-height clsHeight" required />
+                                </td>
+                                <td>Rope No:</td>
+                                <!--<td style="padding:0 6px !important;">
+
+                                    <input type="text"
+                                           ng-model="batch.RopeNo"
+                                           class="table-input" />
+                                </td>-->
+
+                                <td style="padding:0 6px !important;"
+                                    ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.RopeNo"
+                                    ng-blur="batch.RopeNo = $event.target.textContent">
+                                    {{batch.RopeNo}}
                                 </td>
                             </tr>
-                            <!--<tr>
-                    <td>Greidge Color:</td>
-                    <td>{{batch.GreyColor}}</td>
-                </tr>-->
+
                             <tr>
+
                                 <td>Shade Name:</td>
-                                <td>{{batch.DyedColor}}</td>
+                                <td colspan="3">{{batch.DyedColor}}</td>
+
                             </tr>
                             <tr>
                                 <td>Lab Dip No:</td>
-                                <td ng-attr-contenteditable="{{true}}"
+                                <td colspan="3" ng-attr-contenteditable="{{true}}"
                                     ng-bind="batch.LDNo"
                                     ng-blur="batch.LDNo = $event.target.textContent">
                                     {{batch.LDNo}}
                                 </td>
+
                             </tr>
                             <tr>
                                 <td>Enzyme:</td>
@@ -297,9 +359,7 @@
                                         <option value="" ng-required="true" disabled selected>Select</option>
                                     </select>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Turning:</td>
+                                <td>Turing:</td>
                                 <td ng-attr-contenteditable="{{ isEditable }}"
                                     ng-bind="batch.Turing"
                                     ng-blur="batch.Turing = $event.target.textContent">
@@ -307,13 +367,25 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Fabric Id:</td>
+                                <td colspan="3"
+                                    ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.FabricId"
+                                    ng-blur="batch.FabricId = $event.target.textContent">
+                                    {{batch.FabricId}}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Remarks:</td>
-                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                <td colspan="3" ng-attr-contenteditable="{{ isEditable }}"
                                     ng-bind="batch.Remarks"
                                     ng-blur="batch.Remarks = $event.target.textContent">
                                     {{batch.Remarks}}
                                 </td>
+
                             </tr>
+
+
                         </table>
                     </div>
 
@@ -373,12 +445,26 @@
                         </div>
                     </div>
                     <div class="row col-md-12 mb-2" ng-repeat="row in OtherRows track by $index">
-                        <span class="col-md-3" ng-repeat="item in row track by $index">
-                            <input type="checkbox"
-                                   ng-model="item.IsChecked"
-                                   ng-true-value="1"
-                                   ng-false-value="0" />
-                            &nbsp; <strong>{{ item.ProcessName }}</strong>
+                        <!--<span class="col-md-3"
+          ng-repeat="item in row track by $index"
+            ng-if="item.ProcessName && item.ProcessName.trim() !== ''">
+        <input type="checkbox"
+               ng-model="item.IsChecked"
+               ng-true-value="1"
+               ng-false-value="0" />
+        &nbsp; <strong>{{ item.ProcessName }}</strong>
+    </span>-->
+                        <span class="col-md-3 other-slot"
+                              ng-repeat="item in row track by $index"
+                              ng-class="{'ghost': !(item.ProcessName && item.ProcessName.trim())}">
+                            <label class="form-check">
+                                <input type="checkbox"
+                                       ng-model="item.IsChecked"
+                                       ng-true-value="1"
+                                       ng-false-value="0" 
+                                       ng-disabled="!(item.ProcessName && item.ProcessName.trim())" />
+                                &nbsp; <strong>{{ item.ProcessName }}</strong>
+                            </label>
                         </span>
                     </div>
                     <br />
@@ -571,21 +657,21 @@
                         <!--<td contenteditable="true" ng-blur="updateNozzle(obj, $event)" ng-bind="obj.Nozzle"></td>-->
                         <!-- Editable Trolley with Typeahead -->
                         <!--<td>
-            <input type="text"
-                   ng-model="obj.Trolley"
+                                <input type="text"
+                                       ng-model="obj.Trolley"
 
-                   uib-typeahead="item as item.name for item in TrollyInfo | filter:{name:$viewValue} | limitTo:8"
-                   typeahead-editable="false"
-                   typeahead-on-select="onTrolleySelect(obj, $item)" />
-        </td>
-    </tr>-->
-                        
+                                       uib-typeahead="item as item.name for item in TrollyInfo | filter:{name:$viewValue} | limitTo:8"
+                                       typeahead-editable="false"
+                                       typeahead-on-select="onTrolleySelect(obj, $item)" />
+                            </td>
+                        </tr>-->
+
                         <tr ng-repeat="obj in nozzleTrolley">
-                            <td ng-attr-contenteditable="{{ isEditable }}"  ng-bind="obj.Nozzle" ng-blur="obj.Nozzle = $event.target.textContent">{{obj.Nozzle}}</td>
+                            <td ng-attr-contenteditable="{{ isEditable }}" ng-bind="obj.Nozzle" ng-blur="obj.Nozzle = $event.target.textContent">{{obj.Nozzle}}</td>
                             <!--<td contentEditable ng-model="obj.Trolley" uib-typeahead="item as item.name for item in TrollyInfo | filter: {name:$viewValue} | limitTo:8">-->
                             <td>
                                 <input type="text" ng-model="obj.Trolley" typeahead-min-length="1" uib-typeahead="item as item.name for item in TrollyInfo | filter: {name:$viewValue} | limitTo:8"
-                                       typeahead-editable="false" class="form-control input-height clsHeight"  />
+                                       typeahead-editable="false" class="form-control input-height clsHeight" />
                             </td>
 
                         </tr>

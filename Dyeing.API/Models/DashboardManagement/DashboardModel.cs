@@ -73,10 +73,19 @@ namespace Dyeing.API.Models.DashboardManagement
             parameters.Add(name: "@FromDate", value: FromDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameters.Add(name: "@ToDate", value: ToDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
            
-            return DatabaseHubRpt.QueryAsyncNew<object>(
-                    storedProcedureName: @"[dbo].[usp_rpt_BatchDataForFloorStatusNew]", 
-                    parameters: parameters, 
-                    dbName: DyeingDB);
+            //return DatabaseHubRpt.QueryAsyncNew<object>(
+            //        storedProcedureName: @"[dbo].[usp_rpt_BatchDataForFloorStatusNew]", 
+            //        parameters: parameters, 
+            //        dbName: DyeingDB);
+
+
+            return DatabaseHubRpt.QueryAsyncNewV1<object>(
+                  storedProcedureName: @"[dbo].[usp_rpt_BatchDataForFloorStatusNew]",
+                  parameters: parameters,
+                  dbName: DyeingDB);
+
+
+            
         }
 
     }

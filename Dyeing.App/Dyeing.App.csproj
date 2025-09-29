@@ -2299,6 +2299,7 @@
     <Content Include="Reports\FabricManagement\MachineWiseNPTNew.rdlc" />
     <Content Include="Reports\PlanManagement\BatchCardNewV2New.rdlc" />
     <Content Include="Reports\PlanManagement\BatchCardNewV3.rdlc" />
+    <Content Include="Reports\PlanManagement\BatchCard.rdlc" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

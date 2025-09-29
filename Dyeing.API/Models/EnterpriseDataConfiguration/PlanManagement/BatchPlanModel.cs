@@ -71,7 +71,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);           
             parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);           
 
-            return await DatabaseHubRpt.QueryAsync<object>(
+            return await DatabaseHubRpt.QueryAsyncNew<object>(
                 storedProcedureName: @"[dbo].[usp_get_BatchPlanData]", parameters: parameter, dbName: DyeingDB);
         }
         public async Task<IEnumerable<object>> GetBodyPart()

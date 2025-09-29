@@ -823,7 +823,12 @@ namespace Dyeing.App.Controllers.DashboardManagement
         #region New Process Report
         public async Task<ActionResult> NewBatchCardReport(int BpmId, string Format, string rType,int UnitNo,int DyeingUnit)
         {
-            string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
+            // string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
+            //string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV3.rdlc";
+
+            string RptPath = "~/Reports/PlanManagement/BatchCard.rdlc";
+
+
             string RptType = "";
             if (rType == "PPSample")
                 RptType = "PP";
@@ -922,9 +927,10 @@ namespace Dyeing.App.Controllers.DashboardManagement
                     var json = JsonConvert.SerializeObject(_lobj);
                     dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
                 }
+
+               
                 ReportDataSource rs4 = new ReportDataSource("ProcessFlow", dt);
                 rpt.DataSources.Add(rs4);
-
 
                 response = await client.GetAsync("DataRelatedDashboard/GetBatchCardOthersFlowNewV2?BpmId=" + BpmId);
                 if (response.IsSuccessStatusCode)
@@ -933,6 +939,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
                     var json = JsonConvert.SerializeObject(_lobj);
                     dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
                 }
+               
                 ReportDataSource rs5 = new ReportDataSource("Others", dt);
                 rpt.DataSources.Add(rs5);
 
@@ -952,6 +959,10 @@ namespace Dyeing.App.Controllers.DashboardManagement
 
                 ReportParameter ParamReportType = new ReportParameter("UnitName", UnitName.ToString());
                 rpt.SetParameters(ParamReportType);
+
+
+                ReportParameter DyeingUnitType = new ReportParameter("DyeingUnit", DyeingUnit.ToString());
+                rpt.SetParameters(DyeingUnitType);
 
 
                 rpt.Refresh();
