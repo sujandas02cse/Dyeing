@@ -24,7 +24,7 @@
   <DataSets>
     <DataSet Name="BatchCardMaster">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_BatchCardNewV2Master 3318</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -67,6 +67,10 @@
         </Field>
         <Field Name="ShadeName">
           <DataField>ShadeName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BatchDate">
+          <DataField>BatchDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="NoteDyeing">
@@ -121,7 +125,7 @@
     </DataSet>
     <DataSet Name="Nozzle">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_NozzleTrolleyNew 3322</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -136,7 +140,7 @@
         </Field>
         <Field Name="Nozzle">
           <DataField>Nozzle</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Shade">
           <DataField>Shade</DataField>
@@ -162,7 +166,7 @@
     </DataSet>
     <DataSet Name="BatchCardData">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_BatchCardNewV2Data 3318</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -203,7 +207,7 @@
     </DataSet>
     <DataSet Name="BatchCardSpec">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_BatchCardNewV2Specification 3318</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -272,7 +276,7 @@
     </DataSet>
     <DataSet Name="ProcessFlow">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_BatchCardDataNewProcessFlowData 3318</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -289,11 +293,19 @@
           <DataField>IsChecked</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ProcessType">
+          <DataField>ProcessType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PriorityNo">
+          <DataField>PriorityNo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="Others">
       <Query>
-        <DataSourceName>DyeingDBTest</DataSourceName>
+        <DataSourceName>DyeingDB</DataSourceName>
         <CommandText>usp_rpt_BatchCardDataNewOthersFlowData 3318</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
@@ -308,7 +320,15 @@
         </Field>
         <Field Name="ProcessId">
           <DataField>ProcessId</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ProcessType">
+          <DataField>ProcessType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PriorityNo">
+          <DataField>PriorityNo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -928,14 +948,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TodayDate">
+                        <Textbox Name="BatchDate">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TodayDate.Value</Value>
+                                  <Value>=Fields!BatchDate.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -946,7 +966,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TodayDate</rd:DefaultName>
+                          <rd:DefaultName>BatchDate</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -958,6 +978,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

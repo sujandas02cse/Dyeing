@@ -1076,13 +1076,13 @@ namespace Dyeing.API.Controllers.DashboardManagement
 
 
         #region Dynamic Production Monitoring
-        public async Task<IHttpActionResult> GetDynamicProductionMonitor(int UnitId,string Date,string FabricIssue)
+        public async Task<IHttpActionResult> GetDynamicProductionMonitor(int UnitId,int BuildingId,string Date,string FabricIssue)
         {
             try
             {
                 // var queryData = await new DataRelatedDashboardModel().GetSwatchCardData(BpmId, RUnitId);
 
-                var queryData = await new DataRelatedDashboardModel().GetDynamicMonitoring(UnitId, Date,FabricIssue);
+                var queryData = await new DataRelatedDashboardModel().GetDynamicMonitoring(UnitId, BuildingId, Date,FabricIssue);
 
                 if (queryData == null)
                 {

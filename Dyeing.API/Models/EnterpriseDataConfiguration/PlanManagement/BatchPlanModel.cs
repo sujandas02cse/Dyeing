@@ -25,7 +25,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public string Enzyme { get; set; }
             public string SpecialFinish { get; set; }
             public string Process { get; set; }
-            public int MPUniqueId { get; set; }
+            public int MDId { get; set; }
             //public string OFabOpId { get; set; }
         }
         public class BatchModel
@@ -123,7 +123,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                 UnitId = _obj.UnitId,
                 UserId = _obj.UserId,
                 tvp_BatchPlan = _obj.plan.AsTableValuedParameter("dbo.tvp_BatchPlan",
-                            new[] { "InitInfoId", "GroupNo", "SeqNo", "BodyPartId", "FromDate", "ToDate", "PlanQty", "NoOfBatch", "Remarks", "Enzyme", "SpecialFinish", "Process" }),
+                            new[] { "InitInfoId", "GroupNo", "SeqNo", "BodyPartId", "FromDate", "ToDate", "PlanQty", "NoOfBatch", "Remarks", "Enzyme", "SpecialFinish", "Process","MDId" }),
                 tvp_BatchPrepare = _obj.batch.AsTableValuedParameter("dbo.tvp_BatchPreparePlan",
                             new[] { "InitInfoId", "GroupNo", "SeqNo", "BatchNo", "MaxBatchCount" }),
                 tvp_BatchDyedColor = _obj.dyedColor.AsTableValuedParameter("dbo.tvp_BatchDyedColorData",
@@ -132,7 +132,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                             new[] { "InitInfoId", "LabDipNo" }),
             };
 
-            return DatabaseHub.Query<object, object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchPlan]", model: data, dbName: DyeingDB).ToList();
+            return DatabaseHub.Query<object, object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchPlan_New]", model: data, dbName: DyeingDB).ToList();
         }
     }
 }

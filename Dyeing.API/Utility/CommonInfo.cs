@@ -14,8 +14,7 @@ namespace Dyeing.API
     public static class CommonInfo
     {       
         public static SqlMapper.ICustomQueryParameter AsTableValuedParameter<T>
-        (this IEnumerable<T> enumerable,
-        string typeName, IEnumerable<string> orderedColumnNames = null)
+        (this IEnumerable<T> enumerable,string typeName, IEnumerable<string> orderedColumnNames = null)
         {
             var dataTable = new DataTable();
             if (typeof(T).IsValueType || typeof(T).FullName.Equals("System.String"))

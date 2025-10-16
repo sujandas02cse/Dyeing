@@ -40,9 +40,49 @@
         .MPlanDialog .table-modal td input {
             font-size: 10px;
         }
+
+
+        /*Loader*/
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.6);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
     </style>
 </head>
 <body>
+    <div ng-show="isLoading" class="loader-overlay">
+        <div class="spinner"></div>
+        <div><h1>Please Wait</h1></div>
+    </div>
     <div class="col-md-12">
         <div class="card">
             <div class="content-header sty-one">
@@ -141,7 +181,7 @@
                             ng-repeat="dataModel in (PlanData | filter : search)">
                             <td>
                                 <label class="control control--checkbox">
-                                    <input  ng-click="checkJob(dataModel, $index, $event)" ng-model="dataModel.chkJob" ng-   type="checkbox"  >
+                                    <input ng-click="checkJob(dataModel, $index, $event)" ng-model="dataModel.chkJob" ng- type="checkbox">
                                 </label>
                             </td>
                             <td>{{dataModel.BuyerName}}</td>
@@ -165,6 +205,7 @@
                             <td>{{dataModel.CEndDate}}</td>
                             <!--<td>{{dataModel.LDNo}}</td>-->
                             <td>
+
                                 {{dataModel.RNNo}}
                             </td>
                             <td class="d-none"><button class="btn btn-warning" ng-click="SpFinishPopup($event,dataModel.InitInfoId)">Pop Up</button></td>
@@ -175,7 +216,7 @@
 
                     </tbody>
                 </table>
-                
+
             </div>
 
             <!--popup tbl-->

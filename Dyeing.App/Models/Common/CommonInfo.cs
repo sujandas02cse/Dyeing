@@ -25,27 +25,27 @@ namespace Dyeing.App
       
          public static string baseURL =
 
-          // "http://192.168.50.60:93/dyeingApi/api/";
+         // "http://192.168.50.60:93/dyeingApi/api/";
 
-        // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+         "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
 
         //scheme+"://" + Host + (Host == "localhost" ? ":809/dyeingapi" : ":443/dyeingApi") + "/api/";//
 
-         "http://localhost:34605/api/";
+        //  "http://localhost:34605/api/";
 
         //"http://192.168.50.60:91/dyeingApi/api/";
 
         #region Dyeing
 
-        //public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
-        //public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
+        public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
+        public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
 
         #region DyeingTest
 
-        public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
-        public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
+        //public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
 
         #endregion
 

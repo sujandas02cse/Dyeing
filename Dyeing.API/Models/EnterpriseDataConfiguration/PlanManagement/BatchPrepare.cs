@@ -224,6 +224,8 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
 
             var result =  DatabaseHub.Query<object, BatchResponseNew>(storedProcedureName: "[dbo].[Usp_SaveUpdate_BatchPrepareNew1]", model: data, dbName: DyeingDB).FirstOrDefault();
 
+          //  var result = DatabaseHub.Query<object, BatchResponseNew>(storedProcedureName: "[dbo].[Usp_SaveUpdate_BatchPrepare_final]", model: data, dbName: DyeingDB).FirstOrDefault();
+
 
             if (result == null)
             {

@@ -16,7 +16,7 @@
     <DataSet Name="ReportData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_MWiseNPT_New 59, '01-Jan-2025','01-Mar-2025', '','Stenter'</CommandText>
+        <CommandText>usp_rpt_MWiseNPT_New_1 16, '06-Oct-2025','06-Oct-2025', '','Slitting'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -122,7 +122,7 @@
         </Field>
         <Field Name="TotalMTime">
           <DataField>TotalMTime</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Color">
           <DataField>Color</DataField>
@@ -2071,7 +2071,7 @@
       <Width>11.47865in</Width>
       <Page>
         <PageHeader>
-          <Height>1.22916in</Height>
+          <Height>1.33333in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2159,6 +2159,7 @@
                     <TextRun>
                       <Value>=First(Fields!MCategory.Value, "ReportData")</Value>
                       <Style>
+                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -2169,10 +2170,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox35</rd:DefaultName>
-              <Top>0.95833in</Top>
-              <Left>8.08429in</Left>
+              <Top>1.08333in</Top>
+              <Left>9.18625in</Left>
               <Height>0.25in</Height>
-              <Width>3.31708in</Width>
+              <Width>2.21512in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -2211,7 +2212,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox51</rd:DefaultName>
-              <Top>0.155in</Top>
+              <Top>0.2175in</Top>
               <Left>9.18625in</Left>
               <Height>0.25in</Height>
               <Width>2.21512in</Width>
@@ -2253,7 +2254,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox52</rd:DefaultName>
-              <Top>0.38417in</Top>
+              <Top>0.44667in</Top>
               <Left>9.18625in</Left>
               <Height>0.25in</Height>
               <Width>2.21512in</Width>
@@ -2302,7 +2303,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox52</rd:DefaultName>
-              <Top>0.67584in</Top>
+              <Top>0.73834in</Top>
               <Left>9.18625in</Left>
               <Height>0.25in</Height>
               <Width>2.21512in</Width>

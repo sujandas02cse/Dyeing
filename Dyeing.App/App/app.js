@@ -99,29 +99,29 @@ app.run(function ($rootScope, $templateCache, $mdDialog, $mdToast, $anchorScroll
             parent: angular.element(document.body),
             clickOutsideToClose: true,
             template: `<md-dialog aria-label="Confirmation Dialog" class="_md md-transition-in" role="dialog" tabindex="-1" aria-describedby="dialogContent_0" style="">
-        <md-toolbar class="_md _md-toolbar-transitions">
-            <div class="md-toolbar-tools">
-                <h5 style="margin-left:33%;margin-top:3%;" class="ng-binding">Update Confirmation</h5>
-                <span flex="" class="flex"></span>
-                <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Cancel" ng-click="cancel()">
-                    <img src="../../Content/img/close_icon.png" height="15" width="20" style="margin-top:9%;margin-left:1%" class="ng-scope">
-                </button>
-            </div>
-        </md-toolbar>
+                <md-toolbar class="_md _md-toolbar-transitions">
+                    <div class="md-toolbar-tools">
+                        <h5 style="margin-left:33%;margin-top:3%;" class="ng-binding">Update Confirmation</h5>
+                        <span flex="" class="flex"></span>
+                        <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Cancel" ng-click="cancel()">
+                            <img src="../../Content/img/close_icon.png" height="15" width="20" style="margin-top:9%;margin-left:1%" class="ng-scope">
+                        </button>
+                    </div>
+                </md-toolbar>
 
-        <md-dialog-content id="dialogContent_0">
-            <div class="md-dialog-content">
-                <p style="text-align:center;margin-bottom: 0%;margin-top: 2%; font-size:14px;"><strong class="ng-binding">`+msg+` </strong></p>
-            </div>
-        </md-dialog-content>
+                <md-dialog-content id="dialogContent_0">
+                    <div class="md-dialog-content">
+                        <p style="text-align:center;margin-bottom: 0%;margin-top: 2%; font-size:14px;"><strong class="ng-binding">`+msg+` </strong></p>
+                    </div>
+                </md-dialog-content>
 
-        <md-dialog-actions layout="row" class="layout-row">
-                <span flex="" class="flex"></span>
-                <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Yes" ng-click="action(model.Mode)">Yes</button>
-                <button class="md-raised md-warn md-button md-ink-ripple" type="button" ng-transclude="" aria-label="No" ng-click="cancel()">No</button>
+                <md-dialog-actions layout="row" class="layout-row">
+                        <span flex="" class="flex"></span>
+                        <button class="md-raised md-primary md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Yes" ng-click="action(model.Mode)">Yes</button>
+                        <button class="md-raised md-warn md-button md-ink-ripple" type="button" ng-transclude="" aria-label="No" ng-click="cancel()">No</button>
 
-        </md-dialog-actions>
-    </md-dialog>`,
+                </md-dialog-actions>
+            </md-dialog>`,
             locals: {
 
             },
@@ -149,6 +149,32 @@ app.run(function ($rootScope, $templateCache, $mdDialog, $mdToast, $anchorScroll
     //    $mdToast.show($mdToast.customValid({ locals: { message: msg } }));
     //}
     $anchorScroll.yOffset = 500;
+
+
+    let loaderVisible = false;
+
+    $rootScope.ShowLoader = function (message = "Please wait...") {
+        if (loaderVisible) return; // prevent multiple loaders
+        loaderVisible = true;
+
+        $mdDialog.show({
+            templateUrl: '/App/template/Loader/GlobalLoader.html?ts=' + new Date().getTime(),
+            parent: angular.element(document.body),
+            clickOutsideToClose: false,
+            escapeToClose: false,
+            hasBackdrop: true,
+            locals: { message: message },
+            controller: function ($scope, $mdDialog, message) {
+                $scope.message = message;
+            }
+        });
+    };
+
+    $rootScope.HideLoader = function () {
+        if (!loaderVisible) return;
+        loaderVisible = false;
+        $mdDialog.hide();
+    };
 });
 
 app.directive("readText", function () {

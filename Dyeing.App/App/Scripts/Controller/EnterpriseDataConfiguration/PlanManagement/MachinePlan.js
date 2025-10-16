@@ -280,7 +280,7 @@
                 $scope.LoadProcessData();
                 $scope.chkPlan = [];
                 $rootScope.alert(res.Msg);
-                
+
             }
             else $rootScope.alert(res.ErrorMsg);
         });

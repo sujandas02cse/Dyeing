@@ -1,10 +1,4 @@
-﻿app.controller("MachineDetailsConfigController", [
-  "$scope",
-  "$rootScope",
-  "$mdDialog",
-  "$mdToast",
-  "MachineDetailsConfig",
-  function($scope, $rootScope, $mdDialog, $mdToast, MachineDetailsConfig) {
+﻿app.controller("MachineDetailsConfigController", ["$scope","$rootScope","$mdDialog","$mdToast","MachineDetailsConfig",function($scope, $rootScope, $mdDialog, $mdToast, MachineDetailsConfig) {
     var objMachineName = [];
     var objMachineType = [];
     var objMachineModel = [];
@@ -85,7 +79,6 @@
     };
 
     function PopulateBuildingByUnit(unitItem) {
-      debugger;
       objBuildingName.length = 0;
       objFloorName.length = 0;
       $scope.selectedBuildingName = null;
@@ -195,7 +188,6 @@
     }
 
     function createFilter(query, List) {
-      debugger;
       var lowercaseQuery = query;
       return function filterFn(List) {
         return List.display.toLowerCase().indexOf(lowercaseQuery) === 0;
@@ -221,7 +213,6 @@
     };
 
     function SaveUpdate() {
-      debugger;
       $scope.Model.UserId = $scope.UserId;
       if ($scope.selectedName != null) {
         $scope.Model.MachineId = $scope.selectedName.value;
@@ -259,7 +250,6 @@
         $scope.Model.UnitId = 0;
       }
 
-      debugger;
       if ($scope.selectedBuildingName != null) {
         $scope.Model.BuildingNo = $scope.selectedBuildingName.value;
       } else {
@@ -273,7 +263,7 @@
       }
 
       console.log($scope.Model);
-      debugger;
+
 
       MachineDetailsConfig.MachineDetails_SaveUpdate($scope.Model, function(
         data
@@ -352,7 +342,6 @@
     }
 
     $scope.GetMachineDetailByID = function(dataModel) {
-      debugger;
       $scope.btnSave = "Update";
       $scope.Model = dataModel;
 

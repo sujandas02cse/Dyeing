@@ -36,7 +36,6 @@
         });
     }
     _obj.MachineDetails_SaveUpdate = function (_obj, cb) {
-        debugger;
         $http.post(baseApiURL + 'MachineDetailConfig/MachineDetails_SaveUpdate', _obj).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
@@ -59,7 +58,6 @@
     }
 
     _obj.GetBuildingsByUnit = function (Unit, cb) {
-        debugger;
         $http.get(baseApiURL + 'MachineDetailConfig/GetBuildingsByUnit?Unit=' + Unit).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
@@ -68,7 +66,6 @@
     }
 
     _obj.GetFloorsByBuilding = function (Building, cb) {
-        debugger;
         $http.get(baseApiURL + 'MachineDetailConfig/GetFloorsByBuilding?Building=' + Building).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {

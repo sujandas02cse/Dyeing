@@ -1,4 +1,8 @@
-﻿app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$q', '$parse', 'fileReader', '$window', 'PlanManagement', function ($scope, $rootScope, $mdDialog, $mdToast, $q, $parse, fileReader, $window, PlanManagement) {
+﻿
+app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$q', '$parse', 'fileReader', '$window', 'PlanManagement', function ($scope, $rootScope, $mdDialog, $mdToast, $q, $parse, fileReader, $window, PlanManagement) {
+
+
+    // 🔧 --- Variable declarations and setup ---
     var currentJob;
     var previousJob;
     var colorClass = "";
@@ -14,58 +18,80 @@
 
     let MaxCountBatch = [];
 
-    
+    let machineNo = 0;
 
     let MaxUniqueId = 0;
     let resultString = '';
 
-    //variable for save data
+    // Temporary storage for saving
     let labdipData = [];
     let BatchplanData = [];
     let NewColor = [];
 
+     // ⚙️ Machine change event
+    $scope.MachineChange = function (obj) {
+        for (i = 0; i < $scope.chkPlan.length; i++) {
+            if (obj.GroupNo == $scope.chkPlan[i].GroupNo) {
+                machineNo = obj.Machine;
+                $scope.chkPlan[i].Machine = obj.Machine;
+                $scope.chkPlan[i].MCapacity = obj.Machine.MCapacity;
+                $scope.chkPlan[i].MDId = obj.Machine.MDId;
+                //machineNo = obj.Machine;
+                //$scope.chkPlan[i].Machine = obj.Machine;
+               
+            }
+        }
+    }
 
-
+    // 🔹 Enzyme dropdown options
     $scope.Enzyme = [{ "Value": "Yes" }, { "Value": "No" }]
-    
+
+    // 🔹 Load all units
     PlanManagement.GetUnitAll($rootScope.UserId, function (data) {
         $scope.UnitList = data
         if ($scope.UnitList.length == 1) {
             $scope.Unit = $scope.UnitList[0];
             $scope.LoadBuyerData();
+            PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
+                $scope.MachineList = data;
+            });
         }
     });
 
+    // 🔹 Load fabric operations for planning
     PlanManagement.GetOFabricOperationData(function (data) {
       $scope.OFabOpList = data;
       SfList = data;
     });
 
+    // 🔹 Load body parts data
     PlanManagement.GetBodyPart(function (data) {
         $scope.BodyPartList = data;
     });
 
+    // 🔹 Load machines by type
     PlanManagement.GetFinMcByType('Dyeing', function (data) {
         $scope.MachineList = data;
     });
 
+     // 🔹 Load buyer dropdown data
     $scope.LoadBuyerData = function () {
 
-        $scope.isLoading = false;
-        $scope.isLoading = true;
+        $rootScope.ShowLoader();
+
         PlanManagement.GetBuyerByUnit($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
-
-            $scope.isLoading = false;
+            $rootScope.HideLoader();
         });
+
     }
 
+    //// 🔹 Load plan data (main table)
     $scope.LoadProcessData = function () {
-        $scope.isLoading = false;
-        $scope.isLoading = true;
+        $rootScope.ShowLoader('Loading Plan Data');
         PlanManagement.GetBatchPlanData($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
-            $scope.PlanData = data;   
-            $scope.isLoading = false;
+            $scope.PlanData = data;
+            $rootScope.HideLoader();
             //angular.forEach($scope.PlanData, function (item) {
             //    item.YarnType = extractItemNames(item.Composition, 'C');
             //    item.YarnCount = extractItemNames(item.Composition, '0');
@@ -73,13 +99,10 @@
             //$scope.bchkPlan = [];
             $scope.chkPlan = [];
 
-
-            
-
-
         });  
     }
 
+    // 🎨 Alternate row color grouping by JobNo
     $scope.getRowClass = function ($index) {
         if ($index == 0) {
             currentJob = $scope.PlanData[0].JobNo;
@@ -102,7 +125,8 @@
             return colorClass;
         }
     };
-    
+
+    // ✅ Handle row checkbox selection for job
     $scope.checkJob = function (dataModel, index, event) {
 
         if (!dataModel.chkJob) {
@@ -136,6 +160,7 @@
         checkfixed = JSON.parse(JSON.stringify($scope.chkPlan));
     }
 
+    // 🔁 Duplicate a row (same group)
     $scope.duplicate = function (model, indx) {
         let data = angular.copy(model);
         // Step 1: First, shift SeqNo +1 for all items AFTER (or equal to) the one you clicked
@@ -153,37 +178,8 @@
         $scope.chkPlan.sort((a, b) => a.SeqNo - b.SeqNo);
     };
 
-    //$scope.duplicate = function (model, indx) {
-    //    debugger
-    //    let data = angular.copy(model);
-    //    for (i = 0; i < $scope.chkPlan.length; i++) {
-    //        let currData = $scope.chkPlan[i];
-    //        if ((currData.GroupNo == model.GroupNo) && (currData.SeqNo >= model.SeqNo)) {
-    //            $scope.chkPlan[i].SeqNo += 1;
-    //        }
-    //    }
-    //    data.SeqNo = data.SeqNo === 1 ? 1 : (model.SeqNo + 1);
-
-    //    $scope.chkPlan.splice(indx, 0, data);
-    //}
-
-
-    ////Duplicate a row
-
-    //$scope.duplicateb = function (model, indx) {
-    //    let data = angular.copy(model);
-    //    for (i = 0; i < $scope.bchkPlan.length; i++) {
-    //        let currData = $scope.bchkPlan[i];
-    //        if ((currData.GroupNo == model.GroupNo) && (currData.SeqNo >= data.SeqNo)) {
-    //            $scope.bchkPlan[i].SeqNo += 1;
-    //        }
-    //    }
-    //    data.SeqNo = data.SeqNo === 1 ? 1 : (model.SeqNo + 1);
-
-    //    $scope.bchkPlan.splice(indx , 0, data);
-    //}
+    // 🗑️ Remove a selected row
     $scope.remove = function (r) {
-        debugger
         let remModel = $scope.chkPlan[r];
 
         // Step 1: Remove the item
@@ -202,38 +198,7 @@
         $scope.chkPlan.sort((a, b) => a.GroupNo - b.GroupNo || a.SeqNo - b.SeqNo);
     };
 
-
-    //$scope.remove = function (r) {
-    //    debugger
-    //    let remModel = $scope.chkPlan[r];
-    //    $scope.chkPlan.splice(r, 1);
-    //    for (i = 0; i < $scope.chkPlan.length; i++) {
-    //        let currData = $scope.chkPlan[i];
-    //        if (currData.GroupNo == remModel.GroupNo && currData.SeqNo >+ remModel.SeqNo) {
-    //            $scope.chkPlan[i].SeqNo -= 1;
-    //        }
-    //    }
-        
-    //}
-
-    //delete a row
-
-    //$scope.removeb = function (r) {
-    //    let remModel = $scope.bchkPlan[r];
-    //    $scope.bchkPlan.splice(r, 1);
-    //    for (i = 0; i < $scope.bchkPlan.length; i++) {
-    //        let currData = $scope.bchkPlan[i];
-    //        if (currData.GroupNo == remModel.GroupNo && currData.SeqNo >= remModel.SeqNo) {
-    //            $scope.bchkPlan[i].SeqNo -= 1;
-    //        }
-    //    }
-
-    //    //calcTPlanQty($scope.bchkPlan);
-    //    angular.forEach($scope.bchkPlan, function (item) {
-    //        SpecialFinish(item);
-    //    });
-    //}
-
+    // 📄 Copy entire group of rows
     $scope.copy = function (model) {
         let planData = $scope.chkPlan.filter(x => x.GroupNo == model.GroupNo);
         let targetGroupNo = $scope.chkPlan.findIndex(x => x.GroupNo === model.GroupNo);
@@ -263,21 +228,21 @@
         $scope.chkPlan.sort((a, b) => a.GroupNo - b.GroupNo || a.SeqNo - b.SeqNo);
 
     }
-    
 
+    // ❌ Delete an entire group
     $scope.delete = function (model) {
-        debugger
+
         let Find = $scope.chkPlan.filter(x => x.GroupNo == model.GroupNo);
         let FindIndex = $scope.chkPlan.findIndex(x => x.GroupNo === model.GroupNo);
         
         $scope.chkPlan.splice(FindIndex, Find.length);
-        debugger
 
         $scope.BatchData = $scope.BatchData.filter(function (item) {
             return item.GroupNo !== model.GroupNo;
         });
     }
 
+    // 👁️ Show button only for last group
     $scope.showbtn = function (model) {
         const maxGroupNo = Math.max(...$scope.chkPlan.map(m => m.GroupNo));
         if (maxGroupNo == model.GroupNo)
@@ -286,6 +251,7 @@
             return false;
     }
 
+    // 👀 Control pointer events based on group
     $scope.checkForEdit = function (model) {
         const maxGroupNo = Math.max(...$scope.chkPlan.map(m => m.GroupNo));
         if (maxGroupNo == model.GroupNo)
@@ -294,14 +260,15 @@
             return 'pointer-none';
     }
 
+    // 📏 Calculate row span for table
     $scope.rowSpan = function (data) {
         return $scope.chkPlan.filter(x => x.GroupNo === data.GroupNo).length;
     }
-
     $scope.rowSpanB = function (data) {
         return $scope.bchkPlan.filter(x => x.GroupNo === data.GroupNo).length;
     }
-    
+
+    // 👀 Helpers for visibility and pointer control
     $scope.showEl = function (data) {
         if (data.SeqNo == 1)
             return true;
@@ -309,12 +276,11 @@
 
             return false;
     }
-
     $scope.showB = function (data) {
         return 'pointer-events: none;'
     }
 
-
+    // 🔢 Internal function for batch number generation
     function NoOfBatchChangeF(Model, UniqueId, noofBatch, MinB, MaxB, MaxBatchCount) {
         MaxUniqueId = MaxBatchCount;
         let PrevTBatch = 0;
@@ -356,6 +322,7 @@
         });
     }
 
+    // 🔹 Triggered when NoOfBatch input changes
     $scope.NoOfBatchChange = function (model, modelGroupNo, modelNoOfBatch, modelMinBatch, modelMaxBatch, bit) {
         const lastPart = "";
         if (model.GroupNo === $scope.chkPlan[0].GroupNo) {
@@ -363,13 +330,13 @@
 
                 totalBatchData = [];
                 // Find the maximum BatchNo
-                debugger
+
                 const maxBatchNo = data
                     .map(item => item.BatchNo)
                     .sort((a, b) => b.localeCompare(a))[0];
                 const lastPart = maxBatchNo.split('-').pop();
                 let batchno = data;
-                debugger
+
                 angular.forEach(data, function (item) {
                     let obj = {
                         InitInfoId: model.InitInfoId,
@@ -393,7 +360,7 @@
                     }
 
                 });
-                debugger
+
                 $scope.addBatchDataArray(totalBatchData);
             });
         }
@@ -433,13 +400,14 @@
                     }
 
                 });
-                debugger
+
                 $scope.addBatchDataArray(totalBatchData);
             });
         }
 
     }
 
+    // 🧩 Merge or update BatchData array
     $scope.addBatchDataArray = function (objArray) {
 
         if (!objArray || objArray.length === 0) return;
@@ -449,21 +417,20 @@
 
         // Remove all existing objects that have a GroupNo present in the new array
         for (var i = $scope.BatchData.length - 1; i >= 0; i--) {
-            debugger
+
             if (newGroupNos.indexOf($scope.BatchData[i].GroupNo) !== -1) {
-                debugger
+
                 $scope.BatchData.splice(i, 1);
             }
         }
-        debugger
+
         // Add all new objects
         Array.prototype.push.apply($scope.BatchData, objArray);
 
     };
 
 
-
-
+    // 🧮 Calculate total plan quantity
     $scope.TotalPlanQuatity = function () {
         let a = 0;
         angular.forEach($scope.bchkPlan, function (item) {
@@ -473,10 +440,10 @@
         return a;
     }
 
+    // 🔹 Calculate total quantity for a group
     $scope.calcTotalPQty = function (model) {
         calcTPlanQty(model);
     }
-
     function calcTPlanQty(model) {
 
         let planQty = 0;
@@ -501,10 +468,10 @@
 
     }
 
+    // 🔹 Calculate total quantity for a group
     $scope.calcTotalPQtyB = function (model) {
         calcTPlanQtyB(model);
     }
-
     function calcTPlanQtyB(model) {
         let planQty = 0;
         for (i = 0; i < $scope.bchkPlan.length; i++) {
@@ -525,12 +492,13 @@
         }
     }
 
+    // ⚡ Show Save/Update confirmation dialog
     $scope.actionDialog = function (action, dataModel) {
         for (let i = 0; i < $scope.chkPlan.length; i++) {
             let Model = $scope.chkPlan[i];
             for (let j = 0; j < $scope.chkPlan.length; j++) {
                 if (Model.GroupNo === $scope.chkPlan[j].GroupNo) {
-                    debugger
+
                     $scope.chkPlan[j].PlanFromDate = toSqlServerDatetimeLocal(Model.PlanFromDate);
                     $scope.chkPlan[j].PlanToDate = toSqlServerDatetimeLocal(Model.PlanToDate);
                     $scope.chkPlan[j].Remarks = Model.Remarks;
@@ -559,8 +527,7 @@
             NewColor.push(color);
         });
 
-        let a = $scope.chkPlan;
-        debugger
+        //let a = $scope.chkPlan;
         angular.forEach($scope.chkPlan, function (item) {
             let obj = {
                 InitInfoId: item.InitInfoId,
@@ -575,7 +542,8 @@
                 Enzyme: item.Enzyme === undefined ? '' : item.Enzyme,
                 SpecialFinish: '',
                 Process: item.Process === undefined ? '' : item.Process,
-                MPUniqueId: 0
+                MDId: (item.Machine === undefined || item.Machine.MDId === undefined) ? 0 : item.Machine.MDId
+
             }
             BatchplanData.push(obj);
         });
@@ -611,7 +579,7 @@
     }
 
 
-
+    // 📄 Prepare confirmation dialog object
     function objData(action) {
 
         var obj = [];
@@ -623,6 +591,7 @@
         return obj;
     }
 
+    // 💾 Save or update Batch Plan to server
     function SaveUpdate() {
         debugger
         let obj = {
@@ -657,6 +626,7 @@
         });
     }
 
+    // ❌ Cancel dialog and reset
     $scope.cancel = function () {
         $mdDialog.cancel();
         MaximumBatch = 0;
@@ -668,11 +638,14 @@
         //});
     };
 
-    
-
+    // ⏰ Timestamp for template URL
     var ts = Math.floor(Date.now() / 1000);
 
+    // 📦 Open Batch Plan Popup modal
     $scope.MPlanPopup = function (ev) {
+
+        if ($scope.chkPlan.length === 0)
+            return;
 
         let InitInfoModel = [];
         $scope.BatchData = [];
@@ -688,6 +661,10 @@
          resultString = uniqueIds.join(',');
         $scope.bchkPlan = [];
         if (!$scope.bchkPlan || $scope.bchkPlan.length === 0) {
+
+            // 🚀 Show Angular Material loader dialog
+            $rootScope.ShowLoader('Loading batch details data...');
+
             PlanManagement.GetBatchDataByInitId(InitInfoModel, resultString, $scope.chkPlan[0].JobId, function (data) {
                 MaxCountBatch = data.m_Item2;
                 MaxC = 0;
@@ -742,8 +719,9 @@
                         item.noofBatch = item.noofBatch;
                     });
                 };
-
+            
             });
+            
             $mdDialog.show({
                 async: false,
                 controller: BPlanController,
@@ -754,10 +732,10 @@
                 clickOutsideToClose: true,
                 fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
                 locals: {
-                    models: $scope.bchkPlan
+                    models: $scope.bchkPlan 
                 }
             });
-            
+            $rootScope.HideLoader();
         }
         else {
             alert('Error');
@@ -769,40 +747,7 @@
  
     }
 
-
-    //Custom Popup
-    //$scope.SpFinishPopup = function (ev,id) {
-    //    $mdDialog.show({
-    //        async: false,
-    //        controller: DialogController,
-    //        templateUrl: '/App/template/Popup/SpecialFinishDialog.html?ts=' + ts,
-    //        targetEvent: ev,
-    //        scope: $scope,
-    //        preserveScope: true,
-    //        clickOutsideToClose: true,
-    //        fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
-    //        locals: {
-    //            InitInfoId: id
-    //        }
-    //    })  
-    //};
-
-    //$scope.SpFinishPopupBatch = function (ev,id) {
-    //    $mdDialog.show({
-    //        async: false,
-    //        controller: SpFinishControllerBatch,
-    //        templateUrl: '/App/template/Popup/SpecialFinishDialogBatch.html?ts=' + ts,
-    //        targetEvent: ev,
-    //        scope: $scope,
-    //        preserveScope: true,
-    //        clickOutsideToClose: false,
-    //        fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
-    //        locals: {
-    //            Index: id
-    //        }
-    //    })
-    //};
-
+    // 🔄 Reset PlanData selection
     function resetData() {
         if ($scope.PlanData.length > 0) {
             angular.forEach($scope.PlanData, function (item) {
@@ -813,6 +758,7 @@
 
     }
 
+    // 🔹 Controller for action dialog popup
     function DialogController($scope, $mdDialog, InitInfoId) {
         
         $scope.hide = function () {
@@ -827,17 +773,7 @@
         $scope.sf = $scope.bchkPlan.filter(x => x.InitInfoId == InitInfoId);
     }
 
-    //function SpFinishControllerBatch($scope, $mdDialog, Index){
-
-    //    $scope.MPlanPopup(ev);
-
-    //    //angular.forEach($scope.bchkPlan, function (item) {
-    //    //    SpecialFinish(item);
-    //    //});
-    //    //$scope.sf1 = [];
-    //    //$scope.sf1 = $scope.bchkPlan[0].SpecialFinishList;
-    //}
-
+    // 🔹 Controller for Batch Plan popup
     function BPlanController($scope,$mdDialog){
         
         $scope.hide = function () {
@@ -860,94 +796,7 @@
         
     }
 
-    //Special  Finish list to comma separated string ('4,5,8')
-    //function Special(models) {
-    //    let AllSf = [];
-    //    let allSpecialFinishes = [];
-    //    models.forEach(obj => {
-
-    //        if (obj.SpecialFinishList != "") {
-    //            let a = obj.SpecialFinishList.filter(x => x.FabOp == true);
-    //            allSpecialFinishes = allSpecialFinishes.concat(a.map(item => item.id));
-    //            var arrList = allSpecialFinishes.map(a => {
-    //                return a;
-    //            }).join(',');
-    //            obj.SpecialFinish = arrList;
-    //        }
-    //        else if (obj.SpecialFinish != "") {
-    //            allSpecialFinishes = allSpecialFinishes.concat(obj.SpecialFinish.split(',').map(Number));
-    //        }
-    //        else {
-    //            return;
-    //        } 
-
-    //        //const exists = allSpecialFinishes.some(finish => finish === value);
-
-    //        //if (!exists) {
-                 
-    //        //}
-            
-    //    });
-        
-    //    //angular.forEach(models, function (item) {
-    //    //    SpecialFinish(item);
-    //    //});
-    //}
-
-    //Comma separated string to Special Finish list
-
-    //function SpecialFinish(model) {
-    //    let numberA = [];
-    //    let SfListString = JSON.stringify(SfList); // Convert object to JSON string
-    //    let newList = JSON.parse(SfListString);
-
-    //    if (model.SpecialFinish) {
-    //        numberA = model.SpecialFinish.split(',').map(Number);
-
-    //        // Iterate over the array of objects
-    //        newList.forEach(obj => {
-
-    //            // Check if the current object's ID is in the idArray
-    //            if (numberA.includes(obj.id)) {
-    //                // Add the new attribute to the object
-    //                obj.FabOp = true;
-    //            }
-    //        });
-    //        model.SpecialFinishList = newList;
-    //    }
-    //    else {
-    //        //model.SpecialFinishList = model.SpecialFinishList == "" ? newList : $scope.chkPlan[0].SpecialFinishList;
-    //        model.SpecialFinishList = (model.SpecialFinishList == "" || model.SpecialFinishList == null) ? newList : SfList;
-    //    }
-    //    newList = SfList;
-
-    //}
-
-
-    //Get YarnType,YarnCount
-    //function extractItemNames(dataString, type) {
-    //    // Split the input string by '+'
-    //    let items = dataString.split('+');
-    //    let itemNames = [];
-    //    let itemName = '';
-    //    // Loop through each item and extract the ItemName
-    //    items.forEach(function (item) {
-    //        // Split each item by '-' and take the first part as ItemName
-    //        let parts = item.split('-');
-    //        if (type == 'C')
-    //            itemName = parts[0].trim(); // Get the ItemName and trim any whitespace
-    //        else
-    //            itemName = parts[parts.length - 1].trim();
-    //        itemName = itemName.replace(/\(.*?\)/g, '').trim(); 
-    //        if (itemName) {
-    //            itemNames.push(itemName); // Add to the array if it's not empty
-    //        }
-    //    });
-
-    //    // Join the ItemNames into a comma-separated string
-    //    return itemNames.join(', ');
-    //};
-    
+    // 🧹 Remove duplicate BatchNo in array
     function filterUniqueBatchNo(data) {
 
         const uniqueBatchNos = new Set(); // To track unique BatchNo values
@@ -961,8 +810,8 @@
         });
     };
 
+    // 📅 Convert JSON datetime to SQL Server datetime
     function toSqlServerDatetimeLocal(dateString) {
-        debugger
         const date = new Date(dateString);
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');

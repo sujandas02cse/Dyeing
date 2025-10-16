@@ -58,8 +58,26 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string StyleNo { get; set; }
             public string TrackingNo { get; set; }
             public int UnitId { get; set; }
-            
-   }
+            public int  RequiredDiaPartId { get; set; }
+            public int CompTime { get; set; }
+            public int ItemId { get; set; }
+
+            public string FinishedDia { get; set; }
+            public int ActualDiaPartId { get; set; }
+            public string FinishedGSM { get; set; }
+            public string  FinishedBarcodeId { get; set; }
+            public int  FabricForId { get; set; }
+            public string BodyPart { get; set; }
+
+            public string ProductionAlias { get; set; }
+            public string SCMAlias { get; set; }
+
+            public string StitchLength { get; set; }
+
+            public int RequiresISZID { get; set; }
+            public int FinishedISZID { get; set; }
+
+        }
 
         public Task<IEnumerable<object>> GetDataByTracking(string Id,string RollType,string UserId)
         {
@@ -90,12 +108,16 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                                     "Job","JobId",
                                     "McId","OrderId","OrderNo",
                                     "Qty", "RequiredDia","RequiredGSM",
-                                    "RollNo","StyleId","StyleNo","TrackingNo","UnitId"
+                                    "RollNo","StyleId","StyleNo","TrackingNo","UnitId",
+                                    "RequiredDiaPartId","CompTime","ItemId",
+                                    "FinishedDia","ActualDiaPartId","FinishedGSM",
+                                    "FinishedBarcodeId","FabricForId","BodyPart","ProductionAlias",
+                                    "SCMAlias","StitchLength","RequiresISZID","FinishedISZID"
 
                             })
             };
             return await DatabaseHub.QueryAsync<object,object>(
-                  storedProcedureName: @"[dbo].[usp_InsertFinishedFabricHandoverToStore_1]", model: data, dbName: DyeingDB);
+                  storedProcedureName: @"[dbo].[usp_InsertFinishedFabricHandoverToStore]", model: data, dbName: DyeingDB);
         }
 
       

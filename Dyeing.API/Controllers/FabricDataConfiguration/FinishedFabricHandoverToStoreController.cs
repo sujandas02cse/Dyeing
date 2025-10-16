@@ -22,6 +22,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             try
             {
                 try
+                
                 {
                     var queryData = await new FinishedFabricHandoverToStoreModel().GetDataByTracking(Id,RollType,UserId);
 

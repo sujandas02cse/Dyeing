@@ -391,8 +391,13 @@ namespace Dyeing.API.Models.DashboardManagement
 
             //return DatabaseHub.QueryAsync<object>(
             //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
+
+            //return DatabaseHub.QueryAsync<object>(
+            //       storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2DataNew]", parameters: parameters, dbName: DyeingDB);
+
+
             return DatabaseHub.QueryAsync<object>(
-                   storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2DataNew]", parameters: parameters, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_rpt_BatchWithCardPL]", parameters: parameters, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<object>> GetBatchCardSpecificationNew(int BpmId)
@@ -590,10 +595,11 @@ namespace Dyeing.API.Models.DashboardManagement
 
 
         #region Dyanmic Production Monitoring
-        public Task<IEnumerable<object>> GetDynamicMonitoring(int UnitId,string Date,string Issue)
+        public Task<IEnumerable<object>> GetDynamicMonitoring(int UnitId,int BuildingId,string Date,string Issue)
         {
             var parameters = new DynamicParameters();
             parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@BuildingId", value: BuildingId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add(name: "@Date", value: Date, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@FabricIssue", value: Issue, dbType: DbType.String, direction: ParameterDirection.Input);
 

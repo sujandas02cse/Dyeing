@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDBTest</ConnectString>
+        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -16,7 +16,7 @@
     <DataSet Name="BatchCardMaster">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_BatchCardNewV2Master 103489</CommandText>
+        <CommandText>usp_rpt_BatchCardNewV2Master 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -129,7 +129,7 @@
     <DataSet Name="Nozzle">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_NozzleTrolleyNew 103489</CommandText>
+        <CommandText>usp_rpt_NozzleTrolleyNew 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -143,7 +143,7 @@
         </Field>
         <Field Name="Nozzle">
           <DataField>Nozzle</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Shade">
           <DataField>Shade</DataField>
@@ -170,7 +170,7 @@
     <DataSet Name="BatchCardData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>dbo.usp_rpt_BatchWithCardPL 103489</CommandText>
+        <CommandText>usp_rpt_BatchWithCardPL 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -211,7 +211,7 @@
     <DataSet Name="BatchCardSpec">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_BatchCardNewV2Specification 103489</CommandText>
+        <CommandText>usp_rpt_BatchCardNewV2Specification 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -280,7 +280,7 @@
     <DataSet Name="ProcessFlow">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_ShowProcessFlowV1 103489</CommandText>
+        <CommandText>usp_rpt_ShowProcessFlowV1 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -321,7 +321,7 @@
     <DataSet Name="Others">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_OthersFlowData 103489</CommandText>
+        <CommandText>usp_rpt_OthersFlowData 107115</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -5521,10 +5521,10 @@
                   <Width>0.74578in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.25316in</Width>
+                  <Width>1.12816in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.6116in</Width>
+                  <Width>1.4241in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.31223in</Width>
@@ -5539,7 +5539,7 @@
                   <Width>0.60815in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.46875in</Width>
+                  <Width>0.78125in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -5608,21 +5608,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Fabric </Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Type</Value>
+                                  <Value>Fabric Type</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -6875,7 +6861,7 @@
             <Top>1.42192in</Top>
             <Left>0.07012in</Left>
             <Height>0.41111in</Height>
-            <Width>7.93373in</Width>
+            <Width>7.93374in</Width>
             <ZIndex>8</ZIndex>
             <Visibility>
               <Hidden>=IIF(
@@ -7003,6 +6989,7 @@
                             <PaddingLeft>2pt</PaddingLeft>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -7225,7 +7212,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Name : </Value>
+                                  <Value xml:space="preserve"> </Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                   </Style>
@@ -7542,7 +7529,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>0.07012in</Left>
               <Height>0.16041in</Height>
               <Width>2.56324in</Width>

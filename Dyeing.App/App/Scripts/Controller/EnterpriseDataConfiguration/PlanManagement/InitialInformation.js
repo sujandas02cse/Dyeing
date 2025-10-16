@@ -25,22 +25,19 @@
     });
 
     $scope.LoadBuyerData = function () {
+        $rootScope.ShowLoader("Loading Buyer Data");
 
-        $scope.isLoading = false;   
-        $scope.isLoading = true;
         PlanManagement.GetBuyerByUnit($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
-            $scope.isLoading = false;
             $scope.allInitialData = '';
             $scope.allCheck = false;
+            $rootScope.HideLoader();
         });
     }
 
     $scope.LoadProcessData = function () {
 
-        $scope.isLoading = false;
-        $scope.isLoading = true;
-
+        $rootScope.ShowLoader('Loading Info Data');
         PlanManagement.GetInitialInformation($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
             $scope.allInitialData = data;
             alldata = data;
@@ -54,7 +51,7 @@
             angular.forEach($scope.allInitialData, function (item) {
                 SpecialFinish(item);
             });
-            console.log('a', $scope.allInitialData);
+            $rootScope.HideLoader();
         });
         
     }

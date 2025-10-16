@@ -1,0 +1,118 @@
+﻿<div class="row mx-auto mt-5">
+    <img src="../../../Content/img/Masco.jpg" />
+</div>
+<div class="loader-container">    
+    <div class="cloth">
+        <div class="brush-stroke stroke1"></div>
+        <div class="brush-stroke stroke2"></div>
+        <div class="brush-stroke stroke3"></div>
+        <div class="loader-message">{{message}}</div>
+    </div>
+</div>
+
+<style>
+    .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        background: transparent; /* fully transparent container */
+    }
+
+    .cloth {
+        position: relative;
+        width: 400px;
+        height: 180px;
+        background: transparent; /* fully transparent */
+        border-radius: 12px;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Brush strokes */
+    .brush-stroke {
+        position: relative;
+        height: 20px;
+        width: 0;
+        border-radius: 10px;
+        opacity: 0.9;
+        margin: 6px 0;
+        animation: growShrink 4s infinite;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* subtle shadow for depth */
+    }
+
+    /* Gradient colors per bar */
+    .stroke1 {
+        background: linear-gradient(90deg, #ff6b6b, #ff8787);
+    }
+
+    .stroke2 {
+        background: linear-gradient(90deg, #ffb562, #ffd88c);
+    }
+
+    .stroke3 {
+        background: linear-gradient(90deg, #6bc1ff, #8fd7ff);
+    }
+
+    /* Grow full -> hold -> shrink */
+    @keyframes growShrink {
+        0% {
+            width: 0;
+            opacity: 1;
+        }
+
+        25% {
+            width: 100%;
+            opacity: 1;
+        }
+        /* grow full */
+        /*50% {
+            width: 100%;
+            opacity: 1;
+        }*/
+         /*hold full*/ 
+        /*75% {
+            width: 0;
+            opacity: 1;
+        }*/
+        /* shrink */
+        100% {
+            width: 0;
+            opacity: 1;
+        }
+    }
+
+    /* Loader message */
+    .loader-message {
+        font-size: x-large;
+        margin-top: 20px;
+        font-family: 'Comic Sans MS', sans-serif;
+        /*font-size: 18px;*/
+        font-weight: 500;
+        color: #2a2a2a;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        letter-spacing: 0.5px;
+        animation: fadeMessage 1s infinite;
+        background: transparent;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+
+    /* Fade in/out message */
+    @keyframes fadeMessage {
+        0%, 20% {
+            opacity: 0;
+        }
+
+        25%, 70% {
+            opacity: 1;
+        }
+
+        80%, 100% {
+            opacity: 0;
+        }
+    }
+</style>

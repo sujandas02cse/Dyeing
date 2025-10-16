@@ -9,20 +9,34 @@
         } 
     });
 
+    $scope.GetBuildingData = function (Unit) {
+        $rootScope.ShowLoader('Loading Building Data');
+        DynamicProductionMonitorFactory.GetBuildingsByUnit(Unit.Id, function (data) {
+            $scope.BuildingList = data;
+            $rootScope.HideLoader();
+        });
+    }
+
     //interval time
     var refreshInterval = 5 * 60 * 1000;
 
     // Function to load data   
     $scope.LoadingData = function () {
-        if (!$scope.Unit || !$scope.Date) return;
+        debugger
+        if (!$scope.Unit || !$scope.Date || !$scope.Building) return;
+
+        $rootScope.ShowLoader('Loading Data');
+
         $scope.Processing = true;
         $scope.disabledShow = true;
-        DynamicProductionMonitorFactory.GetDyeingProductionMonitorData($scope.Unit.UnitId,FormatDate($scope.Date),$scope.Issue, function (data) {
+        DynamicProductionMonitorFactory.GetDyeingProductionMonitorData($scope.Unit.UnitId, $scope.Building.BuildingId,FormatDate($scope.Date),$scope.Issue, function (data) {
             $scope.ProductionData = data;
             $scope.Processing = false;
             $scope.disabledShow = false;
+            $rootScope.HideLoader();
             }
         );
+        
 
     };
 

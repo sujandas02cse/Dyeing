@@ -311,6 +311,7 @@
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\SlittingOperationConfigFactory.js" />
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\StenterOperationConfigFactory.js" />
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\UnitWiseFinMcSetFactory.js" />
+    <Content Include="App\template\Loader\GlobalLoader.html" />
     <Content Include="App\template\multiselect\angularjs-dropdown-multiselect.html" />
     <Content Include="App\template\Popup\BatchConfigFinishDialog.html" />
     <Content Include="App\template\Popup\BPlanPopup.html" />
