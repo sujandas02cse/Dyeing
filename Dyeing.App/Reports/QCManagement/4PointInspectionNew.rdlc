@@ -5,18 +5,17 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
-        <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
+        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
-      <rd:DataSourceID>18951265-671b-47d5-87e3-4b8138077665</rd:DataSourceID>
+      <rd:DataSourceID>b24320ae-7156-49ec-ad1d-95ab9a254839</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="InspectionData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_DyedFabInspectionNew 4,NULL,NULL,NULL,106554,1</CommandText>
+        <CommandText>usp_rpt_DyedFabInspectionNew 16,NULL,NULL,NULL,107777,1</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

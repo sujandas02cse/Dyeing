@@ -1100,5 +1100,55 @@ namespace Dyeing.API.Controllers.DashboardManagement
             }
         }
         #endregion
+
+        #region Batch Card Background Image
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchCardBackgroundImage(string ProcessName)
+        {
+            try
+            {
+                // var queryData = await new DataRelatedDashboardModel().GetSwatchCardData(BpmId, RUnitId);
+
+                var queryData = await new DataRelatedDashboardModel().GetBatchBackgroundImage(ProcessName);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                // Notify clients to refresh
+                //var hubContext = GlobalHost.ConnectionManager.GetHubContext<ProductionHub>();
+                //hubContext.Clients.All.refreshProductionData(UnitId, Date, FabricIssue);
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+        #endregion
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetPackingListData_New(int Id,string Part)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().GetPackingListData_New(Id, Part);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
     }
 }

@@ -860,6 +860,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
 
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
 
+                //Batch No
                 HttpResponseMessage response = await client.GetAsync("DataRelatedDashboard/GetBatchCardMasterNewV2?BpmId=" + BpmId);
                 if (response.IsSuccessStatusCode)
                 {
@@ -882,7 +883,17 @@ namespace Dyeing.App.Controllers.DashboardManagement
                     dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(json);
                 }
                 string UnitName = dt.Rows[0]["UnitEName"].ToString();
-                //string UnitName = "ABC";
+
+
+                //Picture 
+                response = await client.GetAsync("DataRelatedDashboard/GetBatchCardBackgroundImage?ProcessName=" + rType + "");
+                if (response.IsSuccessStatusCode)
+                {
+                    _lobj = await response.Content.ReadAsAsync<List<object>>();
+                    var json = JsonConvert.SerializeObject(_lobj);
+                    dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(json);
+                }
+                string ImageUrl = dt.Rows[0]["StoragePath"].ToString();
 
 
                 response = await client.GetAsync("DataRelatedDashboard/GetBatchCardDataNewV2?BpmId=" + BpmId);
@@ -942,7 +953,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
                
                 ReportDataSource rs5 = new ReportDataSource("Others", dt);
                 rpt.DataSources.Add(rs5);
-
+            
 
                 rpt.ReportPath = Server.MapPath(RptPath);
 
@@ -954,7 +965,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 ReportParameter parameter = new ReportParameter("BatchQRCode", imagePath);
                 rpt.SetParameters(parameter);
 
-                ReportParameter waterMark = new ReportParameter("ImageParameter", RptType.ToString());
+                ReportParameter waterMark = new ReportParameter("ImageParameter", ImageUrl);
                 rpt.SetParameters(waterMark);
 
                 ReportParameter ParamReportType = new ReportParameter("UnitName", UnitName.ToString());
@@ -1047,7 +1058,6 @@ namespace Dyeing.App.Controllers.DashboardManagement
             }
         }
 
-
         public async Task<ActionResult> SwatchCardNewBulk(int BpmId, int RUnitId, string Format)
         {
             string RptPath = "~/Reports/DataRelatedDashboard/ShadeCardNewBulk.rdlc";
@@ -1088,6 +1098,77 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 throw;
             }
         }
+
+
+
+        public async Task<ActionResult> GetPackingListReport_New(int PackingId, string Format, string BatchType)
+        {
+            string RptPath = "";
+
+            if (BatchType == "NewBulk")
+                RptPath = "~/Reports/FabricManagement/PackingList_New.rdlc";
+
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                rpt.ReportPath = Server.MapPath(RptPath);
+
+                List<string> parts = new List<string> {
+                "Header", "BatchQty", "Fabric", "YarnLot",
+                "InspBy", "Rolls", "Summary", "Tracking","Options","Image"
+                };
+
+                DataTable mainTable = new DataTable();
+                DataTable dt = new DataTable();
+
+                foreach (var part in parts) {
+                    string apiUrl = $"DataRelatedDashboard/GetPackingListData_New?Id={PackingId}&Part={part}";
+                    client.DefaultRequestHeaders.Remove("Authorization");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode) {
+
+                        var jsonData = await response.Content.ReadAsStringAsync();
+                        var listObj = JsonConvert.DeserializeObject<List<object>>(jsonData);
+                        var json = JsonConvert.SerializeObject(listObj);
+                        dt = (DataTable)JsonConvert.DeserializeObject(json, typeof(DataTable));
+
+                        ReportDataSource rs = new ReportDataSource(part,dt);
+                        rpt.DataSources.Add(rs);
+
+                        if (part == "Header" && dt.Rows.Count > 0) {
+
+                            string TrackingNo = dt.Rows[0]["TrackingNo"].ToString();
+                            rpt.EnableExternalImages = true;
+                            string imagePath = Common.PackingQrCodePath + TrackingNo + ".png";
+                            ReportParameter parameter = new ReportParameter("QRCode", imagePath);
+                            rpt.SetParameters(parameter);
+                        }
+                    }
+                }
+
+                rpt.Refresh();
+
+                var fileStream = prn.Export(Format, rpt);
+
+                if (Format == "PDF")
+                    return File(fileStream, "application/pdf");
+
+                else if (Format == "Excel")
+                    return File(fileStream, "application/vnd.ms-excel", "PackingList.xls");
+
+                else
+                    return File(fileStream, "application/ms-word", "PackingList.doc");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
 
         #endregion
 

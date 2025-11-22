@@ -24,6 +24,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                 try
                 
                 {
+                    
                     var queryData = await new FinishedFabricHandoverToStoreModel().GetDataByTracking(Id,RollType,UserId);
 
                     if (queryData == null)
@@ -73,6 +74,8 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             }
 
         }
+
+      
 
         [System.Web.Http.HttpGet]
         public async Task<IHttpActionResult> GetDataBySingleRoll(String SingleRollStickerNo)

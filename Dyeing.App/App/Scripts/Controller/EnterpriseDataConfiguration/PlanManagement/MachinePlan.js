@@ -30,9 +30,13 @@
         $scope.UnitList = data;
         if ($scope.UnitList.length == 1) {
             $scope.Unit = $scope.UnitList[0];
+
+            $rootScope.ShowLoader("Load Machine Data");
+
             $scope.LoadBuyerData();
             PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
                 $scope.MachineList = data;
+                $rootScope.HideLoader();
             });
         }
         
@@ -42,20 +46,43 @@
 
     $scope.LoadBuyerData = function () {
 
-        $scope.isLoading = false;
-        $scope.isLoading = true;
+        $rootScope.ShowLoader();
         PlanManagement.GetBuyerByUnit($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
             PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
                 $scope.MachineList = data;
+                $rootScope.HideLoader();
             });
-            $scope.isLoading = false;
+            
         });
     }
 
-    $scope.LoadProcessData = function () {        
-        PlanManagement.GetMachinePlanData($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
+    $scope.LoadJobData = function () {
+        $rootScope.ShowLoader("Loading Job Data");
+
+        PlanManagement.GetJobByBuyer($scope.Buyer.BuyerId, function (data) {
+            $scope.JobList = data;
+            $scope.allInitialData = '';
+            $scope.allCheck = false;
+            $rootScope.HideLoader();
+        });
+    }
+
+    $scope.LoadProcessData = function () {
+        $rootScope.ShowLoader('Loading Plan Data');
+        if (!$scope.Unit || !$scope.Buyer) {
+            $rootScope.HideLoader();
+            return;
+        }
+
+        if ($scope.Job === undefined || $scope.Job === null)
+            var job = 0;
+        else
+            var job = $scope.Job.JobId;
+
+        PlanManagement.GetMachinePlanData($scope.Unit.Id, $scope.Buyer.BuyerId,job, function (data) {
             $scope.PlanData = data;
+            $rootScope.HideLoader();
         });
     }   
 

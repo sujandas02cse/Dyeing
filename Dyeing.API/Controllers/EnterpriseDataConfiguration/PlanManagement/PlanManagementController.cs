@@ -2,6 +2,10 @@
 using Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,12 +22,12 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
 
 
         [HttpGet]
-        public async Task<IHttpActionResult> InitialInformation(int UnitNo,int BuyerId)
+        public async Task<IHttpActionResult> InitialInformation(int UnitNo,int BuyerId,int JobId)
         {
             try
             {
 
-                var queryData = await new PlanManagementModel().GetInitialInfoData(UnitNo,BuyerId);
+                var queryData = await new PlanManagementModel().GetInitialInfoData(UnitNo,BuyerId,JobId);
 
                 if (queryData == null)
                 {
@@ -520,6 +524,98 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
                 return Ok(_res);
             }
         }
+
+
+        #endregion
+
+
+        #region  Image Generation
+        [HttpGet]
+        public IHttpActionResult ImageGenratior(string Text)
+        {
+            try
+            {
+                //Local  
+                //string saveDir = @"E:\Dyeing\Dyeing.App\Reports\ReportImages";
+
+                //Online
+                //string saveDir = "file:///D:/Websites/Dyeing/Dyeing.APP/Reports/ReportImages";
+
+                //Online Test
+                string saveDir = "file:///E:/Websites/Dyeing/Dyeing.APP/Reports/ReportImages";
+
+                Directory.CreateDirectory(saveDir);
+
+                string fileName = "WaterMark_" + Text.Trim().Replace(" ", "_") + ".png";
+                string savePath = Path.Combine(saveDir, fileName);
+
+                int width = 2480;
+                int height = 3508;
+                int dpi = 300;
+                int padding = 30; // left & right padding in px
+
+                using (Bitmap bmp = new Bitmap(width, height))
+                {
+                    bmp.SetResolution(dpi, dpi);
+
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        g.Clear(Color.White);
+
+                        // Start with large font size
+                        float fontSize = 400f;
+                        Font wmFont = new Font("Arial", fontSize, FontStyle.Bold);
+
+                        // Measure text size
+                        SizeF textSize = g.MeasureString(Text, wmFont, new PointF(0, 0), StringFormat.GenericTypographic);
+
+                        // Shrink font until it fits between left & right padding
+                        while (textSize.Width > (width - padding * 2))
+                        {
+                            fontSize -= 1f;
+                            wmFont.Dispose();
+                            wmFont = new Font("Arial", fontSize, FontStyle.Bold);
+                            textSize = g.MeasureString(Text, wmFont, new PointF(0, 0), StringFormat.GenericTypographic);
+
+                            if (fontSize <= 10f)
+                                break;
+                        }
+
+                        using (Brush wmBrush = new SolidBrush(Color.FromArgb(51, 0, 0, 0)))
+                        {
+                            // Vertical center
+                            float y = (height - textSize.Height) / 2f;
+
+                            // Apply rotation
+                            g.TranslateTransform(padding + textSize.Width / 2f, y + textSize.Height / 2f);
+                            g.RotateTransform(-55);
+                            g.TranslateTransform(-(padding + textSize.Width / 2f), -(y + textSize.Height / 2f));
+
+                            // Draw text starting exactly at 30px from left
+                            g.DrawString(Text, wmFont, wmBrush, new PointF(padding, y), StringFormat.GenericTypographic);
+
+                            g.ResetTransform();
+                        }
+
+                        wmFont.Dispose();
+                    }
+
+                    bmp.Save(savePath, ImageFormat.Png);
+                }
+
+                return Ok($"✅ Saved watermark at: {savePath}");
+            }
+            catch (Exception ex)
+            {
+                return Ok("❌ Error: " + ex.Message);
+            }
+        }
+
+
+
 
 
         #endregion

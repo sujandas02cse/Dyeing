@@ -65,12 +65,13 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
         {
             public int InitInfoId { get; set; }
         }
-        public async Task<IEnumerable<object>> GetBatchPlanData(int UnitId,int BuyerId)
+        public async Task<IEnumerable<object>> GetBatchPlanData(int UnitId,int BuyerId,int JobId)
         {
+            var job = JobId != 0 ? JobId : (int?)null;
             var parameter = new DynamicParameters();
             parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);           
-            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);           
-
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: job, dbType: DbType.Int32, direction: ParameterDirection.Input);
             return await DatabaseHubRpt.QueryAsyncNew<object>(
                 storedProcedureName: @"[dbo].[usp_get_BatchPlanData]", parameters: parameter, dbName: DyeingDB);
         }
@@ -90,12 +91,12 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             if(Change == 1)
             {
                 return await DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_get_GenBatchNoByJob1]", parameters: parameter, dbName: DyeingDB);
+                    storedProcedureName: @"[dbo].[usp_get_GenBatchNoByJob1_New]", parameters: parameter, dbName: DyeingDB);
             }
             else
             {
                 return await DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_get_GenBatchNoByJob]", parameters: parameter, dbName: DyeingDB);
+                    storedProcedureName: @"[dbo].[usp_get_GenBatchNoByJob_New]", parameters: parameter, dbName: DyeingDB);
             }
                 
         }
@@ -110,7 +111,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                 JobId = JobId
             };
 
-            return await DatabaseHub.MultiQueryAsync<object,object,object>(storedProcedureName: @"[dbo].[usp_Get_BatchPlanDataByInitInfo]",model: data,dbName: DyeingDB);
+            return await DatabaseHub.MultiQueryAsync<object,object,object>(storedProcedureName: @"[dbo].[usp_Get_BatchPlanDataByInitInfo1]", model: data,dbName: DyeingDB);
         }
 
         public object SaveUpdate(BatchPlanWrapper _obj)

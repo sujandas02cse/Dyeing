@@ -178,6 +178,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string UserId { get; set; }
             public string FinishedDia { get; set; }
             public string FinishedGSM { get; set; }
+            public string  ActualGSM { get; set; }
         }
 
 
@@ -466,6 +467,8 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                 HostIP = getclientIP(),
                 FinishedDia = _obj.FinishedDia,
                 FinishedGSM = _obj.FinishedGSM,
+                ActualGSM=_obj.ActualGSM,
+
 
                 DyedInspectionDetail = _obj.list.AsTableValuedParameter("dbo.DyedInspectionDetail",
                            new[] { "DyedInspectionDetailID", "FaultID", "TotalPoint", "PointID", "PointData", "RollNo" }),

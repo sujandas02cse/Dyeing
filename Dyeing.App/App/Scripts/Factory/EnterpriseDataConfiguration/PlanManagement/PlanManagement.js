@@ -19,8 +19,16 @@
         });
     }
 
-    _obj.GetInitialInformation = function (UnitNo, BuyerId, cb) {
-        $http.get(baseApiURL + 'PlanManagement/InitialInformation?UnitNo=' + UnitNo + '&&BuyerId=' + BuyerId).then(function successCallback(response) {
+    _obj.GetJobByBuyer = function (BuyerId, cb) {
+        $http.get(baseApiURL + 'CommonApi/GetAllJobByBuyer?BuyerId=' + BuyerId).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+        });
+    }
+
+    _obj.GetInitialInformation = function (UnitNo, BuyerId, JobId ,cb) {
+        $http.get(baseApiURL + 'PlanManagement/InitialInformation?UnitNo=' + UnitNo + '&&BuyerId=' + BuyerId + '&&JobId=' + JobId).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Data....");
@@ -61,8 +69,8 @@
     }
        
     //Batch Plan
-    _obj.GetBatchPlanData = function (UnitId, BuyerId, cb) {
-        $http.get(baseApiURL + 'BatchPlan/GetBatchPlanData?UnitId=' + UnitId + '&BuyerId=' + BuyerId).then(function successCallback(response) {
+    _obj.GetBatchPlanData = function (UnitId, BuyerId, JobId, cb) {
+        $http.get(baseApiURL + 'BatchPlan/GetBatchPlanData?UnitId=' + UnitId + '&BuyerId=' + BuyerId + '&JobId=' + JobId).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Data....");
@@ -103,8 +111,8 @@
 
 
     //Machine Plan
-    _obj.GetMachinePlanData = function (UnitId, BuyerId, cb) {
-        $http.get(baseApiURL + 'MachinePlan/GetMachinePlanData?UnitId=' + UnitId + '&&BuyerId=' + BuyerId).then(function successCallback(response) {
+    _obj.GetMachinePlanData = function (UnitId, BuyerId, JobId, cb) {
+        $http.get(baseApiURL + 'MachinePlan/GetMachinePlanData?UnitId=' + UnitId + '&&BuyerId=' + BuyerId + '&&JobId=' + JobId).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Data....");

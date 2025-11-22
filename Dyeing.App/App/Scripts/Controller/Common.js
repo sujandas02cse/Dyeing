@@ -7,7 +7,19 @@ var baseAppURL = loc.protocol + "//" + loc.hostname + (loc.port ? ":" + loc.port
 
  var baseApiURL = loc.protocol + "//" + loc.hostname + (loc.hostname == "localhost" ? ":34605" : "/dyeingapi") + "/api/";
 
-//var baseApiURL = "http://192.168.50.60:93/dyeingApi/api/";
+
+
+// new test
+//var baseApiURL ="http://192.168.50.61:91/dyeingApi/api/";
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
+        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -16,10 +16,14 @@
     <DataSet Name="PackingList">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>Usp_rpt_packinglistnew_updated1 17553</CommandText>
+        <CommandText>Usp_rpt_packinglistnew_updated1 24847</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
+        <Field Name="BpmId">
+          <DataField>BpmId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="BuyerName">
           <DataField>BuyerName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -28,69 +32,73 @@
           <DataField>JobNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="UnitEName">
-          <DataField>UnitEName</DataField>
+        <Field Name="BatchNo">
+          <DataField>BatchNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BpmId">
-          <DataField>BpmId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="OrderNo">
           <DataField>OrderNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Color">
-          <DataField>Color</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="BatchNo">
-          <DataField>BatchNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FabricType">
-          <DataField>FabricType</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Remarks">
-          <DataField>Remarks</DataField>
+        <Field Name="UnitEName">
+          <DataField>UnitEName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="YarnLot">
           <DataField>YarnLot</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="RollNo">
-          <DataField>RollNo</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="Color">
+          <DataField>Color</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FabricType">
+          <DataField>FabricType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FDia">
+          <DataField>FDia</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FGSM">
+          <DataField>FGSM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PrevDeliveryQty">
+          <DataField>PrevDeliveryQty</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="BatchQuantity">
           <DataField>BatchQuantity</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="FDia">
-          <DataField>FDia</DataField>
+        <Field Name="TrackingNo">
+          <DataField>TrackingNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="RollWeight">
           <DataField>RollWeight</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="FGSM">
-          <DataField>FGSM</DataField>
+        <Field Name="ProcessLoss">
+          <DataField>ProcessLoss</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="InspBy">
+          <DataField>InspBy</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="S_L">
           <DataField>S/L</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="TrackingNo">
-          <DataField>TrackingNo</DataField>
+        <Field Name="BodyPart">
+          <DataField>BodyPart</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ProcessLoss">
-          <DataField>ProcessLoss</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="RollNo">
+          <DataField>RollNo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Dia">
           <DataField>Dia</DataField>
@@ -100,10 +108,6 @@
           <DataField>GSM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="BodyPart">
-          <DataField>BodyPart</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="FinishWeight">
           <DataField>FinishWeight</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -112,17 +116,13 @@
           <DataField>RollWeightYds</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="CreateDate">
           <DataField>CreateDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="InspBy">
-          <DataField>InspBy</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PrevDeliveryQty">
-          <DataField>PrevDeliveryQty</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>

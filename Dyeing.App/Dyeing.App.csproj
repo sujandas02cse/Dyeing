@@ -178,6 +178,7 @@
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfigController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\OperationDataConfiguration\CommentsOnFourPointReportController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\ProductionPlanConfiguration\DiaPartWiseDyeingProcessConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\ProductionPlanConfiguration\DyeingProcessFlowConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\ProductionPlanConfiguration\MatchingWithFieldConfigController.js" />
@@ -264,6 +265,7 @@
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfigFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\OperationDataConfiguration\CommentsOnFourPointReportFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\ProductionPlanConfiguration\DiaPartWiseDyeingProcessConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\ProductionPlanConfiguration\DyeingProcessFlowConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\ProductionPlanConfiguration\MatchingWithFieldConfigFactory.js" />
@@ -317,6 +319,7 @@
     <Content Include="App\template\Popup\BPlanPopup.html" />
     <Content Include="App\template\Popup\DispatchGenerationDialog.html" />
     <Content Include="App\template\Popup\FabOperationDialog.html" />
+    <Content Include="App\template\Popup\FabricInspectionDialogNew.html" />
     <Content Include="App\template\Popup\FabricInspectionDialog.html" />
     <Content Include="App\template\Popup\FabricInspectionRemarksDialog.html" />
     <Content Include="App\template\Popup\FinFabricFloorToStoreIssueDialog.html" />
@@ -355,6 +358,7 @@
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfig.html" />
+    <Content Include="App\Views\BasicDataConfiguration\OperationDataConfiguration\CommentsOnFourPointReport.html" />
     <Content Include="App\Views\BasicDataConfiguration\OperationDataConfiguration\OperationSectionConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\OperationDataConfiguration\ProductionShiftConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\ProductionPlanConfiguration\DiaPartWiseDyeingProcessConfiguration.html" />
@@ -2348,6 +2352,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\ReportImages\" />
     <Folder Include="Views\Dashboard\" />
   </ItemGroup>
   <ItemGroup>

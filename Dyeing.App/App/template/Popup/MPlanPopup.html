@@ -62,11 +62,11 @@
                                 <th colspan="10"><b style="font-size:larger">Total Plan Qty: {{totalPlanQty}}</b></th>
                             </tr>
                             <tr class="table-warning">
-                                <th></th>
+                                <!--<th></th>-->
                                 <th style="width:150px;">Batch No</th>
                                 <th style="width:150px;">M/C No</th>
                                 <th>M/C Capacity</th>
-                                <th>Action</th>
+                                <!--<th>Action</th>-->
                                 <th>Fabric type</th>
                                 <th>Composition</th>
                                 <th>GSM</th>
@@ -82,9 +82,9 @@
                         <tbody>
                             <tr ng-repeat="obj in chkPlan">
                                 <td class="d-none">{{obj.GroupNo}}</td>
-                                <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
+                                <!--<td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
                                     <button class="btn  btn-warning" ng-click="copy(obj, $index)">Copy</button>
-                                </td>
+                                </td>-->
                                 <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
                                     <input class="form-control" readonly type="text" name="name" ng-model="obj.BatchNo" />
                                 </td>
@@ -99,7 +99,7 @@
                                 <td rowspan="{{rowSpanM(obj)}}" ng-if="showEl(obj)">
                                     <input class="form-control" readonly type="text" name="name" ng-model="obj.MCapacity" />
                                 </td>
-                                <td style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>
+                                <!--<td style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>-->
                                 <td><input class="form-control" readonly type="text" name="name" ng-model="obj.FabricType" /></td>
                                 <td><input class="form-control" readonly type="text" name="name" ng-model="obj.Composition" /></td>
                                 <td><input class="form-control" readonly type="text" name="name" ng-model="obj.GSM" /></td>

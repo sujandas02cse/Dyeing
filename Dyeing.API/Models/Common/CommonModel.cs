@@ -417,5 +417,14 @@ namespace Dyeing.API.Models
             return DatabaseHubRpt.QueryAsync<object>(
                     storedProcedureName: @"[dbo].[usp_get_TrackingNoByUnit]", parameters: parameter, dbName: DyeingDB);
         }
+
+        //New Controller for Job by BuyerId (Universal)
+        public IEnumerable<object> GetAllJobByBuyer(int BuyerId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.Query<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_AllJobbyBuyer]", parameters: parameter, dbName: DyeingDB);
+        }
     }
 }

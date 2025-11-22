@@ -19,7 +19,7 @@ namespace Dyeing.API.DBInfo
         public string MSCHOOL = "MascoSchoolDB";
         public string GPDB = "GarmentsProductionDB";    
         public string AMSDB = "AMSDB";
-      //  public string DyeingDB = "DyeingDBTest";
+        //public string DyeingDB = "DyeingDBTest";
         public string DyeingDB = "DyeingDB";
         public string MascoPrint = "MascoPrint";
 

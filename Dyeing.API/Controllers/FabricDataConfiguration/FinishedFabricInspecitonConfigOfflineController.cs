@@ -262,14 +262,17 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             //string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
 
             // for local testing 
-            //string protocol = "http://";
-            //string baseUrl = "localhost:34605";
+            // string protocol = "http://";
+            // string baseUrl = "localhost:34605";
 
             // for local live server
-
             string protocol = "";
             string baseUrl = "https://mis-dyeing.mascoknit.com/";
 
+
+            // for  test 
+            //string protocol = "";
+            //string baseUrl = "http://192.168.50.61:91/";
 
 
             if (HttpContext.Current != null)
@@ -279,7 +282,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             }
 
 
-            string basePath = (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60")) ?
+            string basePath = (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.61") ) ?
                 $"{protocol}{baseUrl}/dyeingApi/images/RollSticker/" :
                 $"{protocol}{baseUrl}/images/RollSticker/";
 

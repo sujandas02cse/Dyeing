@@ -119,7 +119,8 @@
       }
     );
 
-    $scope.CheckWater = function(process) {
+    $scope.CheckWater = function (process) {
+      
       angular.forEach($scope.WaterMark, function(item) {
         if (item.ProcessName === process) item.IsChecked = 1;
         else item.IsChecked = 0;

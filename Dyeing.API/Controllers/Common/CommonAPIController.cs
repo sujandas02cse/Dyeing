@@ -14,6 +14,7 @@ using static Dyeing.API.Models.CommonModel;
 
 namespace Dyeing.API.Controllers
 {    
+    
     public class CommonAPIController : ApiController
     {
         CommonModel.Response _res = new CommonModel.Response();
@@ -881,6 +882,27 @@ namespace Dyeing.API.Controllers
             try
             {
                 var queryData = await new CommonModel().GetTrackingNo(UnitId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        //New Controller for Job by BuyerId (Universal)
+        [HttpGet]
+        public IHttpActionResult GetAllJobByBuyer(int BuyerId)
+        {
+            try
+            {
+                var queryData = new CommonModel().GetAllJobByBuyer(BuyerId);
 
                 if (queryData == null)
                 {

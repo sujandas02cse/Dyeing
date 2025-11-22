@@ -35,10 +35,30 @@
         });
     }
 
+    $scope.LoadJobData = function () {
+        $rootScope.ShowLoader("Loading Job Data");
+
+        PlanManagement.GetJobByBuyer($scope.Buyer.BuyerId, function (data) {
+            $scope.JobList = data;
+            $scope.allInitialData = '';
+            $scope.allCheck = false;
+            $rootScope.HideLoader();
+        });
+    }
+
+        
     $scope.LoadProcessData = function () {
+        debugger
+        if (!$scope.Unit.Id || !$scope.Buyer.BuyerId) return;
+
+        if ($scope.Job === undefined || $scope.Job === null)
+            var job = 0;
+        else
+            var job = $scope.Job.JobId;
 
         $rootScope.ShowLoader('Loading Info Data');
-        PlanManagement.GetInitialInformation($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
+        debugger
+        PlanManagement.GetInitialInformation($scope.Unit.Id, $scope.Buyer.BuyerId, job, function (data) {
             $scope.allInitialData = data;
             alldata = data;
             let initId = 0;
@@ -251,8 +271,11 @@
         PlanManagement.InititalInfo_Save(Obj, function (data) {
             List = [];
             if (data.ErrorMsg == null) {
-               
-                PlanManagement.GetInitialInformation($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
+                if ($scope.Job === undefined || $scope.Job === null)
+                    var job = 0;
+                else
+                    var job = $scope.Job.JobId;
+                PlanManagement.GetInitialInformation($scope.Unit.Id, $scope.Buyer.BuyerId,job, function (data) {
                     $scope.allCheck = false;
                     $scope.search = '';
                     $scope.allInitialData = data;

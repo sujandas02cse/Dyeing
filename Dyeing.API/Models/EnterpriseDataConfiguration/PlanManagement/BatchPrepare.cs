@@ -136,6 +136,9 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
 
             return await DatabaseHubRpt.QueryAsync<object>(
                 storedProcedureName: @"[dbo].[usp_get_BatchPrepareData]", parameters: parameter, dbName: DyeingDB);
+
+            //return await DatabaseHub.QueryAsync<object>(
+            //    storedProcedureName: @"[dbo].[usp_get_BatchPrepareData]", parameters: parameter, dbName: DyeingDB);
         }
         public object GetBatchDataById(int Id,int reviceno)
         {

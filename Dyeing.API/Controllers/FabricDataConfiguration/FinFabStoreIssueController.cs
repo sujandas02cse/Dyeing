@@ -161,7 +161,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
                     string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
                     string imgPath = "";
-                    if (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60"))
+                    if (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.61"))
                         imgPath = protocol + baseUrl + "/dyeingApi/images/PackingList/" + fileName;
                     else
                         imgPath = protocol + baseUrl + "/images/PackingList/" + fileName;

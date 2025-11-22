@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
+        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -16,7 +16,7 @@
     <DataSet Name="BatchCardMaster">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_BatchCardNewV2Master 107115</CommandText>
+        <CommandText>usp_rpt_BatchCardNewV2Master 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -129,7 +129,7 @@
     <DataSet Name="Nozzle">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_NozzleTrolleyNew 107115</CommandText>
+        <CommandText>usp_rpt_NozzleTrolleyNew 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -170,13 +170,17 @@
     <DataSet Name="BatchCardData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_BatchWithCardPL 107115</CommandText>
+        <CommandText>usp_rpt_BatchCardNewV2Data 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
         <Field Name="BodyPart">
           <DataField>BodyPart</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BodyPartId">
+          <DataField>BodyPartId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="FabricType">
           <DataField>FabricType</DataField>
@@ -211,7 +215,7 @@
     <DataSet Name="BatchCardSpec">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_BatchCardNewV2Specification 107115</CommandText>
+        <CommandText>usp_rpt_BatchCardNewV2Specification 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -280,7 +284,7 @@
     <DataSet Name="ProcessFlow">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_ShowProcessFlowV1 107115</CommandText>
+        <CommandText>usp_rpt_ShowProcessFlowV1 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -321,7 +325,7 @@
     <DataSet Name="Others">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_OthersFlowData 107115</CommandText>
+        <CommandText>usp_rpt_OthersFlowData 107777</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -364,24 +368,19 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image5">
-            <Source>Embedded</Source>
-            <Value>=Switch(
-    Parameters!ImageParameter.Value = "O", "Organic",
-    Parameters!ImageParameter.Value = "PP", "Watermark_PP",
-    Parameters!ImageParameter.Value = "C", "China",
-    Parameters!ImageParameter.Value = "PPC", "PPS",
-    Parameters!ImageParameter.Value = "PSI", "PSI",
-    Parameters!ImageParameter.Value = "FB", "FirstBatch",
-    Parameters!ImageParameter.Value = "TB", "TrialBatch",
-    Parameters!ImageParameter.Value = "S", "Spudi",
-    Parameters!ImageParameter.Value = "Unknown", Nothing
-)</Value>
-            <Sizing>FitProportional</Sizing>
+          <Image Name="Watermark">
+            <Source>External</Source>
+            <Value>="file:///" &amp; Replace(Parameters!ImageParameter.Value, "\","/")</Value>
+            <MIMEType>image/x-png</MIMEType>
+            <Sizing>Fit</Sizing>
             <Top>0in</Top>
-            <Left>0.83377in</Left>
-            <Height>5.13469in</Height>
-            <Width>6.33771in</Width>
+            <Left>0.07012in</Left>
+            <Height>5.39153in</Height>
+            <Width>7.93373in</Width>
+            <Visibility>
+              <Hidden>=IIF(Parameters!ImageParameter.Value = Nothing OR Parameters!ImageParameter.Value = "" OR Parameters!ImageParameter.Value = "Empty", True, False)</Hidden>
+            </Visibility>
+            <ToolTip>Watermark</ToolTip>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5544,7 +5543,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.20226in</Height>
+                  <Height>0.13282in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -5557,7 +5556,7 @@
                                 <TextRun>
                                   <Value>Body Part</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5610,7 +5609,7 @@
                                 <TextRun>
                                   <Value>Fabric Type</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5663,7 +5662,7 @@
                                 <TextRun>
                                   <Value>Composition</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5716,7 +5715,7 @@
                                 <TextRun>
                                   <Value>Yarn Type</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5769,7 +5768,7 @@
                                 <TextRun>
                                   <Value>Yarn Brand</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5822,7 +5821,7 @@
                                 <TextRun>
                                   <Value>Yarn Lot</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5875,7 +5874,7 @@
                                 <TextRun>
                                   <Value>S.L.</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -5928,7 +5927,7 @@
                                 <TextRun>
                                   <Value>PL</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -6420,7 +6419,7 @@
             <DataSetName>BatchCardData</DataSetName>
             <Top>2.468in</Top>
             <Left>0.07012in</Left>
-            <Height>0.39644in</Height>
+            <Height>0.327in</Height>
             <Width>7.93373in</Width>
             <ZIndex>6</ZIndex>
             <Style>
@@ -6989,7 +6988,6 @@
                             <PaddingLeft>2pt</PaddingLeft>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -7297,12 +7295,13 @@
             <Style>None</Style>
           </Border>
           <BackgroundImage>
-            <Source>Embedded</Source>
-            <Value>=IIF(First(Fields!IsPPSample.Value, "BatchCardMaster")=1, "Watermark_PP", "")</Value>
+            <Source>External</Source>
+            <Value>=Parameters!ImageParameter.Value</Value>
+            <MIMEType>image/png</MIMEType>
           </BackgroundImage>
         </Style>
       </Body>
-      <Width>8.06635in</Width>
+      <Width>8.05385in</Width>
       <Page>
         <PageHeader>
           <Height>0.81944in</Height>
@@ -7529,6 +7528,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>0.07012in</Left>
               <Height>0.16041in</Height>
               <Width>2.56324in</Width>
@@ -7571,12 +7571,8 @@
     </ReportParameter>
     <ReportParameter Name="ImageParameter">
       <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>C</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>img</Prompt>
+      <Nullable>true</Nullable>
+      <Prompt>ImageParameter</Prompt>
     </ReportParameter>
     <ReportParameter Name="DyeingUnit">
       <DataType>String</DataType>

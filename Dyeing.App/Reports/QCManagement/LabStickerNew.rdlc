@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDBTest</ConnectString>
+        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -36,12 +36,12 @@
           <DataField>RollNo</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="ActualDia">
-          <DataField>ActualDia</DataField>
+        <Field Name="ActualDiaOfflineQC">
+          <DataField>ActualDiaOfflineQC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ActualGSM">
-          <DataField>ActualGSM</DataField>
+        <Field Name="ActualGSMOfflineQC">
+          <DataField>ActualGSMOfflineQC</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="BuyerName">

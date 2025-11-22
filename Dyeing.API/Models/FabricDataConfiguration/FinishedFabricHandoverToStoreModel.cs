@@ -77,6 +77,9 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public int RequiresISZID { get; set; }
             public int FinishedISZID { get; set; }
 
+            public Double UnitValueInTk { get; set; }
+
+
         }
 
         public Task<IEnumerable<object>> GetDataByTracking(string Id,string RollType,string UserId)
@@ -96,31 +99,74 @@ namespace Dyeing.API.Models.FabricDataConfiguration
 
         public async Task<object> SaveUpdate(FinishedFabricHandoverToStoreList Obj)
         {
+
+            var rfdCode = await GetRFDCodeAsync();
+
             var data = new
             {
                 UserId = Obj.UserId,
                 tvpFabricHandover = Obj.PackingList.AsTableValuedParameter("dbo.tvp_FinishedFabricHandoverToStore",
-                            new[] { "BatchNo", "BpmId",
-                                    "Buyer", "BuyerId",
-                                    "Color", "ColorId",
-                                    "Composition", "FabType",
-                                    "Id", "IsHandoverToStore",
-                                    "Job","JobId",
-                                    "McId","OrderId","OrderNo",
-                                    "Qty", "RequiredDia","RequiredGSM",
-                                    "RollNo","StyleId","StyleNo","TrackingNo","UnitId",
-                                    "RequiredDiaPartId","CompTime","ItemId",
-                                    "FinishedDia","ActualDiaPartId","FinishedGSM",
-                                    "FinishedBarcodeId","FabricForId","BodyPart","ProductionAlias",
-                                    "SCMAlias","StitchLength","RequiresISZID","FinishedISZID"
+                            new[] { 
+                                "BatchNo", 
+                                "BpmId",
+                                "Buyer",
+                                "BuyerId",
+                                "Color", 
+                                "ColorId",
+                                "Composition",
+                                "FabType",
+                                "Id",
+                                "IsHandoverToStore",
+                                "Job",
+                                "JobId",
+                                "McId",
+                                "OrderId",
+                                "OrderNo",
+                                "Qty",
+                                "RequiredDia",
+                                "RequiredGSM",
+                                "RollNo",
+                                "StyleId", 
+                                "StyleNo", 
+                                "TrackingNo",
+                                "UnitId",
+                                "RequiredDiaPartId", 
+                                "CompTime", 
+                                "ItemId",
+                                "FinishedDia", 
+                                "ActualDiaPartId",
+                                "FinishedGSM",
+                                "FinishedBarcodeId", 
+                                "FabricForId", 
+                                "BodyPart", 
+                                "ProductionAlias",
+                                "SCMAlias", 
+                                "StitchLength",
+                                "RequiresISZID",
+                                "FinishedISZID",
+                                "UnitValueInTk"
 
-                            })
+                            }),
+                RFDCode = rfdCode
+
             };
             return await DatabaseHub.QueryAsync<object,object>(
                   storedProcedureName: @"[dbo].[usp_InsertFinishedFabricHandoverToStore]", model: data, dbName: DyeingDB);
         }
 
-      
+        public async Task<string> GetRFDCodeAsync()
+        {
+            var list=await DatabaseHub.QueryAsync<string>(
+                    storedProcedureName: @"[dbo].[usp_GetRFDReqNo]", dbName: DyeingDB);
+            var rfd = list.FirstOrDefault();
+
+            if (string.IsNullOrWhiteSpace(rfd))
+                throw new InvalidOperationException("No RFD COde returned.");
+            return rfd;
+          
+
+        }
+
         public Task<IEnumerable<object>> GetDataBySingleRoll(string SingleRollStickerNo)
         {
             var parameters = new DynamicParameters();

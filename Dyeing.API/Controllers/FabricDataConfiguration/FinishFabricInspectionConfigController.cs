@@ -412,7 +412,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
                     string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
                     string stickerPath = "";
-                    if (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60"))
+                    if (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60") || baseUrl.Contains("192.168.50.61"))
                         stickerPath = protocol + baseUrl + "/dyeingApi/images/RollSticker/" + fileName;
                     else
                         stickerPath = protocol + baseUrl + "/images/RollSticker/" + fileName;

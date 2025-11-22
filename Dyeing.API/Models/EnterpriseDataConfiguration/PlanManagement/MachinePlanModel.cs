@@ -36,12 +36,13 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             public string UserId { get; set; }
             public List<MachinePlan> plan { get; set; }
         }
-        public Task<IEnumerable<object>> GetMachinePlanData(int UnitId,int BuyerId)
+        public Task<IEnumerable<object>> GetMachinePlanData(int UnitId,int BuyerId,int JobId)
         {
+            var job = JobId != 0 ? JobId : (int?)null;
             var parameter = new DynamicParameters();
             parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);            
-            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);            
-
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: job, dbType: DbType.Int32, direction: ParameterDirection.Input);
             return DatabaseHubRpt.QueryAsync<object>(
                 storedProcedureName: @"[dbo].[usp_get_MachinePlanData]", parameters: parameter, dbName: DyeingDB);
         }

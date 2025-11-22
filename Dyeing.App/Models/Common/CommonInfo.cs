@@ -24,28 +24,33 @@ namespace Dyeing.App
        // public static string baseURL ="http://"+ Host+ (Host=="localhost"? ":11886":":425")+ "/api/";//"http://localhost:11886/api/";
       
          public static string baseURL =
+          // live 
+          // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
 
-         // "http://192.168.50.60:93/dyeingApi/api/";
+        // for local testing  
+          "http://localhost:34605/api/";
 
-         "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+        // for new test server testing modified on 23-Oct-2025
+        //  "http://192.168.50.61:91/dyeingApi/api/";
 
-        //scheme+"://" + Host + (Host == "localhost" ? ":809/dyeingapi" : ":443/dyeingApi") + "/api/";//
 
-        //  "http://localhost:34605/api/";
-
-        //"http://192.168.50.60:91/dyeingApi/api/";
-
-        #region Dyeing
-
-        public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
-        public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
+        #region Live 
+        //public static string QrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///D:/Websites/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
 
-        #region DyeingTest
+        #region Test
 
-        //public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
-        //public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
+        //public static string QrCodePath = "file:///E:/TestServer/Dyeing/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///E:/TestServer/Dyeing/Dyeing.API/images/PackingList/";
+
+        #endregion
+
+        #region localHost
+
+        public static string QrCodePath = "file:///I:/Dyeing/Dyeing.API/images/BatchQRCode/";
+        public static string PackingQrCodePath = "file:///I:/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
 

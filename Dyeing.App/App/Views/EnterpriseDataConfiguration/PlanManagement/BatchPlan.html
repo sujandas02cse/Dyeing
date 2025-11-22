@@ -96,7 +96,7 @@
             <div class="card-body">
                 <!--input form-->
                 <form class="row row-cols-md-auto align-items-center mb-5">
-                    <div class="col-md-3 col-4">
+                    <div class="col-md-3 col-3 ml-5">
                         <div class="row">
                             <label class="control-label col-md-3">
                                 Unit:
@@ -110,7 +110,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-4 ml-3">
+                    <div class="col-md-3 col-3 ">
                         <div class="row">
                             <label class="control-label col-md-3">
                                 Buyer:
@@ -118,10 +118,29 @@
                             </label>
                             <select class="form-control input-height col-md-9" select2="" name="Buyer"
                                     data-ng-model="Buyer"
-                                    ng-change="LoadProcessData()"
+                                    ng-change="LoadJobData()"
                                     ng-options="item as item.BuyerName for item in BuyerList">
                                 <option value="" ng-required="true">Select Buyer</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <div class="row">
+                            <label class="control-label col-md-3">
+                                Job:
+                                <span class="required" style="color:red"> * </span>
+                            </label>
+                            <select class="form-control input-height col-md-9" select2="" name="Job"
+                                    data-ng-model="Job"
+                                    ng-options="item as item.JobInfo for item in JobList">
+                                <option value="" ng-required="true">Select Job</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-2 ml-5">
+                        <div class="row  justify-content-end">
+                            <!--<a ng-click="sendData()" class="btn btn-lg btn-primary" href="Index#!/InitialPlan">Action Button</a>-->
+                            <a ng-click="LoadProcessData()" class="btn btn-lg btn-success text-white">Show Data</a>
                         </div>
                     </div>
                 </form>

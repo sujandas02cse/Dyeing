@@ -17,12 +17,12 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
         CommonModel.Response _res = new CommonModel.Response();
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetMachinePlanData(int UnitId,int BuyerId)
+        public async Task<IHttpActionResult> GetMachinePlanData(int UnitId,int BuyerId,int JobId)
         {
             try
             {
 
-                var queryData = await new MachinePlanModel().GetMachinePlanData(UnitId,BuyerId);
+                var queryData = await new MachinePlanModel().GetMachinePlanData(UnitId,BuyerId,JobId);
 
                 if (queryData == null)
                 {

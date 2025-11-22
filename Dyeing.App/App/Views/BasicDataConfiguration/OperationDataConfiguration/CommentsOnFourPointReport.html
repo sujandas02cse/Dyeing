@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MachinePlan</title>
+    <style>
+        .loa {
+            cursor: wait;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .tbl-w {
+            background: antiquewhite !important;
+        }
+
+        .tbl-g {
+            background: #1adf22 !important;
+        }
+        .scale-2{
+            scale: 2;
+        }
+        /*.control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+            .control input:checked ~ .control__indicator:after {
+                display: block;
+                color: #fff;
+            }
+        .control--checkbox .control__indicator:after {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -52%);
+            -ms-transform: translate(-50%, -52%);
+            transform: translate(-50%, -52%);
+        }
+
+        .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+            background: transparent;
+        }
+            .control__indicator:after {
+                font-family: 'icomoon';
+                content: '\e5ca';*/
+        /*content: "\e013";*/
+        /*position: absolute;
+                display: none;
+            }
+        .control input:checked ~ .control__indicator {
+            border: 2px solid #007bff;
+            background: #007bff;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="col-md-12" ng-class="{'loa': isLoading}">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Comments on Four Point Report</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Operation Data Configuration</a></li>
+                    <li><i class="fa fa-angle-right"></i> Commnets on Four Point Report</li>
+                </ol>
+            </div>
+            <div class="mt-3 text-center">
+                <span class="radio-label">Bulk</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'Bulk'" type="radio" style="margin-right:5%;" name="Mode" value="Bulk" />
+                <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'New'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+            </div>
+            <div class="card-body">
+                <!--input form-->
+                <form id="form" name="form" ng-init="Model={}">
+                    <!--Unit and batch-->
+                    <div class="row row-cols-md-auto align-items-center mb-4">
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Unit:
+                                        <span class="required" style="color:red"> * </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit" 
+                                            data-ng-model="Model.Unit" 
+                                            ng-change="LoadBatchData(Model.Unit)" 
+                                            ng-options="item as item.Name for item in UnitList">
+                                        <option value="" ng-required="true">Select Unit</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Batch:
+                                        <span class="required" style="color:red"> * </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit" 
+                                            data-ng-model="Model.Batch" 
+                                            ng-change="LoadBatchDetailData(Model.Batch)" 
+                                            ng-options="item as item.BatchNo for item in BatchList">
+                                        <option value="" ng-required="true">Select Batch</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Buyer & Job-->
+                    <div class="row row-cols-md-auto align-items-center mb-4">
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Buyer:
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <input type="text" ng-model="Model.Buyer" placeholder="Buyer" class="form-control input-height" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Job:
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <input type="text" ng-model="Model.Job" placeholder="Job" class="form-control input-height" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Style & Order & Color-->
+                    <div class="row row-cols-md-auto align-items-center mb-4">
+                        <div class="col-md-4 col-4 ">
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Style:
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" ng-model="Model.Style" placeholder="Style" class="form-control input-height" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-4 ">
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Order:
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" ng-model="Model.OrderNo" placeholder="Order" class="form-control input-height" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-4 ">
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Color:
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" ng-model="Model.Color" placeholder="Color" class="form-control input-height" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Body Part-->
+                    <div class="row row-cols-md-auto align-items-center mb-2">
+                        <div class="row col-md-12 col-12 justify-content-center">
+                            <div class="col-md-2">
+                                <label class="control-label col-md-12 text-right ">
+                                    BodyPart:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class=" row col-md-3 text-center ">
+                                <div class="form-check col-md-3">
+                                    <input class="form-check-input scale-2"
+                                           type="checkbox"
+                                           id="checkbox1"
+                                           ng-checked="Model.BodyPart === 'Body'"
+                                           ng-click="selectOnlyOne('Body')">
+                                    <label class="form-check-label ml-4" for="checkbox1">
+                                        Body
+                                    </label>
+                                </div>
+                                <div class="form-check col-md-3">
+                                    <input class="form-check-input scale-2" 
+                                           type="checkbox"
+                                           id="checkbox2"
+                                           ng-checked="Model.BodyPart === 'Neck'"
+                                           ng-click="selectOnlyOne('Neck')">
+                                    <label class="form-check-label ml-4" for="checkbox2">
+                                        Neck
+                                    </label>
+                                </div>
+                                <div class="form-check col-md-3">
+                                    <input class="form-check-input scale-2" 
+                                           type="checkbox"
+                                           id="checkbox3"
+                                           ng-checked="Model.BodyPart === 'Bnt'"
+                                           ng-click="selectOnlyOne('Bnt')">
+                                    <label class="form-check-label ml-4" for="checkbox3">
+                                        Bnt
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fabric Location-->
+                    <div class="row row-cols-md-auto align-items-center mb-2">
+                        <div class="row col-md-12 col-12 ">
+                            <div class="col-md-2">
+                                <label class="control-label col-md-12 text-right ">
+                                    Fabric Location:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class=" row col-md-8 ">
+                                <div class="form-check col-md-12">
+                                    <input type="text" ng-model="Model.FabricLocation" placeholder="Fabric Location" class="form-control input-height" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Aop Unit-->
+                    <div class="row row-cols-md-auto align-items-center mb-2">
+                        <div class="row col-md-12 col-12 ">
+                            <div class="col-md-2">
+                                <label class="control-label col-md-12 text-right ">
+                                    Aop Unit:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class=" row col-md-8 ">
+                                <div class="form-check col-md-12">
+                                    <input type="text" ng-model="Model.AopUnit" placeholder="AOP Unit" class="form-control input-height" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Remarks-->
+                    <div class="row row-cols-md-auto align-items-center mb-1">
+                        <div class="row col-md-12 col-12 ">
+                            <div class="col-md-2">
+                                <label class="control-label col-md-12 text-right ">
+                                    Remarks:
+                                    <span class="required" style="color:red"> * </span>
+                                </label>
+                            </div>
+                            <div class=" row col-md-8 ">
+                                <div class="form-check col-md-12">
+                                    <!--<input type="text" ng-model="Model.MachineEng" placeholder="Remarks" class="form-control input-height" required />-->
+                                    <textarea class="form-control"
+                                              id="remarks"
+                                              rows="3"
+                                              placeholder="Type here..."
+                                              ng-model="Model.Remarks"
+                                              ng-trim="false"
+                                              ng-change="checkLength()"
+                                              maxlength="500"></textarea>
+                                    <small class="text-muted d-block text-right">
+                                        {{ Model.Remarks.length || 0 }}/500 characters
+                                    </small>
+                                    <small class="text-danger" ng-show="Model.Remarks.length >= 500">
+                                        You have reached the maximum character limit.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row" >
+                        <div class="offset-md-2 col-md-9">
+                            <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!--Table data list-->
+        <div class="card mt-5">
+            <div class="card-header sty-one">
+                <form class="form-inline" style="padding-bottom:2px">
+                    <div class="col-sm-6" style="padding-left:0px;">
+                        <input type="text" ng-model="search" ng-change="searchFilter()" class="form-control" placeholder="Search Here...">
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color:green; float:right;">Total Count: {{AllData.length === nan ? 0 : AllData.length}} </span>
+                    </div>
+                </form>
+            </div>
+            <div class="data_tbl table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col">
+                                <label class="control control--checkbox">
+                                    Action
+                                    <!--<div class="control__indicator"></div>-->
+                                </label>
+                            </th>
+                            <th>Unit</th>
+                            <th>Batch</th>
+                            <th>Buyer</th>
+                            <th>Job</th>
+                            <th>Style</th>
+                            <th>Order</th>
+                            <th>Color</th>
+                            <th>BodyPart</th>
+                            <th>Fabric Location</th>
+                            <th>Aop Unit</th>
+                            <th>Remarks</th>
+                            <th>Create By</th>
+                            <th>Create Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="getRowClass($index)"
+                            ng-repeat="dataModel in filtered = (AllData | filter : search) | limitTo: pageSize : (currentPage-1)*pageSize"">
+                            <td>
+                                <label class="control control--checkbox">
+                                    <button class="btn btn-primary" ng-click="EditData(dataModel)">Edit</button>
+                                    <button class="btn btn-danger mt-2" ng-click="actionDialog('Delete', dataModel)">Delete</button>
+                                    <!--<input ng-click="checking($index)" ng-model="dataModel.Active" type="checkbox" class="js-check-all" />-->
+                                </label>
+                            </td>
+                            <td>{{dataModel.UnitEName}}</td>
+                            <td>{{dataModel.BatchNo}}</td>
+                            <td>{{dataModel.BuyerName}}</td>
+                            <td>{{dataModel.JobInfo}}</td>
+                            <td>{{dataModel.StyleNo }}</td>
+                            <td>{{dataModel.OrderNo}}</td>
+                            <td>{{dataModel.Color}}</td>
+                            <td>{{dataModel.BodyPart}}</td>
+                            <td>{{dataModel.FabricLocation}}</td>
+                            <td>{{dataModel.AOPUnit}}</td>
+                            <td>{{dataModel.Remarks}}</td>
+                            <td>{{dataModel.CreateBy}}</td>
+                            <td>{{dataModel.CreateTime | date:'dd-MM-yy':'en-US'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Pagination Controls -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <ul class="pagination">
+                        <li ng-class="{disabled: currentPage === 1}">
+                            <a href="" ng-click="setPage(1)">First</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage === 1}">
+                            <a href="" ng-click="prevPage()">Prev</a>
+                        </li>
+                        <li ng-repeat="n in getPageNumbers()" ng-class="{active: n === currentPage}">
+                            <a href="" ng-click="setPage(n)">{{n}}</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage === pageCount()}">
+                            <a href="" ng-click="nextPage()">Next</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage === pageCount()}">
+                            <a href="" ng-click="setPage(pageCount())">Last</a>
+                        </li>
+                    </ul>
+                    <div class="mr-3">
+                        Showing {{ ((currentPage-1)*pageSize)+1 }}
+                        to {{ Math.min(currentPage*pageSize, filtered.length) }}
+                        of {{ filtered.length }}
+                    </div>
+                </div>
+            </div>
+            <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+            </uib-pagination>-->
+        </div>
+    </div>
+</body>
+</html>

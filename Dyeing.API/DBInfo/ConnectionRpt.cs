@@ -12,11 +12,17 @@ namespace Dyeing.API.DBInfo
     {
         private static SqlConnection ConnectionString(string dbName)
         {
-            SqlConnection conn = new SqlConnection();
+           SqlConnection conn = new SqlConnection();
             //conn.ConnectionString = "data source=MISDCLS;Initial Catalog=" + dbName + ";Integrated Security=SSPI;ApplicationIntent=ReadOnly;";
             //conn.ConnectionString = @"data source=192.168.50.78;Initial Catalog=" + DbName + ";Integrated Security=false; User Id=sa; password=MIS@SERVER2;ApplicationIntent=ReadOnly";
 
+
             conn.ConnectionString = @"Data Source=192.168.50.77;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=1ndex@2023%24#new;";
+
+            //updated by sujan das on 25-oct-2025
+          // conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;Connect Timeout=0;";
+
+
             //conn.ConnectionString = @"Data Source=192.168.50.22\MSSQLSERVER14;Initial Catalog="+ dbName + "; ApplicationIntent=ReadOnly; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
             //conn.ConnectionString = @"Data Source=192.168.50.78;Initial Catalog=" + dbName + "; ApplicationIntent=ReadOnly; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=1ndex@2023%24#new;";
             //conn.ConnectionString = @"Data Source=192.168.15.9;Initial Catalog=" + dbName + "; ApplicationIntent=ReadOnly; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";

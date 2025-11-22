@@ -81,9 +81,15 @@
     };
 
     $scope.GetDashboardData = function(Id) {
-      console.log($scope.batchType);
+      debugger;
       const batchTypeEncoded = encodeURIComponent($scope.batchType);
-      const url = `../DashboardManagement/GetPackingListReport?PackingId=${Id}&Format=PDF&BatchType=${batchTypeEncoded}#view=FitH`;
+      /*  const url = "";*/
+      var url = "";
+      if ($scope.batchType == "NewBulk") {
+        url = `../DashboardManagement/GetPackingListReport_New?PackingId=${Id}&Format=PDF&BatchType=${batchTypeEncoded}#view=FitH`;
+      } else {
+        url = `../DashboardManagement/GetPackingListReport?PackingId=${Id}&Format=PDF&BatchType=${batchTypeEncoded}#view=FitH`;
+      }
       $window.open(url);
     };
 
@@ -138,6 +144,7 @@
       Refresh();
       $scope.search = "";
     };
+
     function Refresh() {
       $scope.Model = {};
       $scope.btnSave = "Save";

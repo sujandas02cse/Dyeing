@@ -280,9 +280,24 @@
       let details1 = $scope.details1.filter(x => x.IsCheck == true);
 
       let Id = 0,
-        BpmId = 0;
-      if ($scope.Mode == "M") Id = $scope.Tracking.Id;
-      else if ($scope.Mode == "N") BpmId = $scope.Batch.BpmId;
+            BpmId = 0;
+        let status = "";
+
+        if ($scope.Mode == "M") {
+
+            debugger;
+
+            Id = $scope.Tracking.Id;
+            status = $scope.Tracking.Status;
+        }
+
+        else if ($scope.Mode == "N") {
+            BpmId = $scope.Batch.BpmId;
+            status = $scope.Batch.Status;
+
+        }
+
+            
 
       let model = {
         Id: Id,
@@ -298,9 +313,12 @@
       console.log("model", model);
       debugger;
 
-      //alert(angular.toJson($scope.Model))
+     
 
-        if ($scope.Batch.Status == "Old" || $scope.Batch.Status=="Bulk") {
+        /*if ($scope.Batch.Status == "Old" || $scope.Batch.Status == "Bulk")*/
+        if (status == "Old" || status == "Bulk")
+
+        {
         FinFabStoreIssue.PackingList_SaveUpdate(model, function(res) {
           debugger;
           if (res.ErrorMsg == null) {
@@ -324,7 +342,10 @@
             else $rootScope.btnPrintShow = false;
           } else $rootScope.alert(res.ErrorMsg);
         });
-      } else {
+        }
+        else if (status=="New")
+
+        {
         debugger;
 
         FinFabStoreIssue.PackingList_SaveUpdateNew(model, function(res) {
@@ -363,11 +384,16 @@
             "&&BatchType=Bulk&&Format=PDF#view=FitH"
         );
       } else {
-        $window.open(
-          "../DashboardManagement/GetPackingListReportAuto?PackingId=" +
-            Id +
-            "&&BatchType=Bulk&&Format=PDF#view=FitH"
-        );
+        //$window.open(
+        //  "../DashboardManagement/GetPackingListReportAuto?PackingId=" +
+        //    Id +
+        //    "&&BatchType=Bulk&&Format=PDF#view=FitH"
+        //);
+          $window.open(
+              "../DashboardManagement/GetPackingListReport_New?PackingId=" +
+              Id +
+              "&&BatchType=NewBulk&&Format=PDF#view=FitH"
+          );
       }
     };
 

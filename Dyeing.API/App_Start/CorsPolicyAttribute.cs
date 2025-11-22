@@ -20,8 +20,11 @@ namespace Dyeing.API.App_Start
             _corsPolicy = new CorsPolicy()
             {
                 AllowAnyHeader = true,
+
+               
                 AllowAnyMethod = false,
-                AllowAnyOrigin = false,               
+             
+                AllowAnyOrigin = false, 
                 Methods = { "get", "post" },
                 Origins =
                 {
@@ -30,7 +33,11 @@ namespace Dyeing.API.App_Start
                      "http://192.168.50.60:86",
                      "https://192.168.50.61",
                      "http://localhost:34592",
-                     "http://localhost:8081/"
+                     "http://localhost:8081/",
+                     "http://192.168.50.61:91",
+                     "https://192.168.50.61:91",
+                      "http://192.168.50.61:91/",
+                     "https://192.168.50.61:91/"
 
                 }
             };

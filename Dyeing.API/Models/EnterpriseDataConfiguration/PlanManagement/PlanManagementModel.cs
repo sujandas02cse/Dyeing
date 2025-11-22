@@ -171,11 +171,13 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
 
 
         #region start Initial Info
-        public Task<IEnumerable<Object>> GetInitialInfoData(int UnitNo,int BuyerId)
+        public Task<IEnumerable<Object>> GetInitialInfoData(int UnitNo,int BuyerId,int JobId)
         {
+            var job = JobId != 0 ? JobId : (int?)null;
             var parameter = new DynamicParameters();
             //parameter.Add(name: "@UnitNo", value: UnitNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: job, dbType: DbType.Int32, direction: ParameterDirection.Input);
             return DatabaseHubRpt.QueryAsyncNew<object>(
                 storedProcedureName: @"[dbo].[usp_get_InitialInfoNew1]", parameter, dbName: DyeingDB);
         }
@@ -352,8 +354,10 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
         {
             var parameter = new DynamicParameters();
             parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            return DatabaseHubRpt.QueryAsync<object>(
-                storedProcedureName: @"[dbo].[usp_Get_MachineDatabyUnit]", parameter, dbName: DyeingDB);
+            //return DatabaseHubRpt.QueryAsync<object>(
+            //    storedProcedureName: @"[dbo].[usp_Get_MachineDatabyUnit]", parameter, dbName: DyeingDB);
+            return DatabaseHub.QueryAsync<object>(
+            storedProcedureName: @"[dbo].[usp_Get_MachineDatabyUnit]", parameter, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<Object>> GetPrioritySetData(int unit,int MechineNo)

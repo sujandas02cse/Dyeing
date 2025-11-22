@@ -154,8 +154,8 @@
                                     </select>
                                 </td>
                                 <td style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)">
-                                    <md-datepicker ng-model="obj.PlanFromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
-                                    <md-datepicker ng-model="obj.PlanToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="obj.PlanFromDate " md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
+                                    <md-datepicker ng-model="obj.PlanToDate " md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                                 </td>
                                 <td style="{{showB(obj)}}"><input class="form-control " type="text" name="name" ng-change="calcTotalPQtyB(obj)" ng-model="obj.PlanQty" /></td>
                                 <td style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" class="hide" ng-model="{{obj.noofBatch}}"></td>
@@ -177,7 +177,7 @@
                                 <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
                                     <select style="width:120px; margin-left:5px; margin-right:5px;"
                                             class="form-control input-height col-md-8"
-                                            select2="" data-ng-model="obj.Machine" ng-change="MachineChange(obj)"
+                                            select2="" data-ng-model="obj.Machine" ng-change="MachineChange(obj,obj.Machine)"
                                             ng-options="item as item.MachineNo for item in MachineList">
                                         <option value="" ng-required="true">Select</option>
                                     </select>
@@ -208,6 +208,7 @@
                                 </td>
                                 <td ng-class="checkForEdit(obj)" style="font-size:xx-large; cursor:pointer;" ng-click="remove($index)">&#10799;</td>
                                 <td ng-class="checkForEdit(obj)" style="font-size:xx-large; cursor:pointer;" ng-click="duplicate(obj, $index)">&#128464;</td>
+                                <!--<td>{{obj.GroupNo}}</td>-->
                                 <td >
                                     <input class="form-control" readonly type="text" name="name" ng-model="obj.FabricType" />
                                 </td>
@@ -221,14 +222,15 @@
                                     <input class="form-control" readonly type="text" name="name" ng-model="obj.Dia" />
                                 </td>
                                 <td ng-class="checkForEdit(obj)">
-                                    <select class="form-control input-height col-md-8" select2="" data-ng-model="obj.BodyPartId" ng-change="changeDataModel(chkPlan)"
+                                    <select class="form-control input-height col-md-8" select2="" data-ng-model="obj.BodyPartId" ng-change="changeDataModel(obj)"
                                             ng-options="item.Id as item.BodyPart for item in BodyPartList">
                                         <option value="" ng-required="true">Select</option>
                                     </select>
                                 </td>
                                 <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
-                                    <md-datepicker ng-model="obj.PlanFromDate" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
-                                    <md-datepicker ng-model="obj.PlanToDate" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="obj.PlanFromDate"  
+                                                   md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker> to
+                                    <md-datepicker ng-model="obj.PlanToDate"  md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                                 </td>
                                 <td ng-class="checkForEdit(obj)" style="{{showB(obj)}}" rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" class="hide" ng-model="{{obj.noofBatch}}"></td>
                                 <td ng-class="checkForEdit(obj)">

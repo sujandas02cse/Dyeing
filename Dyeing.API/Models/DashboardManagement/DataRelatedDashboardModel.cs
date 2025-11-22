@@ -389,15 +389,15 @@ namespace Dyeing.API.Models.DashboardManagement
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
-            //return DatabaseHub.QueryAsync<object>(
-            //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
 
             //return DatabaseHub.QueryAsync<object>(
             //       storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2DataNew]", parameters: parameters, dbName: DyeingDB);
 
 
-            return DatabaseHub.QueryAsync<object>(
-                   storedProcedureName: @"[dbo].[usp_rpt_BatchWithCardPL]", parameters: parameters, dbName: DyeingDB);
+            // return DatabaseHub.QueryAsync<object>(
+            //       storedProcedureName: @"[dbo].[usp_rpt_BatchWithCardPL]", parameters: parameters, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<object>> GetBatchCardSpecificationNew(int BpmId)
@@ -607,5 +607,29 @@ namespace Dyeing.API.Models.DashboardManagement
         }
         #endregion
 
+        #region Batch Card Background Image
+        public Task<IEnumerable<object>> GetBatchBackgroundImage(string ProcessName)
+        {
+            string FinalValue = string.IsNullOrEmpty(ProcessName) ? "" : ProcessName.ToLower();
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@ProcessName", value: FinalValue, dbType: DbType.String, direction: ParameterDirection.Input);
+            //parameters.Add(name: "@FabricIssue", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_Get_GetBatchBackgroundImage]", parameters: parameters, dbName: DyeingDB);
+        }
+        #endregion
+
+
+
+
+        public Task<IEnumerable<object>> GetPackingListData_New(int Id,string Part)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@Id", value: Id, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Part", value: Part, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_parts]", parameters: parameters, dbName: DyeingDB);
+        }
     }
 }

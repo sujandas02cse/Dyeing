@@ -1,7 +1,6 @@
 ﻿
 app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$q', '$parse', 'fileReader', '$window', 'PlanManagement', function ($scope, $rootScope, $mdDialog, $mdToast, $q, $parse, fileReader, $window, PlanManagement) {
 
-
     // 🔧 --- Variable declarations and setup ---
     var currentJob;
     var previousJob;
@@ -29,7 +28,8 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
     let NewColor = [];
 
      // ⚙️ Machine change event
-    $scope.MachineChange = function (obj) {
+    $scope.MachineChange = function (obj,Machine) {
+        var m = Machine;
         for (i = 0; i < $scope.chkPlan.length; i++) {
             if (obj.GroupNo == $scope.chkPlan[i].GroupNo) {
                 machineNo = obj.Machine;
@@ -52,9 +52,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
         if ($scope.UnitList.length == 1) {
             $scope.Unit = $scope.UnitList[0];
             $scope.LoadBuyerData();
-            PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
-                $scope.MachineList = data;
-            });
+            
         }
     });
 
@@ -76,30 +74,60 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
      // 🔹 Load buyer dropdown data
     $scope.LoadBuyerData = function () {
-
-        $rootScope.ShowLoader();
-
+        $rootScope.ShowLoader("Loading Buyer Data...");
         PlanManagement.GetBuyerByUnit($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
-            $rootScope.HideLoader();
+            PlanManagement.GetMachineData($scope.Unit.Id, function (data) {
+                $scope.MachineList = data;
+                $rootScope.HideLoader();
+            });
         });
-
     }
 
-    //// 🔹 Load plan data (main table)
+    // 🔹 Load Job dropdown data
+    $scope.LoadJobData = function () {
+        $rootScope.ShowLoader("Loading Job Data");
+
+        PlanManagement.GetJobByBuyer($scope.Buyer.BuyerId, function (data) {
+            $scope.JobList = data;
+            $scope.allInitialData = '';
+            $scope.allCheck = false;
+            $rootScope.HideLoader();
+        });
+    }
+
+    // 🔹 Load plan data (main table)
     $scope.LoadProcessData = function () {
         $rootScope.ShowLoader('Loading Plan Data');
-        PlanManagement.GetBatchPlanData($scope.Unit.Id, $scope.Buyer.BuyerId, function (data) {
-            $scope.PlanData = data;
+        if (!$scope.Unit || !$scope.Buyer) {
             $rootScope.HideLoader();
+            return;
+        }
+
+        if ($scope.Job === undefined || $scope.Job === null)
+            var job = 0;
+        else
+            var job = $scope.Job.JobId;
+
+        PlanManagement.GetBatchPlanData($scope.Unit.Id, $scope.Buyer.BuyerId, job, function (data) {
+            $scope.PlanData = data;
             //angular.forEach($scope.PlanData, function (item) {
             //    item.YarnType = extractItemNames(item.Composition, 'C');
             //    item.YarnCount = extractItemNames(item.Composition, '0');
             //});
             //$scope.bchkPlan = [];
             $scope.chkPlan = [];
-
+            $rootScope.HideLoader();
         });  
+    }
+
+    // 🔹 Multiple bodypart can not insert in a same batch
+    $scope.changeDataModel = function (model) {
+        var count = $scope.chkPlan.filter(x => x.GroupNo === model.GroupNo && x.BodyPartId === model.BodyPartId);
+        if (count.length > 1) {
+            model.BodyPartId = undefined;
+            return;
+        }
     }
 
     // 🎨 Alternate row color grouping by JobNo
@@ -162,7 +190,9 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
     // 🔁 Duplicate a row (same group)
     $scope.duplicate = function (model, indx) {
+        debugger
         let data = angular.copy(model);
+        data.BodyPartId = undefined;
         // Step 1: First, shift SeqNo +1 for all items AFTER (or equal to) the one you clicked
         for (let i = 0; i < $scope.chkPlan.length; i++) {
             let currData = $scope.chkPlan[i];
@@ -214,10 +244,11 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
                 SeqNo: index + 1,
                 NoOfBatch: '',
                 MaxCountBatch: '',
-                BatchNos: ''
+                BatchNos: '',
+
+                Enzyme: undefined
             };
         });
-
         // Find insertion index
         const indexAfterTarget = targetGroupNo + 1;
 
@@ -494,6 +525,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
     // ⚡ Show Save/Update confirmation dialog
     $scope.actionDialog = function (action, dataModel) {
+
         for (let i = 0; i < $scope.chkPlan.length; i++) {
             let Model = $scope.chkPlan[i];
             for (let j = 0; j < $scope.chkPlan.length; j++) {
@@ -593,7 +625,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
     // 💾 Save or update Batch Plan to server
     function SaveUpdate() {
-        debugger
+
         let obj = {
             Comb: resultString,
             UnitId: $scope.Unit.Id,
@@ -603,9 +635,9 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
             dyedColor: NewColor,
             LabDipDatas:  labdipData
         }
-        debugger
+
         PlanManagement.BatchPlan_SaveUpdate(obj, function (res) {
-            debugger
+
             if (res.ErrorMsg == null) {
                 labdipData = [];
                 resultString = "";
@@ -643,7 +675,6 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
     // 📦 Open Batch Plan Popup modal
     $scope.MPlanPopup = function (ev) {
-
         if ($scope.chkPlan.length === 0)
             return;
 
@@ -677,14 +708,27 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
                         //item.Enzyme = '';
                         //item.Process = '';
                         //item.PlanQty = '';
-                        //item.PlanFromDate = '';
-                        //item.PlanToDate = '';
+                        item.PlanFromDate = new Date();
+                        item.PlanToDate = new Date();
                         //item.NoOfBatch = '';
                         //item.TotalQty = '';
                         //item.BatchNos = '';
                         //item.isExist = '';
                     });
-
+                    $mdDialog.show({
+                        async: false,
+                        controller: BPlanController,
+                        templateUrl: '/App/template/Popup/BPlanPopup.html?ts=' + ts,
+                        targetEvent: ev,
+                        scope: $scope,
+                        preserveScope: true,
+                        clickOutsideToClose: true,
+                        fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
+                        locals: {
+                            models: $scope.bchkPlan
+                        }
+                    });
+                    $rootScope.HideLoader();
                 }
                 else if (data.m_Item1.length != 0) {
                     $scope.bchkPlan = data.m_Item1;
@@ -703,39 +747,40 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
                         else
                             item.BatchNos = item.BatchNos.split(",").join("\n");
                     });
-   
+
                     angular.forEach($scope.chkPlan, function (item) {
-                        item.GroupNo = MaxUniqueId + 1;
+                        item.GroupNo = parseInt(MaxUniqueId) + 1;
                         item.Remarks = '';
-                        item.Enzyme = '';
+                        item.Enzyme === 'Select';
                         item.Process = '';
                         item.PlanQty = '';
-                        item.PlanFromDate = '';
-                        item.PlanToDate = '';
+                        item.PlanFromDate = new Date();
+                        item.PlanToDate = new Date();
                         item.NoOfBatch = 0;
                         item.TotalQty = '';
                         item.BatchNos = '';
                         item.isExist = '';
                         item.noofBatch = item.noofBatch;
                     });
+                    $mdDialog.show({
+                        async: false,
+                        controller: BPlanController,
+                        templateUrl: '/App/template/Popup/BPlanPopup.html?ts=' + ts,
+                        targetEvent: ev,
+                        scope: $scope,
+                        preserveScope: true,
+                        clickOutsideToClose: true,
+                        fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
+                        locals: {
+                            models: $scope.bchkPlan
+                        }
+                    });
+                    $rootScope.HideLoader();
                 };
-            
+                
             });
             
-            $mdDialog.show({
-                async: false,
-                controller: BPlanController,
-                templateUrl: '/App/template/Popup/BPlanPopup.html?ts=' + ts,
-                targetEvent: ev,
-                scope: $scope,
-                preserveScope: true,
-                clickOutsideToClose: true,
-                fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
-                locals: {
-                    models: $scope.bchkPlan 
-                }
-            });
-            $rootScope.HideLoader();
+            
         }
         else {
             alert('Error');
@@ -791,7 +836,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
             $scope.chkPlan = [];
             $scope.BatchData = [];
         };
-        $scope.bchkPlan = [];
+        
 
         
     }

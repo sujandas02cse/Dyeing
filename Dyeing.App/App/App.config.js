@@ -42,6 +42,10 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/BasicDataConfiguration/OperationDataConfiguration/ProductionShiftConfig.html?'+ts,
             controller: 'ProductionShiftConfigController'
         })
+        .when('/CommentsOnFourPointReport', {
+            templateUrl: '/App/Views/BasicDataConfiguration/OperationDataConfiguration/CommentsOnFourPointReport.html?' + ts,
+            controller: 'CommentsOnFourPointReportController'
+        })
 
         //Basic Data Config=>Dyeing Batch Config routing
         .when('/FinishingSpecification', {
