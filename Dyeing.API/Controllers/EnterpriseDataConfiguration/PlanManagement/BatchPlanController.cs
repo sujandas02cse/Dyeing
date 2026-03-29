@@ -103,7 +103,6 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
             try
             {
                 var queryData = new BatchPlanModel().SaveUpdate(_obj);
-
                 if (queryData == null)
                 {
                     _res.Msg = "Batch Plan not updated....";
@@ -113,8 +112,8 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
                 {
                     _res.response = true;                    
 
-                    _res.Msg = "Data saved successfully...";
-                    return Ok(_res);
+                    _res.Msg =  "Data saved successfully...";
+                    return Ok(queryData);
                 }
             }
             catch (Exception ex)

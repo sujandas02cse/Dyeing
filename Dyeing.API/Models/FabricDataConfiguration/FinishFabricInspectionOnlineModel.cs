@@ -222,8 +222,28 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string BatchWeight { get; set; }
             public string FabType { get; set; }
             public string BodyPart { get; set; }
+
+            //public int QRCode { get; set; }
+            //public string UnitShortName { get; set; }
         }
 
+        public class InspectionModelNew
+        {
+            public bool response { get; set; } = false;
+            public string ErrorMsg { get; set; }
+            public string Msg { get; set; }
+            public object Data { get; set; }
+            public string FDia { get; set; }
+            public string FGSM { get; set; }
+            public string TotalRoll { get; set; }
+            public string TRollWeight { get; set; }
+            public string BatchWeight { get; set; }
+            public string FabType { get; set; }
+            public string BodyPart { get; set; }
+
+            public int QRCode { get; set; }
+            public string UnitShortName { get; set; }
+        }
 
         public class InspectionMasterSaveOffline
         {
@@ -241,16 +261,15 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public bool PrintLabSticker { get; set; }
         }
 
-        public async Task SaveStickerPath(string stickerPath, int rollNo, int bpmId)
+        public async Task SaveStickerPath(string stickerPath, int rollNo, int bpmId,int qrCodeId)
         {
             var parameters = new DynamicParameters();
             parameters.Add(name: "@stickerPath", value: stickerPath, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@rollNo", value: rollNo, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@bpmId", value: bpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@qrCodeId", value: qrCodeId, dbType: DbType.String, direction: ParameterDirection.Input);
 
-
-           
-           await DatabaseHub.ExecuteAsync(storedProcedureName: "[dbo].[usp_Update_StickerPath]",
+            await DatabaseHub.ExecuteAsync(storedProcedureName: "[dbo].[usp_Update_StickerPath]",
                 parameters: parameters,
                 dbName: DyeingDB);
         }
@@ -267,6 +286,36 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string BatchNo { get; set; }
 
         }
+      
+      
+
+        //public object FetchQRCodeId(int rollNo, int bpmId)
+        //{
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add(name: "@RollNo", value: rollNo, dbType: DbType.String, direction: ParameterDirection.Input);
+        //    parameters.Add(name: "@BpmId", value: bpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+
+        //    var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_get_QRCodeId]", parameters: parameters, dbName: DyeingDB);
+        //    return result;
+        //}
+
+
+        public int FetchQRCodeIdNew(int rollNo, int bpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@RollNo", rollNo, DbType.Int32);
+            parameters.Add("@BpmId", bpmId, DbType.Int32);
+
+            var result = DatabaseHub.Query<dynamic>(
+                storedProcedureName: @"[dbo].[usp_get_QRCodeId]",
+                parameters: parameters,
+                dbName: DyeingDB
+            );
+
+            int qrCodeId = Convert.ToInt32(result.First().Id);
+            return qrCodeId;
+        }
+
 
         public Task<IEnumerable<object>> GetQcMcNo(string userid)
         {
@@ -450,7 +499,10 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                storedProcedureName: @"[dbo].[usp_get_DyedFabricInspHeadNew_updated]", parameters: parameters, dbName: DyeingDB);
         }
 
-        public InspectionModel SaveUpdateNew(InspectionMasterSaveOnline _obj)
+        //old code
+        //public InspectionModel SaveUpdateNew(InspectionMasterSaveOnline _obj)
+       public InspectionModelNew SaveUpdateNew(InspectionMasterSaveOnline _obj)
+       
         {
             var data = new
             {
@@ -475,8 +527,16 @@ namespace Dyeing.API.Models.FabricDataConfiguration
                 MajorMinorFault = _obj.mnFaultList.AsTableValuedParameter("dbo.tvp_MajorMinorFault",
                            new[] { "DyedInspectionDetailID", "FaultID", "Flag" })
             };
-            return DatabaseHub.Query<object, InspectionModel>(
-                    storedProcedureName: @"[dbo].[usp_SaveUpdate_FinishFabInspectionNew]", model: data, dbName: DyeingDB).FirstOrDefault();
+            //return DatabaseHub.Query<object, InspectionModel>(
+            //        storedProcedureName: @"[dbo].[usp_SaveUpdate_FinishFabInspectionNew]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+            //return DatabaseHub.Query<object, InspectionModel>(
+            //      storedProcedureName: @"[dbo].[usp_SaveUpdate_FinishFabInspectionNew_1]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+            return DatabaseHub.Query<object, InspectionModelNew>(
+                   storedProcedureName: @"[dbo].[usp_SaveUpdate_FinishFabInspectionNew_1]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+
         }
         public Task<IEnumerable<object>> GetRollStatusNew(string BatchNo, int CompTime)
         {
@@ -489,6 +549,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
 
         public Task<IEnumerable<object>> GetRollNoListNew(string BatchNo, int CompTime)
         {
+            
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@pCompTime", value: CompTime, dbType: DbType.Int32, direction: ParameterDirection.Input);

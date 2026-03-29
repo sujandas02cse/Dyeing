@@ -426,5 +426,104 @@ namespace Dyeing.API.Models
             return DatabaseHubRpt.Query<object>(
                     storedProcedureName: @"[dbo].[usp_Get_AllJobbyBuyer]", parameters: parameter, dbName: DyeingDB);
         }
+
+        public IEnumerable<object> GetAllBuyerByUnitNew(int UnitId,string Mode)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@Mode", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.Query<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_AllJobbyBuyer]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public IEnumerable<object> GetAllBatchWithoutHandover(int UnitId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return DatabaseHub.Query<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_AllBatchWithoutHandOver]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public IEnumerable<object> GetAllDia()
+        {
+            return DatabaseHub.Query<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_GetAllDia]",  dbName: DyeingDB);
+        }
+
+
+        public async Task<IEnumerable<object>> GetAllNewBatchByUnit(int UnitId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsyncNew<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_AllNewBatchByUnit]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetBasicInfo(int BpmId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_GetBasicInfoNew]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetBatchNo(string UnitId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_BatchNoByUnit]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetAllDiaPart(string UserId)
+        {
+            //var parameter = new DynamicParameters();
+            //parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_AllFabDiaPart]",  dbName: DyeingDB);
+        }
+
+
+        public Task<IEnumerable<object>> GetOperationTime(string BatchNo)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_CompTimeByBpmId]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetRollList(string BatchNo)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_SourceInspectionDetails]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetRollListByQRCode(string QRCode)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@QRCode", value: QRCode, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_InspectionDetailsByQRCode]", parameters: parameter, dbName: DyeingDB);
+        }
+
+
+        public Task<IEnumerable<object>> GetDestinationBatchList(string BatchNo)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_BatchNoByBatchNo]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetDestinationRollList(string DestinationBatchNo)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BatchNo", value: DestinationBatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_get_DestinationInspectionDetails]", parameters: parameter, dbName: DyeingDB);
+        }
+
     }
 }

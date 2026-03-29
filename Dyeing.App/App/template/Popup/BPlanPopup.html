@@ -49,6 +49,9 @@
     .pointer-auto{
         pointer-events: auto;
     }
+    textarea{
+        width:160px !important;
+    }
 
     /*.batchno-textarea {
         overflow-x: auto;*/ /* Enables horizontal scrolling */
@@ -188,11 +191,6 @@
                                         <option value="" ng-required="true" disabled selected>Select</option>
                                     </select>
                                 </td>
-                                <!--<td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
-                                    <button class="btn btn-warning" ng-model="obj.SpecialFinish" ng-click="SpFinishPopupBatch($event,$index+1)">
-                                        Pop Up
-                                    </button>
-                                </td>-->
                                 <!--<td><input class="form-control" type="text" name="name" ng-model="obj.SpecialFinish" /></td>-->
                                 <td rowspan="{{rowSpanB(obj)}}" ng-if="showEl(obj)" style="{{showB(obj)}}">
                                     <input class="form-control" type="text" name="name" ng-model="obj.Process" />
@@ -249,7 +247,7 @@
                                 <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
                                     <textarea class="form-control  "
                                               style="font-size: 10px; width: 110px; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"
-                                              rows="{{rowSpan(obj)*3}}" name="name" ng-model="obj.BatchNos" readonly />
+                                              rows="{{rowSpan(obj)*3}}" name="name"  readonly />
                                 </td>
                                 <td ng-class="checkForEdit(obj)" rowspan="{{rowSpan(obj)}}" ng-if="showEl(obj)">
                                     <select style="width:120px; margin-left:5px; margin-right:5px;"

@@ -151,11 +151,15 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@pCompTime", value: CompTime, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            //return await DatabaseHub.MultiQueryAsync<object, object>(
+            //        storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMDetailsInfo_v1_new]", parameters: parameters, dbName: DyeingDB);
+
             return await DatabaseHub.MultiQueryAsync<object, object>(
-                    storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMDetailsInfo_v1_new]", parameters: parameters, dbName: DyeingDB);
+                  storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMDetailsInfo_New]", parameters: parameters, dbName: DyeingDB);
         }
 
-        public Task<long> BatchWiseGSM_SaveUpdateNew(BatchGSMWrapper _obj)
+        public  Task<long> BatchWiseGSM_SaveUpdateNew(BatchGSMWrapper _obj)
         {
 
             var data = new
@@ -163,14 +167,22 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
                 HostIP = getclientIP(),
                 CompTime = _obj.CompTime,
                 UserId = _obj.UserId,
+
+
                 BatchWiseGSM = _obj.Details.AsTableValuedParameter("dbo.tvp_BatchWiseGSMData",
                                     new[] { "BgcId", "BpmId", "RollNo", "ActualGSM", "Variation" }),
 
-                GsmFinalComments = _obj.FinalComments.AsTableValuedParameter("",
+                GsmFinalComments = _obj.FinalComments.AsTableValuedParameter("dbo.tvp_BatchWiseGSMFinalComments",
                                     new[] { "BpmId", "CompTime", "FinalComment", "UserId" })
             };
+
+            //return DatabaseHub.ExecuteAsync(
+            //        storedProcedureName: @"[dbo].[usp_SaveUpdate_BatchGSMConfig1New]", model: data, dbName: DyeingDB);
+
+
             return DatabaseHub.ExecuteAsync(
-                    storedProcedureName: @"[dbo].[usp_SaveUpdate_BatchGSMConfig1New]", model: data, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_SaveUpdate_BatchGSMConfig_New]", model: data, dbName: DyeingDB);
+
         }
     }
 }

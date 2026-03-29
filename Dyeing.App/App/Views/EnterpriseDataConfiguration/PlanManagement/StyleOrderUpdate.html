@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MachinePlan</title>
+    <style>
+        .loa {
+            cursor: wait;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .tbl-w {
+            background: antiquewhite !important;
+        }
+
+        .tbl-g {
+            background: #1adf22 !important;
+        }
+
+        .scale-2 {
+            scale: 2;
+        }
+        /*.control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+            .control input:checked ~ .control__indicator:after {
+                display: block;
+                color: #fff;
+            }
+        .control--checkbox .control__indicator:after {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -52%);
+            -ms-transform: translate(-50%, -52%);
+            transform: translate(-50%, -52%);
+        }
+
+        .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+            background: transparent;
+        }
+            .control__indicator:after {
+                font-family: 'icomoon';
+                content: '\e5ca';*/
+        /*content: "\e013";*/
+        /*position: absolute;
+                display: none;
+            }
+        .control input:checked ~ .control__indicator {
+            border: 2px solid #007bff;
+            background: #007bff;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="col-md-12" ng-class="{'loa': isLoading}">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Style Order Update</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-angle-right"></i> PlanManagement</a></li>
+                    <li><i class="fa fa-angle-right"></i> StyleOrderUpdate</li>
+                </ol>
+            </div>
+            <!--<div class="mt-3 text-center">
+                <span class="radio-label">New</span><input class="radio-input" ng-model="Type" ng-change="changeType()" ng-value="'New'" type="radio" style="margin-right:5%;" name="Type" value="New" />
+                <span class="radio-label">Old</span><input class="radio-input" ng-model="Type" ng-change="changeType()" ng-value="'Old'" type="radio" style="margin-right:5%;" name="Type" value="Old" />
+            </div>-->
+            <div class="mt-3 text-center">
+                <span class="radio-label">Style</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'Style'" type="radio" style="margin-right:5%;" name="Mode" value="Style" />
+                <span class="radio-label">Order</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'Order'" type="radio" style="margin-right:5%;" name="Mode" value="Order" />
+            </div>
+            <div class="card-body">
+                <!--input form-->
+                <form id="form" name="form" ng-init="">
+                    <!--Unit and batch-->
+                    <div class="row row-cols-md-auto align-items-center mb-4">
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Unit:
+                                        <span class="required" style="color:red"> * </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit"
+                                            data-ng-model="Unit"
+                                            ng-change="LoadBatchData(Unit)"
+                                            ng-options="item as item.Name for item in UnitList">
+                                        <option value="" ng-required="true">Select Unit</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 ">
+                            <div class="row col-md-10">
+                                <div class="col-md-4">
+                                    <label class="control-label col-md-12 text-right ">
+                                        Batch:
+                                        <span class="required" style="color:red"> * </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit"
+                                            data-ng-model="Batch"
+                                            ng-change="LoadBatchDetailData(Batch)"
+                                            ng-options="item as item.BatchNo for item in BatchList">
+                                        <option value="" ng-required="true">Select Batch</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Main Data -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+
+                            <div style="padding: 20px;">
+
+                                <div class="row align-items-stretch">
+
+                                    <!-- Previous -->
+                                    <div class="col-md-5" style="border: 2px solid #999;padding: 20px;border-radius: 4px;">
+
+                                        <div class="text-center mb-5 font-weight-bold">
+                                            <h2 style="text-decoration: underline;">
+                                                Previous
+                                            </h2>
+                                        </div>
+
+                                        <div class="row mb-2" ng-show="Mode === 'Style'">
+                                            <div class="col-md-4">
+                                                <label class="control-label col-md-12 text-right">
+                                                    Style:
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" ng-model="BatchData.styleINfo" placeholder="{{BatchData.OrderInfo}}" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-show="Mode === 'Order'">
+                                            <div class="col-md-4">
+                                                <label class="control-label col-md-12 text-right">
+                                                    Order:
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" ng-model="BatchData.OrderInfo" placeholder="{{BatchData.OrderInfo}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Vertical Divider -->
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <div style="width: 2px;background: #333;height: 100%;"></div>
+                                    </div>
+
+                                    <!-- New -->
+                                    <div class="col-md-5" style="border: 2px solid #999;padding: 20px;border-radius: 4px;">
+
+                                        <div class="text-center mb-5 font-weight-bold">
+                                            <h2 style="text-decoration: underline;">
+                                                New
+                                            </h2>
+                                        </div>
+
+                                        <div class="row mb-2" ng-show="Mode === 'Style'">
+                                            <div class="col-md-4">
+                                                <label class="control-label col-md-12 text-right">
+                                                    Style:
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit"
+                                                        data-ng-model="Style"
+                                                        ng-options="item as item.StyleInfo for item in StyleList">
+                                                    <option value="" ng-required="true">Select Style</option>
+                                                </select>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-show="Mode === 'Order'">
+                                            <div class="col-md-4">
+                                                <label class="control-label col-md-12 text-right">
+                                                    Order:
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-control input-height float-left ng-pristine ng-untouched ng-valid" select2="" name="unit"
+                                                        data-ng-model="Order"
+                                                        ng-options="item as item.OrderInfo for item in OrderList">
+                                                    <option value="" ng-required="true">Select Order</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Ssave Update Layout -->
+                    <div class="col-md-12 row">
+                        <div class="offset-md-2 col-md-9">
+                            <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

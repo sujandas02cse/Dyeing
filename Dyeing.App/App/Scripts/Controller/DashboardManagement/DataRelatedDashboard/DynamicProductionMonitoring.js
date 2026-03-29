@@ -6,15 +6,21 @@
         $scope.UnitList = data;
         if ($scope.UnitList.length == 1) {
             $scope.Unit = $scope.UnitList[0];
+            $scope.GetBuildingData($scope.Unit);
         } 
     });
 
     $scope.GetBuildingData = function (Unit) {
+        if (Unit === undefined || Unit === null) {
+            $scope.BuildingList = [];
+            return; 
+        }
         $rootScope.ShowLoader('Loading Building Data');
         DynamicProductionMonitorFactory.GetBuildingsByUnit(Unit.Id, function (data) {
             $scope.BuildingList = data;
             $rootScope.HideLoader();
         });
+        $rootScope.HideLoader();
     }
 
     //interval time

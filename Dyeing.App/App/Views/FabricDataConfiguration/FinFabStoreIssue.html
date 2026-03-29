@@ -270,20 +270,28 @@
                                 <th>Kg</th>
                                 <th>Yds</th>
                                 <th>Remarks</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="obj in details">
-                                <td><input type="checkbox" name="name" ng-checked="obj.IsCheck" ng-change="ChangeCheck()" ng-model="obj.IsCheck" /></td>
-                                <!--<td>{{$index+1}}</td>-->
+                                <td>
+                                <input type="checkbox" 
+                                       name="name" 
+                                       ng-change="ChangeCheck()"
+                                       ng-model="obj.IsCheck" 
+                                       ng-disabled="obj.HandoverAndStoreReceive=='Store Received'"
+                                       /></td>
                                 <td>{{obj.RollNo}}</td>
-                                <!--< /td>-->
                                 <td>{{obj.ActualDia}}</td>
                                 <td>{{obj.ActualGSM}}</td>
                                 <td>{{obj.RollWeight}}</td>
                                 <td>{{obj.RollWeightYds}}</td>
                                 <td>
                                     <textarea class="clstextArea" ng-model="obj.Remarks"></textarea>
+                                </td>
+                                <td>
+                                    {{obj.HandoverAndStoreReceive}}
                                 </td>
                             </tr>
                         </tbody>
@@ -301,21 +309,29 @@
                                 <th>Kg</th>
                                 <th>Yds</th>
                                 <th>Remarks</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="obj in details1">
-                                <td><input type="checkbox" name="name" ng-checked="obj.IsCheck" ng-change="ChangeCheck()" ng-model="obj.IsCheck" /></td>
-                                <!--<td>{{$index+1}}</td>-->
+                                <td><input type="checkbox" 
+                                           name="name" 
+                                          
+                                           ng-change="ChangeCheck()" 
+                                           ng-model="obj.IsCheck" 
+                                           ng-disabled="obj.HandoverAndStoreReceive=='Store Received'"
+                                           /></td>
+                             
                                 <td>{{obj.RollNo}}</td>
-                                </
-                                td
                                 <td>{{obj.ActualDia}}</td>
                                 <td>{{obj.ActualGSM}}</td>
                                 <td>{{obj.RollWeight}}</td>
                                 <td>{{obj.RollWeightYds}}</td>
                                 <td>
                                     <textarea class="clstextArea" ng-model="obj.Remarks"></textarea>
+                                </td>
+                                <td>
+                                    {{obj.HandoverAndStoreReceive}}
                                 </td>
                             </tr>
                         </tbody>

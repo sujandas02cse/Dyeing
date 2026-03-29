@@ -74,8 +74,8 @@
             )
             .then(function (mode) {
                 if (mode == "Update" || mode == "Save") {
-                    if ($scope.Model.BodyPart === '' || $scope.Model.BodyPart === undefined || $scope.Model.Batch === undefined)
-                        return;
+                    //if ($scope.Model.BodyPart === '' || $scope.Model.BodyPart === undefined || $scope.Model.Batch === undefined)
+                    //    return;
                     SaveUpdate();
                 } else if (mode === 'Delete') {
                     if (!dataModel || !dataModel.Id) return;
@@ -101,6 +101,8 @@
 
     //Save Update Function to Save Data
     function SaveUpdate() {
+        if ($scope.Model.BodyPart === '' || $scope.Model.BodyPart === undefined || $scope.Model.Batch === undefined)
+            $scope.Model.BodyPart = '';
         var Obj = {
             BpmId         : $scope.Model.Batch.BpmId,
             BodyPart      : $scope.Model.BodyPart,

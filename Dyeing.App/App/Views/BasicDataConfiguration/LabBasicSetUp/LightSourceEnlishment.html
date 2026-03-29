@@ -1,0 +1,162 @@
+﻿<style>
+    md-checkbox .md-container {
+        height: 100% !important;
+    }
+    .img-width{
+        width: 12%;
+    }
+    
+</style>
+<body ng-controller="LightSourceEnlishmentController">
+
+    <div class="content-header sty-one">
+        <h1>Light Source Configuration</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Basic Data Configuration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i> Lab Basic Setup</a></li>
+            <li><i class="fa fa-angle-right"></i> Light Source Enlishment</li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="min-height:500px;">
+
+        <!--================ FORM =================-->
+        <form id="form" name="form">
+
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+
+                        <label class="control-label col-md-3">
+                            Light Source :
+                            <span class="required">
+                                <font color="red">*</font>
+                            </span>
+                        </label>
+
+                        <div class="col-md-6">
+                            <textarea type="text"
+                                      rows="3"
+                                      ng-model="Model.LightSourceName"
+                                      placeholder="Enter Light Source"
+                                      class="form-control input-height"
+                                      maxlength="150"
+                                      required></textarea>
+                            <small class="text-muted d-block text-right">
+                                {{ Model.LightSourceName.length || 0 }}/150 characters
+                            </small>
+                            <small class="text-danger" ng-show="Model.LightSourceName.length >= 150">
+                                You have reached the maximum character limit.
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Is Active -->
+            <div class="form-group row">
+                <div class="offset-md-1 col-md-11">
+                    <div class="row">
+
+                        <label class="control-label col-md-3">
+                            Is Active :
+                        </label>
+
+                        <div class="col-md-2">
+                            <md-checkbox ng-model="Model.IsActive"
+                                         aria-label="IsActive">
+                            </md-checkbox>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Action Button -->
+            <div class="row">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <input type="hidden" ng-model="Model.Id" />
+                </div>
+            </div>
+
+        </form>
+
+
+        <!--================ SEARCH =================-->
+        <form class="form-inline" style="padding-bottom:2px">
+
+            <div class="col-sm-6" style="padding-left:0px;">
+                <input type="text"
+                       ng-model="search"
+                       class="form-control input-height"
+                       placeholder="Search">
+            </div>
+
+            <div class="col-sm-6">
+                <span style="color:green; float:right;">
+                    Showing From:
+                    {{ $index+1+(currentPage-1)*viewby }}
+                    of {{totalItems}}
+                </span>
+            </div>
+
+        </form>
+
+
+        <!--================ TABLE =================-->
+        <div>
+            <table class="table table-bordered table-striped table-condensed table-hover">
+
+                <thead class="bg">
+                    <tr>
+                        <th style="width:5%">SL</th>
+                        <th ng-click="sort('LightSourceName')">
+                            Light Source
+                        </th>
+                        <th ng-click="sort('IsActive')">
+                            Is Active
+                        </th>
+                        <th style="width:15%">Action</th>
+                        <th ng-if="currlength.length>5" style="width:.7%"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr  ng-repeat="dataModel in LightSourceInfo.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))| orderBy:sortKey:reverse| filter:search as currlength">
+                        <td class="d-flex justify-content-center">
+                            {{$index+(currentPage-1)*viewby+1}}
+                        </td>
+                        <td class=" text-center">
+                            {{dataModel.LightSourceName}}
+                        </td>
+                        <td class=" text-center">
+                            {{dataModel.IsActive}}
+                        </td>
+                        <td class=" text-center">
+                            <img class="logo-image img-width" ng-click="GetLightSourceByID(dataModel)" src="/Content/img/editicon.png" />
+                            <img class="logo-image img-width" style="margin-left:7%;" ng-click="actionDialog('Delete',dataModel)" src="/Content/img/deleteicon.png" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!--================ PAGINATION =================-->
+        <uib-pagination
+                        total-items="totalItems"
+                        ng-model="currentPage"
+                        max-size="maxSize"
+                        class="pagination-sm d-flex justify-content-center"
+                        boundary-links="true"
+                        rotate="false"
+                        items-per-page="itemsPerPage">
+        </uib-pagination>
+
+    </div>
+
+</body>

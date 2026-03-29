@@ -9,6 +9,14 @@
         });
     }
 
+    _obj.GetFabricDiaPart = function (UserId, cb) {
+        $http.get(baseApiURL + 'CommonAPI/GetAllDiaPart?UserId=' + UserId).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+        });
+    }
+
     _obj.GetMachineData = function (UnitNo, cb) {
         $http.get(baseApiURL + 'PlanManagement/GetMachineData?UnitNo=' + UnitNo).then(function successCallback(response) {
             cb(response.data);

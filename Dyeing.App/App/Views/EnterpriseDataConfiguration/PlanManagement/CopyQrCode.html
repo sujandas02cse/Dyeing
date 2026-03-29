@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        
+
+
+        .content {
+            padding: 0px;
+        }
+
+        /*Loader*/
+
+        table {
+            width: 100%;
+            border-spacing: 15px;
+        }
+
+        table, th, td {
+            padding: 8px;
+            font-size: 17px;
+        }
+
+            /*table td b {
+                padding-left: 15px;
+            }*/
+
+        .form-control {
+            padding: 10px;
+        }
+
+        .data_tbl th, .data_tbl td {
+            border: 1px solid #333;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .btn_group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-gap: 15px;
+        }
+
+            .btn_group button {
+                width: 100px;
+                font-size: 20px !important;
+            }
+
+        .custom-table-header {
+            position: sticky;
+            z-index: 1;
+        }
+
+        .scale {
+            scale: 2;
+            z-index: -1;
+        }
+
+        .custom-table {
+            width: 60%
+        }
+
+        .custom-width1 {
+            width: 32%;
+        }
+
+        .custom-width2 {
+            width: 10%
+        }
+
+        .select2-container {
+            width: 100% !important;
+        }
+        input[type=radio] {
+            border: 1px;
+            width: 2%;
+            height: 1.4em;
+        }
+
+    </style>
+
+</head>
+<body ng-controller="CopyQrCodeController as Controller">
+    <div class="content-header sty-one">
+        <h1>Roll Modification</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-right"></i> Approval Management   </a></li>
+            <li><i class="fa fa-angle-right"></i> Roll Modification</li>
+        </ol>
+    </div>
+    <div class="card card-body">
+        <form id="form" name="form" ng-keypress="keyPressHandler($event)">
+            <div>
+                <div class="mt-3 mb-lg-2 text-center">
+                    <input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'CopyQrCode'" type="radio"  name="Mode" value="CopyQrCode" /><span class="radio-label" style="margin-right:5%;">SplitQrCode</span>
+                    <input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'ModifyQrCode'" type="radio"  name="Mode" value="ModifyQrCode" /><span class="radio-label" style="margin-right:5%;">ModifyQrCode</span>
+                    <input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'RegenerateQrCode'" type="radio"  name="Mode" value="RegenerateQrCode" /><span class="radio-label" style="margin-right:5%;">RegenerateQrCode</span>
+                </div>
+                <div class="container-fluid mt-3">
+
+                    <!-- Row 1 -->
+                    <div class="row gy-3">
+
+                        <!-- Unit -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <label><b>Unit</b></label>
+                            <select class="form-control"
+                                    ng-model="Unit"
+                                    select2=""
+                                    ng-change="LoadBatchData(Unit)"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="">Select Unit</option>
+                            </select>
+                        </div>
+
+                        <!-- Batch -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <label><b>Batch No</b></label>
+                            <select class="form-control"
+                                    ng-model="Batch"
+                                    select2=""
+                                    ng-change="LoadDetailData(Batch.BatchNo)"
+                                    ng-options="item as item.BatchNo for item in BatchList">
+                                <option value="">Select Batch</option>
+                            </select>
+                        </div>
+
+                        <!-- Roll No dropdown: show only if Batch is selected -->
+                        <div ng-show="Batch && Batch.BatchNo" class="col-lg-4 col-md-6 col-12">
+                            <label><b>Roll No</b></label>
+                            <div>
+                                <select class="form-control"
+                                        ng-model="QrCode"
+                                        select2=""
+                                        ng-change="ChangeOnRoll(Unit,Batch,QrCode)"
+                                        ng-options="item as item.RollNo for item in RollList">
+                                    <option value="">Select Roll</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- QR code input: show only if Batch is NOT selected -->
+                        <div ng-show="!Batch || !Batch.BatchNo" class="col-lg-4 col-md-6 col-12">
+                            <label><b>Roll No</b></label>
+                            <div>
+                                <!--<input class="w-100"
+                                       style="line-height: 2.5rem;"
+                                       type="text"
+                                       id="qrScannerInput"
+                                       ng-model="ScannedQrText"
+                                       ng-keypress="($event.which === 13) && qrScannerKeyPress($event)" />-->
+                                <input class="w-100"
+                                       style="line-height: 2.5rem;"
+                                       type="text"
+                                       id="qrScannerInput"
+                                       ng-model="ScannedQrText"
+                                       ng-change="qrScannerAutoDetect()" />
+                            </div>
+                        </div>
+
+
+                    </div> <!-- end row 1 -->
+                    <!-- Row 2 -->
+                    <div class="row gy-3 mt-3">
+
+                        <!-- Roll Weight (Hide for Regenerate mode) -->
+                        <div class="col-lg-4 col-md-6 col-12" ng-hide="Mode=='RegenerateQrCode'">
+                            <label><b>Roll Weight</b></label>
+                            <input type="text" class="form-control" ng-disabled="Mode==='CopyQrCode'"  ng-model="RollWeight">
+                        </div>
+
+                        <!-- Copy Weight (Only Copy mode) -->
+                        <div class="col-lg-4 col-md-6 col-12" ng-hide="Mode!='CopyQrCode'">  <!--ng-hide="Mode == 'RegenerateQrCode' || Mode =='ModifyQrCode'"-->
+                            <label><b>Split Weight</b></label>
+                            <input type="number" class="form-control" ng-model="CopyWeight">
+                        </div>
+                        
+                        <!-- After Copy Weight (Only Copy mode) -->
+                        <div class="col-lg-4 col-md-6 col-12" ng-hide="Mode!='CopyQrCode'">  <!--ng-hide="Mode == 'RegenerateQrCode' || Mode =='ModifyQrCode'"-->
+                            <label><b>After Split Weight</b></label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="AfterCopyWeight"
+                                   ng-value="(RollWeight - (CopyWeight || 0) | number:2)"
+                                   readonly />
+                        </div>
+
+                    </div> <!-- end row 2 -->
+
+                </div>
+            </div>
+            <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

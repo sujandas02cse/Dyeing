@@ -258,17 +258,53 @@
     }
 
     //Dyeing Unit Change
-    _obj.GetDyeingUnitOrderByStyle = function (StyleId, cb) {
-        $http.get(baseApiURL + 'PlanManagement/GetDyeingUnitOrderByStyle?StyleId=' + StyleId).then(function successCallback(response) {
+    // ================= Buyer =================
+    _obj.GetDyeingUnitTransferBuyer = function (UnitId, cb) {
+        $http.get(baseApiURL + 'PlanManagement/GetDyeingUnitTransferBuyer?UnitId=' + UnitId).then(function (response) {
             cb(response.data);
-        }, function errorCallback(response) {
-            alert("Error Occured during Load Data....");
+        }, function () {
+            alert("Error Occured during Load Buyer Data....");
         });
-    }
+    };
 
+    // ================= Job =================
+    _obj.GetDyeingUnitTransferJob = function (UnitId, BuyerId, cb) {
+        $http.get(baseApiURL +'PlanManagement/GetDyeingUnitTransferJob?UnitId=' + UnitId + '&&BuyerId=' + BuyerId).then(function (response) {
+            cb(response.data);
+        }, function () {
+            alert("Error Occured during Load Job Data....");
+        });
+    };
 
-    _obj.GetDyeingChangeData = function (UnitNo, BuyerId, JobNo, StyleId, OrderNo, cb) {
-        $http.get(baseApiURL + 'PlanManagement/GetDyeingChangeData?UnitNo=' + UnitNo + '&BuyerId=' + BuyerId + '&JobNo=' + JobNo + '&StyleId=' + StyleId + '&OrderNo=' + OrderNo).then(function successCallback(response) {
+    // ================= Style =================
+    _obj.GetDyeingUnitTransferStyle = function (UnitId, BuyerId, JobId, cb) {
+        $http.get(baseApiURL +'PlanManagement/GetDyeingUnitTransferStyle?UnitId=' + UnitId + '&&BuyerId=' + BuyerId + '&&JobId=' + JobId).then(function (response) {
+            cb(response.data);
+        }, function () {
+            alert("Error Occured during Load Style Data....");
+        });
+    };
+
+    // ================= Order =================
+    _obj.GetDyeingUnitTransferOrder = function (UnitId, BuyerId, JobId, StyleId, cb) {
+        $http.get(baseApiURL +'PlanManagement/GetDyeingUnitTransferOrder?UnitId='+ UnitId + '&&BuyerId=' + BuyerId +'&&JobId=' + JobId +'&&StyleId=' + StyleId).then(function (response) {
+            cb(response.data);
+        }, function () {
+            alert("Error Occured during Load Order Data....");
+        });
+    };
+
+    // ================= Color =================
+    _obj.GetDyeingUnitTransferColor = function (UnitId, BuyerId, JobId, StyleId, OrderId, cb) {
+        $http.get(baseApiURL + 'PlanManagement/GetDyeingUnitTransferColor?UnitId=' + UnitId + '&&BuyerId=' + BuyerId + '&&JobId=' + JobId + '&&StyleId=' + StyleId + '&&OrderId=' + OrderId).then(function (response) {
+            cb(response.data);
+        }, function () {
+            alert("Error Occured during Load Color Data....");
+        });
+    };
+
+    _obj.GetDyeingChangeData = function (UnitNo, BuyerId, JobNo, StyleId, OrderNo, Color, cb) {
+        $http.get(baseApiURL + 'PlanManagement/GetDyeingChangeData?UnitNo=' + UnitNo + '&BuyerId=' + BuyerId + '&JobNo=' + JobNo + '&StyleId=' + StyleId + '&OrderNo=' + OrderNo + '&ColorId=' + Color).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Data....");

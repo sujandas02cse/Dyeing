@@ -1,4 +1,4 @@
-﻿<div class="welcome_pg">
+﻿<!--<div class="welcome_pg">
     <div class="card_wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -11,9 +11,38 @@
                         <i class="{{menu.ImageFileName}}"></i>
                         <h3>{{menu.ManuName}}</h3>
                     </a>
-                </div>                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<!--updated by sujan das on 39-03-2026-->
+
+
+<div class="welcome_pg">
+    <div class="card_wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3" ng-repeat="menu in BoxMenuData | orderBy:'BPriority'">
+
+                    <div class="card_box icon_wrap"
+                         ng-show="menu.PageName=='' ? true : false"
+                         ng-click="getDataByMenuId($index)">
+                        <i class="{{menu.ImageFileName}}"></i>
+                        <h3>{{menu.ManuName}}</h3>
+                    </div>
+
+                    <a class="card_box icon_wrap"
+                       ng-hide="menu.PageName=='' ? true : false"
+                       ng-href="{{menu.RouteUrl}}">
+                        <i class="{{menu.ImageFileName}}"></i>
+                        <h3>{{menu.ManuName}}</h3>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
-

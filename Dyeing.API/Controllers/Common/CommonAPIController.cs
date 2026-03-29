@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Dyeing.API.Models.UserManagement;
 using Dyeing.API.Models;
 using static Dyeing.API.Models.CommonModel;
+using Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration;
 
 namespace Dyeing.API.Controllers
 {    
@@ -916,5 +917,228 @@ namespace Dyeing.API.Controllers
             }
         }
 
+
+        //Get all batch which was not hanovered
+        [HttpGet]
+        public IHttpActionResult GetAllBatchWithoutHandover(int UnitId)
+        {
+            try
+            {
+                var queryData = new CommonModel().GetAllBatchWithoutHandover(UnitId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAllDia()
+        {
+            try
+            {
+                var queryData = new CommonModel().GetAllDia();
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllNewBatchByUnitAsync(int UnitId)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetAllNewBatchByUnit(UnitId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+
+        [HttpGet]
+
+        public async Task<IHttpActionResult> GetBasicInfo(int BpmId)
+      
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetBasicInfo(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchNo(string UnitId)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetBatchNo(UnitId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllDiaPart(string UserId)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetAllDiaPart(UserId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetOperationTime(string BatchNo)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetOperationTime(BatchNo);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetRollList(string BatchNo)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetRollList(BatchNo);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetRollListByQRCode(string QRCode)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetRollListByQRCode(QRCode);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDestinationBatchList(string BatchNo)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetDestinationBatchList(BatchNo);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDestinationRollList(string DestinationBatchNo)
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetDestinationRollList(DestinationBatchNo);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+
+      
     }
 }

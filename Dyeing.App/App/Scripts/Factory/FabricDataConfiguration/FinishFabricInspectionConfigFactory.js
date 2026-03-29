@@ -137,7 +137,6 @@
 
      // updated by Sujan Das on 20-April-2025
     _obj.GetUnitAll = function (userCode, cb) {
-        debugger;
         $http.get(baseApiURL + 'CommonApi/GetDyeingUnitByUser?UserId=' + userCode).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
@@ -146,7 +145,6 @@
     }
 
     _obj.GetBatchNoListUnitStatusWise = function (batchType, Unit, cb) {
-        debugger;
         $http.get(baseApiURL + 'McOperationConfig/GetBatchNoListUnitStatusWise?status=' + batchType + '&&unit=' + Unit).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {

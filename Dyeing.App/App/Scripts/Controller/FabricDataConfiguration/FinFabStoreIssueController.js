@@ -36,11 +36,11 @@
     /* Updated By Sujan Das on 27-April-2025 to check new system*/
 
     //-----Initialize Combo------------//
-    FinFabStoreIssue.GetBatchNo(function(data) {
-      //alert(angular.toJson(data))
-      debugger;
-      $scope.BatchList = data;
-    });
+    //FinFabStoreIssue.GetBatchNo(function(data) {
+    //  //alert(angular.toJson(data))
+    //  debugger;
+    //  $scope.BatchList = data;
+    //});
 
     FinFabStoreIssue.GetAllUnit($rootScope.UserId, function(data) {
       debugger;
@@ -219,14 +219,27 @@
     };
 
     $scope.ChangeCheckM = function() {
-      for (let i = 0; i < $scope.details.length; i++) {
-        $scope.details[i].IsCheck = $scope.IsCheck;
+        for (let i = 0; i < $scope.details.length; i++) {
+            if ($scope.details[1].HandoverAndStoreReceive == "Store Received") {
+                $scope.details[i].IsCheck = true;
+            }
+            else {
+                $scope.details[i].IsCheck = $scope.IsCheck;
+            }
       }
       $scope.ChangeCheck();
     };
     $scope.ChangeCheckM1 = function() {
-      for (let i = 0; i < $scope.details1.length; i++) {
-        $scope.details1[i].IsCheck = $scope.IsCheck1;
+        for (let i = 0; i < $scope.details1.length; i++) {
+
+            if ($scope.details1[1].HandoverAndStoreReceive == "Store Received") {
+                $scope.details1[i].IsCheck = true;
+            }
+            else {
+                $scope.details1[i].IsCheck = $scope.IsCheck1;
+            }
+
+        
       }
       $scope.ChangeCheck();
     };

@@ -19,10 +19,41 @@ namespace Dyeing.API.DBInfo
             //conn.ConnectionString = @"Data Source=192.168.50.22\MSSQLSERVER14;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
 
             // Original Live server 
-            conn.ConnectionString = @"Data Source=192.168.50.77;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=1ndex@2023%24#new; Connect Timeout=0;";
+          //conn.ConnectionString = @"Data Source=192.168.50.77;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=1ndex@2023%24#new; Connect Timeout=0;";
+
+            //open as per Ayon da request 
+            conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;Connect Timeout=0;";
+
+            //conn.ConnectionString = @"Data Source=192.168.15.16;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=MIS@SERVER1;";
+            //conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
+            //conn.ConnectionString = @"Data Source=192.168.15.9;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
+            return conn;
+            //return new SqlConnectionStringBuilder
+            //{
+            //    ApplicationName = "AMS",
+            //    DataSource = @"192.168.50.22\MSSQLSERVER14",
+            //    IntegratedSecurity = false,
+            //    InitialCatalog = dbName,
+            //    Password = "*systemmis@16#",
+            //    PersistSecurityInfo = false,
+            //    UserID = "sa",
+            //    Pooling = true
+            //};
+        }
+
+        private static SqlConnection ConnectionStringReadOnly(string dbName)
+        {
+            SqlConnection conn = new SqlConnection();
+            //conn.ConnectionString = "data source=MISDCLS;Initial Catalog=" + dbName + ";Integrated Security=SSPI;";
+            //conn.ConnectionString = @"data source=192.168.15.9;Initial Catalog=" + dbName + ";Integrated Security=false; User Id=sa; password=*systemmis@16#;";
+
+            //conn.ConnectionString = @"Data Source=192.168.50.22\MSSQLSERVER14;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
+
+            // Original Live server 
+           // conn.ConnectionString = @"data source=192.168.50.78;Initial Catalog=" + dbName + ";Integrated Security=false; User Id=sa; password=1ndex@2023%24#new;ApplicationIntent=ReadOnly";
 
             // open as per Ayon da request 
-           // conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;Connect Timeout=0;";
+            conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;Connect Timeout=0;";
 
             //conn.ConnectionString = @"Data Source=192.168.15.16;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=MIS@SERVER1;";
             //conn.ConnectionString = @"Data Source=192.168.15.7;Initial Catalog=" + dbName + "; PersistSecurityInfo = false; Integrated Security = false; Pooling = true; User id=sa;Password=*systemmis@16#;";
@@ -44,6 +75,12 @@ namespace Dyeing.API.DBInfo
         protected static IDbConnection LiveConnection(string dbName)
         {
             var connection = OpenConnection(ConnectionString(dbName));
+            connection.Open();
+            return connection;
+        }
+        protected static IDbConnection LiveConnectionReadOnly(string dbName)
+        {
+            var connection = OpenConnection(ConnectionStringReadOnly(dbName));
             connection.Open();
             return connection;
         }

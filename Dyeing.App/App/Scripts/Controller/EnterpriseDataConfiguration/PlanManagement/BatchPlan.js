@@ -635,23 +635,32 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
             dyedColor: NewColor,
             LabDipDatas:  labdipData
         }
+        debugger
+        console.log('a', JSON.stringify(obj));
 
         PlanManagement.BatchPlan_SaveUpdate(obj, function (res) {
-
+            labdipData = [];
+            resultString = "";
+            $scope.BatchData = [];
+            BatchplanData = [];
+            NewColor = [];
+            $scope.LoadProcessData();
+            $scope.bchkPlan = [];
+            $scope.chkPlan = [];
+            $scope.BatchData = [];
+            planData = [];
+            $scope.PlanData = [];
+            debugger
+            console.log(JSON.stringify(res));
+            debugger
             if (res.ErrorMsg == null) {
-                labdipData = [];
-                resultString = "";
-                $scope.BatchData = [];
-                BatchplanData = [];
-                NewColor = [];
-                $scope.LoadProcessData();
-                $scope.bchkPlan = [];
-                $scope.chkPlan = [];
-                $scope.BatchData = [];
-                planData = [];
-                $scope.PlanData = [];
-                
-                $rootScope.alert(res.Msg);
+                if (res.Msg === 'Batch Plan not updated....')
+                    $rootScope.alert(res.Msg);
+                else {
+                    res[0].Msg = res[0].Msg.replace(/(BatchNo:[^\s]+)\s+/, '$1\n');
+                    $rootScope.alert(res[0].Msg);
+                }
+                    
 
             }
             else $rootScope.alert(res.ErrorMsg);
@@ -697,6 +706,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
             $rootScope.ShowLoader('Loading batch details data...');
 
             PlanManagement.GetBatchDataByInitId(InitInfoModel, resultString, $scope.chkPlan[0].JobId, function (data) {
+                debugger
                 MaxCountBatch = data.m_Item2;
                 MaxC = 0;
                 
@@ -743,7 +753,8 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
                         item.SpecialFinish = item.SpecialFinish;
                         //item.isExist = 1;
                         if (item.BatchNos === undefined || item.BatchNos == null)
-                            NoOfBatchChangeF(item, item.GroupNo, item.NoOfBatch, item.MinBatch, item.MaxBatch, MaximumBatch);
+                            item.BatchNos = '';
+                            //NoOfBatchChangeF(item, item.GroupNo, item.NoOfBatch, item.MinBatch, item.MaxBatch, MaximumBatch);
                         else
                             item.BatchNos = item.BatchNos.split(",").join("\n");
                     });

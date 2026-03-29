@@ -365,52 +365,6 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
         }
 
 
-        #region Dyeing Unit Change Data
-
-        [HttpGet]
-        public async Task<IHttpActionResult> GetDyeingChangeData(int UnitNo,int BuyerId, int JobNo, int StyleId, int OrderNo)
-        {
-            try
-            {
-
-                var queryData = await new PlanManagementModel().GetDyeingChangeData(UnitNo,BuyerId, JobNo, StyleId, OrderNo);
-
-                if (queryData == null)
-                {
-                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
-                }
-
-                return Ok(queryData);
-            }
-            catch (Exception exception)
-            {
-                return InternalServerError(exception: exception);
-            }
-        }
-
-
-        [HttpPost]
-        public async Task<IHttpActionResult> SaveDyeingChangeData(DyeingUnitChange obj)
-        {
-            try
-            {
-                var queryData = await new PlanManagementModel().SaveDyeingUnitChange(obj);
-                if (queryData == null)
-                {
-                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
-                }
-
-                return Ok(queryData);
-            }
-            catch (Exception exception)
-            {
-                return InternalServerError(exception: exception);
-            }
-        }
-
-        #endregion
-
-
         #region Machine To Machine Change
         [HttpGet]
         public async Task<IHttpActionResult> GetBatchAndMachineData(int UnitNo)
@@ -620,6 +574,147 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
 
         #endregion
 
+
+        #region Dyeing Unit Transfer
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingUnitTransferBuyer(int UnitId)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().GetBuyerForDyeingUnitTransfer(UnitId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingUnitTransferJob(int UnitId,int BuyerId)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().GetJobForDyeingUnitTransfer(UnitId,BuyerId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingUnitTransferStyle(int UnitId, int BuyerId,int JobId)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().GetStyleForDyeingUnitTransfer(UnitId,BuyerId,JobId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingUnitTransferOrder(int UnitId, int BuyerId, int JobId, int StyleId)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().GetOrderForDyeingUnitTransfer(UnitId, BuyerId, JobId, StyleId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingUnitTransferColor(int UnitId, int BuyerId, int JobId, int StyleId, int OrderId)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().GetColorForDyeingUnitTransfer(UnitId, BuyerId, JobId, StyleId, OrderId);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetDyeingChangeData(int UnitNo, int BuyerId, int JobNo, int StyleId, int OrderNo, int ColorId)
+        {
+            try
+            {
+
+                var queryData = await new PlanManagementModel().GetDyeingChangeData(UnitNo, BuyerId, JobNo, StyleId, OrderNo, ColorId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IHttpActionResult> SaveDyeingChangeData(DyeingUnitChange obj)
+        {
+            try
+            {
+                var queryData = await new PlanManagementModel().SaveDyeingUnitChange(obj);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        #endregion
 
     }
 }

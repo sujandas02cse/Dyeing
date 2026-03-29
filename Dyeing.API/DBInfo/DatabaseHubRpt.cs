@@ -297,6 +297,7 @@ namespace Dyeing.API.DBInfo
             }
         }
 
+
         /// <summary>
         /// This method executes the Stored Procedure, gets the data from execution and returns that data in a list.
         /// This is a Generic Method, and it returns a list of POCO class.
@@ -2073,6 +2074,95 @@ namespace Dyeing.API.DBInfo
                 }
             }
         }
+
+        public async Task<IEnumerable<TResult>> QueryAsyncReadonly<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName)
+        {
+            if (!IsStoredProcedureNameCorrect(storedProcedureName))
+            {
+                return null;
+            }
+
+            using (var connection = LiveConnectionReadonly(dbName))
+            {
+                try
+                {
+                    return await connection.QueryAsync<TResult>(
+                        sql: storedProcedureName,
+                        param: parameters,
+                        commandTimeout: null,
+                        commandType: CommandType.StoredProcedure
+                        );
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+                finally
+                {
+                    CloseConnection(connection);
+                }
+            }
+        }
+
+        public async Task<IEnumerable<T>> QueryAsyncReadOnly<T>(string storedProcedureName, DynamicParameters parameters, string dbName)
+        {
+            if (!IsStoredProcedureNameCorrect(storedProcedureName))
+            {
+                return null;
+            }
+
+            using (var connection = LiveConnectionReadonly(dbName))
+            {
+                try
+                {
+                    return await connection.QueryAsync<T>(
+                        sql: storedProcedureName,
+                        param: parameters,
+                        commandTimeout: null,
+                        commandType: CommandType.StoredProcedure
+                        );
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+                finally
+                {
+                    CloseConnection(connection);
+                }
+            }
+        }
+
+        public async Task<IEnumerable<TResult>> QueryAsyncReadonlyNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName)
+        {
+            if (!IsStoredProcedureNameCorrect(storedProcedureName))
+            {
+                return null;
+            }
+
+            using (var connection = LiveConnectionReadonly(dbName))
+            {
+                try
+                {
+                    return await connection.QueryAsync<TResult>(
+                        sql: storedProcedureName,
+                        param: parameters,
+                        commandTimeout: 1800,
+                        commandType: CommandType.StoredProcedure
+                        );
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+                finally
+                {
+                    CloseConnection(connection);
+                }
+            }
+        }
+
+
         #endregion
     }
 }

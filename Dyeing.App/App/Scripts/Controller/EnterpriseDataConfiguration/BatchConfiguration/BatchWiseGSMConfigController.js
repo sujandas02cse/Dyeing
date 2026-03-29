@@ -141,7 +141,9 @@
         BatchWiseGSMConfig.GetBatchWiseGSMInfoNew(
           $scope.Batch.BpmId,
           pCompTime,
-          function(data) {
+            function (data) {
+
+                debugger;
             $scope.Model = data;
             if (pCompTime == 0) {
               let compTime = data.CompTime;
@@ -258,8 +260,8 @@
 
       //for (var i = 0; i < $scope.Details.length; i++) {
       //   $scope.Details[i].UserId = $scope.UserId;
-        //}
-        debugger;
+      //}
+      debugger;
       var Comments = Remarks.map(function(item) {
         return {
           BpmId: $scope.Batch.BpmId,
@@ -273,16 +275,21 @@
         UserId: $rootScope.UserId,
         Details: $scope.Details,
         FinalComments: Comments
-      };
+        };
+        debugger;
 
       var ReportObject = {
         BpmId: $scope.Batch.BpmId,
         CompTime: $scope.Model.CompTime,
         Status: $scope.batchType,
-        UnitId: $scope.Unit.UnitId
-      };
+          UnitId: $scope.Unit.UnitId,
+          BuyerId: $scope.Model.BuyerId
+        };
 
-        if ($scope.Batch.Status == "Old" || $scope.Batch.Status == "Bulk") {
+        console.log(ReportObject);
+
+
+      if ($scope.Batch.Status == "Old" || $scope.Batch.Status == "Bulk") {
         BatchWiseGSMConfig.BatchWiseGSM_SaveUpdate(obj, function(data) {
           if (data.ErrorMsg == null) {
             $rootScope.alert(data.Msg);
@@ -297,7 +304,21 @@
           if (data.ErrorMsg == null) {
             $rootScope.alert(data.Msg);
             Refresh();
-            Show4PointInspectionReport(ReportObject);
+
+              debugger;
+
+              //if (ReportObject.UnitId == 16 || ReportObject.BuyerId == 7) {
+              //    debugger;
+              //    Show4PointInspectionReportNew(ReportObject);
+
+              //}
+
+              //else {
+
+              //         Show4PointInspectionReport(ReportObject);
+              //}
+              Show4PointInspectionReportNew(ReportObject);
+           
           } else {
             $rootScope.alert(data.ErrorMsg);
           }
@@ -320,10 +341,12 @@
         ReportObject.Status === "Old" || ReportObject.Status === "Bulk"
           ? "~/Reports/QCManagement/4PointInspection.rdlc"
           : "~/Reports/QCManagement/4PointInspectionNew.rdlc";
+
       var fileName =
         ReportObject.Status === "Old" || ReportObject.Status === "Bulk"
           ? "FinishedFabricInspection"
           : "FinishedFabricInspectionNew";
+
       var rptComInfo = [
         { APIAction: "BroadcastManagement/GetReportingData" },
         { ReportPath: reportPath },
@@ -350,6 +373,15 @@
           "&&Dataset=" +
           JSON.stringify(Dataset)
       );
+    }
+
+    function Show4PointInspectionReportNew(ReportObject) {
+     
+
+      var url = `../DashboardManagement/GetInspctionReport?BpmId=${
+        ReportObject.BpmId
+      }&CompTime=${ReportObject.CompTime}&Format=PDF`;
+      $window.open(url);
     }
 
     var vm = this;

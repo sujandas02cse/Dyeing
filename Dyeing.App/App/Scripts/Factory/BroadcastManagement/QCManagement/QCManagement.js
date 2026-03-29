@@ -133,6 +133,19 @@
         });
     }
 
+
+
+    _obj.GetBasicInfo = function (BpmId, cb) {
+        $http.get(baseApiURL + 'CommonApi/GetBasicInfo?BpmId=' + BpmId).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Roll No Information....");
+        });
+    }
+
+
+
+
     return _obj;
 }]);
 

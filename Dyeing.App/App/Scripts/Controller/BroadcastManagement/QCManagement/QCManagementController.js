@@ -256,10 +256,13 @@
 
             // updated by Sujan Das on 03-May-25 to show Unit
 
-           // $scope.parmData.Unit = data[0];
+            // $scope.parmData.Unit = data[0];
           }
         });
-      } else {
+      }
+      else
+
+      {
         QCManagement.GetCompTimeByIdNew($scope.parmData.Batch.BpmId, function(
           data
         ) {
@@ -287,17 +290,22 @@
             /*$scope.parmData.Unit = data[0];*/
           }
         });
+
         debugger;
-        //QCManagement.GetUnitNameByBatchNew(
-        //  $scope.parmData.Batch.BpmId,
-        //  function(data) {
-        //    debugger;
-        //    if (data.length > 0) {
-        //      $scope.parmData.Unit = data[0];
-        //    }
-        //  }
-        //);
-      }
+
+        QCManagement.GetBasicInfo(
+          $scope.parmData.Batch.BpmId,
+          function(data) {
+            debugger;
+              if (data.length > 0) {
+                  $scope.parmData.BuyerId = data[0];
+
+            }
+          }
+        );
+
+        }
+
     };
 
     $scope.GetDataByBuyer = function(obj) {
@@ -654,16 +662,52 @@
       Dataset += "]";
 
       // $window.open('GetAMSReport?APIAction=' + $scope.Model[0].APIAction + '&&ReportPath=' + $scope.Model[0].ReportPath + '&&FileName=' + $scope.Model[0].FileName + '&&Dataset=' + $scope.Model[0].Dataset + '&&SQL=' + $scope.Model[0].SQL + '&&rptParm=' + encodeURIComponent(rptParm) + '&&Format=' + format);
-      $window.open(
-        "../BroadcastManagement/GetBroadcastData?rptComInfo=" +
-          encodeURIComponent(rptComInfo) +
-          "&&rptParm=" +
-          encodeURIComponent(rptParm) +
-          "&&SQL=" +
-          encodeURIComponent(SQL) +
-          "&&Dataset=" +
-          encodeURIComponent(Dataset)
-      );
+
+      debugger;
+      console.log(encodeURIComponent(rptComInfo));
+      console.log(encodeURIComponent(rptParm));
+      console.log(encodeURIComponent(SQL));
+      console.log(encodeURIComponent(Dataset));
+
+      console.log($scope.parmData.BuyerId);
+
+        debugger;
+
+      let arr = JSON.parse(rptParm.replace(/'/g, '"'));
+
+      /*for new system and export unit*/
+
+      if (
+        $scope.batchType == "New" &&
+          $scope.rpt.ReportingId == 30
+          //&&
+          //( arr[0].UnitId == 16 || $scope.parmData.BuyerId == 7 )
+      )
+
+      {
+        //let arr = JSON.parse(rptParm.replace(/'/g, '"'));
+        console.log(arr[0].UnitId);
+        console.log(arr[4].BpmId);
+        console.log(arr[5].CompTime);
+        var url = `../DashboardManagement/GetInspctionReport?BpmId=${
+          arr[4].BpmId
+        }&CompTime=${arr[5].CompTime}&Format=PDF`;
+        $window.open(url);
+      }
+      else
+
+      {
+        $window.open(
+          "../BroadcastManagement/GetBroadcastData?rptComInfo=" +
+            encodeURIComponent(rptComInfo) +
+            "&&rptParm=" +
+            encodeURIComponent(rptParm) +
+            "&&SQL=" +
+            encodeURIComponent(SQL) +
+            "&&Dataset=" +
+            encodeURIComponent(Dataset)
+        );
+      }
     };
 
     function InitilState() {

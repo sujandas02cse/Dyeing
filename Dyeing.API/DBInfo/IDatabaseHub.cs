@@ -70,6 +70,7 @@ namespace Dyeing.API.DBInfo
         /// <typeparam name="TResult">This is the type of POCO class that will be sent as pamater and returned. For more info, refer to https://msdn.microsoft.com/en-us/library/vstudio/dd456872(v=vs.100).aspx. </typeparam>
         /// <returns>Returns a List of POCO class if successfully executed. If any exception is raised, it returns null.</returns>
         IEnumerable<TResult> Query<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+        Task<IEnumerable<T>> QueryAsyncReadOnly<T>(string storedProcedureName, DynamicParameters parameters, string dbName);
 
         /// <summary>
         /// This method executes the Stored Procedure, gets the data from execution and returns that data in a list.
@@ -254,6 +255,8 @@ namespace Dyeing.API.DBInfo
         /// <returns>Returns a List of POCO class if successfully executed. If any exception is raised, it returns null.</returns>
         Task<IEnumerable<TResult>> QueryAsyncNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
         Task<IEnumerable<TResult>> QueryAsyncNewV1<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+        Task<IEnumerable<TResult>> QueryAsyncReadonly<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
+        Task<IEnumerable<TResult>> QueryAsyncReadonlyNew<TResult>(string storedProcedureName, DynamicParameters parameters, string dbName);
         #endregion
     }
 }

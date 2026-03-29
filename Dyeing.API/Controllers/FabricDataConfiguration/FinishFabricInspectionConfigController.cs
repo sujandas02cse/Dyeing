@@ -378,6 +378,10 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
         {
             _res = new CommonModel.Response();
             InspectionModel queryData = null;
+
+            // updated by Sujan Das on 19-January-2026
+            InspectionModelNew queryDataNew = null;
+
             try
             {
                 if (status == "Old")
@@ -386,19 +390,44 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                 }
                 else
                 {
-                     queryData = new FinishFabricInspectionOnlineModel().SaveUpdateNew(_obj);
+                    // queryData = new FinishFabricInspectionOnlineModel().SaveUpdateNew(_obj);
+                    queryDataNew = new FinishFabricInspectionOnlineModel().SaveUpdateNew(_obj);
                 }
 
-                if (queryData == null)
+
+                if (status == "Old")
                 {
-                    if (_obj.MasterId == -1) _res.Msg = "Inspection Data Not Saved....";
-                    else _res.Msg = "Inspection Data Not Updated....";
-                    return Ok(_res);
+
+                    if (queryData == null)
+                    {
+                        if (_obj.MasterId == -1) _res.Msg = "Inspection Data Not Saved....";
+                        else _res.Msg = "Inspection Data Not Updated....";
+                        return Ok(_res);
+                    }
                 }
+
+                else if (status == "New")
+                {
+                    if (queryDataNew == null)
+                    {
+                        if (_obj.MasterId == -1) _res.Msg = "Inspection Data Not Saved....";
+                        else _res.Msg = "Inspection Data Not Updated....";
+                        return Ok(_res);
+                    }
+
+                }
+
+
                 _res.response = true;
+
                 //if (_obj.DyedInspectionEntryID == -1)
                 {
-                    int rollNo = Convert.ToInt32(queryData.Data);
+                    int rollNo = 0;
+                    if (status=="Old")
+                     rollNo = Convert.ToInt32(queryData.Data);
+                    else if (status=="New")
+                     rollNo = Convert.ToInt32(queryDataNew.Data);
+
                     _res.Msg = "Inspection Data Saved Successfully.";
                     //if (rollNo > 0)
                     _res.Msg += " The New Roll No: " + rollNo;
@@ -412,23 +441,59 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
                     string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
                     string stickerPath = "";
+
+                    string QRCode = "";
+                    string UnitShortName = "";
+
+                    if (status=="New")
+                    {
+                         QRCode = queryDataNew.QRCode.ToString();
+                         UnitShortName = queryDataNew.UnitShortName.ToString();
+                    }
+
                     if (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.60") || baseUrl.Contains("192.168.50.61"))
                         stickerPath = protocol + baseUrl + "/dyeingApi/images/RollSticker/" + fileName;
                     else
                         stickerPath = protocol + baseUrl + "/images/RollSticker/" + fileName;
 
-                    _res.Data = new
+
+                    if (status == "Old")
                     {
-                        rollNo = rollNo,
-                        stickerPath = stickerPath,
-                        TotalRoll = queryData.TotalRoll,
-                        TRollWeight = queryData.TRollWeight,
-                        FDia = queryData.FDia,
-                        FGSM = queryData.FGSM,
-                        FabType = queryData.FabType,
-                        BatchWeight = queryData.BatchWeight,
-                        BodyPart = queryData.BodyPart
-                    };
+                        _res.Data = new
+                        {
+                            rollNo = rollNo,
+                            stickerPath = stickerPath,
+                            TotalRoll = queryData.TotalRoll,
+                            TRollWeight = queryData.TRollWeight,
+                            FDia = queryData.FDia,
+                            FGSM = queryData.FGSM,
+                            FabType = queryData.FabType,
+                            BatchWeight = queryData.BatchWeight,
+                            BodyPart = queryData.BodyPart
+                            //,
+                            //QRCode = queryData.QRCode,
+                            //UnitShortName = queryData.UnitShortName
+                        };
+                    }
+
+                    else if (status == "New")
+                    {
+                        _res.Data = new
+                        {
+                            rollNo = rollNo,
+                            stickerPath = stickerPath,
+                            TotalRoll = queryDataNew.TotalRoll,
+                            TRollWeight = queryDataNew.TRollWeight,
+                            FDia = queryDataNew.FDia,
+                            FGSM = queryDataNew.FGSM,
+                            FabType = queryDataNew.FabType,
+                            BatchWeight = queryDataNew.BatchWeight,
+                            BodyPart = queryDataNew.BodyPart,
+                            QRCode = queryDataNew.QRCode,
+                            UnitShortName = queryDataNew.UnitShortName
+                        };
+
+                    }
 
                     DirectoryInfo d = new DirectoryInfo(path);
                     if (!d.Exists)
@@ -437,11 +502,22 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                     }
                     if (!System.IO.File.Exists(file))
                     {
-                        QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                        QRCodeData qrCodeData = qrGenerator.CreateQrCode(rollNoFull, QRCodeGenerator.ECCLevel.Q);
-                        QRCode qrCode = new QRCode(qrCodeData);
-                        Bitmap qrCodeImage = qrCode.GetGraphic(20);
-                        qrCodeImage.Save(file, ImageFormat.Png);
+                        if (status == "Old")
+                        {
+                            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                            QRCodeData qrCodeData = qrGenerator.CreateQrCode(rollNoFull, QRCodeGenerator.ECCLevel.Q);
+                            QRCode qrCode = new QRCode(qrCodeData);
+                            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                            qrCodeImage.Save(file, ImageFormat.Png);
+                        }
+                        else if (status == "New")
+                        {
+                            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                            QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRCode, QRCodeGenerator.ECCLevel.Q);
+                            QRCode qrCode = new QRCode(qrCodeData);
+                            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                            qrCodeImage.Save(file, ImageFormat.Png);
+                        }
                     }
                 }
                 //else _res.Msg = "Inspection Data Updated Successfully....";

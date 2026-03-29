@@ -72,7 +72,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);           
             parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add(name: "@JobId", value: job, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            return await DatabaseHubRpt.QueryAsyncNew<object>(
+            return await DatabaseHubRpt.QueryAsync<object>(
                 storedProcedureName: @"[dbo].[usp_get_BatchPlanData]", parameters: parameter, dbName: DyeingDB);
         }
         public async Task<IEnumerable<object>> GetBodyPart()
@@ -133,7 +133,7 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                             new[] { "InitInfoId", "LabDipNo" }),
             };
 
-            return DatabaseHub.Query<object, object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchPlan_New]", model: data, dbName: DyeingDB).ToList();
+            return DatabaseHub.Query<object, object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchPlan_New_ForTestBatchNo]", model: data, dbName: DyeingDB).ToList();
         }
     }
 }

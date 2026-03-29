@@ -21,17 +21,25 @@ namespace Dyeing.App
         static string port = HttpContext.Current.Request.Url.Port.ToString();
 
         //public static string baseURL = "http://192.168.50.60:425/api/";
-       // public static string baseURL ="http://"+ Host+ (Host=="localhost"? ":11886":":425")+ "/api/";//"http://localhost:11886/api/";
-      
-         public static string baseURL =
-          // live 
-          // "https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+        // public static string baseURL ="http://"+ Host+ (Host=="localhost"? ":11886":":425")+ "/api/";//"http://localhost:11886/api/";
 
-        // for local testing  
-          "http://localhost:34605/api/";
 
-        // for new test server testing modified on 23-Oct-2025
-        //  "http://192.168.50.61:91/dyeingApi/api/";
+        // live 
+        public static string baseURL =
+        //"https://mis-dyeing.mascoknit.com/dyeingApi/api/";
+
+
+        // live (for ssl security issue)
+        //"http://mis-dyeing.mascoknit.com/dyeingApi/api/";
+
+        // for local   
+        "http://localhost:34605/api/";
+
+        // for old  test server testing modified on 23-Oct-2025
+        // "http://192.168.50.61:91/dyeingApi/api/";
+
+        // for new  test server testing modified on 20-Dec-2025
+        //  "http://192.168.50.60:93/dyeingApi/api/";
 
 
         #region Live 
@@ -40,12 +48,21 @@ namespace Dyeing.App
 
         #endregion
 
-        #region Test
+        #region old Test
 
         //public static string QrCodePath = "file:///E:/TestServer/Dyeing/Dyeing.API/images/BatchQRCode/";
         //public static string PackingQrCodePath = "file:///E:/TestServer/Dyeing/Dyeing.API/images/PackingList/";
 
         #endregion
+
+
+        #region new Test
+
+        //public static string QrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/BatchQRCode/";
+        //public static string PackingQrCodePath = "file:///D:/PublishBackup/DyeingTest/Dyeing.API/images/PackingList/";
+
+        #endregion
+
 
         #region localHost
 

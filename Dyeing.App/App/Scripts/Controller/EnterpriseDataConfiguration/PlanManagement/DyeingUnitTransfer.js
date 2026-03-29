@@ -10,31 +10,39 @@
     });
 
     $scope.FindBuyer = function () {
-        PlanManagement.GetFabBookingBuyerByUnit($scope.Unit.Id, function (data) {
+        debugger
+        PlanManagement.GetDyeingUnitTransferBuyer($scope.Unit.Id, function (data) {
             $scope.BuyerList = data;
         });
     }
 
     $scope.FindJob = function () {
-        PlanManagement.GetFabBookingJobByBuyer($scope.Buyer.BuyerId, function (data) {
+        PlanManagement.GetDyeingUnitTransferJob($scope.Unit.Id,$scope.Buyer.BuyerId, function (data) {
             $scope.JobList = data;
         });
     }
 
     $scope.FindStyle = function () {
-        PlanManagement.GetFabBookingStyleByJob($scope.Job.JobNo, function (data) {
+        PlanManagement.GetDyeingUnitTransferStyle($scope.Unit.Id, $scope.Buyer.BuyerId,$scope.Job.JobNo, function (data) {
             $scope.StyleList = data;
         });
     }
 
     $scope.FindOrder = function () {
-        PlanManagement.GetDyeingUnitOrderByStyle($scope.Style.StyleId, function (data) {
+        PlanManagement.GetDyeingUnitTransferOrder($scope.Unit.Id, $scope.Buyer.BuyerId, $scope.Job.JobNo,$scope.Style.StyleId, function (data) {
             $scope.OrderList = data;
         });
     }
 
+    $scope.FindColor = function () {
+        PlanManagement.GetDyeingUnitTransferColor($scope.Unit.Id, $scope.Buyer.BuyerId, $scope.Job.JobNo, $scope.Style.StyleId,$scope.Order.OrderId, function (data) {
+            $scope.ColorList = data;
+        });
+    }
+
     $scope.FindDyeingChangeData = function () {
-        PlanManagement.GetDyeingChangeData($scope.Unit.Id, $scope.Buyer.BuyerId, $scope.Job.JobNo, $scope.Style.StyleId, $scope.Order.OrderId, function (data) {
+        PlanManagement.GetDyeingChangeData($scope.Unit.Id, $scope.Buyer.BuyerId, $scope.Job.JobNo,
+                $scope.Style.StyleId, $scope.Order.OrderId, $scope.Color.ColorId, function (data) {
             $scope.ChangeDataList = data;
         });
     }
@@ -111,6 +119,7 @@
         $scope.Style = [];
         $scope.Job = [];
         $scope.Buyer = [];
+        $scope.Color = [];
     }
 
 }]);

@@ -380,31 +380,6 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_PrioritySet]", parameters: parameter, dbName: DyeingDB);
         }
 
-        #region Dyeing Unit Change Data
-
-        public async Task<object> GetDyeingChangeData(int UnitNo,int BuyerId, int JobNo, int StyleId, int OrderNo)
-        {
-            var parameter = new DynamicParameters();
-                parameter.Add(name: "@UnitId", value: UnitNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add(name: "@BuyerNo", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add(name: "@JobNo", value: JobNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add(name: "@StyleId", value: StyleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add(name: "@OrderNo", value: OrderNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            return await DatabaseHub.QueryAsync<object>(
-                storedProcedureName: @"[dbo].[usp_Get_DyeingUnitChangeData]", parameter, dbName: DyeingDB);
-        }
-
-
-        public async Task<IEnumerable<Object>> SaveDyeingUnitChange(DyeingUnitChange obj)
-        {
-            var parameter = new DynamicParameters();
-            parameter.Add(name: "@UserId", value: obj.UserId, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("@data", obj.ListData.AsTableValuedParameter("dbo.DyeingUnitChange",
-                new[] { "InitInfoId", "PreUnitNo", "FinalUnitNo" }));
-            return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[Usp_SaveUpdate_DyeingUnitChange]", parameters: parameter, dbName: DyeingDB);
-        }
-
-        #endregion
 
         #region Machine to Machine Transfer
 
@@ -442,8 +417,6 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
         #endregion
 
 
-
-
         #region SCMSynchronization
         public Task<IEnumerable<object>> GetSCMIssuedBatchNo()
         {
@@ -451,14 +424,89 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
                     storedProcedureName: @"[dbo].[usp_get_BatchNo_SCMIssue]", dbName: DyeingDB);
         }
 
-     
-      
-          public Task<long> SCMSynchronization_Save(SCMSynchronization obj)
+        public Task<long> SCMSynchronization_Save(SCMSynchronization obj)
         {
             var parameter = new DynamicParameters();
             parameter.Add(name: "@BpmId", value: obj.BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             return DatabaseHub.ExecuteAsync(
               storedProcedureName: @"[dbo].[usp_Get_ScmToDyeing]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        #endregion
+
+
+        #region Dyeing Unit Transfer
+        public async Task<IEnumerable<object>> GetBuyerForDyeingUnitTransfer(int UnitId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+              storedProcedureName: @"[dbo].[usp_Get_DyeingUnitTransferBuyer]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public async Task<IEnumerable<object>> GetJobForDyeingUnitTransfer(int UnitId,int BuyerId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+              storedProcedureName: @"[dbo].[usp_Get_DyeingUnitTransferJob]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public async Task<IEnumerable<object>> GetStyleForDyeingUnitTransfer(int UnitId,int BuyerId, int JobId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+              storedProcedureName: @"[dbo].[usp_Get_DyeingUnitTransferStyle]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public async Task<IEnumerable<object>> GetOrderForDyeingUnitTransfer(int UnitId, int BuyerId ,int JobId, int StyleId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@StyleId", value: StyleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+              storedProcedureName: @"[dbo].[usp_Get_DyeingUnitTransferOrder]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public async Task<IEnumerable<object>> GetColorForDyeingUnitTransfer(int UnitId, int BuyerId, int JobId, int StyleId, int OrderId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@StyleId", value: StyleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@OrderId", value: OrderId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+              storedProcedureName: @"[dbo].[usp_Get_DyeingUnitTransferColor]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public async Task<object> GetDyeingChangeData(int UnitNo, int BuyerId, int JobNo, int StyleId, int OrderNo, int ColorId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@BuyerNo", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@JobNo", value: JobNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@StyleId", value: StyleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@OrderNo", value: OrderNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add(name: "@ColorId", value: ColorId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return await DatabaseHub.QueryAsync<object>(
+                storedProcedureName: @"[dbo].[usp_Get_DyeingUnitChangeData]", parameter, dbName: DyeingDB);
+        }
+
+
+        public async Task<IEnumerable<Object>> SaveDyeingUnitChange(DyeingUnitChange obj)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UserId", value: obj.UserId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@data", obj.ListData.AsTableValuedParameter("dbo.DyeingUnitChange",
+                new[] { "InitInfoId", "PreUnitNo", "FinalUnitNo" }));
+            return await DatabaseHub.QueryAsync<object>(storedProcedureName: @"[dbo].[Usp_SaveUpdate_DyeingUnitChange]", parameters: parameter, dbName: DyeingDB);
         }
 
         #endregion

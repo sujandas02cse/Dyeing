@@ -34,7 +34,7 @@
                         <div class="col-md-4 col-6">
                             <div class="row">
                                 <label class="control-label col-md-4">Buyer</label>
-                                <select class="col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                <select class="col-md-8 mb-2 me-sm-2" select2="" name="Buyer"
                                         data-ng-model="Buyer"
                                         ng-change="FindJob()"
                                         ng-options="item as item.BuyerName for item in BuyerList">
@@ -45,7 +45,7 @@
                         <div class="col-md-4 col-6">
                             <div class="row">
                                 <label class="control-label col-md-4">Job</label>
-                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="Job"
                                         data-ng-model="Job"
                                         ng-change="FindStyle()"
                                         ng-options="item as item.JobInfo for item in JobList">
@@ -58,7 +58,7 @@
                         <div class="col-md-4 col-6">
                             <div class="row">
                                 <label class="control-label col-md-4">Style</label>
-                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="Style"
                                         data-ng-model="Style"
                                         ng-change="FindOrder()"
                                         ng-options="item as item.StyleInfo for item in StyleList">
@@ -69,11 +69,22 @@
                         <div class="col-md-4 col-6">
                             <div class="row">
                                 <label class="control-label col-md-4">Order</label>
-                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="Order"
                                         data-ng-model="Order"
-                                        ng-change="FindDyeingChangeData()"
+                                        ng-change="FindColor()"
                                         ng-options="item as item.OrderInfo for item in OrderList">
                                     <option value="" ng-required="true">Select Order</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <div class="row">
+                                <label class="control-label col-md-4">Color</label>
+                                <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="Color"
+                                        data-ng-model="Color"
+                                        ng-change="FindDyeingChangeData()"
+                                        ng-options="item as item.ColorName for item in ColorList">
+                                    <option value="" ng-required="true">Select Color</option>
                                 </select>
                             </div>
                         </div>
@@ -101,13 +112,12 @@
                             <th>Job No</th>
                             <th>Style</th>
                             <th>Order</th>
+                            <th>Color</th>
+                            <th>Fabric Type</th>
                             <th>Booking Date</th>
                             <th>Shipment Date</th>
-                            <th>Current Dyeing Unit</th>
+                            <!--<th>Current Dyeing Unit</th>-->
                             <th>Composition</th>
-                            <th>Required Greige Qty</th>
-                            <th>Avail Greige Qty</th>
-                            <th>Transfer Greige Qty</th>
                             <th>Transfer Dyeing Unit</th>
                         </tr>
 
@@ -118,18 +128,15 @@
                             <th>{{data.JobInfo}}</th>
                             <th>{{data.StyleInfo}}</th>
                             <th>{{data.OrderInfo}}</th>
-                            <th>{{data.BookingDate}}</th>
-                            <th>{{data.ShipmentDate}}</th>
-                            <th class="d-none">{{data.DyeingUnitId}}</th>
-                            <th>{{data.UnitName}}</th>
+                            <th>{{data.Color}}</th>
+                            <th>{{data.FabricType}}</th>
+                            <th>{{data.BookingDate | date:'dd-MM-yyyy'}}</th>
+                            <th>{{data.ShipmentDate | date:'dd-MM-yyyy'}}</th>
                             <th>{{data.Composition}}</th>
-                            <th>{{data.ReqGQty}}</th>
-                            <th>{{data.AvGreidgeQty}}</th>
-                            <th>{{data.TrGridgeQty}}</th>
                             <th>
                                 <select class="form-control col-md-8 mb-2 me-sm-2" select2="" name="unit"
                                         data-ng-model="data.TrDyeingUnit"
-                                        ng-change="FindBuyer()"
+                                        
                                         ng-options="item as item.Name for item in UnitList">
                                     <option value="" ng-required="true">Select Unit</option>
                                 </select>

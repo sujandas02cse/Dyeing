@@ -228,6 +228,9 @@
         pointer-events: none; /* no clicks/tab */
     }
 
+    #diaPart + .select2.select2-container.select2-container--default {
+        width: 100% !important;
+    }
 
 </style>
 
@@ -334,7 +337,6 @@
                                     {{batch.RopeNo}}
                                 </td>
                             </tr>
-
                             <tr>
 
                                 <td>Shade Name:</td>
@@ -351,13 +353,12 @@
 
                             </tr>
                             <tr>
-                                <td>Enzyme:</td>
+                                <td>Grey Color:</td>
 
-                                <td style="padding: 0 10px !important;">
-                                    <select data-ng-model="batch.Enzyme" class="form-control input-height" select2=""
-                                            ng-options="item.Value as item.Value for item in Enzyme">
-                                        <option value="" ng-required="true" disabled selected>Select</option>
-                                    </select>
+                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                    ng-bind="batch.GreyColor"
+                                    ng-blur="batch.GreyColor = $event.target.textContent">
+                                    {{batch.GreyColor}}
                                 </td>
                                 <td>Turing:</td>
                                 <td ng-attr-contenteditable="{{ isEditable }}"
@@ -368,16 +369,25 @@
                             </tr>
                             <tr>
                                 <td>Fabric Id:</td>
-                                <td colspan="3"
+                                <td
                                     ng-attr-contenteditable="{{ isEditable }}"
                                     ng-bind="batch.FabricId"
                                     ng-blur="batch.FabricId = $event.target.textContent">
                                     {{batch.FabricId}}
                                 </td>
+                                <td>Enzyme:</td>
+
+                                <td style="padding: 0 10px !important;">
+                                    <select data-ng-model="batch.Enzyme" class="form-control input-height" select2=""
+                                            ng-options="item.Value as item.Value for item in Enzyme">
+                                        <option value="">Select</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Remarks:</td>
-                                <td colspan="3" ng-attr-contenteditable="{{ isEditable }}"
+                                <td colspan="3" 
+                                    ng-attr-contenteditable="{{true}}"
                                     ng-bind="batch.Remarks"
                                     ng-blur="batch.Remarks = $event.target.textContent">
                                     {{batch.Remarks}}
@@ -483,6 +493,8 @@
                                 <th>Yarn Brand</th>
                                 <th>Yarn Lot</th>
                                 <th>Stitch Length</th>
+                                <th>PL %</th>
+                                <th>FD</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -502,6 +514,8 @@
                                     ng-bind="obj.StitchLength"
                                     ng-blur="obj.StitchLength = $event.target.textContent">
                                 </td>
+                                <td></td>
+                                <td>{{obj.FeederName}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -519,6 +533,7 @@
                                 <th>M/C Dia G</th>
                                 <th>Rolls</th>
                                 <th>Identification</th>
+                                <th>DiaPart</th>
                                 <th>F/Dia</th>
                                 <th>G/Dia</th>
                                 <th>F/GSM</th>
@@ -546,8 +561,14 @@
                                 </td>
                                 <td>{{obj.Rolls}}</td>
                                 <td>{{obj.Identification}}</td>
-                                <td 
-                                    ng-bind="obj.FDia"
+                                <td ng-disabled="obj.ActualQty > 0 || obj.PlanQty > 0"
+                                    style="padding: 0 10px !important;">
+                                    <select id="diaPart" ng-disabled="!(obj.ActualQty > 0 || obj.PlanQty > 0)" ng-model="obj.FabricDiaPartId" class=" input-height" select2=""
+                                            ng-options="item.FabricDiaPartId as item.FabricDiaPartDescription for item in DiaPartList">
+                                        <option style="width:100%" value="">Select</option>
+                                    </select>
+                                </td>
+                                <td ng-bind="obj.FDia"
                                     ng-blur="obj.FDia = $event.target.textContent">
                                     {{obj.FDia}}
                                 </td>
@@ -557,8 +578,7 @@
                                     >
                                     {{obj.GDia}}
                                 </td>
-                                <td 
-                                    ng-bind="obj.FGSM"
+                                <td ng-bind="obj.FGSM"
                                     ng-blur="obj.FGSM = $event.target.textContent">
                                     {{obj.FGSM}}
                                     <!--<input type="text" ng-model="obj.FGSM" class="form-control input-height clsHeight" required />-->
@@ -568,7 +588,7 @@
                                     ng-blur="obj.GGSM = $event.target.textContent">
                                     {{obj.GGSM}}
                                 </td>
-                                <td ng-attr-contenteditable="{{ isEditable }}"
+                                <td contenteditable="true"
                                     ng-bind="obj.Remarks"
                                     ng-blur="obj.Remarks = $event.target.textContent">
                                     {{obj.Remarks}}

@@ -55,7 +55,7 @@ namespace Dyeing.API.Models.BasicDataConfiguration.OperationDataConfiguration
             parameter.Add(name: "@AOPUnit", value: saveUpdateCommentData.AOPUnit, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add(name: "@Remarks", value: saveUpdateCommentData.Remarks, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add(name: "@User", value: saveUpdateCommentData.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-           
+            
             return DatabaseHub.QueryAsync<object>(
                 storedProcedureName: @"[dbo].[usp_SaveUpdate_FourPointReportComment]", parameter, dbName: DyeingDB);
         }

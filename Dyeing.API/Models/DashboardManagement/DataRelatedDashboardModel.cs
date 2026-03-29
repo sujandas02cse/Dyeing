@@ -389,8 +389,15 @@ namespace Dyeing.API.Models.DashboardManagement
             var parameters = new DynamicParameters();
             parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
+
+
+            // updated by sujan das on 28-03-2026 to show b2b generated body parts
+
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data]", parameters: parameters, dbName: DyeingDB);
+                 storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2Data_b2b]", parameters: parameters, dbName: DyeingDB);
+
 
             //return DatabaseHub.QueryAsync<object>(
             //       storedProcedureName: @"[dbo].[usp_rpt_BatchCardNewV2DataNew]", parameters: parameters, dbName: DyeingDB);
@@ -628,8 +635,63 @@ namespace Dyeing.API.Models.DashboardManagement
             parameters.Add(name: "@Id", value: Id, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@Part", value: Part, dbType: DbType.String, direction: ParameterDirection.Input);
 
+            //return DatabaseHub.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_parts]", parameters: parameters, dbName: DyeingDB);
+
             return DatabaseHub.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_parts]", parameters: parameters, dbName: DyeingDB);
+                    storedProcedureName: @"[dbo].[Usp_rpt_packinglistnew_parts_new1]", parameters: parameters, dbName: DyeingDB);
+
         }
+
+        #region New DashBoard Report
+        public Task<Tuple<IEnumerable<object>, IEnumerable<object>, IEnumerable<object>>> MonthlyQualityInspectionSummaryGet(int UnitId, int BuyerId, int JobId, int Year, int Month)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Year", value: Year, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Month", value: Month, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            return DatabaseHub.MultiQueryAsync<object,object,object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_MonthlyQualityInspectionSummary]", parameters: parameters, dbName: DyeingDB);
+        }
+        public Task<IEnumerable<object>> JobWiseRftStatusGet(int UnitId, int BuyerId, int JobId, int Year, int Month)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Year", value: Year, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Month", value: Month, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_JobWiseRftStatus]", parameters: parameters, dbName: DyeingDB);
+        }
+        public Task<IEnumerable<object>> MonthlyProductionDeliveryWIPStatusGet(int UnitId, int BuyerId, int JobId, int Year, int Month)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@BuyerId", value: BuyerId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@JobId", value: JobId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Year", value: Year, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Month", value: Month, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_rpt_MonthlyProductionDeliveryWipStatus]", parameters: parameters, dbName: DyeingDB);
+        }
+
+   
+         public Task<IEnumerable<object>> GetInspectionData(int BpmId, int CompTime,string Part)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@CompTime", value: CompTime, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Part", value: Part, dbType: DbType.String, direction: ParameterDirection.Input);
+            
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[Usp_rpt_FourPointInspection]", parameters: parameters, dbName: DyeingDB);
+        }
+        #endregion
     }
 }

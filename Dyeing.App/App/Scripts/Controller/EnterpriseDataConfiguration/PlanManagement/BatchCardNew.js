@@ -7,31 +7,33 @@
 
     //UnitList
     BatchCardNew.GetUnitAll($rootScope.UserId, function (data) {
-        debugger
         $scope.UnitList = data;
         if ($scope.SourceUnit === undefined)
             $scope.SourceUnit.UnitId = 0;
     });
 
+    BatchCardNew.GetFabricDiaPart($rootScope.UserId, function (data) {
+        $scope.DiaPartList = data;
+    });
+
     //MachineList
     BatchCardNew.GetMachineData($scope.UnitId, function(data) {
         $scope.UnitId = $location.search().u;
-      $scope.MachineList = data;
+        $scope.MachineList = data;
     });
 
     BatchCardNew.GetTrollyNo($scope.UnitId, function (data) {
-        debugger
       $scope.TrollyInfo = data;
     });
 
     //Show or Hide those Section
     $scope.ShowProcess = function (unit) {
-        debugger
-        if ($scope.UnitId === 16) {
+      if ($scope.UnitId === 16) {
         $scope.buildProcessFlowRows();
         $scope.buildOtherRows();
         return ($scope.Sh = "Display: Auto");
-      } else return ($scope.Sh = "Display: None");
+      }
+      else return ($scope.Sh = "Display: None");
     };
 
     //BatchCardNew.GetFinMcByType('Dyeing', function (data) {
@@ -62,7 +64,6 @@
 
     function NozzleTrollyBatchDataLoad(Bpmid) {
       BatchCardNew.GetNozzleTrollyBatchData(Bpmid, function(data) {
-        debugger;
         $scope.nozzleTrolley = data.m_Item1;
         //$scope.nozzleTrolley = data;
       });
@@ -72,7 +73,6 @@
     $scope.nozzleTrolley = [{}, {}, {}, {}];
 
     BatchCardNew.GetBatchDataById($location.search().id,$scope.reviseNo,function(data) {
-        debugger;
         NozzleTrollyBatchDataLoad($location.search().id);
         $scope.batch = data.m_Item1[0];
         $scope.batchDetails = data.m_Item2;
@@ -81,28 +81,24 @@
         $scope.WaterMark = data.m_Item5;
         $scope.ProcessFlow = data.m_Item6;
         $scope.Others = data.m_Item7;
-        debugger
         var check = [$scope.ProcessFlow, $scope.Others].flatMap(arr =>
           arr.filter(x => x.IsChecked === 1)
         );
-        debugger
         if (check.length > 0) {
           BatchCardNew.GetUnitAll($rootScope.UserId);
           //$scope.SourceUnit = $scope.UnitList.find(x => x.Id === 16);
           //$scope.ShowProcess($scope.SourceUnit.Id);
         }
         if ($scope.UnitId == 16) {
-            debugger
             $scope.buildProcessFlowRows();
             $scope.buildOtherRows();
         }
-        debugger
         $scope.batch.BpmId = $location.search().id;
         $scope.changePlanQty();
         $scope.changeActualQty();
         let totalRoll = 0;
-        angular.forEach($scope.batchSpec, function(item) {
-          totalRoll += item.Rolls === undefined ? 0 : item.Rolls;
+        angular.forEach($scope.batchSpec, function (item) {
+            totalRoll += item.Rolls === undefined ? 0 : parseInt(item.Rolls);
         });
 
         $scope.batch.TotalRolls = totalRoll;
@@ -128,7 +124,6 @@
     };
 
     $scope.buildProcessFlowRows = function () {
-        debugger
       $scope.ProcessFlowRows = [];
       if (!$scope.ProcessFlow || !$scope.ProcessFlow.length) return;
 
@@ -138,7 +133,6 @@
     };
 
     $scope.buildOtherRows = function () {
-        debugger
       $scope.OtherRows = [];
       if (!$scope.Others || !$scope.Others.length) return;
 
@@ -266,7 +260,6 @@
         }))
       );
 
-      debugger;
       var waterMark = $scope.WaterMark.find(x => x.IsChecked === 1);
 
       var rType = "";
@@ -315,8 +308,9 @@
         $scope.SourceUnit.UnitId === undefined
       )
         Source = $scope.batch.DyeingUnitId;
-      else Source = $scope.SourceUnit.UnitId;
+        else Source = $scope.SourceUnit.UnitId;
 
+        debugger
       let obj = {
         BpmId: $scope.batch.Id,
         UnitId: $scope.batch.DyeingUnitId === undefined ? 0 : $scope.batch.DyeingUnitId,
@@ -328,7 +322,7 @@
         ShadeName: $scope.batch.Color,
         LabdipNo: $scope.batch.LDNo,
         Turing: $scope.batch.Turing === null ? "" : $scope.batch.Turing,
-        Enzyme: $scope.batch.Enzyme === null ? "" : $scope.batch.Enzyme,
+          Enzyme: $scope.batch.Enzyme || "",
         IssueMethod:
           $scope.batch.IssueMethod === null ? "" : $scope.batch.IssueMethod,
         Barcode: $scope.batch.Barcode === null ? "" : $scope.batch.Barcode,

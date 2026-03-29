@@ -17,7 +17,7 @@
       );
     };
 
-    _obj.GetDataByTracking = function(Id, RollType,UserId, cb) {
+    _obj.GetDataByTracking = function(Id, RollType, UserId, cb) {
       debugger;
       $http
         .get(
@@ -85,12 +85,12 @@
         );
     };
 
-      _obj.GetDataByMultiRoll = function (payload, cb) {
+    _obj.GetDataByMultiRoll = function(payload, cb) {
       debugger;
       $http
         .post(
           baseApiURL + "FinishedFabricHandoverToStore/GetDataByMultiRoll",
-            payload
+          payload
         )
         .then(
           function successCallback(response) {

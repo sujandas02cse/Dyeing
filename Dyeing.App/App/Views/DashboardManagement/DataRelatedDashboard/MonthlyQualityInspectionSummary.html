@@ -1,0 +1,613 @@
+﻿<style>
+    .table-scroll tbody {
+        max-height: 3000px !important;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width: 230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .table-scroll tbody {
+        max-height: 1000px !important;
+    }
+
+    .button-search {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    .custom_tbl {
+        table-layout: fixed;
+    }
+
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+        }
+
+    .dropdown-menu {
+        z-index: 5;
+    }
+
+    .custom_tbl td {
+        font-size: 12px;
+    }
+
+        /* .custom_tbl tbody tr:nth-child(2n+1) {
+        background: #cae3e7;
+    }*/
+
+        .custom_tbl td.input {
+            color: #333 !important;
+            padding: 0 5px !important;
+            position: relative;
+        }
+
+            .custom_tbl td.input input {
+                display: block;
+                /* border: 1px solid; */
+                background: #fff;
+                color: #333 !important;
+                padding: 5px;
+                border: none;
+                width: 100%;
+                height: 35px;
+                border-radius: 3px;
+            }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+            /*background: #fff !important;*/
+            color: #333 !important;
+        }
+
+    .custom_tbl tr:hover td {
+        background: #364865 !important;
+        cursor: default;
+        color: white;
+    }
+
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-input {
+        transform: scale(1.2);
+    }
+
+    .f-24 {
+        font-size: 24px;
+    }
+
+    .f-18 {
+        font-size: 18px;
+    }
+
+
+    /*form Chart*/
+    .chart-container {
+        height: 400px; /* Adjust this value as needed */
+        width: 100%;
+    }
+
+
+
+    /* 1. Set up the card for 3D effects and smooth transitions */
+    .card1 {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative; /* Needed for pseudo-elements */
+        overflow: hidden; /* Keeps the glowing effect contained within the card's rounded corners */
+        transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+        cursor: pointer;
+        /* Add perspective to the card container for a 3D feel */
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        /* 2. Create the dynamic "glow" or "shine" effect using a pseudo-element */
+    .card1::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%; /* Large enough to cover the card during rotation */
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+        opacity: 0; /* Hidden by default */
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        /* Position the shine element relative to the center of the card */
+        transform: translate(-50%, -50%) rotate(45deg);
+        z-index: 0; /* Behind the content */
+    }
+
+    /* 3. Apply hover effects */
+    .card1:hover {
+        transform: translateY(-8px) scale(1.02) rotateX(2deg); /* Lifts, slightly enlarges, and slightly tilts */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Stronger shadow */
+    }
+
+    /* Show the glow/shine on hover */
+    .card1:hover::before {
+        opacity: 1;
+        /* Optionally animate the background position slightly on hover */
+        transform: translate(-50%, -50%) rotate(135deg);
+    }
+
+    /* --- General Layout and Centering (as before) --- */
+    .card-header1 {
+        height: 52px; /* Percentage height for responsiveness */
+        display: flex;
+        align-items: center; /* Vertically center content */
+        justify-content: center; /* Horizontally center content */
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        position: relative; /* Ensure header content is above the pseudo-element */
+        z-index: 1;
+    }
+
+    .card-body1 {
+        flex: 1;
+        position: relative; /* Ensure body content is above the pseudo-element */
+        z-index: 1;
+    }
+
+    /* Ensure all cards within a row have the same height */
+    .row.g-3 > [class*='col-'] {
+        display: flex;
+    }
+
+    .row.g-3 > [class*='col-'] > .card {
+        width: 100%;
+    }
+
+    .card-header1 h3,
+    .card-body1 table,
+    .card-body1 canvas penaltyChart {
+        /* The transform: translateZ(0) trick forces hardware acceleration */
+        transform: translateZ(0);
+        /* Ensures sharp text rendering during transition */
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+
+    /* Ensure smoother font rendering in general */
+    .card-header1, .card-body1 {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    #penaltyChart, #appearanceChart {
+        /* Define a fixed height and width */
+        height: 200px !important; 
+        /*width: 600px !important; 
+        max-width: 100% !important;*/
+        
+    }
+</style>
+<div ng-controller="MonthlyQualityInspectionSummaryController">
+    <div class="content-header sty-one">
+        <h1>Monthly Quality Inspection Summary</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Dashboard Management</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Data Related Dashboard</a></li>
+            <li><i class="fa fa-angle-right"> Monthly Quality Inspection Summary</i></li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="padding:0; ">
+        <div class="mt-3 text-center">
+            <span class="radio-label">Bulk</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'Bulk'" type="radio" style="margin-right:5%;" name="Mode" value="Bulk" />
+            <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'New'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+        </div>
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-3">
+                        Unit:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="unit"
+                                data-ng-model="Unit"
+                                ng-change="GetBuyer(Unit)"
+                                ng-options="item as item.Name for item in UnitList">
+                            <option value="" ng-required="true">Select Unit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Buyer:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="building"
+                                data-ng-model="Buyer"
+                                ng-change="GetJobNo(Buyer)"
+                                ng-options="item as item.BuyerName for item in BuyerList">
+                            <option value="" ng-required="true">Select Buyer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Job:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <select class="form-control" select2="" name="building"
+                                data-ng-model="Job"
+                                ng-options="item as item.JobInfo for item in JobList">
+                            <option value="" ng-required="true">Select Job</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" style="width:110px;" 
+                               class="button-search btn-lg" 
+                               ng-show="ProductionData.length>0" 
+                               value="ExportPdf"  
+                               ng-class="disabledShow===true?'btn-disabled':'btn-primary'" 
+                               ng-disabled="disabledShow" 
+                               ng-click="DownloadPdf(Unit,Buyer,Job,RYear,RMonth)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" style="margin-top:20px;">
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-3">
+                        Year:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <md-input-container>
+                            <label>Select Year</label>
+                            <md-select ng-model="RYear">
+                                <!-- ng-repeat iterates over the 'years' array -->
+                                <md-option ng-repeat="year in years" ng-value="year">
+                                    {{ year }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <label class="control-label col-md-4">
+                        Month:
+                        <span class="required" style="color:red"> * </span>
+                    </label>
+                    <div class="col-md-7">
+                        <md-input-container>
+                            <label>Select Month</label>
+                            <md-select ng-model="RMonth" aria-label="Select Month">
+                                <!-- Bind the entire object's 'value' property to the ng-model -->
+                                <md-option ng-repeat="month in monthsList" ng-value="month.value">
+                                    <!-- Display the month's name in the dropdown -->
+                                    {{ month.name }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row justify-content-center">
+                    <label class="control-label col-md-4">
+                        <button 
+                                class="btn btn-primary" 
+                                ng-value="Processing==true?'Processing':'Search'" 
+                                ng-click="LoadingData(Unit,Buyer,Job,RYear,RMonth)">
+                            <h2>Search</h2>
+                        </button>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+
+        <div style="width: 100%; overflow: auto; max-height: 600px;">
+            <table id="dynamicProductionReport" class="table table-bordered bordered table-text table-hover custom_tbl">
+                <thead class="bg">
+                    <tr>
+                        <th>Buyer &nbsp;</th>
+                        <th>Total Check Qty &nbsp;</th>
+                        <th>Pass Qty &nbsp;</th>
+                        <th>Reject Qty &nbsp;</th>
+                        <th>Pass %  &nbsp;</th>
+                        <th>Rejection % &nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody ng-init="
+                                tCheck=0;
+                                tPass=0;
+                                tReject=0;
+                                tPassper=0;
+                                tRejectPer=0;
+                            ">
+                    <tr style="{{showColor(obj)}}"
+                        ng-repeat="obj in (ProductionData | orderBy:sortKey:reverse)"
+                        ng-init="
+                                $parent.tCheck = $parent.tCheck + (obj.TotalCheckQty || 0);
+                                $parent.tPass = $parent.tPass + (obj.PassQty || 0);
+                                $parent.tReject = $parent.tReject + (obj.RejectQty || 0);
+                                $parent.tPassper = $parent.tPassper + (obj.PassPer || 0);
+                                $parent.tRejectPer = $parent.tRejectPer + (obj.RejectPer || 0);
+                            ">
+                        <td>{{obj.BuyerName}} &nbsp;</td>
+                        <td>{{obj.TotalCheckQty}} &nbsp;</td>
+                        <td>{{obj.PassQty}} &nbsp;</td>
+                        <td>{{obj.RejectQty}} &nbsp;</td>
+                        <td>{{obj.PassPer | number:2}} &nbsp;</td>
+                        <td>{{obj.RejectPer | number:2}} &nbsp;</td>
+                    </tr>
+
+                    <!-- Total Row -->
+                    <tr ng-show="ProductionData.length > 0" style="font-weight:bold; background:#f8f8f8;">
+                        <td>Total</td>
+                        <td>{{tCheck}}</td>
+                        <td>{{tPass}}</td>
+                        <td>{{tReject}}</td>
+                        <td>{{tPassper | number:2}}</td>
+                        <td>{{tRejectPer | number:2}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <!-- Container -->
+        <div class=" my-4" ng-show="ProductionData.length>0">
+            <div class="row g-5">
+
+                <!-- Penalty Point Based Defect Section -->
+                <div class="col-md-6">
+                    <div class="row g-3">
+
+                        <!-- Table Card -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="card1 col-md-12 shadow-sm border-0">
+                                <div class="card-header1 mt-3 bg-primary text-white text-center">
+                                    <h3 class="mb-0">Penalty Point Based Top 3 Defect</h3>
+                                </div>
+                                <div class="card-body1 p-0">
+                                    <table class="table table-bordered text-center mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Defect Name</th>
+                                                <th>Defect Count</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in penaltyDefects">
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.defCount}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart Card -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="card1 col-md-12 shadow-sm border-0">
+                                <div class="card-header1 mt-3 bg-primary text-white text-center">
+                                    <h3 class="mb-0">Penalty Point Chart</h3>
+                                </div>
+                                <div class="card-body1">
+                                    <canvas id="penaltyChart" ></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Appearance Based Defect Section -->
+                <div class="col-md-6">
+                    <div class="row g-3">
+
+                        <!-- Table Card -->
+                        <div class="col-md-6  col-sm-12">
+                            <div class="card1 col-md-12  shadow-sm border-0">
+                                <div class="card-header1 mt-3 bg-success text-white text-center">
+                                    <h3 class="mb-0">Appearance Based Top 3 Defect</h3>
+                                </div>
+                                <div class="card-body1  p-0">
+                                    <table class="table table-bordered text-center mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Defect Name</th>
+                                                <th>Defect Count</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in appearanceDefects">
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.defCount}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart Card -->
+                        <div class="col-md-6 mt-3 col-sm-12">
+                            <div class="card1 col-md-12 shadow-sm border-0">
+                                <div class="card-header1 mt-3 bg-success text-white text-center">
+                                    <h3 class="mb-0">Appearance Chart</h3>
+                                </div>
+                                <div class="card-body1">
+                                    <canvas id="appearanceChart" ></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+

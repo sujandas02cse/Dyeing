@@ -261,18 +261,28 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             //string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
             //string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
 
-            // for local testing 
-            // string protocol = "http://";
-            // string baseUrl = "localhost:34605";
+            // for local 
+            string protocol = "http://";
+            string baseUrl = "localhost:34605";
 
-            // for local live server
-            string protocol = "";
-            string baseUrl = "https://mis-dyeing.mascoknit.com/";
+            //for  live server
+
+            //string protocol = "";
+            //string baseUrl = "https://mis-dyeing.mascoknit.com/";
+
+            // for  live server (ssl security issue)
+            //string protocol = "";
+            //string baseUrl = "http://mis-dyeing.mascoknit.com/";
 
 
-            // for  test 
+            // for  old test server
             //string protocol = "";
             //string baseUrl = "http://192.168.50.61:91/";
+
+
+            // for  new test server
+            //string protocol = "";
+            //string baseUrl = "http://192.168.50.60:93/";
 
 
             if (HttpContext.Current != null)
@@ -282,7 +292,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
             }
 
 
-            string basePath = (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.61") ) ?
+            string basePath = (baseUrl.Contains("mis-dyeing") || baseUrl.Contains("192.168.50.61") || baseUrl.Contains("192.168.50.60")) ?
                 $"{protocol}{baseUrl}/dyeingApi/images/RollSticker/" :
                 $"{protocol}{baseUrl}/images/RollSticker/";
 
@@ -298,6 +308,10 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                 int rollNo = Convert.ToInt32(item.NumberOfRoll);
                 int bpmId = Convert.ToInt32(item.BpmId);
 
+             
+                int qrCodeId = new FinishFabricInspectionOnlineModel().FetchQRCodeIdNew(rollNo, bpmId);
+                string qrCodeIdFull = $"{qrCodeId}";
+
                 string rollNoFull = $"{BatchNo}({rollNo})";
                 string fileName = rollNoFull.Replace("+", "-") + ".png";
                 string file = Path.Combine(path, fileName);
@@ -306,13 +320,15 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
                 if (!System.IO.File.Exists(file))
                 {
                     QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(rollNoFull, QRCodeGenerator.ECCLevel.Q);
+                    //QRCodeData qrCodeData = qrGenerator.CreateQrCode(rollNoFull, QRCodeGenerator.ECCLevel.Q);
+                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrCodeIdFull, QRCodeGenerator.ECCLevel.Q);
+
                     QRCode qrCode = new QRCode(qrCodeData);
                     Bitmap qrCodeImage = qrCode.GetGraphic(20);
                     qrCodeImage.Save(file, ImageFormat.Png);
                 }
 
-              await inspectionModel.SaveStickerPath(stickerPath, rollNo, bpmId);
+              await inspectionModel.SaveStickerPath(stickerPath, rollNo, bpmId, qrCodeId);
             }
 
             return queryData;

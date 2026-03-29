@@ -6,6 +6,7 @@
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
+        <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>b24320ae-7156-49ec-ad1d-95ab9a254839</rd:DataSourceID>
@@ -15,7 +16,7 @@
     <DataSet Name="InspectionData">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>usp_rpt_DyedFabInspectionNew 16,NULL,NULL,NULL,107777,1</CommandText>
+        <CommandText>usp_rpt_DyedFabInspectionNew 16,NULL,NULL,NULL,111172,1</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

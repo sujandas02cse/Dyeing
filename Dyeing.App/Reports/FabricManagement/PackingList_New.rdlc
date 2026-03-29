@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
+        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -16,7 +16,7 @@
     <DataSet Name="Header">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Header'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Header'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -57,7 +57,7 @@
     <DataSet Name="BatchQty">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'BatchQty'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'BatchQty'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -70,7 +70,7 @@
     <DataSet Name="Fabric">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Fabric'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Fabric'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -99,7 +99,7 @@
     <DataSet Name="YarnLot">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'YarnLot'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'YarnLot'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -116,7 +116,7 @@
     <DataSet Name="InspBy">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'InspBy'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'InspBy'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -133,7 +133,7 @@
     <DataSet Name="Rolls">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Rolls'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Rolls'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -186,7 +186,7 @@
     <DataSet Name="Summary">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Summary'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Summary'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -226,12 +226,16 @@
           <DataField>ProcessLoss</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="TargetProcessLoss">
+          <DataField>TargetProcessLoss</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="Tracking">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Tracking'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Tracking'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -252,7 +256,7 @@
     <DataSet Name="Options">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Options'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Options'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -269,7 +273,7 @@
     <DataSet Name="Image">
       <Query>
         <DataSourceName>DyeingDB</DataSourceName>
-        <CommandText>exec Usp_rpt_packinglistnew_parts 24882, 'Image'</CommandText>
+        <CommandText>exec Usp_rpt_packinglistnew_parts 26114, 'Image'</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -292,8 +296,8 @@
             <Source>External</Source>
             <Value>="file:///" &amp; Replace(First(Fields!StoragePath.Value,"Image"), "\","/")</Value>
             <Sizing>Fit</Sizing>
-            <Top>1.38513in</Top>
-            <Left>0.07419in</Left>
+            <Top>1.37791in</Top>
+            <Left>0.07422in</Left>
             <Height>4.44094in</Height>
             <Width>11.0636in</Width>
             <Visibility>
@@ -309,33 +313,36 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.24917in</Width>
+                  <Width>0.23875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.30292in</Width>
+                  <Width>0.28209in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44362in</Width>
+                  <Width>0.41237in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44792in</Width>
+                  <Width>0.40625in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.39583in</Width>
+                  <Width>0.35416in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.60688in</Width>
+                  <Width>0.45063in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.63542in</Width>
+                  <Width>0.42709in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.55208in</Width>
+                  <Width>0.46875in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.59375in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.35069in</Height>
+                  <Height>0.24652in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -347,7 +354,7 @@
                                 <TextRun>
                                   <Value>SL</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -379,7 +386,7 @@
                                 <TextRun>
                                   <Value>Roll</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -411,7 +418,7 @@
                                 <TextRun>
                                   <Value>Dia"</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -444,7 +451,7 @@
                                 <TextRun>
                                   <Value>GSM</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -477,7 +484,7 @@
                                 <TextRun>
                                   <Value>kg</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -510,7 +517,7 @@
                                 <TextRun>
                                   <Value>Yds</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -541,9 +548,23 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Remarks</Value>
+                                  <Value>Body</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Part</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -576,7 +597,7 @@
                                 <TextRun>
                                   <Value>Cutting </Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -590,7 +611,7 @@
                                 <TextRun>
                                   <Value>Issue</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -612,10 +633,43 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Remarks</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox55</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingTop>1pt</PaddingTop>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.19791in</Height>
+                  <Height>0.15624in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -627,7 +681,7 @@
                                 <TextRun>
                                   <Value>=Fields!SL.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -657,7 +711,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollNo.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -687,7 +741,7 @@
                                 <TextRun>
                                   <Value>=Fields!Dia.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -718,7 +772,7 @@
                                 <TextRun>
                                   <Value>=Fields!GSM.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -749,7 +803,7 @@
                                 <TextRun>
                                   <Value>=Fields!FinishWeight.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -780,7 +834,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollWeightYds.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -811,7 +865,7 @@
                                 <TextRun>
                                   <Value>=Fields!Remarks.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -842,7 +896,7 @@
                                 <TextRun>
                                   <Value>=Fields!Cutting_Issue.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -862,12 +916,44 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox56">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox56</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -894,13 +980,13 @@
                 <FilterExpression>=Fields!SL.Value</FilterExpression>
                 <Operator>LessThanOrEqual</Operator>
                 <FilterValues>
-                  <FilterValue DataType="Integer">20</FilterValue>
+                  <FilterValue DataType="Integer">25</FilterValue>
                 </FilterValues>
               </Filter>
             </Filters>
             <Top>1.38513in</Top>
             <Left>0.07419in</Left>
-            <Height>0.5486in</Height>
+            <Height>0.40276in</Height>
             <Width>3.63384in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -954,30 +1040,29 @@
                 <Top>0in</Top>
                 <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.70238in</Width>
+                <Width>0.69792in</Width>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1008,27 +1093,26 @@
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1057,31 +1141,30 @@
                 <Top>0.25in</Top>
                 <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.70238in</Width>
+                <Width>0.69792in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1112,27 +1195,26 @@
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1161,31 +1243,30 @@
                 <Top>0.5in</Top>
                 <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.70238in</Width>
+                <Width>0.69792in</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1216,27 +1297,26 @@
                 <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1265,31 +1345,30 @@
                 <Top>0.75in</Top>
                 <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.70238in</Width>
+                <Width>0.69792in</Width>
                 <ZIndex>6</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1320,27 +1399,26 @@
                 <ZIndex>7</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1369,31 +1447,30 @@
                 <Top>1in</Top>
                 <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.70238in</Width>
+                <Width>0.69792in</Width>
                 <ZIndex>8</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1424,27 +1501,26 @@
                 <ZIndex>9</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1461,8 +1537,29 @@
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </RightBorder>
             </Style>
           </Rectangle>
           <Rectangle Name="Rectangle2">
@@ -1486,32 +1583,31 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
                 <Top>1in</Top>
-                <Left>0.00441in</Left>
+                <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.92592in</Width>
+                <Width>0.93033in</Width>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1542,10 +1638,29 @@
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
+                  <TopBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </TopBorder>
+                  <BottomBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </BottomBorder>
+                  <LeftBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </LeftBorder>
+                  <RightBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </RightBorder>
                   <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                 </Style>
@@ -1568,34 +1683,33 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
-                <Top>0.00139in</Top>
-                <Left>0.00442in</Left>
-                <Height>0.25in</Height>
-                <Width>0.92741in</Width>
+                <Top>0in</Top>
+                <Left>0in</Left>
+                <Height>0.25139in</Height>
+                <Width>0.93183in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1619,34 +1733,33 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>BuyerName</rd:DefaultName>
-                <Top>0.00139in</Top>
+                <Top>0in</Top>
                 <Left>0.93034in</Left>
-                <Height>0.25in</Height>
+                <Height>0.25139in</Height>
                 <Width>1.85726in</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1673,33 +1786,32 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
                 <Top>0.25139in</Top>
-                <Left>0.00442in</Left>
+                <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.92592in</Width>
+                <Width>0.93034in</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1732,27 +1844,26 @@
                 <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1779,33 +1890,32 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
                 <Top>0.50139in</Top>
-                <Left>0.00442in</Left>
-                <Height>0.25in</Height>
-                <Width>0.92592in</Width>
+                <Left>0in</Left>
+                <Height>0.24861in</Height>
+                <Width>0.93034in</Width>
                 <ZIndex>6</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1833,32 +1943,31 @@
                 <rd:DefaultName>BuyerName</rd:DefaultName>
                 <Top>0.50139in</Top>
                 <Left>0.93034in</Left>
-                <Height>0.25in</Height>
+                <Height>0.24861in</Height>
                 <Width>1.85726in</Width>
                 <ZIndex>7</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1885,33 +1994,32 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox8</rd:DefaultName>
                 <Top>0.75in</Top>
-                <Left>0.00442in</Left>
+                <Left>0in</Left>
                 <Height>0.25in</Height>
-                <Width>0.92592in</Width>
+                <Width>0.93034in</Width>
                 <ZIndex>8</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
                   <TopBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </TopBorder>
                   <BottomBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </BottomBorder>
                   <LeftBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </LeftBorder>
                   <RightBorder>
-                    <Color>Silver</Color>
+                    <Color>Black</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </RightBorder>
@@ -1942,10 +2050,29 @@
                 <ZIndex>9</ZIndex>
                 <Style>
                   <Border>
-                    <Color>Silver</Color>
                     <Style>Solid</Style>
                     <Width>0.25pt</Width>
                   </Border>
+                  <TopBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </TopBorder>
+                  <BottomBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </BottomBorder>
+                  <LeftBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </LeftBorder>
+                  <RightBorder>
+                    <Color>Black</Color>
+                    <Style>Solid</Style>
+                    <Width>0.25pt</Width>
+                  </RightBorder>
                   <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                 </Style>
@@ -1959,8 +2086,29 @@
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </RightBorder>
             </Style>
           </Rectangle>
           <Rectangle Name="Rectangle3">
@@ -2037,9 +2185,29 @@
                               <rd:DefaultName>Textbox37</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2083,9 +2251,29 @@
                               <rd:DefaultName>Textbox39</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2129,9 +2317,29 @@
                               <rd:DefaultName>Textbox41</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2175,9 +2383,29 @@
                               <rd:DefaultName>Textbox43</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2221,9 +2449,29 @@
                               <rd:DefaultName>Textbox45</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2267,9 +2515,29 @@
                               <rd:DefaultName>Textbox47</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2313,9 +2581,29 @@
                               <rd:DefaultName>Textbox49</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2330,7 +2618,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Process </Value>
+                                      <Value>Target Process </Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -2344,7 +2632,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Loss</Value>
+                                      <Value>Loss%</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -2359,9 +2647,29 @@
                               <rd:DefaultName>Textbox51</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2404,7 +2712,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Loss</Value>
+                                      <Value>Loss%</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -2419,9 +2727,29 @@
                               <rd:DefaultName>Textbox53</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Top</VerticalAlign>
                                 <PaddingTop>2pt</PaddingTop>
                               </Style>
@@ -2456,9 +2784,29 @@
                               <rd:DefaultName>ProductionAlias</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2486,9 +2834,29 @@
                               <rd:DefaultName>FDia</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2516,9 +2884,29 @@
                               <rd:DefaultName>FGSM</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2546,9 +2934,29 @@
                               <rd:DefaultName>BatchQuantity</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2576,9 +2984,29 @@
                               <rd:DefaultName>FinishQuantity</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2606,9 +3034,29 @@
                               <rd:DefaultName>FinishQuantityYds</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2636,9 +3084,29 @@
                               <rd:DefaultName>PreviousDeliveryQty</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2646,7 +3114,58 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="ProcessLoss">
+                            <Textbox Name="TargetProcessLoss">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!TargetProcessLoss.Value</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>TargetProcessLoss</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="ProcessLoss1">
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
@@ -2655,14 +3174,378 @@
                                       <Value>=Fields!ProcessLoss.Value</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
-                                        <Format>n2</Format>
                                       </Style>
                                     </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ProcessLoss1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.25in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox38">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
                                     <TextRun>
-                                      <Value>%</Value>
+                                      <Value>Total</Value>
                                       <Style>
                                         <FontSize>9pt</FontSize>
-                                        <Format>n2</Format>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox38</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                            <ColSpan>3</ColSpan>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell />
+                        <TablixCell />
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="BatchQuantity1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Sum(Fields!BatchQuantity.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>BatchQuantity1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="FinishQuantity1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Sum(Fields!FinishQuantity.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>FinishQuantity1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="FinishQuantityYds1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Sum(Fields!FinishQuantityYds.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>FinishQuantityYds1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="PreviousDeliveryQty1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Sum(Fields!PreviousDeliveryQty.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>PreviousDeliveryQty1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="TargetProcessLoss1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Avg(Fields!TargetProcessLoss.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>TargetProcessLoss1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </Border>
+                                <TopBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
+                                <VerticalAlign>Middle</VerticalAlign>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="ProcessLoss">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Avg(Fields!ProcessLoss.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>#,0.00;- #,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2674,39 +3557,29 @@
                               <rd:DefaultName>ProcessLoss</rd:DefaultName>
                               <Style>
                                 <Border>
-                                  <Color>LightGrey</Color>
                                   <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
                                 </Border>
-                                <VerticalAlign>Middle</VerticalAlign>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="Textbox54">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <rd:DefaultName>Textbox54</rd:DefaultName>
-                              <Style>
-                                <Border>
-                                  <Color>LightGrey</Color>
+                                <TopBorder>
+                                  <Color>Black</Color>
                                   <Style>Solid</Style>
-                                </Border>
+                                  <Width>0.25pt</Width>
+                                </TopBorder>
+                                <BottomBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </BottomBorder>
+                                <LeftBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Color>Black</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.25pt</Width>
+                                </RightBorder>
                                 <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
@@ -2737,13 +3610,16 @@
                     <TablixMember>
                       <Group Name="Details1" />
                     </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>Before</KeepWithGroup>
+                    </TablixMember>
                   </TablixMembers>
                 </TablixRowHierarchy>
                 <DataSetName>Summary</DataSetName>
                 <Top>0in</Top>
                 <Left>0in</Left>
-                <Height>0.75292in</Height>
-                <Width>5.65709in</Width>
+                <Height>1.00292in</Height>
+                <Width>5.6571in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -2754,13 +3630,34 @@
             <KeepTogether>true</KeepTogether>
             <Top>0.05694in</Top>
             <Left>5.4807in</Left>
-            <Height>0.75292in</Height>
+            <Height>1.00292in</Height>
             <Width>5.65712in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>0.25pt</Width>
+              </RightBorder>
             </Style>
           </Rectangle>
           <Tablix Name="Tablix4">
@@ -2773,27 +3670,30 @@
                   <Width>0.30292in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44362in</Width>
+                  <Width>0.41862in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44792in</Width>
+                  <Width>0.38959in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.39583in</Width>
+                  <Width>0.35416in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.60688in</Width>
+                  <Width>0.47355in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.63542in</Width>
+                  <Width>0.39375in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.55208in</Width>
+                  <Width>0.46875in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.6in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.35069in</Height>
+                  <Height>0.25347in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -2805,7 +3705,7 @@
                                 <TextRun>
                                   <Value>SL</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2837,7 +3737,7 @@
                                 <TextRun>
                                   <Value>Roll</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2869,7 +3769,7 @@
                                 <TextRun>
                                   <Value>Dia"</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2902,7 +3802,7 @@
                                 <TextRun>
                                   <Value>GSM</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2935,7 +3835,7 @@
                                 <TextRun>
                                   <Value>kg</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2968,7 +3868,7 @@
                                 <TextRun>
                                   <Value>Yds</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -2999,9 +3899,23 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Remarks</Value>
+                                  <Value>Body</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Part</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3034,7 +3948,7 @@
                                 <TextRun>
                                   <Value>Cutting </Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3048,7 +3962,7 @@
                                 <TextRun>
                                   <Value>Issue</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3070,10 +3984,43 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox57">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Remarks</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox57</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingTop>1pt</PaddingTop>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.19791in</Height>
+                  <Height>0.15245in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3085,7 +4032,7 @@
                                 <TextRun>
                                   <Value>=Fields!SL.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3115,7 +4062,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollNo.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3145,7 +4092,7 @@
                                 <TextRun>
                                   <Value>=Fields!Dia.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3176,7 +4123,7 @@
                                 <TextRun>
                                   <Value>=Fields!GSM.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3207,7 +4154,7 @@
                                 <TextRun>
                                   <Value>=Fields!FinishWeight.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3238,7 +4185,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollWeightYds.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3269,7 +4216,7 @@
                                 <TextRun>
                                   <Value>=Fields!Remarks.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3300,7 +4247,7 @@
                                 <TextRun>
                                   <Value>=Fields!Cutting_Issue.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3320,12 +4267,44 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox58">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox58</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -3352,21 +4331,21 @@
                 <FilterExpression>=Fields!SL.Value</FilterExpression>
                 <Operator>GreaterThanOrEqual</Operator>
                 <FilterValues>
-                  <FilterValue DataType="Integer">21</FilterValue>
+                  <FilterValue DataType="Integer">26</FilterValue>
                 </FilterValues>
               </Filter>
               <Filter>
                 <FilterExpression>=Fields!SL.Value</FilterExpression>
                 <Operator>LessThanOrEqual</Operator>
                 <FilterValues>
-                  <FilterValue DataType="Integer">40</FilterValue>
+                  <FilterValue DataType="Integer">50</FilterValue>
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>1.37791in</Top>
+            <Top>1.38283in</Top>
             <Left>3.75891in</Left>
-            <Height>0.5486in</Height>
-            <Width>3.63384in</Width>
+            <Height>0.40592in</Height>
+            <Width>3.65051in</Width>
             <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=IIF(Count(Fields!RollNo.Value, "Rolls") &lt;= 20, True, False)</Hidden>
@@ -3403,33 +4382,36 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.24917in</Width>
+                  <Width>0.18667in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.30292in</Width>
+                  <Width>0.2682in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44362in</Width>
+                  <Width>0.30473in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.44792in</Width>
+                  <Width>0.35764in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.39583in</Width>
+                  <Width>0.32639in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.60688in</Width>
+                  <Width>0.46105in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.63542in</Width>
+                  <Width>0.4132in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.60773in</Width>
+                  <Width>0.47579in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.78472in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.35069in</Height>
+                  <Height>0.26041in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3441,7 +4423,7 @@
                                 <TextRun>
                                   <Value>SL</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3473,7 +4455,7 @@
                                 <TextRun>
                                   <Value>Roll</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3505,7 +4487,7 @@
                                 <TextRun>
                                   <Value>Dia"</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3538,7 +4520,7 @@
                                 <TextRun>
                                   <Value>GSM</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3571,7 +4553,7 @@
                                 <TextRun>
                                   <Value>kg</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3604,7 +4586,7 @@
                                 <TextRun>
                                   <Value>Yds</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3635,9 +4617,23 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Remarks</Value>
+                                  <Value>Body</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Part</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3670,7 +4666,7 @@
                                 <TextRun>
                                   <Value>Cutting </Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3684,7 +4680,7 @@
                                 <TextRun>
                                   <Value>Issue</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -3706,10 +4702,43 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox59">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Remarks</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox59</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
+                            <PaddingTop>1pt</PaddingTop>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.19791in</Height>
+                  <Height>0.1493in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -3721,7 +4750,7 @@
                                 <TextRun>
                                   <Value>=Fields!SL.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3751,7 +4780,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollNo.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3781,7 +4810,7 @@
                                 <TextRun>
                                   <Value>=Fields!Dia.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3812,7 +4841,7 @@
                                 <TextRun>
                                   <Value>=Fields!GSM.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3843,7 +4872,7 @@
                                 <TextRun>
                                   <Value>=Fields!FinishWeight.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3874,7 +4903,7 @@
                                 <TextRun>
                                   <Value>=Fields!RollWeightYds.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3905,7 +4934,7 @@
                                 <TextRun>
                                   <Value>=Fields!Remarks.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3936,7 +4965,7 @@
                                 <TextRun>
                                   <Value>=Fields!Cutting_Issue.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3956,12 +4985,44 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox60">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox60</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -3988,21 +5049,21 @@
                 <FilterExpression>=Fields!SL.Value</FilterExpression>
                 <Operator>GreaterThan</Operator>
                 <FilterValues>
-                  <FilterValue DataType="Integer">40</FilterValue>
+                  <FilterValue DataType="Integer">50</FilterValue>
                 </FilterValues>
               </Filter>
               <Filter>
                 <FilterExpression>=Fields!SL.Value</FilterExpression>
                 <Operator>LessThanOrEqual</Operator>
                 <FilterValues>
-                  <FilterValue DataType="Integer">60</FilterValue>
+                  <FilterValue DataType="Integer">75</FilterValue>
                 </FilterValues>
               </Filter>
             </Filters>
             <Top>1.37791in</Top>
             <Left>7.4483in</Left>
-            <Height>0.5486in</Height>
-            <Width>3.68949in</Width>
+            <Height>0.40971in</Height>
+            <Width>3.57839in</Width>
             <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=IIF(Count(Fields!RollNo.Value, "Rolls") &lt;= 40, True, False)</Hidden>
@@ -4563,9 +5624,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.60292in</Top>
+              <Top>0.57792in</Top>
               <Left>1.28in</Left>
-              <Height>0.2964in</Height>
+              <Height>0.3214in</Height>
               <Width>8.5in</Width>
               <Style>
                 <Border>

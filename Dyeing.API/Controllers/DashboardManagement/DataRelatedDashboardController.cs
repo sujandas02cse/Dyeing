@@ -1150,5 +1150,93 @@ namespace Dyeing.API.Controllers.DashboardManagement
         }
 
 
+        #region New DashBoard Report
+        [HttpGet]
+        public async Task<IHttpActionResult> GetMonthlyQualityInspectionSummary(int UnitId,int BuyerId,int JobId,int RYear,int RMonth)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().MonthlyQualityInspectionSummaryGet(UnitId,BuyerId,JobId, RYear, RMonth);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetJobWiseRftStatus(int UnitId, int BuyerId, int JobId, int RYear, int RMonth)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().JobWiseRftStatusGet(UnitId, BuyerId, JobId, RYear, RMonth);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetMonthlyProductionDeliveryWIPStatus(int UnitId, int BuyerId, int JobId, int RYear, int RMonth)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().MonthlyProductionDeliveryWIPStatusGet(UnitId, BuyerId, JobId, RYear, RMonth);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+        #endregion
+
+
+        #region FourPointInspectionReport
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetInspectionData(int BpmId, int CompTime,string Part)
+        {
+            try
+            {
+                var queryData = await new DataRelatedDashboardModel().GetInspectionData(BpmId,CompTime,Part);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
+        #endregion
     }
 }

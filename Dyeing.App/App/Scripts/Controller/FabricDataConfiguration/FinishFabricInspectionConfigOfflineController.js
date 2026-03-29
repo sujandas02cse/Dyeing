@@ -22,6 +22,7 @@
     $scope.ShowDiaGsmTable = false;
     $scope.DiaPartList = [];
     $scope.IsLabStickerChecked = false;
+    $scope.IsLabStickerChecked = false;
     $scope.MasterDiaPart = null;
 
     //for (var i = 1; i <= 10; i++) {
@@ -39,7 +40,6 @@
     $scope.btnUpdate = "Update";
 
     function GetMaximumCompactingTime(BatchNo) {
-      debugger;
       FinishFabricInspectionConfigOffline.GetMaximumCompactingTime(
         encodeURIComponent(BatchNo),
         function(data) {
@@ -258,7 +258,6 @@
 
       FinishFabricInspectionConfigOffline.FinishFabricInspectionConfigOffline_Save(
         Obj,
-
         function(data) {
           debugger;
           console.log(data);
@@ -268,7 +267,6 @@
             ShowSticker(
               Obj,
               fixedCompactingTime,
-
               GetMainBatchNo(),
               labStickerFlag,
               $scope.batchType
@@ -306,8 +304,8 @@
       debugger;
       var reportPath =
         $scope.batchType === "Old" || $scope.batchType === "Bulk"
-          ? "~/Reports/QCManagement/LabSticker.rdlc"
-          : "~/Reports/QCManagement/LabSticker.rdlc";
+          ? "~/Reports/QCManagement/LabStickerNew-copy.rdlc"
+          : "~/Reports/QCManagement/LabStickerNew-copy.rdlc";
       debugger;
       var fileName =
         $scope.batchType === "Old" || $scope.batchType === "Bulk"
@@ -505,7 +503,7 @@
               $scope.DiaGsmDetails = $scope.DiaGsmDetails.concat(data);
 
               angular.forEach(data, function(item) {
-                item.PrintLabSticker = true;
+                item.PrintLabSticker = false;
               });
 
               serializeRollNumbers();

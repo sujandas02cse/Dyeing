@@ -34,7 +34,6 @@
     let skipClearTextOnce = false;
 
     FinishFabricInspectionConfig.GetUnitAll($rootScope.UserId, function(data) {
-      debugger;
       $scope.UnitList = data;
       if ($scope.UnitList.length == 1) {
         $scope.Unit = $scope.UnitList[0];
@@ -42,7 +41,6 @@
     });
 
     $scope.$watch("batchType", function(newVal, oldVal) {
-      debugger;
       if (newVal && newVal !== oldVal) {
         if (!skipClearTextOnce) {
           clearTextFields();
@@ -241,7 +239,6 @@
         //  .catch(function(error) {
         //    $rootScope.alert("Error retrieving status: " + error);
         //  });
-        debugger;
         if ($scope.batchType === "Bulk") {
           LoadByBatch();
         } else if ($scope.batchType === "New") {
@@ -326,9 +323,13 @@
                 }
               );
             } else if ($scope.batchType === "New") {
-              /*   else if (status === "New")*/
+              debugger;
+
               FinishFabricInspectionConfig.GetCompTimeByBatchNew(
-                encodeURIComponent(BatchNo),
+                encodeURIComponent($scope.master.BatchNo),
+
+                //encodeURIComponent(BatchNo),
+
                 function(data) {
                   //$scope.RollNoInfo = data;
                   if (data.length > 0) {
@@ -356,25 +357,32 @@
                   }
 
                   FinishFabricInspectionConfig.GetRollNoNew(
-                    encodeURIComponent(BatchNo),
+                    //encodeURIComponent(BatchNo),
+
+                    encodeURIComponent($scope.master.BatchNo),
+
                     $scope.master.CompTime,
                     function(data) {
                       $scope.RollNoInfo = data;
 
-                      if ($scope.master.BatchNo.indexOf("(RP-") == -1) {
-                        let Batch = $scope.master.BatchNo.split("(");
-                        if ($scope.RadioMode == "R" && Batch.length > 1) {
-                          let rollNo = Batch[1]
-                            .replace("(", "")
-                            .replace(")", "");
-                          $scope.master.Roll = {
-                            Value: rollNo,
-                            DisplayValue: rollNo
-                          };
-                          LoadByBatchNew();
-                        }
-                      } else {
-                      }
+                      //  if ($scope.master.BatchNo.indexOf("(RP-") == -1)
+                      //  {
+                      //  let Batch = $scope.master.BatchNo.split("(");
+                      //  if ($scope.RadioMode == "R" && Batch.length > 1) {
+                      //    let rollNo = Batch[1]
+                      //      .replace("(", "")
+                      //      .replace(")", "");
+                      //    $scope.master.Roll = {
+                      //      Value: rollNo,
+                      //      DisplayValue: rollNo
+                      //    };
+                      //    LoadByBatchNew();
+                      //  }
+                      //}
+                      //else
+                      //{
+
+                      // }
                     }
                   );
                 }
@@ -514,7 +522,6 @@
     }
 
     function LoadByBatchNew() {
-      debugger;
       $scope.mnFaultList = [];
       //$scope.majorMinorFault = [];
       var type = "batch";
@@ -551,14 +558,10 @@
             $scope.Ptsperhundred = 0;
             $scope.master.IsWithoutBarcode = true;
 
-            debugger;
-
             var model = data.master[0];
 
             /*$scope.BodyPart = data.batchSpecs;*/
             $scope.BodyPart = data.batchSpecsWithDiaGSM;
-
-            debugger;
 
             if ($scope.BodyPart.length > 0 && $scope.RadioMode == "N") {
               $scope.master.BodyPart = $scope.BodyPart[0].id;
@@ -708,7 +711,6 @@
 
     $scope.ConfirmSave = function(ev) {
       skipClearTextOnce = true;
-      debugger;
 
       if (valid()) {
         $scope.btnSaveDisabled = false;
@@ -718,8 +720,10 @@
           /*templateUrl: "/App/template/Popup/FabricInspectionDialog.html",*/
           /*  templateUrl: "/App/template/Popup/FabricInspectionDialogNew.html",*/
 
-            templateUrl: ($scope.batchType === 'Bulk') ? '/App/template/Popup/FabricInspectionDialog.html'
-                                                        :'/App/template/Popup/FabricInspectionDialogNew.html',
+          templateUrl:
+            $scope.batchType === "Bulk"
+              ? "/App/template/Popup/FabricInspectionDialog.html"
+              : "/App/template/Popup/FabricInspectionDialogNew.html",
 
           targetEvent: ev,
           scope: $scope,
@@ -767,8 +771,26 @@
       return obj;
     }
 
+    function formatNow12Hour() {
+      const d = new Date();
+
+      const yyyy = d.getFullYear();
+      const MM = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+
+      //let hh = d.getHours(); // 0–23
+      //const ampm = hh >= 12 ? "PM" : "AM";
+      //hh = hh % 12;
+      //if (hh === 0) hh = 12; // midnight / noon handling
+
+      //const mm = String(d.getMinutes()).padStart(2, "0");
+
+      //return `${yyyy}-${MM}-${dd} ${hh}:${mm} ${ampm}`;
+
+        return `${yyyy}-${MM}-${dd}`;
+    }
+
     async function SaveUpdate() {
-      debugger;
       console.log($scope.master.BatchNo);
       console.log($scope.master.ActualGSM);
 
@@ -834,8 +856,6 @@
       //updated by Sujan Das on 05-jan-2024
       // send status for saving new and old bactchNo
 
-      debugger;
-
       // Updated by Sujan Das on 17-March-2025
       // Have to fetch Fabric Type for respected body
 
@@ -857,6 +877,10 @@
       //FinishFabricInspectionConfig.SaveUpdate($scope.master, function (res)
       //#endregion
 
+      if ($scope.master.ActualGSM == null || $scope.master.ActualGSM === "") {
+        $scope.master.ActualGSM = 1;
+      }
+
       console.log($scope.master);
 
       FinishFabricInspectionConfig.SaveUpdateNew(
@@ -867,6 +891,7 @@
             let msg = "";
             // Updated by Sujan Das on 19-March-2025
             // create separeate model for old and new system sticker
+
             let model = {};
             if (status == "New") {
               model = {
@@ -889,7 +914,10 @@
                   $scope.master.FabricTypeOfBodyPart +
                   "(" +
                   $scope.master.CompositionOfBodyPart +
-                  ")"
+                  ")",
+                CurrentDate: formatNow12Hour(),
+                  UnitShortName: res.Data.UnitShortName,
+                QRCode: res.Data.QRCode
               };
             } else {
               model = {
@@ -1277,7 +1305,7 @@
 
             <div class="unit">                
                 <span><b>` +
-        data.UnitEName +
+        data.UnitShortName +
         `</b></span>
             </div>
             <div class="qr_code">
@@ -1290,65 +1318,82 @@
         <div class="body">
             <table class="table">
                 <tr>
-                    <td>Buyer:</td>
-                    <td colspan="3">` +
+                  
+      <td colspan="4"><span class="label">Buyer :</span> <span class="value">` +
         data.Buyer +
-        `</td>
+        `</span></td>
+
                 </tr>
                 <tr>
-                    <td>Job:</td>
-                    <td colspan="3">` +
+                   
+        <td colspan="4"><span class="label">Job :</span> <span class="value">` +
         data.Job +
-        `</td>
+        `</span></td>
+
                 </tr>
                 <tr>
-                    <td>Style:</td>
-                    <td colspan="3">` +
+                 
+           <td colspan="4"><span class="label">Style :</span> <span class="value">` +
         data.Order +
-        `</td>
+        `</span></td>
+
                 </tr>
                 <tr>
-                    <td>Batch No:</td>
-                    <td colspan="3">` +
+                  
+           <td colspan="4"><span class="label">Batch :</span> <span class="value">` +
         data.BatchNo +
-        `</td>
+        `</span></td>
                 </tr>
                 <tr>
-                    <td>Color:</td>
-                    <td colspan="3">` +
+                   
+           <td colspan="4"><span class="label">Color :</span> <span class="value">` +
         data.FabColor +
-        `</td>
+        `</span></td>
                 </tr>
                 <tr>
-                    <td>Fabric Type:</td>
-                    <td colspan="3">` +
+                  
+       <td colspan="4"><span class="label">Fabric :</span> <span class="value">` +
         data.FabType +
-        `</td>
+        `</span></td>
                 </tr>
                 <tr>
-                    <td>Req.Dia:</td>
-                    <td style="font-weight:1000;font-size:12px;line-height:12px;white-space:nowrap;">` +
+                    <td>R.Dia:</td>
+                    <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
         data.ReqDia +
         `</td>
                     <td>R.GSM:</td>
-                    <td>` +
+                    <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
         data.ReqGSM +
         `</td>
                 </tr>
+
                 <tr>
-                    <td>Roll No:</td>
-                    <td>` +
+
+  <td colspan="2">
+    <span class="label">Roll :</span>
+    <span class="value">` +
         data.RollNo +
-        " (" +
+        ` (` +
         data.BodyPart +
-        ")" +
-        `</td>
-                    <td colspan="2" style="font-weight:900;font-size:11px;line-height:11px;white-space:nowrap;">
-                    R.Wgt: ` +
+        `)</span>
+  </td>
+
+           <td colspan="2">
+    <span class="label">R.Wgt :</span>
+    <span class="value">` +
         data.FinishWeight +
-        ` 
-              </td>
-                </tr>               
+        `</span>
+  </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="4"><span class="label">Date :</span> <span class="value dateValue">` +
+          data.CurrentDate + ' ('+ data.QRCode +')'+
+        `</span></td>
+
+                </tr>
+
             </table>
         </div>    
     </div>`;
@@ -1364,7 +1409,7 @@
 
                     <div class="unit">                        
                         <span><b>` +
-          data.UnitEName +
+          data.UnitShortName +
           `</b></span>
                     </div>
 
@@ -1376,66 +1421,79 @@
                 <div class="body">
                     <table class="table">
                         <tr>
-                            <td>Buyer:</td>
-                            <td colspan="3">` +
+                         
+      <td colspan="4"><span class="label">Buyer :</span> <span class="value">` +
           data.Buyer +
-          `</td>
+          `</span></td>
+
                         </tr>
                         <tr>
-                            <td>Job:</td>
-                            <td colspan="3">` +
+                            
+            <td colspan="4"><span class="label">Job :</span> <span class="value">` +
           data.Job +
-          `</td>
+          `</span></td>
+
+
                         </tr>
                         <tr>
-                            <td>Style:</td>
-                            <td colspan="3">` +
+                      
+              <td colspan="4"><span class="label">Style :</span> <span class="value">` +
           data.Order +
-          `</td>
+          `</span></td>
                         </tr>
                         <tr>
-                            <td>Batch No:</td>
-                            <td colspan="3">` +
+                           
+             <td colspan="4"><span class="label">Batch :</span> <span class="value">` +
           data.BatchNo +
-          `</td>
+          `</span></td>
                         </tr>
                         <tr>
-                            <td>Color:</td>
-                            <td colspan="3">` +
+                         
+         <td colspan="4"><span class="label">Color :</span> <span class="value">` +
           data.FabColor +
-          `</td>
+          `</span></td>
                         </tr>
                         <tr>
-                            <td>Fabric Type:</td>
-                            <td colspan="3">` +
+                         
+       <td colspan="4"><span class="label">Fabric :</span> <span class="value">` +
           data.FabType +
-          `</td>
+          `</span></td>
                          </tr>
                         <tr>
-                            <td>Req.Dia:</td>
-                            <td style="font-weight:1000;font-size:12px;line-height:12px;white-space:nowrap;">` +
+                            <td>R.Dia:</td>
+                            <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
           data.ReqDia +
           `</td>
                             <td>R.GSM:</td>
-                            <td>` +
+                            <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
           data.ReqGSM +
           `</td>
                         </tr>
                         <tr>
-                            <td>Roll No:</td>
-                            <td>` +
+                           
+           <td colspan="2">
+    <span class="label">Roll :</span>
+    <span class="value">` +
           data.RollNo +
-          " (" +
+          ` (` +
           data.BodyPart +
-          ")" +
-          `</td>
-                            <td colspan="2" style="font-weight:900;font-size:11px;line-height:11px;white-space:nowrap;">B.Wgt:
+          `)</span>
+  </td>
 
-                            ` +
+           <td colspan="2">
+    <span class="label">B.Wgt :</span>
+    <span class="value">` +
           data.BatchWeight +
-          ` 
-                         </td>
-                        </tr>               
+          `</span>
+  </td>
+
+                        </tr>
+             <tr>
+                  <td colspan="4"><span class="label">Date :</span> <span class="value dateValue">` +
+           data.CurrentDate + ' ('+data.QRCode+')' +
+          `</span></td>
+
+              </tr>
                     </table>
                 </div>
             </div>`;
@@ -1443,7 +1501,7 @@
       var popupWin = window.open("", "_blank", "width=auto,height=auto");
       popupWin.document.open();
       popupWin.document.write(
-        `<html><head><link href="../../../Content/css/sticker.css" rel="stylesheet" /></head><body onload="window.print()">` +
+        `<html><head><link href="../../../Content/css/stickerNew.css" rel="stylesheet" /></head><body onload="window.print()">` +
           printContents +
           `</body></html>`
       );

@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDBTest</ConnectString>
+        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -545,6 +545,7 @@
                     <Value>Types of fabrics for Dyeing:- Grey / Heatest Grey / Bleach / Sourcing</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -556,9 +557,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>1.50342in</Top>
-            <Left>2.6342in</Left>
+            <Left>4.18628in</Left>
             <Height>0.24028in</Height>
-            <Width>5.46542in</Width>
+            <Width>3.91334in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -744,17 +745,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Style No:</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
+                    <Value>Style No: </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontSize>8pt</FontSize>
@@ -766,7 +757,7 @@
                   <TextRun>
                     <Value>=First(Fields!StyleInfo.Value, "usp_rpt_SampleBatchPrepMaster")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -780,7 +771,7 @@
             <Top>1.50418in</Top>
             <Left>0.05904in</Left>
             <Height>0.23952in</Height>
-            <Width>2.57516in</Width>
+            <Width>4.12724in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>

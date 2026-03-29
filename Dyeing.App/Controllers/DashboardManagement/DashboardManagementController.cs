@@ -826,7 +826,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
             // string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV2New.rdlc";
             //string RptPath = DyeingUnit == 16 ? "~/Reports/PlanManagement/BatchCardNewV3.rdlc" : "~/Reports/PlanManagement/BatchCardNewV3.rdlc";
 
-            string RptPath = "~/Reports/PlanManagement/BatchCard.rdlc";
+            string RptPath = "~/Reports/PlanManagement/BatchCard3.rdlc";
 
 
             string RptType = "";
@@ -960,8 +960,8 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 rpt.EnableExternalImages = true;
                 string imagePath = Common.QrCodePath + BatchNo + ".png";
                 //string imagePath =  @"D:\Newfolder\" + BatchNo + ".png";
-                //string path=new Uri(Server.MapPath("~/images/BatchQRCode/" + BatchNo + ".png")).AbsoluteUri;
-                
+                //string imagePath=new Uri(Server.MapPath("~/images/BatchQRCode/" + BatchNo + ".png")).AbsoluteUri;
+
                 ReportParameter parameter = new ReportParameter("BatchQRCode", imagePath);
                 rpt.SetParameters(parameter);
 
@@ -1106,7 +1106,9 @@ namespace Dyeing.App.Controllers.DashboardManagement
             string RptPath = "";
 
             if (BatchType == "NewBulk")
-                RptPath = "~/Reports/FabricManagement/PackingList_New.rdlc";
+               // RptPath = "~/Reports/FabricManagement/PackingList_New.rdlc";
+            RptPath = "~/Reports/FabricManagement/PackingList_New-Copy.rdlc";
+
 
             try
             {
@@ -1116,7 +1118,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
 
                 List<string> parts = new List<string> {
                 "Header", "BatchQty", "Fabric", "YarnLot",
-                "InspBy", "Rolls", "Summary", "Tracking","Options","Image"
+                "InspBy", "Rolls", "Summary", "Tracking","Options","Image","Color","FabricType"
                 };
 
                 DataTable mainTable = new DataTable();
@@ -1170,6 +1172,287 @@ namespace Dyeing.App.Controllers.DashboardManagement
         }
 
 
+       
+
+       public async Task<ActionResult> GetInspctionReport(int BpmId, int CompTime, string Format)
+        {
+            string RptPath = "~/Reports/QCManagement/4PointInspection_New.rdlc";
+
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                rpt.ReportPath = Server.MapPath(RptPath);
+
+                List<string> Parts = new List<string> {
+                "Unit", "Header", "MC", "BatchQty",
+                "FinishQty", "BatchProcessLoss", "FabricType", "Color",
+                "Dia","GSM","InspBy","Composition",
+                "YarnLot","YarnSource","AverageGSM","AcceptRejectRollQty",
+                "Roll","Fault","InspStartEnd","InspectionSummary",
+                "ProcessLoss","Image","Location","PointSystem","PointClassification","BuyerHeader"
+                };
+
+                DataTable mainTable = new DataTable();
+                DataTable dt = new DataTable();
+
+                foreach (var Part in Parts)
+                {
+                    string apiUrl = $"DataRelatedDashboard/GetInspectionData?BpmId={BpmId}&CompTime={CompTime}&Part={Part}";
+                    client.DefaultRequestHeaders.Remove("Authorization");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonData = await response.Content.ReadAsStringAsync();
+                        var listObj = JsonConvert.DeserializeObject<List<object>>(jsonData);
+                        var json = JsonConvert.SerializeObject(listObj);
+                        dt = (DataTable)JsonConvert.DeserializeObject(json, typeof(DataTable));
+                        ReportDataSource rs = new ReportDataSource(Part, dt);
+                        rpt.DataSources.Add(rs);
+                        rpt.EnableExternalImages = true;
+                    }
+                }
+
+                rpt.Refresh();
+
+                var fileStream = prn.Export(Format, rpt);
+
+                if (Format == "PDF")
+                    return File(fileStream, "application/pdf");
+
+                else if (Format == "Excel")
+                    return File(fileStream, "application/vnd.ms-excel", "PackingList.xls");
+
+                else
+                    return File(fileStream, "application/ms-word", "PackingList.doc");
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+
+
+        #endregion
+
+        #region New Dashboard Report
+        public async Task<ActionResult> GET_MonthlyQualityInspectionSummary(int UnitId, int BuyerId, int JobId, int RYear, int RMonth, string Format)
+        {
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                DataSet ds = new DataSet();
+
+                // prepare HTTP call
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                // Call your Web API endpoint (which executes the stored procedure)
+                HttpResponseMessage response = await client.GetAsync(
+                    $"DataRelatedDashboard/GetMonthlyQualityInspectionSummary?UnitId={UnitId}&BuyerId={BuyerId}&JobId={JobId}&RYear={RYear}&RMonth={RMonth}"
+                );
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Failed to retrieve data from API.");
+
+                // 🔹 Read and parse JSON
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var allTables = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+
+                // 🔹 Convert to DataSet
+                foreach (var kvp in allTables)
+                {
+                    string innerJson = kvp.Value.ToString();
+                    DataTable dt = JsonConvert.DeserializeObject<DataTable>(innerJson);
+                    dt.TableName = kvp.Key; // m_Item1, m_Item2, m_Item3
+                    ds.Tables.Add(dt);
+                }
+
+                // 🔹 Load RDLC report
+                rpt.ReportPath = Server.MapPath("~/Reports/DataRelatedDashboard/MonthlyQualityInspectionSummary.rdlc");
+                rpt.DataSources.Clear();
+
+                // 🔹 Bind datasets
+                if (ds.Tables.Contains("m_Item1"))
+                    rpt.DataSources.Add(new ReportDataSource("SummaryDS", ds.Tables["m_Item1"]));
+
+                if (ds.Tables.Contains("m_Item2"))
+                    rpt.DataSources.Add(new ReportDataSource("PenaltyDS", ds.Tables["m_Item2"]));
+
+                if (ds.Tables.Contains("m_Item3"))
+                    rpt.DataSources.Add(new ReportDataSource("AppearanceDS", ds.Tables["m_Item3"]));
+
+                rpt.Refresh();
+
+                // 🔹 Step 6: Export
+                var fileStream = prn.Export(Format, rpt);
+
+                string contentType = "application/pdf";
+                string fileName = "MonthlyQualityInspectionSummary" + DateTime.Now.ToString("dd-MMM-yyyy");
+
+                if (Format == "Excel")
+                {
+                    contentType = "application/vnd.ms-excel";
+                    fileName += ".xls";
+                }
+                else if (Format == "Word")
+                {
+                    contentType = "application/msword";
+                    fileName += ".doc";
+                }
+                else
+                {
+                    contentType = "application/pdf";
+                    fileName += ".pdf";
+                }
+
+                return File(fileStream, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error generating Monthly Quality Inspection Summary report.", ex);
+            }
+        }
+
+        public async Task<ActionResult> GET_JobWiseRftStatus(int UnitId, int BuyerId, int JobId, int RYear, int RMonth, string Format)
+        {
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                DataSet ds = new DataSet();
+
+                // prepare HTTP call
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                // Call your Web API endpoint (which executes the stored procedure)
+                HttpResponseMessage response = await client.GetAsync(
+                    $"DataRelatedDashboard/GetJobWiseRftStatus?UnitId={UnitId}&BuyerId={BuyerId}&JobId={JobId}&RYear={RYear}&RMonth={RMonth}"
+                );
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Failed to retrieve data from API.");
+
+                // 🔹 Read and parse JSON
+                var jsonString = await response.Content.ReadAsStringAsync();
+
+                // 🔹 Convert JSON array → DataTable
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonString);
+
+                // 🔹 Add to DataSet
+                ds.Tables.Add(dt);
+
+
+
+                // 🔹 Load RDLC report
+                rpt.ReportPath = Server.MapPath("~/Reports/DataRelatedDashboard/JobWiseRftStatus.rdlc");
+                rpt.DataSources.Clear();
+                rpt.DataSources.Add(new ReportDataSource("JobWiseRftStatus", ds.Tables[0]));
+
+                rpt.Refresh();
+
+                // 🔹 Step 6: Export
+                var fileStream = prn.Export(Format, rpt);
+
+                string contentType = "application/pdf";
+                string fileName = "JobWiseRftStatus" + DateTime.Now.ToString("dd-MMM-yyyy");
+
+                if (Format == "Excel")
+                {
+                    contentType = "application/vnd.ms-excel";
+                    fileName += ".xls";
+                }
+                else if (Format == "Word")
+                {
+                    contentType = "application/msword";
+                    fileName += ".doc";
+                }
+                else
+                {
+                    contentType = "application/pdf";
+                    fileName += ".pdf";
+                }
+
+                return File(fileStream, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error generating Monthly Quality Inspection Summary report.", ex);
+            }
+        }
+
+        public async Task<ActionResult> GET_MonthlyProductionDeliveryWIPStatus(int UnitId, int BuyerId, int JobId, int RYear, int RMonth, string Format)
+        {
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                DataSet ds = new DataSet();
+
+                // prepare HTTP call
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                // Call your Web API endpoint (which executes the stored procedure)
+                HttpResponseMessage response = await client.GetAsync(
+                    $"DataRelatedDashboard/GetMonthlyProductionDeliveryWIPStatus?UnitId={UnitId}&BuyerId={BuyerId}&JobId={JobId}&RYear={RYear}&RMonth={RMonth}"
+                );
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Failed to retrieve data from API.");
+
+                // 🔹 Read and parse JSON
+                var jsonString = await response.Content.ReadAsStringAsync();
+
+                // 🔹 Convert JSON array → DataTable
+                DataTable dt = JsonConvert.DeserializeObject<DataTable>(jsonString);
+
+                // 🔹 Add to DataSet
+                ds.Tables.Add(dt);
+
+
+
+                // 🔹 Load RDLC report
+                rpt.ReportPath = Server.MapPath("~/Reports/DataRelatedDashboard/MonthlyProductionDeliveryWIPStatus.rdlc");
+                rpt.DataSources.Clear();
+                rpt.DataSources.Add(new ReportDataSource("MonthlyProductionDeliveryWIPStatus", ds.Tables[0]));
+
+                rpt.Refresh();
+
+                // 🔹 Step 6: Export
+                var fileStream = prn.Export(Format, rpt);
+
+                string contentType = "application/pdf";
+                string fileName = "MonthlyProductionDeliveryWIPStatus" + DateTime.Now.ToString("dd-MMM-yyyy");
+
+                if (Format == "Excel")
+                {
+                    contentType = "application/vnd.ms-excel";
+                    fileName += ".xls";
+                }
+                else if (Format == "Word")
+                {
+                    contentType = "application/msword";
+                    fileName += ".doc";
+                }
+                else
+                {
+                    contentType = "application/pdf";
+                    fileName += ".pdf";
+                }
+
+                return File(fileStream, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error generating Monthly Quality Inspection Summary report.", ex);
+            }
+        }
         #endregion
 
     }

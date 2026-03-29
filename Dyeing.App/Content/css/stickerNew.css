@@ -1,0 +1,83 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 12px;
+    line-height: 12px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+.wrapper {
+    width: 50mm;
+    height: 50mm !important;
+    min-height: 50mm !important;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1px;
+    height: 44px;
+}
+
+    .header .unit span { /* padding-left: 48px; */
+    }
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+.qr_code img {
+    width: 44px;
+    height: 44px;
+    padding: 0px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #333;
+    table-layout: fixed;
+}
+
+    table td {
+        border: 1px solid #333; /* ✅ main compact controls */
+        padding: 0px !important; /* keep 0 */
+        font-size: 12px; /* smaller inside table */
+        line-height: 12px;
+        vertical-align: middle; /* optional: reduces text extra spacing */
+        letter-spacing: 0;
+    }
+
+        table td:first-child {
+            width: 60px;
+        }
+
+.label {
+    font-weight: 400; /* normal */
+}
+
+.value {
+    font-weight: 700; /* bold */
+}
+/* PRINT: remove browser default margins */
+
+@media print {
+    body {
+        margin: 0;
+    }
+
+    .wrapper {
+        width: 50mm;
+        height: 50mm !important;
+        min-height: 50mm !important;
+        padding-left: 4px; /* keep small */
+        padding-top: 4px;
+    }
+}

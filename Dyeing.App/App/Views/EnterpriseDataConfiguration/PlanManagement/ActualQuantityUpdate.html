@@ -1,0 +1,481 @@
+﻿<style>
+    .table-scroll tbody {
+        max-height: 3000px !important;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .form-check-input {
+        position: relative !important;
+    }
+
+    label {
+        /*font-size: 12px !important;*/
+    }
+
+    .form-control {
+        /*font-size: 12px !important;*/
+        padding: 5px 2px;
+    }
+
+    .md-datepicker-input {
+        width: 120px;
+    }
+
+    .input-height {
+        width: 230px !important;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1.5);
+    }
+
+    .machine_new table th,
+    .machine_new table td {
+        border: 1px solid #9f9f9f !important;
+        padding: 5px 7px !important;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .control-label {
+        /*text-align:left;*/
+    }
+
+    .select2-selection__choice {
+        color: green !important;
+        font-size: 12px;
+    }
+
+    .auto-complete-div-multi-wrapper auto-complete-div.default-style ul {
+        background: whitesmoke;
+        z-index: 1001;
+    }
+
+    .auto-complete-repeat {
+        /* padding:2px !important;
+        margin:2px !important;*/
+        font-size: 12px !important;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        font-size: 15px;
+    }
+
+    .auto-complete-div-multi-wrapper {
+        background-color: white !important;
+    }
+
+    .planAuto {
+        border-style: solid;
+        border-width: 1px;
+        border-color: lightgrey;
+        border-radius: 4px;
+    }
+
+    .plan {
+        width: 230px;
+        display: inline;
+        font-size: 16px;
+        font-weight: bold;
+        color: green;
+        /*float: right;*/
+    }
+
+    .btn-dropdown {
+        width: 211px;
+        border-color: none;
+        font-size: 12px;
+    }
+
+    .dropdown-batch {
+        border-width: 0.1px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: gray;
+        font-size: 12px;
+    }
+    /*.btn-sm {
+        padding: 5px !important;
+        width: 100px !important;
+        font-size: 11px !important;
+    }*/
+    .btn:hover {
+        color: inherit;
+    }
+
+    .table-scroll tbody {
+        max-height: 1000px !important;
+    }
+
+    .button-search {
+        border-radius: 4px;
+        border: none;
+        text-align: center;
+        font-size: 14px;
+        width: 85px;
+        padding: 4px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
+    .custom_tbl {
+        table-layout: fixed;
+    }
+
+        .custom_tbl th, .custom_tbl td {
+            border: 1px solid #555 !important;
+            vertical-align: middle !important;
+            padding: 10px 0 !important;
+        }
+
+        .custom_tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 6;
+        }
+
+    .dropdown-menu {
+        z-index: 5;
+    }
+
+    .custom_tbl td {
+        font-size: 12px;
+    }
+
+        /* .custom_tbl tbody tr:nth-child(2n+1) {
+        background: #cae3e7;
+    }*/
+
+        .custom_tbl td.input {
+            color: #333 !important;
+            padding: 0 5px !important;
+            position: relative;
+        }
+
+            .custom_tbl td.input input {
+                display: block;
+                /* border: 1px solid; */
+                background: #fff;
+                color: #333 !important;
+                padding: 5px;
+                border: none;
+                width: 100%;
+                height: 35px;
+                border-radius: 3px;
+            }
+
+    .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td {
+        background: #364865 !important;
+    }
+
+        .table-hover > tbody > tr:hover, .table-hover > tbody > tr:hover > td.input {
+            /*background: #fff !important;*/
+            color: #333 !important;
+        }
+
+    .custom_tbl tr:hover td {
+        background: #364865 !important;
+        cursor: default;
+        color: white;
+    }
+
+    .md-datepicker-input-container {
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: inherit;
+    }
+
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px; /* Adjust the gap between radio buttons */
+    }
+
+    .radio-label {
+        margin-left: 30px; /* Adjust the space between radio button and label text */
+    }
+
+    .radio-container {
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-input {
+        transform: scale(1.2);
+    }
+
+    .f-24 {
+        font-size: 24px;
+    }
+
+    .f-18 {
+        font-size: 18px;
+    }
+
+
+    /*form Chart*/
+    .chart-container {
+        height: 400px; /* Adjust this value as needed */
+        width: 100%;
+    }
+
+
+
+    /* 1. Set up the card for 3D effects and smooth transitions */
+    .card1 {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative; /* Needed for pseudo-elements */
+        overflow: hidden; /* Keeps the glowing effect contained within the card's rounded corners */
+        transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+        cursor: pointer;
+        /* Add perspective to the card container for a 3D feel */
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        /* 2. Create the dynamic "glow" or "shine" effect using a pseudo-element */
+    .card1::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200%; /* Large enough to cover the card during rotation */
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+        opacity: 0; /* Hidden by default */
+        transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        /* Position the shine element relative to the center of the card */
+        transform: translate(-50%, -50%) rotate(45deg);
+        z-index: 0; /* Behind the content */
+    }
+
+    /* 3. Apply hover effects */
+    .card1:hover {
+        transform: translateY(-8px) scale(1.02) rotateX(2deg); /* Lifts, slightly enlarges, and slightly tilts */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Stronger shadow */
+    }
+
+   /* Show the glow/shine on hover */
+    .card1:hover::before {
+        opacity: 1;
+        /* Optionally animate the background position slightly on hover */
+        transform: translate(-50%, -50%) rotate(135deg);
+    }
+
+    .w-14 {
+        width: 14% !important;
+    }
+    .w-10{
+        width: 8% !important;
+    }
+
+    .max-width-custom {
+        max-width: -webkit-fill-available;
+    }
+
+    td .select2-container {
+        /* Set the width to fill the container */
+        width: 100% !important;
+        /* Ensure all padding/borders are counted inwards, making it fit better */
+        box-sizing: border-box;
+    }
+
+    input{
+        border: none !important;
+    }
+
+</style>
+<div ng-controller="ActualQuantityUpdateController">
+    <div class="content-header sty-one">
+        <h1>Actual Quantity Update</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Enterprise Data Configuaration</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i>Dyeing Plan Management</a></li>
+            <li><i class="fa fa-angle-right">Actual Quantity Update</i></li>
+        </ol>
+    </div>
+
+    <div class="card card-body" style="padding:0; ">
+        <!--<div class="mt-3 text-center">
+        <span class="radio-label">Bulk</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'Bulk'" type="radio" style="margin-right:5%;" name="Mode" value="Bulk" />
+        <span class="radio-label">New</span><input class="radio-input" ng-model="Mode" ng-change="changeMode()" ng-value="'New'" type="radio" style="margin-right:5%;" name="Mode" value="New" />
+    </div>-->
+        <form id="form" name="form">
+            <div class="form-group row" style="margin-top:20px;">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Unit:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <select class="form-control input-height col-md-9" select2="" name="unit"
+                                    data-ng-model="Unit"
+                                    ng-change="LoadBatchData()"
+                                    ng-options="item as item.Name for item in UnitList">
+                                <option value="" ng-required="true">Select Unit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="control-label col-md-3">
+                            Batch No:
+                            <span class="required" style="color:red"> * </span>
+                        </label>
+                        <div class="col-md-7">
+                            <select class="form-control input-height col-md-9" select2="" name="Batch"
+                                    data-ng-model="Batch"
+                                    ng-change="GetBatchData(Batch)"
+                                    ng-options="item as item.BatchNo for item in BatchList">
+                                <option value="" ng-required="true">Select Batch No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div style="width: 100%; overflow: auto; ">
+                <table id="dynamicProductionReport" class="table table-bordered bordered table-text table-hover  mx-4 max-width-custom">
+                    <thead class="bg">
+                        <tr>
+                            <th class="w-10">Body Part &nbsp;</th>
+                            <th class="w-10">Plan Qty &nbsp;</th>
+                            <th class="w-10">Actual Qty &nbsp;</th>
+                            <th >Fabric</th>
+                            <th class="w-10">Rolls &nbsp;</th>
+                            <th class="w-14">F/Dia &nbsp;</th>
+                            <th>Remarks &nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="obj in (ProductionData | orderBy:sortKey:reverse)">
+
+                            <!-- Body Part Readonly -->
+                            <td>{{obj.BodyPart}}</td>
+                            <td>
+                                <input type="number"
+                                       ng-model="obj.PlanQty"
+                                       step="0.01"
+                                       min="0"
+                                       ng-keypress="onlyNumber($event, true)"
+                                       ng-blur="checkMin(obj, 'PlanQty', 0)"
+                                       readonly
+                                       class="form-control text-center" />
+                            </td>
+                            <!-- Actual Qty (cannot be less than original DB value) -->
+                            <td>
+                                <input type="number"
+                                       ng-model="obj.ActualQty"
+                                       step="0.01"
+                                       min="{{obj.ActualQty}}"
+                                       ng-keypress="onlyNumber($event, true)"
+                                       ng-blur="checkMin(obj, 'ActualQty', 0)"
+                                       class="form-control text-center" />
+                            </td>
+
+                            <!-- Fabric Type -->
+                            <td>
+                                <select class="form-control text-center"
+                                        select2
+                                        ng-model="obj.ItemId"
+                                        ng-disabled="(obj.ActualQty_DB > 0) "
+                                        ng-options="item.ItemId as item.ItemDescription
+                                        for item in FabricList
+                                        | filter:{ ProductionAlias: obj.ProductionAlias }">
+                                    <option value="">Select Fabric</option>
+                                </select>
+                            </td>
+
+                            <!-- Rolls editable (integer only) -->
+                            <!--<td>
+                                <input type="number"
+                                       ng-model="obj.Rolls"
+                                       step="1"
+                                       ng-attr-min="{{obj.Rolls || 0}}"
+                                       ng-disabled="!obj.ActualQty || obj.ActualQty < obj.ActualQty_DB"
+                                       ng-keypress="onlyInteger($event)"
+                                       ng-blur="checkMin(obj, 'Rolls', obj.Rolls)"
+                                       class="form-control text-center" />
+                            </td>-->
+
+                            <!-- Rolls editable (integer only) -->
+                            <td>
+                                <input type="number"
+                                       ng-model="obj.Rolls"
+                                       step="1"
+                                       ng-attr-min="{{obj.Rolls || 0}}"
+                                       ng-keypress="onlyInteger($event)"
+                                       ng-blur="checkMin(obj, 'Rolls', obj.Rolls)"
+                                       class="form-control text-center" />
+                            </td>
+
+                            <!-- FDia editable (integer only) -->
+                            <!--<td>
+                                <select class="form-control text-center" select2 name="FDia"
+                                        ng-model="obj.FDia"
+                                        ng-disabled="!obj.ActualQty || (obj.ActualQty_DB === 0 || obj.ActualQty === 0)"
+                                        ng-options="item.FDia as item.FDia for item in DiaList ">
+                                    <option value="">Select Dia</option>
+                                </select>
+                            </td>-->
+                            <!-- FDia editable (integer only) -->
+                            <td>
+                                <select class="form-control text-center" select2 name="FDia"
+                                        ng-model="obj.FDia"
+                                        ng-options="item.FDia as item.FDia for item in DiaList ">
+                                    <option value="">Select Dia</option>
+                                </select>
+                            </td>
+
+                            <!-- Remarks editable only when ActualQty > 0 -->
+                            <td>
+                                <textarea class="form-control m-0 p-0"
+                                          rows="3"
+                                          placeholder="Type here..."
+                                          ng-model="obj.Remarks"
+                                          ng-trim="false"
+                                          ng-disabled="!obj.ActualQty || obj.ActualQty < obj.ActualQty_DB"
+                                          maxlength="150"></textarea>
+                                <small class="text-muted d-block text-right">
+                                    {{ obj.Remarks.length || 0 }}/150 characters
+                                </small>
+                                <small class="text-danger" ng-show="obj.Remarks.length >= 150">
+                                    You have reached the maximum character limit.
+                                </small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12 row" style="padding-top: 10px; padding-bottom: 10px; margin-bottom:110px !important;"
+                 ng-show="ProductionData.length > 0">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+

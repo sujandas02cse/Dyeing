@@ -7,10 +7,48 @@
   "$parse",
   "Home",
   function($scope, $rootScope, $mdDialog, $mdToast, $q, $parse, Home) {
+    // updated By Sujan Das on 09-03-2026
+    function buildRouteUrl(menu) {
+      if (!menu.PageName || menu.PageName === "") {
+        return "";
+      }
+
+      // only MachineOperation page needs dynamic menu text
+
+      if (menu.PageName === "MachineOperation") {
+        return (
+          "#!/" +
+          menu.PageName +
+          "?menuName=" +
+          encodeURIComponent(menu.ManuName || "") +
+          "&parentName=" +
+          encodeURIComponent("Machine Data Configuration")
+        );
+      }
+
+      //other stable pages remain unchanged
+      return "#!/" + menu.PageName;
+    }
+
     Home.GetMenuData($rootScope.UserId, function(data) {
       $scope.MenuList = data;
       $scope.CurrentMenuData = data.filter(x => x.ManuStepId == 1);
       $scope.BoxMenuData = data.filter(x => x.BPriority > 0);
+
+      // updated By Sujan Das on 09-03-2026
+
+      angular.forEach($scope.MenuList, function(menu) {
+        menu.RouteUrl = buildRouteUrl(menu);
+      });
+
+        angular.forEach($scope.CurrentMenuData, function (menu) {
+        menu.RouteUrl = buildRouteUrl(menu);
+      });
+
+      angular.forEach($scope.BoxMenuData, function(menu) {
+        menu.RouteUrl = buildRouteUrl(menu);
+      });
+
       //$scope.MainMenuList = data.filter(x => x.ManuStepId == 1);
     });
 
@@ -20,6 +58,12 @@
       $scope.CurrentMenuData = $scope.MenuList.filter(
         x => x.ParantManuId == menuId
       );
+
+      // updated By Sujan Das on 09-03-2026
+
+      angular.forEach($scope.CurrentMenuData, function(menu) {
+        menu.RouteUrl = buildRouteUrl(menu);
+      });
     };
 
     //var opendd;

@@ -124,6 +124,25 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             controller: 'BuyerWisePointSystemValueConfigController'
         })
 
+        //Basic Data Config=>Lab Basic Setup routing
+        .when('/LightSourceEnlishment', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LightSourceEnlishment.html?' + ts,
+            controller: 'LightSourceEnlishmentController'
+        })
+
+        .when('/LabBookingReceive', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabBookingReceive.html?' + ts,
+            controller: 'LabBookingReceiveController'
+        })
+        .when('/LabDipDeclare', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipDeclare.html?' + ts,
+            controller: 'LabDipDeclareController'
+        })
+        .when('/TestRequestForm', {
+            templateUrl: '/App/Views/BasicDataConfiguration/TestRequestForm/TestRequestForm.html?' + ts,
+            controller: 'TestRequestFormController'
+        })
+
         //Machine Data Config routing
         .when('/MachineDetailsConfig', {
             templateUrl: '/App/Views/MachineDataConfiguration/MachineDetailsConfig.html?'+ts,
@@ -187,6 +206,11 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
         .when('/SuedingMcOpConfig', {
             templateUrl: '/App/Views/MachineDataConfiguration/SuedingMcOpConfig.html?' + ts,
             controller: 'SuedingMcOpConfigController'
+        })
+
+        .when('/MachineOperation', {
+            templateUrl: '/App/Views/MachineDataConfiguration/MachineOperation.html?' + ts,
+            controller: 'MachineOperationConfigController'
         })
 
         //EnterpriseDataConfiguration=>ProductionPlanConfig routing
@@ -261,6 +285,10 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchReprocessConfig.html?' + ts,
             controller: 'BatchReprocessConfigController'
         })
+        .when('/BatchToBatchRollTransfer', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchToBatchRollTransfer.html?' + ts,
+            controller:'BatchToBatchRollTransferController'
+        })
 
         //EnterpriseDataConfiguration=>Dyeing Plan Management
         .when('/InitialInformation', {
@@ -310,6 +338,22 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
         .when('/SCMSynchronization', {
             templateUrl: '/App/Views/EnterpriseDataConfiguration/PlanManagement/SCMSynchronization.html?' + ts,
             controller: 'SCMSynchronizationController'
+        })
+        .when('/ActualQuantityUpdate', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/PlanManagement/ActualQuantityUpdate.html?' + ts,
+            controller: 'ActualQuantityUpdateController'
+        })
+        .when('/CopyQrCode', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/PlanManagement/CopyQrCode.html?' + ts,
+            controller: 'CopyQrCodeController'
+        })
+        .when('/StyleOrderUpdate', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/PlanManagement/StyleOrderUpdate.html?' + ts,
+            controller: 'StyleOrderUpdateController'
+        })
+        .when('/DyeingFollowUp', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/PlanManagement/DyeingFollowUp.html?' + ts,
+            controller: 'DyeingFollowUpController'
         })
 
         //EnterpriseDataConfiguration=>Approval Management routing
@@ -453,6 +497,18 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
         .when('/DynamicProductionMonitoring', {
             templateUrl: '/App/Views/DashboardManagement/DataRelatedDashboard/DynamicProductionMonitoring.html?' + ts,
             controller: 'DynamicProductionMonitoring'
+        })
+        .when('/MonthlyQualityInspectionSummary', {
+            templateUrl: '/App/Views/DashboardManagement/DataRelatedDashboard/MonthlyQualityInspectionSummary.html?' + ts,
+            controller: 'MonthlyQualityInspectionSummaryController'
+        })
+        .when('/JobWiseRftStatus', {
+            templateUrl: '/App/Views/DashboardManagement/DataRelatedDashboard/JobWiseRftStatus.html?' + ts,
+            controller: 'JobWiseRftStatusController'
+        })
+        .when('/MonthlyProductionDeliveryWIPStatus', {
+            templateUrl: '/App/Views/DashboardManagement/DataRelatedDashboard/MonthlyProductionDeliveryWIPStatus.html?' + ts,
+            controller: 'MonthlyProductionDeliveryWIPStatusController'
         })
 
         //BroadcastManagement routing

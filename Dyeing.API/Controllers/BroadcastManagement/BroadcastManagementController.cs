@@ -63,7 +63,6 @@ namespace Dyeing.API.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IHttpActionResult> GetReportingData(string SQL, string rptParm)
         {

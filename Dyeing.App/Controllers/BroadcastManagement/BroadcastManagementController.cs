@@ -131,6 +131,7 @@ namespace AMS.UI.Controllers
             //paramList.Add(new ReportParameter("BatchQRCode", "http://example.com/yourqrcode.png")); // if passing QR code path
 
             rpt.EnableExternalImages = true;
+
             //rpt.SetParameters(paramList);
 
 
@@ -162,6 +163,8 @@ namespace AMS.UI.Controllers
                 return File(fileStream, "application/ms-word", _rptInfo.FileName + ".doc");
 
         }
+
+        
 
 
     }
