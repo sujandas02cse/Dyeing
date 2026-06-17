@@ -161,7 +161,7 @@ app.controller("BatchPlan", ['$scope', '$rootScope', '$mdDialog', '$mdToast', '$
 
             let isExist = $scope.chkPlan.filter(x => x.JobNo === dataModel.JobNo);
 
-            let isSameColor = $scope.chkPlan.every(x => x.Color === dataModel.Color);
+            let isSameColor = $scope.chkPlan.every(x => x.Color.trim() === dataModel.Color.trim());
 
             if ($scope.chkPlan.length == 0 || (isExist.length > 0 && isSameColor )) {
                 dataModel.GroupNo = 1;

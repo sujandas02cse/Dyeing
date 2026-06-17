@@ -86,5 +86,72 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.BatchConfiguration
                 return Ok(_res);
             }
         }
+
+
+
+
+        #region New Reprocess
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchbyUnitNew(int UnitId, string Type)
+        {
+            try
+            {
+                var queryData = await new BatchReprocessConfigModel().GetBatchbyUnitNew(UnitId,Type);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetBatchDatabyUnitNew(int BpmId)
+        {
+            try
+            {
+                var queryData = await new BatchReprocessConfigModel().GetBatchDatabyUnitNew(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+
+        }
+
+        [HttpPost]
+        public IHttpActionResult BatchReprocessData_SaveUpdateNew(BatchRprocessWrapper _obj)
+        {
+            try
+            {
+                var queryData = new BatchReprocessConfigModel().InsertBulkDataNew(_obj);
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(exception: ex);
+            }
+        }
+
+        #endregion
     }
 }

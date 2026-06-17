@@ -947,7 +947,15 @@
             if (status == "Old") {
               genSticker(model);
             } else if (status == "New") {
-              genStickerNew(model);
+
+                if ($scope.master.Buyer == 'JM Fabrics') {
+                    genStickerJMFabrics(model);
+                }
+                else {
+                    genStickerNew(model);
+                }
+
+              
             }
 
             for (var i = 0; i < $scope.details.length; i++) {
@@ -1510,5 +1518,226 @@
       //popupWin.print();
       //popupWin.close();
     }
+
+    function genStickerJMFabrics(data) {
+          console.log("sticker", data);
+          var printContents =
+              `<div class="wrapper">
+        <div class="header">
+            <div class="logo">
+                           
+            </div>
+
+            <div class="unit">                
+                <span><b>` +
+              data.UnitShortName +
+              `</b></span>
+            </div>
+            <div class="qr_code">
+                <img src="` +
+              data.StickerPath +
+              `" />
+            </div>
+
+        </div>
+        <div class="body">
+            <table class="table">
+                <tr>
+                  
+      <td colspan="4"><span class="label">Buyer :</span> <span class="value">` +
+              data.Buyer +
+              `</span></td>
+
+                </tr>
+                <tr>
+                   
+        <td colspan="4"><span class="label">Job :</span> <span class="value">` +
+              data.Job +
+              `</span></td>
+
+                </tr>
+                <tr>
+                 
+           <td colspan="4"><span class="label">Style :</span> <span class="value">` +
+              data.Order +
+              `</span></td>
+
+                </tr>
+                <tr>
+                  
+           <td colspan="4"><span class="label">Batch :</span> <span class="value">` +
+              data.BatchNo +
+              `</span></td>
+                </tr>
+                <tr>
+                   
+           <td colspan="4"><span class="label">Color :</span> <span class="value">` +
+              data.FabColor +
+              `</span></td>
+                </tr>
+                <tr>
+                  
+       <td colspan="4"><span class="label">Fabric :</span> <span class="value">` +
+              data.FabType +
+              `</span></td>
+                </tr>
+                <tr>
+                    <td>R.Dia:</td>
+                    <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
+              data.ReqDia +
+              `</td>
+                    <td>R.GSM:</td>
+                    <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
+              data.ReqGSM +
+              `</td>
+                </tr>
+
+                <tr>
+
+  <td colspan="2">
+    <span class="label">Roll :</span>
+    <span class="value">` +
+              data.RollNo +
+              ` (` +
+              data.BodyPart +
+              `)</span>
+  </td>
+
+           <td colspan="2">
+    <span class="label">R.Wgt :</span>
+    <span class="value">` +
+              data.FinishWeight +
+              `</span>
+  </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="4"><span class="label">Date :</span> <span class="value dateValue">` +
+              data.CurrentDate + ' (' + data.QRCode + ')' +
+              `</span></td>
+
+                </tr>
+
+            </table>
+        </div>    
+    </div>`;
+          if (data.LabStickerReq == true) {
+              printContents +=
+                  `<div class="wrapper">
+                <div class="header">
+                    <div class="qr_code">
+                        <img src="` +
+                  data.StickerPath +
+                  `" />
+                    </div>                    
+
+                    <div class="unit">                        
+                        <span><b>` +
+                  data.UnitShortName +
+                  `</b></span>
+                    </div>
+
+                    <div class="logo">
+                        
+                    </div>
+
+                </div>
+                <div class="body">
+                    <table class="table">
+                        <tr>
+                         
+      <td colspan="4"><span class="label">Buyer :</span> <span class="value">` +
+                  data.Buyer +
+                  `</span></td>
+
+                        </tr>
+                        <tr>
+                            
+            <td colspan="4"><span class="label">Job :</span> <span class="value">` +
+                  data.Job +
+                  `</span></td>
+
+
+                        </tr>
+                        <tr>
+                      
+              <td colspan="4"><span class="label">Style :</span> <span class="value">` +
+                  data.Order +
+                  `</span></td>
+                        </tr>
+                        <tr>
+                           
+             <td colspan="4"><span class="label">Batch :</span> <span class="value">` +
+                  data.BatchNo +
+                  `</span></td>
+                        </tr>
+                        <tr>
+                         
+         <td colspan="4"><span class="label">Color :</span> <span class="value">` +
+                  data.FabColor +
+                  `</span></td>
+                        </tr>
+                        <tr>
+                         
+       <td colspan="4"><span class="label">Fabric :</span> <span class="value">` +
+                  data.FabType +
+                  `</span></td>
+                         </tr>
+                        <tr>
+                            <td>R.Dia:</td>
+                            <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
+                  data.ReqDia +
+                  `</td>
+                            <td>R.GSM:</td>
+                            <td style="font-weight:1000;font-size:10px;line-height:10px;white-space:nowrap;">` +
+                  data.ReqGSM +
+                  `</td>
+                        </tr>
+                        <tr>
+                           
+           <td colspan="2">
+    <span class="label">Roll :</span>
+    <span class="value">` +
+                  data.RollNo +
+                  ` (` +
+                  data.BodyPart +
+                  `)</span>
+  </td>
+
+           <td colspan="2">
+    <span class="label">B.Wgt :</span>
+    <span class="value">` +
+                  data.BatchWeight +
+                  `</span>
+  </td>
+
+                        </tr>
+             <tr>
+                  <td colspan="4"><span class="label">Date :</span> <span class="value dateValue">` +
+                  data.CurrentDate + ' (' + data.QRCode + ')' +
+                  `</span></td>
+
+              </tr>
+                    </table>
+                </div>
+            </div>`;
+          }
+          var popupWin = window.open("", "_blank", "width=auto,height=auto");
+          popupWin.document.open();
+          popupWin.document.write(
+              `<html><head><link href="../../../Content/css/stickerNew.css" rel="stylesheet" /></head><body onload="window.print()">` +
+              printContents +
+              `</body></html>`
+          );
+          popupWin.document.close();
+          //popupWin.focus();
+          //popupWin.print();
+          //popupWin.close();
+      }
+
+
+
+
   }
 ]);

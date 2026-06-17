@@ -132,6 +132,10 @@
           <DataField>ShipmentDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="UnitName">
+          <DataField>UnitName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
     <DataSet Name="Nozzle">
@@ -7764,7 +7768,7 @@
                   <TextRuns>
                     <TextRun>
                       <Label>UnitName</Label>
-                      <Value>=Parameters!UnitName.Value</Value>
+                      <Value>=First(Fields!UnitName.Value, "BatchCardMaster")</Value>
                       <Style>
                         <FontFamily>Algerian</FontFamily>
                         <FontSize>14pt</FontSize>

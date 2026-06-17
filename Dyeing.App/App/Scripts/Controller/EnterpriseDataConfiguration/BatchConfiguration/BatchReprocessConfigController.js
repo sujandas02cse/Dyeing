@@ -22,7 +22,7 @@
     function objData(action) {
         var obj = [];
         if (action == 'Save') {
-            obj = { 'Mode': 'Save', 'btnText': 'Yes', 'Header': 'Save Confirmation', 'message': 'Do you want to save Machine Model Configuration Data?' };
+            obj = { 'Mode': 'Save', 'btnText': 'Yes', 'Header': 'Save Confirmation', 'message': 'Do you want to save Reprocess Configuration Data?' };
         }
         return obj;
     }
@@ -69,6 +69,30 @@
         });  
     };
 
+
+    ///all batch data by unit
+    $scope.getUnitValNew = function () {
+        Unit = $scope.Unit;
+        debugger
+        BatchReprocessConfig.GetBatchbyUnitNew(Unit.UnitId,'New', function (data) {
+            $scope.allBatch = data;
+        });
+    };
+
+    ///batch value by new bpm id
+    $scope.getBatchValNew = function () {
+        Batch = $scope.Batch;
+        debugger
+        BatchReprocessConfig.GetBatchDatabyUnitNew(Batch.BpmId, function (data) {
+            debugger
+            console.log("data", data);
+            $scope.allRollData = data;
+            allRollData = $scope.allRollData;
+            //$scope.hide = false; 
+        });
+    };
+
+
     $scope.toggleRadio = function (index) {
         $scope.allRollData[index].RStatus = null;
         AllroleDataModel = $scope.allRollData.filter(x => x.RStatus != null);
@@ -98,12 +122,16 @@
 
     
 
-    function save (){
-        arr = AllroleDataModel.filter(x => x.RStatus != null);
+    function save() {
+        debugger
+        arr = AllroleDataModel.filter(x => x.RStatus != null && x.RStatus != '');
         
 
         ///Object creation for post  start
         let dataValue = angular.forEach(arr, function (obj) {
+            debugger
+            if (obj.RStatus === '')
+                return;
             obj.BpmId = Batch.BpmId;
             delete obj.Qty;
         });
@@ -114,9 +142,10 @@
         console.log("finalData", finalData);
         ///Object creation for post  end
 
+        var saveFunction = $scope.batchType === 'New' ? BatchReprocessConfig.SaveUpdateRollData : BatchReprocessConfig.SaveRollData;
         
-        let response = BatchReprocessConfig.SaveRollData(finalData, function (data) {
-            if (data.Msg == " Data Saved Successfully....") {
+        saveFunction(finalData, $scope.batchType, function (data) {
+            if (data.Msg == "Data Saved Successfully....") {
                 
                 $scope.allRollData = [];
                 //$scope.allBatch = [];
@@ -136,7 +165,18 @@
         });
     }
 
-
+    $scope.Refresh = function() {
+        $scope.allRollData = [];
+        //$scope.allBatch = [];
+        //$scope.allUnit = [];
+        finalData = [];
+        AllroleDataModel = [];
+        $scope.Unit = [];
+        $scope.Batch = [];
+        Batch = [];
+        Unit = [];
+        arr = [];
+    }
     
 
 }]);

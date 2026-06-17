@@ -30,6 +30,12 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
             public string UserId { get; set; }
            public int SourcePackingListDetailsId { get; set; }
             public int SourceBatchGsmConfigId { get; set; }
+
+            public int SourceMcOperationTime { get; set; }
+            public int SourceMachineTypeId { get; set; }
+            public int SourceMachineId { get; set; }
+            public int SourceMcOperationMasterId { get; set; }
+
         }
 
 
@@ -44,27 +50,45 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
             var data = new
             {
                 RollList = BatchRollTransferObjList.AsTableValuedParameter("dbo.tvp_BatchRollTransferType",
-                                      new[] {"Id","SourceInspectionMasterId", "SourceBpmId", "SourceRollNo", 
-                                             "SourceBodyPartId" , "SourceBodyPartName","SourceFabricTypeId",
-                                             "SourceFabricType","SourceComposition","SourceItemId","SourceOperationTime",
-                                          "DestinationBpmId","UserId","SourcePackingListDetailsId","SourceBatchGsmConfigId"}),
+                                      new[] {
+                                          "Id",
+                                          "SourceInspectionMasterId",
+                                          "SourceBpmId", 
+                                          "SourceRollNo", 
+                                          "SourceBodyPartId" , 
+                                          "SourceBodyPartName",
+                                          "SourceFabricTypeId",
+                                          "SourceFabricType",
+                                          "SourceComposition",
+                                          "SourceItemId",
+                                          "SourceOperationTime",
+                                          "DestinationBpmId",
+                                          "UserId",
+                                          "SourcePackingListDetailsId",
+                                          "SourceBatchGsmConfigId",
+
+                                          "SourceMcOperationTime",
+                                          "SourceMachineTypeId",
+                                          "SourceMachineId",
+                                          "SourceMcOperationMasterId"
+                                      }),
             };
 
+            //return DatabaseHub.ExecuteAsync(
+            //       storedProcedureName: @"[dbo].[usp_BatchToBatchRollTransfer]", model: data, dbName: DyeingDB);
+
+
             return DatabaseHub.ExecuteAsync(
-                   storedProcedureName: @"[dbo].[usp_BatchToBatchRollTransfer]", model: data, dbName: DyeingDB);
+             storedProcedureName: @"[dbo].[usp_BatchToBatchRollTransfer_v2]", model: data, dbName: DyeingDB);
+
+
+
         }
 
 
-      
-        //   public Task<IEnumerable<object>> DestinationMaxCompactingTime(string DestinationBpmId)
-        //{
-        //    var parameter = new DynamicParameters();
-        //    parameter.Add(name: "@BpmId", value: DestinationBpmId, dbType: DbType.String, direction: ParameterDirection.Input);
-        //    return DatabaseHubRpt.QueryAsync<object>(
-        //     storedProcedureName: @"[dbo].[usp_get_MaxOperationTime]", parameters: parameter, dbName: DyeingDB);
-        //}
 
-     
+
+
         public async Task<int> DestinationMaxCompactingTime(int DestinationBpmId)
         {
             var parameter = new DynamicParameters();

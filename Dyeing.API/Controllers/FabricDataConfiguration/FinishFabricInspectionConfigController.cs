@@ -310,6 +310,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
 
 
                 pointTemp = cls.GetInspectionPoints();
+
                 faultTemp = cls.GetFaultEntityDetailNew(FilterText, RollNo, CompTime);
 
                 List<DataTable> result = ConvertToDataTable(pointTemp).AsEnumerable()

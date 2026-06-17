@@ -639,6 +639,19 @@
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="OperationalStage">
+      <Query>
+        <DataSourceName>DyeingDB</DataSourceName>
+        <CommandText>exec Usp_rpt_FourPointInspection 125541,1,'OperationalStage'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="MachineOperationInfo">
+          <DataField>MachineOperationInfo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -8635,7 +8648,7 @@
       <Width>11.15095in</Width>
       <Page>
         <PageHeader>
-          <Height>0.77757in</Height>
+          <Height>0.76736in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -8655,7 +8668,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
@@ -8663,7 +8676,7 @@
               <Top>0.53595in</Top>
               <Left>1.44667in</Left>
               <Height>0.23141in</Height>
-              <Width>7.70098in</Width>
+              <Width>3.8508in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -8684,44 +8697,15 @@
               <Height>0.66891in</Height>
               <Width>0.87917in</Width>
               <ZIndex>1</ZIndex>
+              <Visibility>
+                <Hidden>=IIF(Trim(First(Fields!BuyerName.Value, "Header")) = "JM Fabrics", True, False)</Hidden>
+              </Visibility>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
               </Style>
             </Image>
-            <Textbox Name="Textbox5">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Compacting: </Value>
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.53595in</Top>
-              <Left>9.15807in</Left>
-              <Height>0.23141in</Height>
-              <Width>0.85817in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-              </Style>
-            </Textbox>
             <Textbox Name="UnitEName">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -8738,7 +8722,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
@@ -8747,7 +8731,7 @@
               <Left>1.44667in</Left>
               <Height>0.4375in</Height>
               <Width>7.70098in</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -8757,37 +8741,6 @@
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
                 <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="CompTime">
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CompTime.Value, "MC")</Value>
-                      <Style>
-                        <FontSize>9pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>CompTime</rd:DefaultName>
-              <Top>0.53595in</Top>
-              <Left>10.01624in</Left>
-              <Height>0.23141in</Height>
-              <Width>1.08333in</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
               </Style>
             </Textbox>
             <Textbox Name="HeaderText">
@@ -8812,12 +8765,42 @@
               <Left>9.15459in</Left>
               <Height>0.4375in</Height>
               <Width>1.94497in</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
                 <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="MachineOperationInfo">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!MachineOperationInfo.Value, "OperationalStage")</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>MachineOperationInfo</rd:DefaultName>
+              <Top>0.53583in</Top>
+              <Left>5.29747in</Left>
+              <Height>0.23153in</Height>
+              <Width>5.80209in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingRight>2pt</PaddingRight>
               </Style>
             </Textbox>
           </ReportItems>

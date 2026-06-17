@@ -139,8 +139,28 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             controller: 'LabDipDeclareController'
         })
         .when('/TestRequestForm', {
-            templateUrl: '/App/Views/BasicDataConfiguration/TestRequestForm/TestRequestForm.html?' + ts,
+            templateUrl: '/App/Views/BasicDataConfiguration/TestRequestForm/TestRequestForm.html?' + ts, 
             controller: 'TestRequestFormController'
+        })
+        .when('/LabDipReceipeCard', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipReceipeCard.html?' + ts,
+            controller: 'LabDipReceipeCardController'
+        })
+        .when('/LabDipInternalApproved', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipInternalApproved.html?' + ts,
+            controller: 'LabDipInternalApprovedController'
+        })
+        .when('/LabDipSubmissionData', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipSubmissionData.html?' + ts,
+            controller: 'LabDipSubmissionController'
+        })
+        .when('/LabDipApproval', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipApproval.html?' + ts,
+            controller: 'LabDipApprovalController'
+        })
+        .when('/LabDipDashboard', {
+            templateUrl: '/App/Views/BasicDataConfiguration/LabBasicSetup/LabDipDashboard.html?' + ts,
+            controller: 'LabDipDashboardController'
         })
 
         //Machine Data Config routing
@@ -281,6 +301,14 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchFinishing.html?' + ts,
             controller: 'BatchFinishingController'
         })
+
+        .when('/BatchFinishingNew', {
+            templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchFinishingNew.html?' + ts,
+            controller: 'BatchFinishingController'
+        })
+
+
+
         .when('/BatchReprocessConfig', {
             templateUrl: '/App/Views/EnterpriseDataConfiguration/BatchConfiguration/BatchReprocessConfig.html?' + ts,
             controller: 'BatchReprocessConfigController'
@@ -392,7 +420,6 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             templateUrl: '/App/Views/FabricDataConfiguration/FinishFabricInspectionConfig.html?'+ts,
             controller: 'FinishFabricInspectionConfigController'
         })
-
         .when('/FinishFabricInspectionConfig', {
             controller: function () {
                 //$rootScope.menu = false;
@@ -402,6 +429,14 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
                 window.open("/Home/Index#!/FinFabInspConfig", '_blank')
             },
             template: ''
+        })
+
+
+
+        //Fabric Data Configuration routing
+        .when('/FinishFabricInspectionConfigNewFormat', {
+            templateUrl: '/App/Views/FabricDataConfiguration/FinishFabricInspectionConfigNewFormat.html?' + ts,
+            controller: 'FinishFabricInspectionConfigNewFormatController'
         })
 
         // Fabric data configuration rounting for sample
@@ -421,6 +456,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             },
             template: ''
         })
+
         .when('/FinInspTableConfig', {
             templateUrl: '/App/Views/FabricDataConfiguration/FinFabInspTableConfig.html?' + ts,
             controller: 'FinishFabricInsTableConfigController'
@@ -435,6 +471,7 @@ app.config(function ($routeProvider, $locationProvider, $mdDateLocaleProvider, $
             },
             template: ''
         })
+
         .when('/NewInspection', {
             templateUrl: '/App/Views/FabricDataConfiguration/FinishFabricInspection.html?'+ts,
             controller: 'FinishFabricInspectionNewConfigController'

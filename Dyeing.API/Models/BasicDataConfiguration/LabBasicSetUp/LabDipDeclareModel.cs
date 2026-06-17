@@ -16,6 +16,7 @@ namespace Dyeing.API.Models.BasicDataConfiguration.LabBasicSetUp
             public int DeclareUnitId { get; set; }
             public string LabStartDate { get; set; }
             public string LabDipBookingNo { get; set; }
+            public string LDNo { get; set; }
             public string UserId { get; set; }
             public string UserIp { get; set; }
         }
@@ -34,12 +35,26 @@ namespace Dyeing.API.Models.BasicDataConfiguration.LabBasicSetUp
                 dbName: DyeingDB);
         }
 
+        public  IEnumerable<object> CheckLabDip(string LabDipNo)
+        {
+            var parameters = new DynamicParameters();
+
+            parameters.Add("@LDNo", LabDipNo, DbType.String, ParameterDirection.Input);
+
+            return DatabaseHub.Query<object>(
+                storedProcedureName: @"[dbo].[usp_Get_CheckLabDipNo]",
+                parameters: parameters,
+                dbName: DyeingDB);
+        }
+
+
+
         public IEnumerable<object> SaveLabDipDeclare(List<LabBookingReceiveDto> model)
         {
             var parameters = new DynamicParameters();
 
             parameters.Add("@LabDipDeclare", model.AsTableValuedParameter("dbo.Tvp_LabDipDeclare", new[]
-                    {"LabReceivedId","DeclareUnitId","LabStartDate","LabDipBookingNo","UserId","UserIp"}));
+                    {"LabReceivedId","DeclareUnitId","LabStartDate","LabDipBookingNo","LDNo","UserId","UserIp"}));
 
             return DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_SaveUpdate_LabDipDeclare]", parameters: parameters,dbName: DyeingDB);
         }

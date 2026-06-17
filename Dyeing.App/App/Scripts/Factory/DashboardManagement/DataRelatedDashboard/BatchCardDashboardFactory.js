@@ -135,67 +135,29 @@
     };
 
     _obj.GetBatchCardDataV1NewBulk = function(unitId, fromDate, toDate, cb) {
-      $http
-        .get(
-          baseApiURL +
-            "DataRelatedDashboard/GetBatchCardDataNewBulk?unitId=" +
-            unitId +
-            "&&fromDate=" +
-            fromDate +
-            "&&toDate=" +
-            toDate
-        )
-        .then(
-          function successCallback(response) {
-            cb(response.data);
-          },
-          function errorCallback(response) {
-            alert("Error Occured during Loading Plan No....");
-          }
-        );
+      $http.get(baseApiURL +"DataRelatedDashboard/GetBatchCardDataNewBulk?unitId=" +unitId +"&&fromDate=" +fromDate +"&&toDate=" +toDate).then(
+        function successCallback(response) {
+          cb(response.data);
+        },
+        function errorCallback(response) {
+          alert("Error Occured during Loading Plan No....");
+        }
+      );
     };
 
-    _obj.GetBatchCardDataV2NewBulk = function(
-      unitId,
-      mode,
-      fromDate,
-      toDate,
-      cb
-    ) {
-      $http
-        .get(
-          baseApiURL +
-            "DataRelatedDashboard/GetBatchCardDataV2NewBulk?unitId=" +
-            unitId +
-            "&&mode=" +
-            mode +
-            "&&fromDate=" +
-            fromDate +
-            "&&toDate=" +
-            toDate
-        )
-        .then(
-          function successCallback(response) {
-            cb(response.data);
-          },
-          function errorCallback(response) {
-            alert("Error Occured during Loading Plan No....");
-          }
-        );
+    _obj.GetBatchCardDataV2NewBulk = function(unitId,mode,fromDate,toDate,cb) {
+      $http.get(baseApiURL +"DataRelatedDashboard/GetBatchCardDataV2NewBulk?unitId=" +unitId +"&&mode=" +mode +"&&fromDate=" +fromDate +"&&toDate=" +toDate).then(
+        function successCallback(response) {
+          cb(response.data);
+        },
+        function errorCallback(response) {
+          alert("Error Occured during Loading Plan No....");
+        }
+      );
     };
 
     _obj.GetBatchCardDataBeforeIssue = function(unitId, fromDate, toDate, cb) {
-      $http
-        .get(
-          baseApiURL +
-            "DataRelatedDashboard/GetBatchCardDataBeforeIssue?unitId=" +
-            unitId +
-            "&&fromDate=" +
-            fromDate +
-            "&&toDate=" +
-            toDate
-        )
-        .then(
+      $http.get(baseApiURL +"DataRelatedDashboard/GetBatchCardDataBeforeIssue?unitId=" +unitId +"&&fromDate=" +fromDate +"&&toDate=" +toDate).then(
           function successCallback(response) {
             cb(response.data);
           },
@@ -206,24 +168,14 @@
     };
 
     _obj.GetBatchCardDataAfterIssue = function(unitId, fromDate, toDate, cb) {
-      $http
-        .get(
-          baseApiURL +
-            "DataRelatedDashboard/GetBatchCardDataAfterIssue?unitId=" +
-            unitId +
-            "&&fromDate=" +
-            fromDate +
-            "&&toDate=" +
-            toDate
-        )
-        .then(
-          function successCallback(response) {
-            cb(response.data);
-          },
-          function errorCallback(response) {
-            alert("Error Occured during Loading Plan No....");
-          }
-        );
+      $http.get(baseApiURL +"DataRelatedDashboard/GetBatchCardDataAfterIssue?unitId=" +unitId +"&&fromDate=" +fromDate +"&&toDate=" +toDate).then(
+        function successCallback(response) {
+          cb(response.data);
+        },
+        function errorCallback(response) {
+          alert("Error Occured during Loading Plan No....");
+        }
+      );
     };
 
     _obj.GetUnitWithoutUser = function(cb) {

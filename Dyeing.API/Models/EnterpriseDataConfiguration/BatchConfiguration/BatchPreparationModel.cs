@@ -465,7 +465,17 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
         }
         public object BatchDataProcessing_SaveUpdate(BatchDataWrapper _obj)
         {
-            
+            //var validationErrors = ValidateBatchData(_obj.batch);
+
+            //if (validationErrors.Any())
+            //{
+            //    return new
+            //    {
+            //        ErrorMsg = "Validation failed",
+            //        Details = validationErrors
+            //    };
+            //}
+
             var data = new
             {              
                 HostIP = getclientIP(),
@@ -479,6 +489,43 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
             };
             return DatabaseHub.Query<object, object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchDataProcessing]", model: data, dbName: DyeingDB).ToList();
             //return DatabaseHub.Execute(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchPreparation]", model: data, dbName: DyeingDB);
+        }
+
+        private void CheckLength(List<string> errors, int row, string column, string value, int maxLength)
+        {
+            if (!string.IsNullOrEmpty(value) && value.Length > maxLength)
+            {
+                errors.Add($"Row {row}: Column '{column}' exceeds max length {maxLength}. Value: {value}");
+            }
+        }
+
+        public List<string> ValidateBatchData(List<BatchData> batch)
+        {
+            var errors = new List<string>();
+
+            int row = 1;
+
+            foreach (var item in batch)
+            {
+                CheckLength(errors, row, "McNo", item.McNo, 50);
+                CheckLength(errors, row, "Buyer", item.Buyer, 100);
+                CheckLength(errors, row, "Job", item.Job, 250);
+                CheckLength(errors, row, "Style", item.Style, 500);
+                CheckLength(errors, row, "Color", item.Color, 500);
+                CheckLength(errors, row, "LDNo", item.LDNo, 150);
+                CheckLength(errors, row, "RN", item.RN, 100);
+                CheckLength(errors, row, "FabType", item.FabType, 500);
+                CheckLength(errors, row, "YarnSource", item.YarnSource, 100);
+                CheckLength(errors, row, "YarnLot", item.YarnLot, 100);
+                CheckLength(errors, row, "MatchingWith", item.MatchingWith, 250);
+                CheckLength(errors, row, "Enzyme", item.Enzyme, 50);
+                CheckLength(errors, row, "Process", item.Process, 1000);
+                CheckLength(errors, row, "NoOfBatch", item.NoOfBatch?.ToString(), 10);
+
+                row++;
+            }
+
+            return errors;
         }
 
         public object BatchDataProcessingSample_SaveUpdate(SampleBatchDataWrapper batchDataWrapper)

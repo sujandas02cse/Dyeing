@@ -123,9 +123,7 @@
     </div>
     <div class="card card-body" style="min-height:500px;">
         <form id="form" name="form" ng-keypress="keyPressHandler($event)">
-
-
-            <!--<div ng-include src="'../../../App/Views/Shared/_LayoutBulkNewSelector.html'"></div>-->
+            <div ng-include src="'../../../App/Views/Shared/_LayoutUnit.html'"></div>
 
             <div class="form-group row">
                 <div class="col-md-4">
@@ -136,35 +134,49 @@
                         </label>
                         <div class="col-md-8">
 
-                            <input 
-                                   type="text" 
-                                   id="batch" 
-                                   auto-focus ng-model="McOperation.BatchNo"
-                                   typeahead-on-select="getDataByBatchId()" 
+                            <input type="text"
+                                   id="batch"
+                                   auto-focus 
+                                   ng-model="McOperation.BatchNo"
+                                   typeahead-on-select="getDataByBatchId()"
                                    placeholder="Batch No.."
                                    class="form-control input-height"
                                    ng-virtual-keyboard="alphanumeric"
-                                   typeahead-min-length="1" 
+                                   typeahead-min-length="1"
                                    uib-typeahead="item as item.BatchNo for item in batchList | filter: {BatchNo:$viewValue}  | limitTo:8"
-                                   ng-required="true"
-                                  >
+                                   ng-required="true">
                         </div>
                     </div>
                 </div>
+     
                 <div class="col-md-4">
                     <div class="row">
-                        <label class="control-label col-md-4">
-                            Machine:
+                        <label class="control-label col-md-4 clsHeight">
+                            M/C No:
                         </label>
                         <div class="col-md-8">
-                            <select ng-model="McOperation.CompTime"
-                                    ng-options="machine.id as machine.name for machine in machineList"
-                                    class="form-control input-height clsHeight"
-                                    ng-required="true">
+                            <!--<input type="text"
+                                   ng-model="McOperation.MachineNo"
+                                   ng-virtual-keyboard="{kt: 'Numpad', keyCenter: 4, size:5}"
+                                   typeahead-min-length="1"
+                                   uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                   typeahead-editable="false"
+                                   class="form-control input-height clsHeight"
+                                   ng-disabled="IsReadOnlyEndMode"
+                                   required />-->
 
-                                <option value="">Select</option>
 
-                            </select>
+                            <input type="text"
+                                   ng-model="McOperation.MachineNo"
+                                     class="form-control input-height"
+                                   ng-virtual-keyboard="alphanumeric"
+                                   typeahead-min-length="1"
+                                   uib-typeahead="item as item.MachineNo for item in MachineList | filter: {MachineNo:$viewValue}  | limitTo:8"
+                                  
+                                   ng-disabled="IsReadOnlyEndMode"
+                                   required />
+
+
                         </div>
                     </div>
                 </div>
@@ -216,34 +228,66 @@
             </div>
             <div class="row" style="margin-top: 10px; margin-bottom: 10px">
 
-                <div class="col-md-12">
+                <div class="col-md-12" ng-if="fabricList && fabricList.length>0" >
 
                     <table class="table table-bordered table-striped" style="font-size: 20px">
                         <thead>
                             <tr>
                                 <th style="width:50px; text-align:center;">
-                                    <input type="checkbox"  id="selectAll" ng-model="selectAll" ng-click="toggleAll()">
+                                    <!--<input type="checkbox"
+    id="selectAll"
+    ng-model="selectAll"
+    ng-change="toggleAll()"
+    ng-disabled="IsReadOnlyEndMode||IsHistoryView">-->
+                                    <input type="checkbox"
+                                           id="selectAll"
+                                           ng-click="toggleAll($event)"
+                                           ng-disabled="IsReadOnlyEndMode || IsHistoryView">
                                 </th>
-                                <th>Body Part</th>
-                                <th>Fabric Type</th>
+                                <!--<th>BodyPartId</th>-->
+                                <th>BodyPart</th>
+                                <!--<th>FabricTypeId</th>-->
+                                <th>FabricType</th>
                                 <th>Composition</th>
-                                <th>GSM</th>
                                 <th>Dia</th>
-                                <th>Qty</th>
+                                <th>GSM</th>
+                                <!--<th>PlanQty</th>-->
+                                <th>Quantity</th>
+                                <!--<th>Status</th>-->
+                                <th>Running Machine</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in fabricList">
                                 <td class="text-center">
-                                    <input type="checkbox" ng-model="item.selected" ng-change="checkIfAllSelected()">
+                                    <input type="checkbox"
+                                           ng-model="item.selected"
+                                           ng-change="checkIfAllSelected()"
+                                           ng-disabled="IsReadOnlyEndMode||IsHistoryView||item.isDisabled ">
                                 </td>
-                                <td>{{item.bodyPart}}</td>
-                                <td>{{item.fabricType}}</td>
-                                <td>{{item.composition}}</td>
-                                <td>{{item.gsm}}</td>
-                                <td>{{item.dia}}</td>
-                                <td>{{item.qty}}</td>
+                                <!--<td>{{item.BodyPartId}}</td>-->
+                                <td>{{item.BodyPart}}</td>
+                                <!--<td>{{item.FabricTypeId}}</td>-->
+                                <td>{{item.FabricType}}</td>
+                                <td>{{item.Composition}}</td>
+                                <td>{{item.FDia}}</td>
+                                <td>{{item.FGSM}}</td>
+                                <!--<td>{{item.PlanQty}}</td>-->
+                                <!--<td>{{item.ActualQty}}</td>-->
+
+                                <td>
+                                    <input type="number"
+                                           ng-model="item.ActualQty"
+                                           class="form-control"
+                                           min="0"
+                                           step="0.01"
+                                           ng-disabled="IsReadOnlyEndMode||IsHistoryView||item.isDisabled"
+                                           style="height:35px;font-size:18px;width:100px"/>
+                                </td>
+
+                                <!--<td>{{item.StatusName}}</td>-->
+                                <td>{{item.RunningMachineNo}}</td>
                             </tr>
                         </tbody>
 
@@ -253,55 +297,58 @@
             </div>
 
             <!--<pre>{{fabricList | json}}</pre>-->
-        
 
-            <div class="form-group row">
+        <div class="form-group row">
 
-                <div class="col-md-4">
-                    <div class="row">
-                        <label class="control-label col-md-4 clsHeight">
-                            Batch Start:
-                        </label>
-                        <div class="col-md-8">
-                            <input class="form-control" type="text" disabled ng-model="McOperation.StartTime" style="height:55px">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="row">
-                        <label class="control-label col-md-4 clsHeight">
-                            Batch End:
-                        </label>
-                        <div class="col-md-8">
-                            <input class="form-control"
-                                   ng-model="McOperation.EndTime" type="text" disabled style="height:55px">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <label class="control-label col-md-5 clsHeight">
-                            Operation Time:
-                        </label>
-                        <div class="col-md-7">
-                            <select ng-model="McOperation.CompTime"
-                                    ng-change="getDataByBatchId()"
-                                    ng-options="a.id as a.name for a in CompactingTime"
-                                    class="form-control input-height clsHeight"
-                                    ng-required="true">
-                                <option value="" selected>Select</option>
-
-                            </select>
-                        </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-5 clsHeight">
+                        Operation Time:
+                    </label>
+                    <div class="col-md-7">
+      
+                        <select ng-model="McOperation.OperationTime"
+                                ng-options="item.OperationTime as item.OperationTimeName for item in OperationTimeList"
+                                ng-change="OperationTimeChanged()"
+                                class="form-control input-height clsHeight"
+                              
+                                ng-disabled="IsReadOnlyEndMode">
+                            <option value="">Select</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        Batch Start:
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" disabled ng-model="McOperation.BatchStart" style="height:55px">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="row">
+                    <label class="control-label col-md-4 clsHeight">
+                        Batch End:
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control"
+                               ng-model="McOperation.BatchEnd" type="text" disabled style="height:55px">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
             <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
                 <div class="offset-md-2 col-md-9">
-                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButton.html'"></div>
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutActionButtonMcOperation.html'"></div>
 
                 </div>
             </div>

@@ -9,21 +9,31 @@
     
 
     $scope.allCheck = false;
-
+    debugger
     DyeingFollowUp.GetAllBuyer(function (data) {
         //$scope.OFabOpList = data;
         $scope.BuyerList = data;
+        if ($scope.BuyerList.length === 1) {
+            $scope.Buyer = $scope.BuyerList[0];
+            $scope.LoadJobData($scope.Buyer);
+        }
 
     });
 
 
     $scope.LoadJobData = function (buyer) {
+        debugger
         if (!buyer) {
             console.log('job', "No buyer");
             return;
         }
         DyeingFollowUp.GetJobByBuyer(buyer.BuyerId, function (data) {
             $scope.JobList = data;
+            if ($scope.JobList.length === 1) {
+                $scope.Job = $scope.JobList[0];
+                $scope.LoadStyleData($scope.Buyer, $scope.Job);
+            }
+                
         })
 
         $scope.Job === undefined;
@@ -34,12 +44,18 @@
     }
 
     $scope.LoadStyleData = function (buyer, job) {
+        debugger
         if (!buyer || !job) {
             console.log('order', "no data");
             return;
         }
         DyeingFollowUp.GetStyleByJob(buyer.BuyerId, job.JobId, function (data) {
             $scope.StyleList = data;
+            if ($scope.StyleList.length === 1) {
+                $scope.Style = $scope.StyleList[0];
+                $scope.LoadOrderData($scope.Buyer, $scope.Job, $scope.Style);
+            }
+                
         })
         $scope.Style === undefined;
         $scope.Order === undefined;
@@ -52,6 +68,9 @@
         }
         DyeingFollowUp.GetOrderByStyle(buyer.BuyerId, job.JobId, style.StyleId, function (data) {
             $scope.OrderList = data;
+            if ($scope.OrderList.length === 1) {
+                $scope.Order = $scope.OrderList[0];            }
+                
         })
         $scope.Order === undefined;
     }

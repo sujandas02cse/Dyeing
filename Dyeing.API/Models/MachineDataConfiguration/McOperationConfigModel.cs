@@ -35,7 +35,6 @@ namespace Dyeing.API.Models.MachineDataConfiguration
 
         }
 
-
         public object McOpConfiguration_SaveUpdateNew(McOperationConfigDataModel _obj)  ///Task<IEnumerable<object>>
         {
             var parameters = new DynamicParameters();
@@ -76,7 +75,6 @@ namespace Dyeing.API.Models.MachineDataConfiguration
             return result;
         }
 
-
         public object GetBatchNoList(int batchId)
         {
             var data = new
@@ -89,6 +87,40 @@ namespace Dyeing.API.Models.MachineDataConfiguration
            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetBactchListNew]", dbName: DyeingDB);
             return result;
         }
+
+        // Machine Operation
+        public Task<IEnumerable<object>> SaveMachineOperationConfig(MachineOperationConfigModel Obj)
+        {
+            var data = new
+            {
+                HostIP = getclientIP(),
+                BpmId = Obj.BpmId,
+                MDId = Obj.MDId,
+                CreatedBy = Obj.CreatedBy,
+                MachineTypeId=Obj.MachineTypeId,
+                Details =Obj.Details.AsTableValuedParameter("dbo.tvp_McOperationDetailType",
+                                             new[] {
+                                             "BodyPartId",
+                                             "Quantity"})
+            };
+
+            //return DatabaseHub.QueryAsync<object,object>(
+            //       storedProcedureName: @"[dbo].[sp_SaveMcOperation]", model: data, dbName: DyeingDB);
+
+            //return DatabaseHub.QueryAsync<object, object>(
+            //    storedProcedureName: @"[dbo].[sp_SaveMcOperation_New]", model: data, dbName: DyeingDB);
+
+
+
+
+           // new implementation
+            return DatabaseHub.QueryAsync<object, object>(
+                storedProcedureName: @"[dbo].[sp_SaveMcOperation_NewFormat]", model: data, dbName: DyeingDB);
+
+
+
+        }
+
 
         public object LoadAllData()
         {
@@ -131,8 +163,96 @@ namespace Dyeing.API.Models.MachineDataConfiguration
 
         }
 
-       
+        public object LoadCurrentStatus(string BpmId,string MachineTypeId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@MachineTypeId", value: MachineTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+            //var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[sp_LoadCurrentStatus]", parameters: parameters, dbName: DyeingDB);
+
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[sp_LoadCurrentStatus_New]", parameters: parameters, dbName: DyeingDB);
+
+            return result;
+        }
+
+        public object GetBodyPartDetailsForEndMode(string bpmId, int mcOperationMasterId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: bpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@McOperationMasterId", value: mcOperationMasterId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetBodyPartDetailsForEndMode]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetOperationHistoryByTime(string BpmId, int OperationTime,string machineTypeId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@OperationTime", value: OperationTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@MachineTypeId", value: machineTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            //var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetOperationHistoryByTime]", parameters: parameters, dbName: DyeingDB);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetOperationHistoryByTime_New]", parameters: parameters, dbName: DyeingDB);
+
+            return result;
+        }
+
+        public object GetBatchBodyPartStatus(string bpmId, int? mdId, int? mcOperationMasterId,string machineTypeId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: bpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@MDId", value: mdId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@McOperationMasterId", value: mcOperationMasterId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@MachineTypeId", value: machineTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetBatchBodyPartStatus]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetBatchNoListUnitWise(int unit)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@UnitId", value: unit, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetBactchListUnitWIse]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object LoadBuyerJobStyle(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetBuyerJobStyle]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetMachineTypeId(string machineType)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@McType", value: machineType, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetMachineTypeId]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object LoadMachineStages(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetMachineStages]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetMachineWiseBodyParts(int mcOperationMasterId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@McOperationMasterId", value: mcOperationMasterId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetMachineWiseBodyParts]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
 
         public IEnumerable<object> GetFinMcByTypeUnitWise(string McType, string UnitId)
         {
@@ -141,6 +261,21 @@ namespace Dyeing.API.Models.MachineDataConfiguration
             parameters.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_get_FinMachine_New]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object LoadTotalRollQuantity(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetTotalRollQuantity]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object LoadInspectionPoint()
+        {
+            var parameters = new DynamicParameters();
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_SelectPointsForInspection_New]", parameters: parameters, dbName: DyeingDB);
             return result;
         }
 
@@ -153,6 +288,13 @@ namespace Dyeing.API.Models.MachineDataConfiguration
 
             var result = DatabaseHub.MultiQuery<object, object>(
                    storedProcedureName: @"[dbo].[sp_SlitMcConfigOperation]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object LoadFaultsForInspection()
+        {
+            var parameters = new DynamicParameters();
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_SelectFaultsForInspection]", parameters: parameters, dbName: DyeingDB);
             return result;
         }
 
@@ -203,8 +345,6 @@ namespace Dyeing.API.Models.MachineDataConfiguration
             return result;
         }
 
-
-
         //Compacting Machine
         public Task<IEnumerable<object>> CompactingMcOperation_SaveUpdate(CompactingMcOpModel _obj)
         {
@@ -247,6 +387,47 @@ namespace Dyeing.API.Models.MachineDataConfiguration
             parameters.Add(name: "@UnitId", value: unit, dbType: DbType.Int64, direction: ParameterDirection.Input);
           
             var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[GetBactchListNew_1]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetBatchBasicInfo(string BpmId, string unitId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetBatchBasicInfo]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+
+        public object GetBodyPartDetails(string BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[sp_GetBodyPartDetails]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+
+        public object GetOperationTime(string BpmId,string machineTypeId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@MachineTypeId", value: machineTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+           // var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[sp_GetOperationTime]", parameters: parameters, dbName: DyeingDB);
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[sp_GetOperationTime_New]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+        public object GetBatchStartEndTime(string BpmId,int OperationTime)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@OperationTime", value: OperationTime, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetBatchStartEndTime]", parameters: parameters, dbName: DyeingDB);
             return result;
         }
     }
@@ -324,11 +505,9 @@ namespace Dyeing.API.Models.MachineDataConfiguration
         public int BatchQty { get; set; }
         public decimal PadPresure { get; set; }
         public decimal DustSpeed { get; set; }
-
         public int StenId { get; set; } 
         public int BpmId { get; set; }
         public int IsSoftnerUse { get; set; }
-
         public string BuyerName { get; set; }
 
         public string MachineNo { get; set; }
@@ -336,11 +515,24 @@ namespace Dyeing.API.Models.MachineDataConfiguration
         public string OrderName { get; set; }
         public string StyleName { get; set; }
         public string ColorName { get; set; }
-   
-
     }
 
 
+    public class MachineOperationConfigModel
+    {
+        public long BpmId { get; set; }
+        public int MDId { get; set; }
+        public string CreatedBy { get; set; }
+        public string HostIP { get; set; }
+        public List<MachineOperationDetailsModel> Details { get; set; }
 
-    
+        public int MachineTypeId { get; set; }
+    }
+
+    public class MachineOperationDetailsModel
+    {
+        public int BodyPartId { get; set; }
+        public decimal Quantity { get; set; }
+    }
+
 }

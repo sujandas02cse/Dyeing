@@ -179,6 +179,10 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.BatchConfiguration
             {
                 var queryData = new BatchWiseGSMModel().GetBatchWiseGSMInfoNew(BpmId, CompTime);
 
+                // implemented for qc in every stage but not working properly yet
+
+                // var queryData = new BatchWiseGSMModel().GetBatchWiseGSMInfoNewFormat(BpmId);
+
                 if (queryData == null)
                 {
                     return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
@@ -199,6 +203,11 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.BatchConfiguration
             try
             {
                 var queryData = await new BatchWiseGSMModel().GetBatchWiseGSMDetailsInfoNew(BpmId, CompTime);
+
+
+             // implemented for qc in every stage but not working properly yet
+
+             //  var queryData = await new BatchWiseGSMModel().GetBatchWiseGSMDetailsInfoNewFormat(BpmId);
 
                 if (queryData == null)
                 {

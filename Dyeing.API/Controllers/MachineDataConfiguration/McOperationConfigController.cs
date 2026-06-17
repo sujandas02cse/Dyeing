@@ -183,8 +183,6 @@ namespace Dyeing.API.Controllers.MachineDataConfiguration
 
         }
 
-
-
         [HttpGet]
         public IHttpActionResult GetFinMcByTypeUnitWise(string Type,string unit)
         {

@@ -54,6 +54,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
             string RptPath = "~/Reports/DataRelatedDashboard/MasterDataDashboard.rdlc";
             string DataSet = "MasterData";
             return await GetReportData(APIActionParam, Format, "MasterData", RptPath, DataSet);
+
         }
         public async Task<ActionResult> SwatchCard(int BpmId, int RUnitId, string Format)
         {            
@@ -1174,6 +1175,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
 
        
 
+
        public async Task<ActionResult> GetInspctionReport(int BpmId, int CompTime, string Format)
         {
             string RptPath = "~/Reports/QCManagement/4PointInspection_New.rdlc";
@@ -1190,7 +1192,7 @@ namespace Dyeing.App.Controllers.DashboardManagement
                 "Dia","GSM","InspBy","Composition",
                 "YarnLot","YarnSource","AverageGSM","AcceptRejectRollQty",
                 "Roll","Fault","InspStartEnd","InspectionSummary",
-                "ProcessLoss","Image","Location","PointSystem","PointClassification","BuyerHeader"
+                "ProcessLoss","Image","Location","PointSystem","PointClassification","BuyerHeader","OperationalStage"
                 };
 
                 DataTable mainTable = new DataTable();
@@ -1236,6 +1238,68 @@ namespace Dyeing.App.Controllers.DashboardManagement
             }
         }
 
+
+        public async Task<ActionResult> GetInspctionReportNewFormat(int BpmId, int CompTime, string OperationIds, string Format)
+        {
+            string RptPath = "~/Reports/QCManagement/4PointInspection_NewFormat.rdlc";
+
+            try
+            {
+                prn = new PrintRDLC();
+                rpt = new LocalReport();
+                rpt.ReportPath = Server.MapPath(RptPath);
+
+                List<string> Parts = new List<string> {
+                "Unit", "Header", "MC", "BatchQty",
+                "FinishQty", "BatchProcessLoss", "FabricType", "Color",
+                "Dia","GSM","InspBy","Composition",
+                "YarnLot","YarnSource","AverageGSM","AcceptRejectRollQty",
+                "Roll","Fault","InspStartEnd","InspectionSummary",
+                "ProcessLoss","Image","Location","PointSystem","PointClassification","BuyerHeader","OperationalStage"
+                };
+
+                DataTable mainTable = new DataTable();
+                DataTable dt = new DataTable();
+
+                foreach (var Part in Parts)
+                {
+                    string apiUrl = $"DataRelatedDashboard/GetInspectionDataNewFormat?BpmId={BpmId}&CompTime={1}&OperationIds={OperationIds}&Part={Part}";
+                    client.DefaultRequestHeaders.Remove("Authorization");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Common.accessToken);
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonData = await response.Content.ReadAsStringAsync();
+                        var listObj = JsonConvert.DeserializeObject<List<object>>(jsonData);
+                        var json = JsonConvert.SerializeObject(listObj);
+                        dt = (DataTable)JsonConvert.DeserializeObject(json, typeof(DataTable));
+                        ReportDataSource rs = new ReportDataSource(Part, dt);
+                        rpt.DataSources.Add(rs);
+                        rpt.EnableExternalImages = true;
+                    }
+                }
+
+                rpt.Refresh();
+
+                var fileStream = prn.Export(Format, rpt);
+
+                if (Format == "PDF")
+                    return File(fileStream, "application/pdf");
+
+                else if (Format == "Excel")
+                    return File(fileStream, "application/vnd.ms-excel", "PackingList.xls");
+
+                else
+                    return File(fileStream, "application/ms-word", "PackingList.doc");
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
 
 

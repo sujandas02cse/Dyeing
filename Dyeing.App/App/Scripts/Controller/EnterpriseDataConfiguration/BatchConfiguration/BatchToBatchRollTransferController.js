@@ -237,10 +237,17 @@
         : "";
     }
 
+    //$scope.IsLockedRow = function(row) {
+    //  return (
+    //    row.PresentStatus === "Store Received" ||
+    //    row.PresentStatus === "Handovered"
+    //  );
+    //  };
+
     $scope.IsLockedRow = function(row) {
       return (
-        row.PresentStatus === "Store Received" ||
-        row.PresentStatus === "Handovered"
+        row.SourcePresentStatus === "Store Received" ||
+        row.SourcePresentStatus === "Handovered"
       );
     };
 
@@ -301,8 +308,8 @@
       if (!$scope.DestinationBatchNo || !$scope.DestinationBatchNo.BatchNo)
         errors.push("Select Destination Batch No");
 
-      if ($scope.DestinationMaxCompactingTime == 0)
-        errors.push("Destination Compating Time is Zero.");
+      //if ($scope.DestinationMaxCompactingTime == 0)
+      //  errors.push("Destination Compating Time is Zero.");
 
       if (errors.length) {
         alert(errors.join("\n"));
@@ -351,7 +358,11 @@
           DestinationBpmId: $scope.DestinationBatchNo.BpmId,
           UserId: $rootScope.UserId,
           SourcePackingListDetailsId: r.SourcePackingListDetailsId,
-          SourceBatchGsmConfigId: r.SourceBatchGsmConfigId
+          SourceBatchGsmConfigId: r.SourceBatchGsmConfigId,
+          SourceMcOperationTime: r.SourceMcOperationTime,
+          SourceMachineTypeId: r.SourceMachineTypeId,
+          SourceMachineId: r.SourceMachineId,
+          SourceMcOperationMasterId: r.SourceMcOperationMasterId
         };
       });
 

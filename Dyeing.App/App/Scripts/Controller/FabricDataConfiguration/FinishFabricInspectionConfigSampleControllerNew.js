@@ -1713,7 +1713,7 @@
         `</td>
                 </tr>
                 <tr>
-                    <td colspan="4">J:
+                    <td colspan="4">Tr:
                     ` +
         data.Job +
         `</td>
@@ -1821,7 +1821,7 @@
           `</td>
                         </tr>
                         <tr>
-                            <td colspan="4">J:
+                            <td colspan="4">Tr:
                             ` +
           data.Job +
           `</td>

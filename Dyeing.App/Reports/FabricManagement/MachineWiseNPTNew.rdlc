@@ -5,7 +5,7 @@
     <DataSource Name="DyeingDB">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=192.168.50.77;Initial Catalog=DyeingDB</ConnectString>
+        <ConnectString>Data Source=192.168.15.7;Initial Catalog=DyeingDB</ConnectString>
         <Prompt>Specify a user name and password for data source DyeingDB:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
@@ -152,6 +152,14 @@
           <DataField>Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="BodyPart">
+          <DataField>BodyPart</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BodyPartName">
+          <DataField>BodyPartName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -178,13 +186,16 @@
                   <Width>0.61646in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.42083in</Width>
+                  <Width>0.36875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.4212in</Width>
+                  <Width>0.37953in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.68125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.58225in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.59647in</Width>
@@ -199,16 +210,16 @@
                   <Width>0.40287in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.50583in</Width>
+                  <Width>0.33916in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.6058in</Width>
+                  <Width>0.48321in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.627in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.875in</Width>
+                  <Width>0.78125in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.51629in</Width>
@@ -264,9 +275,10 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>18</ColSpan>
+                        <ColSpan>19</ColSpan>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell />
                     <TablixCell />
                     <TablixCell />
                     <TablixCell />
@@ -287,7 +299,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.2in</Height>
+                  <Height>0.31458in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -300,7 +312,7 @@
                                 <TextRun>
                                   <Value>Buyer</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -316,10 +328,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -335,7 +344,7 @@
                                 <TextRun>
                                   <Value>Job</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -351,10 +360,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -370,7 +376,7 @@
                                 <TextRun>
                                   <Value>Style</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -386,10 +392,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -405,7 +408,7 @@
                                 <TextRun>
                                   <Value>Order</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -421,10 +424,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -440,7 +440,7 @@
                                 <TextRun>
                                   <Value>Color</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -456,10 +456,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -475,7 +472,7 @@
                                 <TextRun>
                                   <Value>Dia</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -491,10 +488,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -510,7 +504,7 @@
                                 <TextRun>
                                   <Value>GSM</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -526,10 +520,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -545,7 +536,7 @@
                                 <TextRun>
                                   <Value>Fab Type</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -561,10 +552,53 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Bod</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Part</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.25pt</Width>
+                            </Border>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -580,7 +614,7 @@
                                 <TextRun>
                                   <Value>Batch No</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -596,10 +630,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -615,7 +646,7 @@
                                 <TextRun>
                                   <Value>Date</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -631,10 +662,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -650,7 +678,7 @@
                                 <TextRun>
                                   <Value>Start Time</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -666,10 +694,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -685,7 +710,7 @@
                                 <TextRun>
                                   <Value>End Time</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -701,10 +726,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -718,15 +740,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Prod Qty</Value>
+                                  <Value>Prod  Qty</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Right</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -736,10 +758,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -753,9 +772,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Prod Time</Value>
+                                  <Value>Prod  Time</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -771,10 +790,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -790,7 +806,7 @@
                                 <TextRun>
                                   <Value>Remarks</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -806,10 +822,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -825,7 +838,7 @@
                                 <TextRun>
                                   <Value>ID &amp; Name</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -841,10 +854,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -860,7 +870,7 @@
                                 <TextRun>
                                   <Value>NPT</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -876,10 +886,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -895,7 +902,7 @@
                                 <TextRun>
                                   <Value>Total Time </Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -909,7 +916,7 @@
                                 <TextRun>
                                   <Value>(PT+NPT)</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -925,10 +932,7 @@
                               <Style>Solid</Style>
                               <Width>0.25pt</Width>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
+                            <VerticalAlign>Top</VerticalAlign>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1197,6 +1201,40 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>FabType</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.25pt</Width>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="BodyPartName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!BodyPartName.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>BodyPartName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1591,9 +1629,10 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>12</ColSpan>
+                        <ColSpan>13</ColSpan>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell />
                     <TablixCell />
                     <TablixCell />
                     <TablixCell />
@@ -1837,6 +1876,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1855,7 +1895,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.86458in</Size>
+                        <Size>0.82291in</Size>
                         <CellContents>
                           <Textbox Name="Textbox150">
                             <CanGrow>true</CanGrow>
@@ -1868,7 +1908,9 @@
                                     <Style />
                                   </TextRun>
                                 </TextRuns>
-                                <Style />
+                                <Style>
+                                  <TextAlign>Center</TextAlign>
+                                </Style>
                               </Paragraph>
                             </Paragraphs>
                             <rd:DefaultName>Textbox150</rd:DefaultName>
@@ -1877,6 +1919,7 @@
                                 <Color>LightGrey</Color>
                                 <Style>None</Style>
                               </Border>
+                              <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
                               <PaddingTop>2pt</PaddingTop>
@@ -1892,7 +1935,7 @@
                     </TablixMember>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.86458in</Size>
+                        <Size>0.82291in</Size>
                         <CellContents>
                           <Textbox Name="Textbox60">
                             <CanGrow>true</CanGrow>
@@ -1901,9 +1944,9 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Machine No</Value>
+                                    <Value>     Machine   No</Value>
                                     <Style>
-                                      <FontSize>9pt</FontSize>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
                                   </TextRun>
@@ -1919,10 +1962,7 @@
                                 <Style>Solid</Style>
                                 <Width>0.25pt</Width>
                               </Border>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
+                              <VerticalAlign>Top</VerticalAlign>
                             </Style>
                           </Textbox>
                         </CellContents>
@@ -1944,7 +1984,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>0.86458in</Size>
+                        <Size>0.82291in</Size>
                         <CellContents>
                           <Textbox Name="MachineNo3">
                             <CanGrow>true</CanGrow>
@@ -2051,9 +2091,9 @@
             </TablixRowHierarchy>
             <DataSetName>ReportData</DataSetName>
             <Top>0.01611in</Top>
-            <Left>0.2175in</Left>
-            <Height>0.98542in</Height>
-            <Width>11.23046in</Width>
+            <Left>0.0675in</Left>
+            <Height>1.1in</Height>
+            <Width>11.29428in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2068,7 +2108,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>11.47865in</Width>
+      <Width>11.55871in</Width>
       <Page>
         <PageHeader>
           <Height>1.33333in</Height>

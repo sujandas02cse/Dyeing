@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Batch Configuration(Finishing)</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .content-header {
+            background: linear-gradient(90deg, #7bbfda 0%, #9ed0e8 100%);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0;
+        }
+
+            .content-header h1 {
+                font-size: 16px;
+                font-weight: 700;
+                color: #1a3a4a;
+                margin: 0;
+            }
+
+            .content-header .breadcrumb {
+                background: transparent;
+                margin: 0;
+                padding: 0;
+                font-size: 11px;
+                color: #2a5068;
+            }
+
+                .content-header .breadcrumb a {
+                    color: #1a3a4a;
+                    text-decoration: none;
+                }
+
+            .content-header .breadcrumb-item + .breadcrumb-item::before {
+                content: '›';
+                color: #2a5068;
+            }
+
+        .card {
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .card-body {
+            padding: 14px 16px;
+            background: #fff;
+        }
+
+        .batch-label {
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .finish_wrap {
+            border: 1px solid #aaa;
+            margin-bottom: 6px;
+        }
+
+            .finish_wrap table {
+                margin-bottom: 0;
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+                .finish_wrap table th,
+                .finish_wrap table td {
+                    border: 1px solid #b0b8c0 !important;
+                    padding: 4px 7px !important;
+                    font-size: 12px;
+                    vertical-align: middle;
+                }
+
+                .finish_wrap table th {
+                    text-align: center;
+                }
+
+        .section-header {
+            background-color: #c8dff0 !important;
+            font-weight: 700;
+            text-align: center;
+        }
+
+            .section-header h5 {
+                margin: 0;
+                font-size: 12px;
+                font-weight: 700;
+                color: #1a3a56;
+            }
+
+        .finish_wrap table td:nth-child(odd):not([colspan]) {
+            white-space: nowrap;
+            width: 1%;
+            background-color: #fafbfc;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .finish_wrap table td:nth-child(even):not([colspan]) {
+            width: auto;
+        }
+
+        .form-control {
+            font-size: 12px !important;
+            height: 26px !important;
+            padding: 2px 6px !important;
+            border: 1px solid #b0b8c0 !important;
+            border-radius: 2px !important;
+            background: #fff;
+            width: 100%;
+            min-width: 50px;
+            box-sizing: border-box;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #5b9bd5 !important;
+                box-shadow: none !important;
+            }
+
+        .input-height {
+            height: auto !important;
+        }
+
+        .shrinkage-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+            .shrinkage-row > label {
+                white-space: nowrap;
+                margin: 0;
+                font-weight: 600;
+                font-size: 12px;
+            }
+
+            .shrinkage-row .shrink-item {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                min-width: 0;
+            }
+
+                .shrinkage-row .shrink-item label {
+                    white-space: nowrap;
+                    margin: 0;
+                    font-weight: 600;
+                    font-size: 12px;
+                }
+
+                .shrinkage-row .shrink-item .form-control {
+                    flex: 1;
+                    min-width: 40px;
+                }
+
+        .operator-row td {
+            background-color: #f4f6f8 !important;
+            font-size: 11px !important;
+            color: #666;
+            font-style: italic;
+        }
+
+        .col-left {
+            border-right: 1px solid #aaa;
+        }
+
+        .btn-save {
+            background-color: #2e7bbf;
+            color: #fff;
+            border: 1px solid #2567a4;
+            font-size: 12px;
+            padding: 4px 18px;
+            border-radius: 3px;
+        }
+
+            .btn-save:hover {
+                background-color: #2567a4;
+                color: #fff;
+            }
+
+        .btn-reset {
+            background-color: #6c757d;
+            color: #fff;
+            border: 1px solid #5a6268;
+            font-size: 12px;
+            padding: 4px 18px;
+            border-radius: 3px;
+            margin-right: 6px;
+        }
+
+            .btn-reset:hover {
+                background-color: #5a6268;
+                color: #fff;
+            }
+
+        .btn-delete {
+            background-color: #c0392b;
+            color: #fff;
+            border: 1px solid #a93226;
+            font-size: 12px;
+            padding: 4px 18px;
+            border-radius: 3px;
+            margin-right: 6px;
+        }
+
+            .btn-delete:hover {
+                background-color: #a93226;
+                color: #fff;
+            }
+
+        .finish_wrap .table {
+            margin-bottom: 0;
+        }
+
+            .finish_wrap .table td,
+            .finish_wrap .table th {
+                border-top: none;
+            }
+    </style>
+</head>
+
+<body ng-controller="BatchFinishingController">
+
+    <div class="content-header">
+        <h1>Batch Configuration(Finishing)</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Batch Configuration</a></li>
+                <li class="breadcrumb-item active">Batch Configuration(Finishing)</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="form-group row mb-2">
+                <div class="col-md-6">
+                    <div class="row align-items-center">
+                        <label class="batch-label col-md-4 col-form-label text-right pr-1">
+                            Batch No/QR Code: <span style="color:red">*</span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control input-height"
+                                   placeholder="Batch No.."
+                                   ng-model="batchFins.Batch"
+                                   typeahead="x as x.BatchNo for x in batchList | filter:{BatchNo:$viewValue} | limitTo:20"
+                                   typeahead-on-select="getDataByBatchId($item)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="finish_wrap">
+                <div class="row no-gutters">
+
+                    <div class="col-md-6 col-left">
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Slitting Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingMcSpeed" /></td>
+                                <td>P. Pressure</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingPPressure" /></td>
+                            </tr>
+                            <tr>
+                                <td>J-Box P. Pressure</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingJBoxPPressure" /></td>
+                                <td>Before Width</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingBWidth" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingOFPercent" /></td>
+                                <td>After Width</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SlittingAWidth" /></td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Heatset Parameter</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Grey Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetGreyDia" /></td>
+                                <td>Grey GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetGreyGSM" /></td>
+                            </tr>
+                            <tr>
+                                <td>A. P/H/S Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetAPHSDia" /></td>
+                                <td>A. P/H/S GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetAPHSGSM" /></td>
+                            </tr>
+                            <tr>
+                                <td>P/H/S Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetPHSSpeed" /></td>
+                                <td>P/H/S Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetPHSTemp" /></td>
+                            </tr>
+                            <tr>
+                                <td>Heatset Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetTemp" /></td>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetMcSpeed" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetOFPercent" /></td>
+                                <td>U/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetUFPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td>Pinning %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetPinningPercent" /></td>
+                                <td>Setting Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetSettingDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>Blower</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetBlower" /></td>
+                                <td>A/H/S Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetAHSDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>A/H/S GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.HeatsetAHSGSM" /></td>
+                                <td colspan="2" style="background:#fafbfc;"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="shrinkage-row">
+                                        <label>Shrinkage%:</label>
+                                        <div class="shrink-item">
+                                            <label>L=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.HeatsetShrinkageL" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>W=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.HeatsetShrinkageW" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>Sp=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.HeatsetShrinkageSp" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Brush Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Fabric Speed</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.BrushFabricSpeed" /></td>
+                            </tr>
+                            <tr>
+                                <td>1st/Lower Drum RPM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushLowerDrumRPM" /></td>
+                                <td>2nd/Upper Drum RPM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushUpperDrumRPM" /></td>
+                            </tr>
+                            <tr>
+                                <td>Lower Drum Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushLowerDrumPileSpeed" /></td>
+                                <td>Upper Drum Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushUpperDrumPileSpeed" /></td>
+                            </tr>
+                            <tr>
+                                <td>Lower Drum C. Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushLowerDrumCPileSpeed" /></td>
+                                <td>Upper Drum C. Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushUpperDrumCPileSpeed" /></td>
+                            </tr>
+                            <tr>
+                                <td>Lower Drum Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushLowerDrumTension" /></td>
+                                <td>Upper Drum Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.BrushUpperDrumTension" /></td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Dryer Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Steam</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerSteam" /></td>
+                                <td>Teflon</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerTeflon" /></td>
+                            </tr>
+                            <tr>
+                                <td>Chemical Used</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.DryerChemicalUsed" /></td>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerMcSpeed" /></td>
+                                <td>Set Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerSetDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>Angle %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerAnglePercent" /></td>
+                                <td>Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerTemp" /></td>
+                            </tr>
+                            <tr>
+                                <td>Chain O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerChainOFPercent" /></td>
+                                <td>Belt O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerBeltOFPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td>A. Width</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerAWidth" /></td>
+                                <td>A. GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerAGSM" /></td>
+                            </tr>
+                            <tr>
+                                <td>Shrinkage Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerShrinkageDia" /></td>
+                                <td>Vibration</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.DryerVibration" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="shrinkage-row">
+                                        <label>Shrinkage%:</label>
+                                        <div class="shrink-item">
+                                            <label>L=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.DryerShrinkageL" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>W=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.DryerShrinkageW" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>Sp=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.DryerShrinkageSp" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Squeezer Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SqueezerMcSpeed" /></td>
+                                <td>P. Pressure</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SqueezerPPressure" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SqueezerOFPercent" /></td>
+                                <td>After Width</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SqueezerAfterWidth" /></td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Stenter Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Chemical Used</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.StenterChemicalUsed" /></td>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterMcSpeed" /></td>
+                                <td>P. Pressure</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterPPressure" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterOFPercent" /></td>
+                                <td>U/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterUFPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td>Pinning %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterPinningPercent" /></td>
+                                <td>Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterTemp" /></td>
+                            </tr>
+                            <tr>
+                                <td>A. GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterAGSM" /></td>
+                                <td>Set Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterSetDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>Blower</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterBlower" /></td>
+                                <td>Shrinkage Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.StenterShrinkageDia" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="shrinkage-row">
+                                        <label>Shrinkage%:</label>
+                                        <div class="shrink-item">
+                                            <label>L=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.StenterShrinkageL" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>W=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.StenterShrinkageW" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>Sp=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.StenterShrinkageSp" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Sueding Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingPileSpeed" /></td>
+                                <td>C. Pile Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingCPileSpeed" /></td>
+                            </tr>
+                            <tr>
+                                <td>Drum RPM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingDrumRPM" /></td>
+                                <td>Plaiter Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingPlaiterTension" /></td>
+                            </tr>
+                            <tr>
+                                <td>Lower Front Drag Roll Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingLowerFrontDragRollTension" /></td>
+                                <td>Taker In Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.SuedingTakerInTension" /></td>
+                            </tr>
+                            <tr>
+                                <td>Fabric Speed</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.SuedingFabricSpeed" /></td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Shearing Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Fabric Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingFabricSpeed" /></td>
+                                <td>Cylinder RPM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingCylinderRPM" /></td>
+                            </tr>
+                            <tr>
+                                <td>Distance from Blade (mm)</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingDistanceFromBladeMM" /></td>
+                                <td>Distance from Comber (mm)</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingDistanceFromComberMM" /></td>
+                            </tr>
+                            <tr>
+                                <td>Feed Roller Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingFeedRollerTension" /></td>
+                                <td>Delivery Roller Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.ShearingDeliveryRollerTension" /></td>
+                            </tr>
+                        </table>
+
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Stenter Machine (2nd Time)</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Chemical Used</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.Stenter2ChemicalUsed" /></td>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2McSpeed" /></td>
+                                <td>P. Pressure</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2PPressure" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2OFPercent" /></td>
+                                <td>U/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2UFPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td>Pinning %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2PinningPercent" /></td>
+                                <td>Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2Temp" /></td>
+                            </tr>
+                            <tr>
+                                <td>A. GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2AGSM" /></td>
+                                <td>Set Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2SetDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>Blower</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2Blower" /></td>
+                                <td>Shrinkage Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.Stenter2ShrinkageDia" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="shrinkage-row">
+                                        <label>Shrinkage%:</label>
+                                        <div class="shrink-item">
+                                            <label>L=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.Stenter2ShrinkageL" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>W=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.Stenter2ShrinkageW" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>Sp=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.Stenter2ShrinkageSp" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="finish_wrap">
+                <div class="row no-gutters">
+
+                    <div class="col-md-6 col-left">
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>Compactor Machine</h5></th>
+                            </tr>
+                            <tr>
+                                <td>M/C Speed</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorMcSpeed" /></td>
+                                <td>Set Dia</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorSetDia" /></td>
+                            </tr>
+                            <tr>
+                                <td>O/F %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorOFPercent" /></td>
+                                <td>Temp</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorTemp" /></td>
+                            </tr>
+                            <tr>
+                                <td>Com Unit-1 Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorComUnit1Tension" /></td>
+                                <td>Com Unit-2 Tension</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorComUnit2Tension" /></td>
+                            </tr>
+                            <tr>
+                                <td>Compaction %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorCompactionPercent" /></td>
+                                <td>Pinning %</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorPinningPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td>Upper &amp; Lower Teflon Pressure</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.CompactorUpperLowerTeflonPressure" /></td>
+                            </tr>
+                            <tr>
+                                <td>A. Width</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorAWidth" /></td>
+                                <td>A. GSM</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.CompactorAGSM" /></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-md-6">
+                        <table class="table">
+                            <tr>
+                                <th colspan="4" class="section-header"><h5>QC Report / Finishing Record</h5></th>
+                            </tr>
+                            <tr>
+                                <td>Final Width</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.QCFinalWidth" /></td>
+                            </tr>
+                            <tr>
+                                <td>Final GSM</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.QCFinalGSM" /></td>
+                            </tr>
+                            <tr>
+                                <td>No. of Rolls</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.QCNoOfRoll" /></td>
+                            </tr>
+                            <tr>
+                                <td>P/L %</td>
+                                <td colspan="3"><input class="form-control" type="text" ng-model="machineFins.QCPLPercent" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="shrinkage-row">
+                                        <label>Shrinkage%:</label>
+                                        <div class="shrink-item">
+                                            <label>L=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.QCShrinkageL" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>W=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.QCShrinkageW" />
+                                        </div>
+                                        <div class="shrink-item">
+                                            <label>Sp=</label>
+                                            <input class="form-control" type="text" ng-model="machineFins.QCShrinkageSp" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Grey Weight</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.QCGreyWeight" /></td>
+                                <td>Finished Weight</td>
+                                <td><input class="form-control" type="text" ng-model="machineFins.QCFinishedWeight" /></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-12 text-center">
+                    <button type="button"
+                            class="btn btn-reset"
+                            ng-click="Refresh()">
+                        <i class="fa fa-refresh"></i> Reset
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-delete"
+                            ng-click="actionDialog('Delete', machineFins)">
+                        <i class="fa fa-trash"></i> Delete
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-save"
+                            ng-click="actionDialog(btnSave, machineFins)">
+                        <i class="fa fa-save"></i> {{btnSave || 'Save'}}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

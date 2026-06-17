@@ -7,7 +7,24 @@
 
     //UnitList
     BatchCardNew.GetUnitAll($rootScope.UserId, function (data) {
-        $scope.UnitList = data;
+        //$scope.UnitList = data;
+        $scope.UnitList = [
+            {
+                "Id": 4,
+                "UnitId": 4,
+                "Name": "Masco Industries Ltd.(Composite Knit Garments)"
+            },
+            {
+                "Id": 16,
+                "UnitId": 16,
+                "Name": "Masco Exports Ltd."
+            },
+            {
+                "Id": 59,
+                "UnitId": 59,
+                "Name": "Concept Knitting Ltd. (Dyeing Unit)"
+            }
+        ];
         if ($scope.SourceUnit === undefined)
             $scope.SourceUnit.UnitId = 0;
     });
@@ -55,12 +72,7 @@
       }
     };
     $scope.reviseNo = $location.search().r;
-    //if (reviseNo == undefined) {
-    //    reviseNo = 0;
-    //}
-    //else
-    //    reviseNo = 1;
-    //$scope.ReviseNo = reviseNo;
+   
 
     function NozzleTrollyBatchDataLoad(Bpmid) {
       BatchCardNew.GetNozzleTrollyBatchData(Bpmid, function(data) {
@@ -301,8 +313,10 @@
       //    $scope.batch.McNo = $scope.batch.McNo.MachineNo;
       //}
 
-      let Source = 0;
+        let Source = 0;
+        debugger
       if (
+
         $scope.SourceUnit === undefined ||
         $scope.SourceUnit.UnitId === null ||
         $scope.SourceUnit.UnitId === undefined
@@ -381,8 +395,8 @@
               "&&Format=PDF&&rType=" +
               rType +
               "&&UnitNo=" +
-              Unit +
-              "&&DyeingUnit=" + $scope.UnitId +"#view = FitH"
+              $scope.batch.SourceUnitId +
+              "&&DyeingUnit=" + $scope.batch.SourceUnitId + "#view = FitH"
           );
         } else $rootScope.alert(res.ErrorMsg);
       });

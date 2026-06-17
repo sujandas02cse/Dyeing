@@ -45,6 +45,10 @@
         .tbl-g {
             background: #1adf22 !important;
         }
+
+        .select2-container--default {
+            width: 100%;
+        }
         /*.control {
             display: block;
             position: relative;
@@ -110,7 +114,7 @@
                 <div class="row row-cols-md-auto align-items-center mb-5">
                     <!--1st row with Buyer, Job, Style, Order-->
                     <section class="col-md-12 row mb-3 ml-3">
-                        <div class="col-md-4 col-4">
+                        <div class="col-md-4 ">
                             <div class="row">
                                 <label class="control-label col-md-3 ">
                                     Unit:
@@ -124,23 +128,23 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4 ">
                             <div class="row">
                                 <label class="control-label col-md-6">From Date</label>
                                 <md-datepicker ng-model="FromDate" ng-class="col-md-6" ng-change="LoadProcessData()" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4 ">
                             <div class="row">
                                 <label class="control-label col-md-6">To Date</label>
                                 <md-datepicker ng-model="ToDate" ng-class="col-md-6" ng-change="LoadProcessData()" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                             </div>
                         </div>
-                        
+
                     </section>
                     <!--2nd Row lab booking No-->
                     <section class="row col-md-12 ml-3">
-                        <div class="col-md-4 col-4">
+                        <div class="col-md-4 ">
                             <div class="row">
                                 <label class="control-label col-md-4 ">
                                     Lab Dip Booking No.:
@@ -153,11 +157,11 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4 ">
                             <div class="row">
-                                
+
                                 <label class="control-label col-md-6">Receive Date</label>
-                                <md-datepicker ng-model="ReceiveDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus ng-disabled="true" ></md-datepicker>
+                                <md-datepicker ng-model="ReceiveDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus ng-disabled="true"></md-datepicker>
                             </div>
                         </div>
                     </section>
@@ -228,8 +232,8 @@
                                 <td>{{dataModel.Department}}</td>
                                 <td>{{dataModel.PrimaryLightSource}}</td>
                                 <td>{{dataModel.SecondaryLightSource}}</td>
-                                <td><md-datepicker ng-model="dataModel.BookingDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker></td>
-                                <td><md-datepicker ng-model="dataModel.RequiredSubmissionDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker></td>
+                                <td><md-datepicker ng-model="dataModel.BookingDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus ng-disabled="true"></md-datepicker></td>
+                                <td><md-datepicker ng-model="dataModel.RequiredSubmissionDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus ng-disabled="true"></md-datepicker></td>
                                 <td>
                                     <textarea class="form-control"
                                               id="remarks"
@@ -246,7 +250,7 @@
                                         You have reached the maximum character limit.
                                     </small>
                                 </td>
-                                <td>{{dataModel.LabDipBookingNo}}</td>
+                                <!--<td>{{dataModel.LabDipBookingNo}}</td>-->
 
                             </tr>
                         </tbody>

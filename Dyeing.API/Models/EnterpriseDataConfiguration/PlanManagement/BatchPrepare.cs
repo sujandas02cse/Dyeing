@@ -151,6 +151,8 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             };
             return DatabaseHub.MultiQuery<object, object, object, object, object, object, object, object>(
                     storedProcedureName: @"[dbo].[usp_get_BatchCardDataById1]", model: data, dbName: DyeingDB);
+            //return DatabaseHub.MultiQuery<object, object, object, object, object, object, object, object>(
+            //        storedProcedureName: @"[dbo].[usp_get_BatchCardDataById2]", model: data, dbName: DyeingDB);
         }
 
         public object BatchPrepare_SaveUpdate(BatchPrepareWrapper _obj)

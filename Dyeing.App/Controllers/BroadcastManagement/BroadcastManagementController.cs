@@ -48,6 +48,7 @@ namespace AMS.UI.Controllers
 
         public async Task<ActionResult> GetBroadcastData(string rptComInfo, string rptParm, string SQL, string Dataset)
         {
+
             prn = new PrintRDLC();
             rpt = new LocalReport();
             _rptInfo = new CommRptInfo();

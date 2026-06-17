@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MachinePlan</title>
+    <style>
+        .loa {
+            cursor: wait;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .tbl-w {
+            background: antiquewhite !important;
+        }
+
+        .tbl-g {
+            background: #1adf22 !important;
+        }
+        /*.control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+            .control input:checked ~ .control__indicator:after {
+                display: block;
+                color: #fff;
+            }
+        .control--checkbox .control__indicator:after {
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -52%);
+            -ms-transform: translate(-50%, -52%);
+            transform: translate(-50%, -52%);
+        }
+
+        .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 4px;
+            border: 2px solid #ccc;
+            background: transparent;
+        }
+            .control__indicator:after {
+                font-family: 'icomoon';
+                content: '\e5ca';*/
+        /*content: "\e013";*/
+        /*position: absolute;
+                display: none;
+            }
+        .control input:checked ~ .control__indicator {
+            border: 2px solid #007bff;
+            background: #007bff;
+        }*/
+
+    </style>
+</head>
+<body ng-controller="LabDipReceipeCardController">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Lab Dip & Receive Card</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Basic Data Configuration</a></li>
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Lab Basic Setup</a></li>
+                    <li><i class="fa fa-angle-right"></i> Lab Dip & Receive Card</li>
+                </ol>
+            </div>
+
+            <div class="card-body">
+                <div class="mb-5">
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <td><b>LAB Dip No.</b></td>
+                                <td>
+                                    <select class="form-control input-height col-md-12" select2="" name="Unit"
+                                            ng-change="LoadProcessData(LabDipBooking)"
+                                            ng-model="LabDipBooking"
+                                            ng-options="item as item.LDNo for item in LabDipBookingList">
+                                        <option value="" ng-required="true">Select Lab Dip No</option>
+                                    </select>
+                                </td>
+                                <td><b>Buyer</b></td>
+                                <td>
+                                    <input type="text" class="form-control" name="" value="{{LabDipBooking.BuyerName}}" readonly />
+                                </td>
+                                <td><b>Style</b></td>
+                                <td>
+                                    <input type="text" class="form-control" name="" value="{{LabDipBooking.Style}}" readonly />
+                                </td>
+                                <td><b>Color</b></td>
+                                <td>
+                                    <input type="text" class="form-control" name="" value="{{LabDipBooking.ColorNameId}}" readonly />
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <form id="form" name="form">
+            <div class="card mt-5">
+                <div class="card-header sty-one">
+                    <div class="form-inline" style="padding-bottom:2px">
+                        <!--<div class="col-sm-6" style="padding-left:0px;">-->
+                        <!--<input type="text" ng-model="search" ng-change="searchFilter()" class="form-control" placeholder="Search Here...">-->
+                        <!--</div>
+                        <div class="col-sm-6">
+                            <span style="color:green; float:right;">Total Count: {{labBookingReceiveList.length === nan ? 0 : labBookingReceiveList.length}} </span>
+                        </div>-->
+                    </div>
+                </div>
+                <div class=" table-responsive">
+                    <div class="mb-5">
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <tr class="table-primary">
+                                    <th>RN No.</th>
+                                    <th>Primary Light <br /> Source</th>
+                                    <th>Secondary Light <br /> Source</th>
+                                    <th>Pre Treatment <br /> Fabric Type</th>
+                                    <th>ML Ratio</th>
+                                    <th>Program Type</th>
+                                    <th>Level pH</th>
+                                    <th>Alkali pH</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.RNNo" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PrimaryLightSource" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.SecondaryLightSource" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PreTreatmentFabricType" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.MLRatio" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.ProgramType" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.LevelpH" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.AlkalipH" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.Remarks" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mb-5">
+                        <table class="table table-bordered">
+                            <thead class=" text-center" style="z-index:97 !important">
+                                <tr class="table-primary">
+                                    <th colspan="4"></th>
+                                    <th colspan="3">DEKOL-1 G/L</th>
+                                </tr>
+                                <tr class="table-primary">
+                                    <th colspan="2">Name of Dye Staff</th>
+                                    <th>Dyes %</th>
+                                    <th>Dyes Lot No</th>
+                                    <th>Salt G/L</th>
+                                    <th>Soda G/L</th>
+                                    <th>Caustic G/L</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="3">Cotton Part Recipe</td>
+                                    <td>SYNO ULT YELLOW DS</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CSynoULTYellowDSDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CSynoULTYellowDSDyesLot" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.DSalt" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.DSoda" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.DCaustic" /></td>
+                                </tr>
+                                <tr>
+                                    <td>SYNO ULT RED DS</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CSynoULTRedDSDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CSynoULTRedDSDyesLot" /></td>
+                                </tr>
+                                <tr>
+                                    <td>REMA BLUE RR</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CRemaBlueRRDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.CRemaBlueRRDyesLot" /></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">Poly Part Receipe</td>
+                                    <td>SYNO ULT YELLOW DS</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PSynoULTYellowDSDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PSynoULTYellowDSDyesLot" /></td>
+                                </tr>
+                                <tr>
+                                    <td>SYNO ULT RED DS</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PSynoULTRedDSDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PSynoULTRedDSDyesLot" /></td>
+                                </tr>
+                                <tr>
+                                    <td>REMA BLUE RR</td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PRemaBlueRRDyes" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PRemaBlueRRDyesLot" /></td>
+                                </tr>
+                                <tr>
+                                    <td> Total Shade %</td>
+                                    <td>
+                                        {{(+LabDipReceipe.CSynoULTRedDSDyes || 0) + (+LabDipReceipe.CRemaBlueRRDyes || 0) + (+LabDipReceipe.CSynoULTYellowDSDyes || 0) + (+LabDipReceipe.PSynoULTYellowDSDyes || 0) + (+LabDipReceipe.PSynoULTRedDSDyes || 0) + (+LabDipReceipe.PRemaBlueRRDyes || 0)}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <tr class="table-primary">
+                                    <th colspan="6"></th>
+                                    <th colspan="3">Reduction Program</th>
+                                </tr>
+                                <tr class="table-primary">
+                                    <th>Temp</th>
+                                    <th>pH</th>
+                                    <th>PSD (G/L)</th>
+                                    <th>Rl</th>
+                                    <th>DFM</th>
+                                    <th>TOP</th>
+                                    <th>Caustic Soda</th>
+                                    <th>Hydrogen</th>
+                                    <th>Temp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.Temp" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.pH" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.PSDGL" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.RI" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.DFM" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.TOP" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.RCausticSoda" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.RHydrogenPerOxide" /></td>
+                                    <td><input type="text" class="form-control" name="" ng-model="LabDipReceipe.RTemp" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="mt-5 mb-5">
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <td class="float-right">
+                                    <b class="mr-3">Prepared By</b>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" ng-model="$root.EmpName" readonly />
+                                </td>
+                                <td class="float-right">
+                                    <b class="mr-3">Checked By</b>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" readonly />
+                                </td>
+                                <td class="float-right">
+                                    <b class="mr-3">Authorized By</b>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" readonly />
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage">
+                </uib-pagination>-->
+            </div>
+            <div ng-show="LabDipBooking != undefined" class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                <div class="offset-md-2 col-md-9">
+                    <div ng-include src="'../../../App/Views/Shared/_LayoutIssueActionButton.html'"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -259,10 +259,7 @@
             // $scope.parmData.Unit = data[0];
           }
         });
-      }
-      else
-
-      {
+      } else {
         QCManagement.GetCompTimeByIdNew($scope.parmData.Batch.BpmId, function(
           data
         ) {
@@ -293,19 +290,46 @@
 
         debugger;
 
-        QCManagement.GetBasicInfo(
-          $scope.parmData.Batch.BpmId,
-          function(data) {
-            debugger;
-              if (data.length > 0) {
-                  $scope.parmData.BuyerId = data[0];
-
-            }
+        QCManagement.GetBasicInfo($scope.parmData.Batch.BpmId, function(data) {
+          debugger;
+          if (data.length > 0) {
+            $scope.parmData.BuyerId = data[0];
           }
-        );
+        });
 
+        debugger;
+        //if ($scope.rpt.ReportingId == 30) {
+        //  $scope.LoadInspectionOperationList();
+        //}
+
+          debugger;
+        if ($scope.rpt.ReportingId == 46) {
+          $scope.LoadInspectionOperationList();
         }
+      }
+    };
 
+    $scope.LoadInspectionOperationList = function() {
+      debugger;
+
+      $scope.OperationList = [];
+
+      if (!$scope.parmData.Batch || !$scope.parmData.Batch.BpmId) {
+        return;
+      }
+
+      QCManagement.GetInspectionOperationList(
+        $scope.parmData.Batch.BpmId,
+        function(data) {
+          debugger;
+
+          $scope.OperationList = data;
+
+          angular.forEach($scope.OperationList, function(item) {
+            item.IsChecked = false;
+          });
+        }
+      );
     };
 
     $scope.GetDataByBuyer = function(obj) {
@@ -671,7 +695,7 @@
 
       console.log($scope.parmData.BuyerId);
 
-        debugger;
+      debugger;
 
       let arr = JSON.parse(rptParm.replace(/'/g, '"'));
 
@@ -679,24 +703,38 @@
 
       if (
         $scope.batchType == "New" &&
-          $scope.rpt.ReportingId == 30
-          //&&
-          //( arr[0].UnitId == 16 || $scope.parmData.BuyerId == 7 )
-      )
-
-      {
-        //let arr = JSON.parse(rptParm.replace(/'/g, '"'));
-        console.log(arr[0].UnitId);
-        console.log(arr[4].BpmId);
-        console.log(arr[5].CompTime);
+        $scope.rpt.ReportingId == 30
+        //&&
+        //( arr[0].UnitId == 16 || $scope.parmData.BuyerId == 7 )
+      ) {
         var url = `../DashboardManagement/GetInspctionReport?BpmId=${
           arr[4].BpmId
         }&CompTime=${arr[5].CompTime}&Format=PDF`;
         $window.open(url);
       }
-      else
 
-      {
+      // New for 4 point inspection report with operationId
+        // for test it is 47 and for live it is 46
+
+     else if ($scope.batchType == "New" && $scope.rpt.ReportingId == 46) {
+        debugger;
+        var selectedOperationIds = [];
+
+        angular.forEach($scope.OperationList, function(item) {
+          if (item.IsChecked == true) {
+            selectedOperationIds.push(item.McOperationMasterId);
+          }
+        });
+
+        var operationIds = selectedOperationIds.join(",");
+
+        var url = `../DashboardManagement/GetInspctionReportNewFormat?BpmId=${
+          arr[4].BpmId
+        }&CompTime=${
+          arr[5].CompTime
+        }&OperationIds=${operationIds}&Format=${Format}`;
+        $window.open(url);
+      } else {
         $window.open(
           "../BroadcastManagement/GetBroadcastData?rptComInfo=" +
             encodeURIComponent(rptComInfo) +

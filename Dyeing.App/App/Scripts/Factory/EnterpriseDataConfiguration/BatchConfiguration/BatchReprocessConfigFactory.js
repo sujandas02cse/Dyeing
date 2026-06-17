@@ -31,12 +31,41 @@
     }
 
     _obj.SaveRollData = function (data, cb) {
-        $http.post(baseApiURL + 'BatchReprocessConfig/BatchReprocessData_SaveUpdate', data).then(function successCallback(response) {
+        $http.post(baseApiURL + 'BatchReprocessConfig/BatchReprocessData_SaveUpdate?', data).then(function successCallback(response) {
             cb(response.data);
         }, function errorCallback(response) {
             alert("Error Occured during Load Data....");
         });
     }
+
+
+    //New Process
+
+
+    _obj.GetBatchbyUnitNew = function (UnitId,Type, cb) {
+        $http.get(baseApiURL + 'BatchReprocessConfig/GetBatchbyUnitNew?UnitId=' + UnitId + '&&Type=' + Type).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+        });
+    }
+
+    _obj.GetBatchDatabyUnitNew = function (BpmId, cb) {
+        $http.get(baseApiURL + 'BatchReprocessConfig/GetBatchDatabyUnitNew?BpmId=' + BpmId).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+        });
+    }
+
+    _obj.SaveUpdateRollData = function (data, cb) {
+        $http.post(baseApiURL + 'BatchReprocessConfig/BatchReprocessData_SaveUpdateNew?', data).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Data....");
+        });
+    }
+
 
     return _obj;
 }]);

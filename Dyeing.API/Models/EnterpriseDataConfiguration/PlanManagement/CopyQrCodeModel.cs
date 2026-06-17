@@ -52,8 +52,12 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.PlanManagement
             parameters.Add(name: "@Method", value: copyQr.Method, dbType: DbType.String, direction: ParameterDirection.Input);
             parameters.Add(name: "@User", value: copyQr.UserId, dbType: DbType.String, direction: ParameterDirection.Input);
         
-            return DatabaseHub.Query<object>(
-                    storedProcedureName: @"[dbo].[usp_SaveUpdate_CopyQrCode]", parameters: parameters, dbName: DyeingDB);
+            //return DatabaseHub.Query<object>(
+            //        storedProcedureName: @"[dbo].[usp_SaveUpdate_CopyQrCode]", parameters: parameters, dbName: DyeingDB);
+            
+
+                 return DatabaseHub.Query<object>(
+                    storedProcedureName: @"[dbo].[usp_SaveUpdate_CopyQrCode_backup]", parameters: parameters, dbName: DyeingDB);
         }
 
         public async Task SaveStickerPath(string stickerPath, int rollNo, int bpmId, int qrCodeId,string userId)

@@ -224,7 +224,7 @@
         var sqlQuery = "[dbo].[usp_rpt_LabStickerOfflineForRoll]";
         var SQL = [{ SQL: sqlQuery }];
         var Dataset = [{ Dataset: "LabSticker" }];
-        var labStickerFlag = '';
+        var labStickerFlag = '0';
         $window.open(
             "../BroadcastManagement/GetBroadcastDataLabSticker?rptComInfo=" + JSON.stringify(rptComInfo) +
             "&&rptParm=" + JSON.stringify(rptParm) +

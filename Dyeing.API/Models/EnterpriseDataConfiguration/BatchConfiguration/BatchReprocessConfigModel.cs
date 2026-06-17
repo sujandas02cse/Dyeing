@@ -62,6 +62,48 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
         }
 
 
+        #region New Reprocess
+        public Task<IEnumerable<object>> GetBatchbyUnitNew(int UnitId, string Type)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@UnitId", value: UnitId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add(name: "@Type", value: Type, dbType: DbType.String, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_BatchbyUnit]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> GetBatchDatabyUnitNew(int BpmId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+            
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_BatchDatabyUnit]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> SaveUpdate(int BpmId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_Get_BatchDatabyUnit]", parameters: parameter, dbName: DyeingDB);
+        }
+
+        public Task<IEnumerable<object>> InsertBulkDataNew(BatchRprocessWrapper batchRprocessWrapper)
+        {
+            var dynamicParameters = new DynamicParameters();
+
+            dynamicParameters.Add("@UserId", batchRprocessWrapper.UserId);
+            dynamicParameters.Add("@Details", batchRprocessWrapper.Details.AsTableValuedParameter("dbo.BatchReprocessConfig",
+                new[] { "BpmId", "RollNo", "RStatus", "HostIP" }));
+            
+            return DatabaseHub.QueryAsync<object>(storedProcedureName: "[dbo].[usp_SaveUpdate_BatchReprocessDataNew]", parameters: dynamicParameters, dbName: DyeingDB);
+        }
+
+
+        #endregion
+
 
     }
 }

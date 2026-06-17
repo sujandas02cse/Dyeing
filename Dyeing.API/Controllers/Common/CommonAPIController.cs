@@ -1138,7 +1138,27 @@ namespace Dyeing.API.Controllers
         }
 
 
+        [HttpGet]
 
-      
+        public async Task<IHttpActionResult> GetInspectionOperationList(int BpmId)
+
+        {
+            try
+            {
+                var queryData = await new CommonModel().GetInspectionOperationList(BpmId);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(exception: new ServerException(message: "Database server temporarily unavailable."));
+                }
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception: exception);
+            }
+        }
+
+
     }
 }

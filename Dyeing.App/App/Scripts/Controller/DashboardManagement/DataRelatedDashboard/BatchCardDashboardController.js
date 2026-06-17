@@ -276,7 +276,7 @@
     };
 
 
-      $scope.GetDashboardDataNew = function (BpmId,ProcessName, flag) {
+      $scope.GetDashboardDataNew = function (BpmId, ProcessName, SourceUnitId, flag) {
           //var BpmId = $scope.BpmId;
           debugger;
           let RUnitId = 0;
@@ -341,7 +341,7 @@
                       "&&rType=" +
                       ProcessName+
                       "&&UnitNo=" +
-                      RUnitId +
+                      SourceUnitId +
                       "&&DyeingUnit=" +
                       RUnitId +
                       "#view=FitH"

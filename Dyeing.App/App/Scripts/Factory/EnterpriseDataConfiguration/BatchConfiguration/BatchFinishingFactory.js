@@ -29,6 +29,19 @@
     }
 
 
+    _obj.SaveBatchConfigurationFinishingNew = function (obj, cb) {
+        debugger;
+        $http.post(baseApiURL + 'BatchFinishing/BatchFinish_SaveUpdateNew', obj).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Information....");
+        });
+    }
+
+
+
+
+
 
 
     return _obj;

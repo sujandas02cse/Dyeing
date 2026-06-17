@@ -19,6 +19,7 @@ namespace Dyeing.API.Controllers.FabricDataConfiguration
         [HttpGet]
         public IHttpActionResult GetBarcodeInfo(Int64 BarcodeNumber)
         {
+
             try
             {
                 var queryData = new BarcodeConfigModel().GetBarcodeInfo(BarcodeNumber);

@@ -20,6 +20,15 @@
             });
     };
 
+    _obj.CheckLabDip = function (labDipNo, cb) {
+        $http.get(baseApiURL + 'LabDipDeclare/CheckLabDip?labDipNo=' + labDipNo).then(function successCallback(response) {
+            cb(response.data);
+        },
+            function errorCallback(response) {
+                alert("Error Occured during Load Data....");
+            });
+    };
+
 
     //================ SAVE / UPDATE =================//
 

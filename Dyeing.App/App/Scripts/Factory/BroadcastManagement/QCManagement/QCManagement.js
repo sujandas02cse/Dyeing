@@ -143,7 +143,14 @@
         });
     }
 
-
+    _obj.GetInspectionOperationList = function (BpmId, cb) {
+        debugger;
+        $http.get(baseApiURL + 'CommonApi/GetInspectionOperationList?BpmId=' + BpmId).then(function successCallback(response) {
+            cb(response.data);
+        }, function errorCallback(response) {
+            alert("Error Occured during Load Roll No Information....");
+        });
+    }
 
 
     return _obj;

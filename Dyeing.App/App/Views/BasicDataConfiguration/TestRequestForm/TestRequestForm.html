@@ -3,8 +3,351 @@
 <head>
     <meta charset="utf-8" />
     <title>Test Request Form</title>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .content {
+            padding: 0px;
+        }
+
+        table {
+        }
+
+            table th,
+            table td {
+                font-size: smaller;
+                border: 1px solid black !important;
+            }
+
+        .data_tbl {
+            position: relative;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+            .data_tbl thead {
+                position: sticky;
+                /* position: absolute; */
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+        .tbl-w {
+            background: antiquewhite !important;
+        }
+
+        .tbl-g {
+            background: #1adf22 !important;
+        }
+
+        .scale {
+            scale: 2;
+            z-index: -1;
+        }
+    </style>
 </head>
-<body>
-    <h5>Test Request Form</h5>
+<body ng-controller="TestRequestFormController as controller">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="content-header sty-one">
+                <h1>Test Request Form</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Basic Data Configuration</a></li>
+                    <li><a href="#"><i class="fa fa-angle-right"></i> Lab Basic Setup</a></li>
+                    <li><i class="fa fa-angle-right"></i> Test Request Form</li>
+                </ol>
+            </div>
+        
+            <div class="card-body">
+                <!--Card Text Center-->
+                <div class="text-center">
+                    <h1>MASCO GROUP CENTRAL R&D</h1>
+                    <h3>TEST REQUEST FORM</h3>
+                </div>
+                <div class="row p-3 mb-2">
+                    <div class="col-md-4">
+                        <table class="table table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">R&D Ref:</th>
+                                    <th colspan="4">
+                                        <select class="col-md-8 form-control" select2="" name="RnD"
+                                                data-ng-model="RnD"
+                                                ng-options="item as item.BookingNo for item in RefList">
+                                            <option value="" ng-required="true">Select Reference No</option>
+                                        </select>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Style Name:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.StyleName}}" readonly />
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Fabric Type:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.FabricType}}" readonly />
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Composition:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.Composition}}" readonly />
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table class="table table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Color:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.Color}}" readonly />
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Lot No:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" ng-model="RnD.LotNo"  />
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">R/GSM:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.GSM}}" readonly />
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">R/Dia:</th>
+                                    <th colspan="4">
+                                        <input type="text" class="form-control" name="" value="{{RnD.DiaSet}}" readonly />
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <table class="table table-bordered w-100">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" rowspan="2">Report no::</td>
+                                    <td colspan="4" >
+                                        <input type="text" class="form-control" name="" value="{{RnD.ReportNo}}" readonly />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" rowspan="2">Date:</td>
+                                    <th colspan="4">
+                                        <md-datepicker ng-model="RnD.InputDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus ></md-datepicker>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Table data list-->
+        <form id="form" name="form">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <!--Yarn Data-->
+                    <div>
+                        <h4 class="text-center">Yarn USER Report analysis</h4>
+                        <table class=" text-center table table-bordered w-100 mb-5">
+                            <thead>
+                                <tr>
+                                    <th>TPI</th>
+                                    <th>IPI</th>
+                                    <th>CSP</th>
+                                    <th>Fabric Length</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Test SUMMARY-->
+                    <div>
+                        <h4 class="text-center">TEST SUMMARY</h4>
+                        <table class=" text-center table table-bordered w-100 mb-5">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" colspan="3">Test parameters</th>
+                                    <th class="text-center" colspan="3" rowspan="2">Buyer Requirements</th>
+                                    <th class="text-center" colspan="3" rowspan="2">Test Result</th>
+                                    <th class="text-center" colspan="2">Remarks</th>
+                                </tr>
+                                <tr>
+                                    <th>Specialty</th>
+                                    <th>Method</th>
+                                    <th>Test Name</th>
+                                    <th>Pass</th>
+                                    <th>Fail</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr ng-repeat="test in First">
+                                    <td ng-if="$first || test.Specialty !== First[$index - 1].Specialty"
+                                        ng-attr-rowspan="{{ (First | filter:{Specialty: test.Specialty}).length }}">
+                                        {{test.Specialty}}
+                                    </td>
+                                    <td ng-if="$first || test.test_name !== First[$index - 1].test_name || test.method !== First[$index - 1].method || test.Specialty !== First[$index - 1].Specialty"
+                                        ng-attr-rowspan="{{ (First | filter:{Specialty: test.Specialty, method: test.method, test_name: test.test_name}).length }}">
+                                        {{test.method}}
+                                    </td>
+                                    <td ng-if="$first || test.test_name !== First[$index - 1].test_name || test.method !== First[$index - 1].method || test.Specialty !== First[$index - 1].Specialty"
+                                        ng-attr-rowspan="{{ (First | filter:{Specialty: test.Specialty, method: test.method, test_name: test.test_name}).length }}">
+                                        {{test.test_name}}
+                                    </td>
+                                    <td class="text-center" ng-attr-colspan="{{ test.BRparameter === 'Max 4%' ? 3 : 1 }}">{{test.BRparameter}}</td>
+                                    <td ng-show="test.BRparameter !== 'Max 4%'" colspan="2">{{test.buyer_requirements}}</td>
+                                    <!--<td class="text-center" ng-attr-colspan="{{ test.TRparameter === '1%' ? 3 : 1 }}">{{test.TRparameter}}</td>
+                                    <td ng-show="test.TRparameter !== '1%'" colspan="2"><input type="text"
+                                            class="form-control"
+                                            ng-model="test.test_result" />
+                                    </td> -->
+                                    <td class="text-center"
+                                        ng-if="test.TRparameter !== '1%'">
+                                        {{test.TRparameter}}
+                                    </td>
+
+                                    <td ng-if="test.TRparameter !== '1%'" colspan="2">
+                                        <input type="text"
+                                               class="form-control"
+                                               ng-model="test.test_result" />
+                                    </td>
+
+                                    <td ng-if="test.TRparameter === '1%'" colspan="3">
+                                        <input type="text"
+                                               class="form-control"
+                                               ng-model="test.test_result"/>
+                                    </td>
+                                    <td><input type="checkbox" ng-click="CheckState('P', test)" ng-model="test.Pass" class="scale" /></td>
+                                    <td><input type="checkbox" ng-click="CheckState('F', test)" ng-model="test.Fail" class="scale" /></td>
+                                </tr>
+                                <!--2nd part Start-->
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td>Color change</td>
+                                    <td>Color Stain</td>
+                                    <td>Cross Stain</td>
+                                    <td>Color Change</td>
+                                    <td>Color Stain</td>
+                                    <td>Cross Stain</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"></td>
+                                    <td rowspan="2">{{Second.Method}}</td>
+                                    <td rowspan="2">{{Second.TestName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{Second.color_Change}}</td>
+                                    <td>{{Second.color_Stain}}</td>
+                                    <td>{{Second.cross_Stain}}</td>
+                                    <td><input type="text" class="form-control" ng-model="Second.test_Color_Change"/></td>
+                                    <td><input type="text" class="form-control" ng-model="Second.test_Color_Stain" /></td>
+                                    <td><input type="text" class="form-control" ng-model="Second.test_Cross_Stain" /></td>
+                                    <td><input type="checkbox" ng-click="CheckState('P',Second)" ng-model="Second.Pass" class="scale" /></td>
+                                    <td><input type="checkbox" ng-click="CheckState('F',Second)" ng-model="Second.Fail" class="scale" /></td>
+                                </tr>
+                                <!--2nd Part End-->
+                                <!--3rd Part Start-->
+                                <tr ng-repeat="test in Third">
+                                    <td>
+                                        {{test.Specialty}}
+                                    </td>
+                                    <td ng-if="$first || test.method !== Third[$index - 1].method"
+                                        ng-attr-rowspan="{{ (Third | filter:{method: test.method}).length }}">
+                                        {{test.method}}
+                                    </td>
+                                    <td>{{test.test_name}}</td>
+                                    <td class="text-center" ng-attr-colspan="{{ (test.BRparameter === '=4 @7200 Cycles' || test.BRparameter === '=4 @4000 REV' || test.BRparameter === 'For brushed/brushed fabric washing < 120gsm, 200kPa') ? 3 : 1 }}">
+                                        {{test.BRparameter}}
+                                    </td>
+                                    <td ng-hide="(test.TRparameter === '=4 @7200 Cycles' || test.TRparameter === '=4 @4000 REV' || test.TRparameter === 'For brushed/brushed fabric washing < 120gsm, 200kPa')" colspan="2">
+                                        {{test.buyer_requirements}}
+                                    </td>
+
+                                    <td class="text-center" ng-hide="{{ (test.TRparameter === '=4 @7200 Cycles' || test.TRparameter === '=4 @4000 REV' || test.TRparameter === 'For brushed/brushed fabric washing < 120gsm, 200kPa') }}">
+                                        {{test.TRparameter}}
+                                    </td>
+                                    <td ng-attr-colspan="{{ (test.BRparameter === '=4 @7200 Cycles' || test.BRparameter === '=4 @4000 REV' || test.BRparameter === 'For brushed/brushed fabric washing < 120gsm, 200kPa') ? 3 : 2 }}">
+                                        <input type="text"
+                                               class="form-control"
+                                               ng-model="test.test_result" />
+                                    </td>
+                                    <!--<td ng-attr-colspan="{{ (test.BRparameter === '=4 @7200 Cycles' || test.BRparameter === '=4 @4000 REV' || test.BRparameter === 'For brushed/brushed fabric washing < 120gsm, 200kPa') ? 3 : 2 }}">
+                                        {{test.test_result}}
+                                    </td>-->
+
+                                    <td><input type="checkbox" ng-click="CheckState('P',test)" ng-model="test.Pass" class="scale" /></td>
+                                    <td><input type="checkbox" ng-click="CheckState('F',test)" ng-model="test.Fail" class="scale" /></td>
+                                </tr>
+                                <!--3rd Part End-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Fabric Finish-->
+                    <div>
+                        <h4 class="text-center">Yarn USER Report analysis</h4>
+                        <table class=" text-center table table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <th>GSM</th>
+                                    <th>Count</th>
+                                    <th>Stitch Length</th>
+                                    <th>WPI</th>
+                                    <th>WPI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td rowspan="4"></td>
+                                    <td rowspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-12 row" style="padding-top:10px;padding-bottom:10px;">
+                    <div class="offset-md-2 col-md-9">
+                        <div ng-include src="'../../../App/Views/Shared/_LayoutIssueActionButton.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
 </body>
 </html>

@@ -32,6 +32,29 @@ namespace Dyeing.API.Controllers.BasicDataConfiguration.LabBasicSetUp
             }
         }
 
+        [HttpGet]
+        public IHttpActionResult CheckLabDip(string labDipNo)
+        {
+            try
+            {
+                var queryData = new LabDipDeclareModel().CheckLabDip(labDipNo);
+
+                if (queryData == null)
+                {
+                    return InternalServerError(
+                        new Exception("Database server temporarily unavailable."));
+                }
+
+                return Ok(queryData);
+            }
+            catch (Exception exception)
+            {
+                return InternalServerError(exception);
+            }
+        }
+
+
+
         [HttpPost]
         public IHttpActionResult SaveUpdateLabDipDeclare(List<LabBookingReceiveDto> model)
         {

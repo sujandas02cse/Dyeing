@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardManagement\DashboardManagementController.cs" />
+    <Compile Include="Controllers\LabManagement\LabManagementController.cs" />
     <Compile Include="Models\BroadcastManagement\DataProcessingModel.cs" />
     <Compile Include="Models\Common\CommonInfo.cs" />
     <Compile Include="Models\Common\NoCacheAttribute.cs" />
@@ -178,6 +179,11 @@
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfigController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfigController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipDashboardController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipApprovalController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipSubmissionController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipInternalApprovedController.js" />
+    <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipReceipeCardController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabDipDeclareController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LabBookingReceiveController.js" />
     <Content Include="App\Scripts\Controller\BasicDataConfiguration\LabBasicSetUp\LightSourceEnlishmentController.js" />
@@ -211,6 +217,7 @@
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchCardSampleController.js" />
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchDataProcessingController.js" />
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchCardReprocessController.js" />
+    <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchFinishingNewController.js" />
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchReprocessConfigController.js" />
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\BatchConfiguration\BatchToBatchRollTransferController.js" />
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\PlanManagement\ActualQuantityUpdateController.js" />
@@ -231,6 +238,7 @@
     <Content Include="App\Scripts\Controller\EnterpriseDataConfiguration\PlanManagement\PrioritySet.js" />
     <Content Include="App\Scripts\Controller\FabricDataConfiguration\FinFabStoreIssueController.js" />
     <Content Include="App\Scripts\Controller\FabricDataConfiguration\FinishedFHTSController.js" />
+    <Content Include="App\Scripts\Controller\FabricDataConfiguration\FinishFabricInspectionConfigNewFormatController.js" />
     <Content Include="App\Scripts\Controller\FabricDataConfiguration\FinishFabricInspectionConfigOfflineController.js" />
     <Content Include="App\Scripts\Controller\FabricDataConfiguration\FinishFabricInspectionConfigSampleControllerNew.js" />
     <Content Include="App\Scripts\Controller\MachineDataConfiguration\MachineOperationConfigController.js" />
@@ -278,6 +286,11 @@
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfigFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfigFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipApprovalFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipDashboardFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipSubmissionFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipInternalApprovedFactory.js" />
+    <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipReceipeCardFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabDipDeclareFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LabBookingReceiveFactory.js" />
     <Content Include="App\Scripts\Factory\BasicDataConfiguration\LabBasicSetUp\LightSourceEnlishmentFactory.js" />
@@ -311,9 +324,11 @@
     <Content Include="App\Scripts\Factory\EnterpriseDataConfiguration\PlanManagement\SCMSynchronization.js" />
     <Content Include="App\Scripts\Factory\FabricDataConfiguration\FinFabStoreIssueFactory.js" />
     <Content Include="App\Scripts\Factory\FabricDataConfiguration\FinishedFabricHandoverToStoreFactory.js" />
+    <Content Include="App\Scripts\Factory\FabricDataConfiguration\FinishFabricInspectionConfigNewFormatFactory.js" />
     <Content Include="App\Scripts\Factory\FabricDataConfiguration\FinishFabricInspectionConfigOfflineFactory.js" />
     <Content Include="App\Scripts\Factory\FabricDataConfiguration\FinishFabricInspectionSampleConfigFactory.js" />
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\CompactingMcOperationFactory.js" />
+    <Content Include="App\Scripts\Factory\MachineDataConfiguration\MachineOperationConfigFactory.js" />
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\NewMcOperationConfigFactory.js" />
     <Content Include="App\Scripts\Factory\MachineDataConfiguration\McOperationConfigFactory.js" />
     <Content Include="App\Scripts\Factory\EnterpriseDataConfiguration\BatchConfiguration\BatchFinishingFactory.js" />
@@ -381,6 +396,11 @@
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\PointSystemValueRangeConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\PointValueRangeConfig.html" />
     <Content Include="App\Views\BasicDataConfiguration\InspectionConfiguration\UnitWiseInspectionMCConfig.html" />
+    <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipDashboard.html" />
+    <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipApproval.html" />
+    <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipSubmissionData.html" />
+    <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipInternalApproved.html" />
+    <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipReceipeCard.html" />
     <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabDipDeclare.html" />
     <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LabBookingReceive.html" />
     <Content Include="App\Views\BasicDataConfiguration\LabBasicSetUp\LightSourceEnlishment.html" />
@@ -416,6 +436,7 @@
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchCardReprocess.html" />
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchCardSample.html" />
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchDataProcessing.html" />
+    <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchFinishingNew.html" />
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchFinishing.html" />
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchPreparation.html" />
     <Content Include="App\Views\EnterpriseDataConfiguration\BatchConfiguration\BatchReprocessConfig.html" />
@@ -448,6 +469,7 @@
     <Content Include="App\Views\FabricDataConfiguration\FinFabStoreIssue.html" />
     <Content Include="App\Views\FabricDataConfiguration\FinFabricStoreIssueConfigOld.html" />
     <Content Include="App\Views\FabricDataConfiguration\FinishedFabricHandoverToStore.html" />
+    <Content Include="App\Views\FabricDataConfiguration\FinishFabricInspectionConfigNewFormat.html" />
     <Content Include="App\Views\FabricDataConfiguration\FinishFabricInspectionConfigOffline.html" />
     <Content Include="App\Views\FabricDataConfiguration\FinishFabricInspectionConfigSample.html" />
     <Content Include="App\Views\FabricDataConfiguration\FinishFabricInspectionOld.html" />
@@ -490,6 +512,7 @@
     <Content Include="App\template\Common\CustomDialog.html" />
     <Content Include="App\template\Common\CustomToast.html" />
     <Content Include="App\Views\Home\index.html" />
+    <Content Include="App\Views\Shared\_LayoutActionButtonMcOperation.html" />
     <Content Include="App\Views\Shared\_LayoutActionButtonManualQC.html" />
     <Content Include="App\Views\Shared\_LayoutBulkNewRadioButton.html" />
     <Content Include="App\Views\Shared\_LayoutBulkNewSelector.html" />
@@ -2350,6 +2373,8 @@
     <Content Include="Reports\QCManagement\4PointInspectionNew.rdlc" />
     <Content Include="Reports\FabricManagement\PackingList_New-Copy.rdl" />
     <Content Include="Reports\FabricManagement\PackingList_New-Copy.rdlc" />
+    <Content Include="Reports\LabManagement\LabDipReceipeReport.rdl" />
+    <Content Include="Reports\LabManagement\LabDipReceipeReport.rdlc" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2399,6 +2424,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Reports\ReportImages\" />
     <Folder Include="Views\Dashboard\" />
+    <Folder Include="Views\LabManagement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

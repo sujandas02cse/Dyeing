@@ -418,11 +418,15 @@
                                 Batch No:
                             </label>
                             <div class="col-md-8">
-                                <input type='text' placeholder="Batch No" id="BatchNo" style="width: 74%; display: inline;" auto-focus 
+                                <input type='text' 
+                                       placeholder="Batch No" 
+                                       id="BatchNo" 
+                                       style="width: 74%; display: inline;" auto-focus 
                                        ng-model="master.BatchNo"
                                        ng-virtual-keyboard="{kt: 'Numpad', enterSubmit: enterBatchClick, size:5, keyCenter: 4, customClass: 'myCustomizedVkt'}"
-                                       class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" my-enter="enterBatchClick()">
-                                <!--<input type="text" ng-model="master.BatchNo" style="width: 74%; display: inline;" placeholder="Batch No" class="form-control input-height clsHeight" ng-show='Batch2' />-->
+                                       class="ng-isolate-scope ng-pristine ng-valid form-control input-height clsHeight" 
+                                       my-enter="enterBatchClick()">
+                                
                                 <div style="display:inline;" class="button btn-info px-4 py-3 mr-1 mb-1 btn-mid" ng-click="Refresh()" role="button" tabindex="0">
                                     <span class="ng-binding"><i class="fa fa-refresh"></i></span>
                                 </div>

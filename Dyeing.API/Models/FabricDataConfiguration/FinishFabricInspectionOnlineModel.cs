@@ -39,6 +39,36 @@ namespace Dyeing.API.Models.FabricDataConfiguration
 
         }
 
+        
+
+        public InspectionModelNew UpdateNewFormat(InspectionMasterSaveOnlineNewFormat _obj)
+
+        {
+            var data = new
+            {
+                MasterId = _obj.MasterId,
+                BpmId = _obj.BpmId,
+                RollNo = _obj.RollNo,
+                Width=_obj.Width,
+                FinishWeight = _obj.FinishWeight,
+                ActualGSM = _obj.ActualGSM,
+                UserId = _obj.UserId,
+                HostIP = getclientIP(),
+
+                DyedInspectionDetail = _obj.list.AsTableValuedParameter("dbo.DyedInspectionDetail",
+                           new[] { "DyedInspectionDetailID", "FaultID", "TotalPoint", "PointID", "PointData", "RollNo" }),
+                MajorMinorFault = _obj.mnFaultList.AsTableValuedParameter("dbo.tvp_MajorMinorFault",
+                           new[] { "DyedInspectionDetailID", "FaultID", "Flag" })
+            };
+
+            return DatabaseHub.Query<object, InspectionModelNew>(
+                   storedProcedureName: @"[dbo].[usp_Update_FinishFabInspection]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+
+        }
+
+
+
         public class Machine
         {
 
@@ -147,6 +177,8 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string Flag { get; set; }
         }
 
+      
+
         public class InspectionMasterSaveOnline
         {
             public int Barcode { get; set; }
@@ -181,7 +213,64 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             public string  ActualGSM { get; set; }
         }
 
+    
 
+        public class InspectionMasterSaveOnlineNewFormat
+        {
+            public int Barcode { get; set; }
+            public int MasterId { get; set; }
+            public int BuyerId { get; set; }
+            public int OrderId { get; set; }
+
+          
+            public int FBarcodeGenerationID { get; set; }
+
+            public decimal Width { get; set; }
+            public decimal Length { get; set; }
+            public decimal FinishWeight { get; set; }
+            public decimal RejectWeight { get; set; }
+
+            public int TotalPoint { get; set; }
+            public decimal Ptsperhundred { get; set; }
+
+            public string GradeName { get; set; }
+            public string Remarks { get; set; }
+
+            public int RollNo { get; set; }
+            public bool LabSticker { get; set; }
+
+            public int CommercialApproved { get; set; }
+            public string GSM { get; set; }
+            public int QcMcNo { get; set; }
+            public string GradeNo { get; set; }
+
+            public int BpmId { get; set; }
+            public string BatchNo { get; set; }
+
+            public int CompTime { get; set; }
+            public int BodyPart { get; set; }
+
+            public string UserId { get; set; }
+
+            public string FinishedDia { get; set; }
+            public string FinishedGSM { get; set; }
+            public string ActualGSM { get; set; }
+
+            // New columns
+            public int? OperationTime { get; set; }
+            public int? MachineTypeId { get; set; }
+            public int? MachineId { get; set; }
+
+            // Optional helper from UI operation master
+            public int? McOperationMasterId { get; set; }
+
+
+            public IEnumerable<FaultEntityDetailSaveOnline> list { get; set; }
+            public IEnumerable<FaultEntityDetailSaveOnline> mnFaultList { get; set; }
+
+            public int BodyPartId { get; set; }
+           
+        }
 
         public class InspectionGrade
         {
@@ -243,6 +332,7 @@ namespace Dyeing.API.Models.FabricDataConfiguration
 
             public int QRCode { get; set; }
             public string UnitShortName { get; set; }
+            public string Composition { get; set; }
         }
 
         public class InspectionMasterSaveOffline
@@ -679,6 +769,89 @@ namespace Dyeing.API.Models.FabricDataConfiguration
             return result;
         }
 
+
+
+        public InspectionModelNew SaveNewFormat(InspectionMasterSaveOnlineNewFormat _obj)
+
+        {
+            var data = new
+            {
+
+                BatchNo = _obj.BatchNo,
+                LabSticker = _obj.LabSticker,
+                Width = _obj.Width,
+                FinishWeight = _obj.FinishWeight,
+                Remarks = _obj.Remarks,
+              
+                UserId = _obj.UserId,
+                HostIP = getclientIP(),
+
+                FinishedDia = _obj.FinishedDia,
+                FinishedGSM = _obj.FinishedGSM,
+                ActualGSM = _obj.ActualGSM,
+
+                OperationTime = _obj.OperationTime,
+                MachineTypeId = _obj.MachineTypeId,
+                MachineId = _obj.MachineId,
+                McOperationMasterId=_obj.McOperationMasterId,
+                BodyPartId= _obj.BodyPartId,
+                BpmId=_obj.BpmId,
+
+
+                DyedInspectionDetail = _obj.list.AsTableValuedParameter("dbo.DyedInspectionDetail",
+                           new[] { "DyedInspectionDetailID", "FaultID", "TotalPoint", "PointID", "PointData", "RollNo" }),
+                MajorMinorFault = _obj.mnFaultList.AsTableValuedParameter("dbo.tvp_MajorMinorFault",
+                           new[] { "DyedInspectionDetailID", "FaultID", "Flag" })
+            };
+            
+            return DatabaseHub.Query<object, InspectionModelNew>(
+                   storedProcedureName: @"[dbo].[usp_Save_FinishFabInspection]", model: data, dbName: DyeingDB).FirstOrDefault();
+
+
+        }
+
+
+        public object LoadAllGeneratedRolls(int mcOperationMasterId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@McOperationMasterId", value: mcOperationMasterId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+             var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_get_AllGeneratedRolls]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+
+        public object LoadRollWiseInspectionPoints(int BpmId, int RollNo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@RollNo", value: RollNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+           
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_GetRollWiseInspectionPoints]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+
+        public object LoadRollWiseFaults(int BpmId, int RollNo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@RollNo", value: RollNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_LoadSavedMajorMinorFaults]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
+
+
+
+        public object DisplayRollWiseBodyPart(int BpmId, int RollNo)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameters.Add(name: "@RollNo", value: RollNo, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_DisplayRollWiseBodyPart]", parameters: parameters, dbName: DyeingDB);
+            return result;
+        }
     }
 
 }

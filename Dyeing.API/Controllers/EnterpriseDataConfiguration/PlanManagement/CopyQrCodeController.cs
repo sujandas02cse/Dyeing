@@ -96,8 +96,6 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
                 throw new InvalidOperationException("Failed to resolve path for ~/images/RollSticker/.");
             }
 
-            //string protocol = HttpContext.Current.Request.ServerVariables["HTTPS"] == "off" ? "http://" : "https://";
-            //string baseUrl = HttpContext.Current.Request.ServerVariables["HTTP_HOST"];
 
             // for local 
             string protocol = "http://";
@@ -107,14 +105,6 @@ namespace Dyeing.API.Controllers.EnterpriseDataConfiguration.PlanManagement
             //string protocol = "";
             //string baseUrl = "https://mis-dyeing.mascoknit.com/";
 
-            // for  live server (ssl security issue)
-            //string protocol = "";
-            //string baseUrl = "http://mis-dyeing.mascoknit.com/";
-
-
-            // for  old test server
-            //string protocol = "";
-            //string baseUrl = "http://192.168.50.61:91/";
 
 
             // for  new test server

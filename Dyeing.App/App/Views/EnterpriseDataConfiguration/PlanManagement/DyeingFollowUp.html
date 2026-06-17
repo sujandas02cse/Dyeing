@@ -233,7 +233,7 @@
                                 <th>Per DElivery Qty <br /> (Approx.)</th>
                                 <th>Comment</th>
                                 <th>Revise No. (From <br /> Knitting)</th>
-                                <th>Knitting Status</th>
+                                <!--<th>Knitting Status</th>-->
                                 <th>Dyeing Delivery <br />Start Date </th>
                                 <th>Dyeing Delivery <br />Finished Date </th>
                                 <th>Per Delivery Qty <br />(Approx.)</th>
@@ -262,7 +262,7 @@
                                 <td>{{dataModel.PerDeliveryQty_Dyeing}}</td>
                                 <td>{{dataModel.KnittingComment}}</td>
                                 <td>{{dataModel.ReviseNo_FromDyeing}}</td>
-                                <td><input class="form-control" type="text" name="name" ng-model="dataModel.KnittingStatus" /></td>
+                                <!--<td><input class="form-control" type="text" name="name" ng-model="dataModel.KnittingStatus" /></td>-->
                                 <td><md-datepicker ng-model="dataModel.DyeingDeliveryStartDate" md-placeholder="Start Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker></td>
                                 <td><md-datepicker ng-model="dataModel.DyeingDeliveryFinishedDate" md-placeholder="Finish Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker></td>
                                 <td><input class="form-control" type="text" name="name" ng-keypress="onlyNumber($event, true)" ng-blur="checkMin(dataModel, 'PerDeliveryQty', 0)" ng-model="dataModel.PerDeliveryQty" /></td>

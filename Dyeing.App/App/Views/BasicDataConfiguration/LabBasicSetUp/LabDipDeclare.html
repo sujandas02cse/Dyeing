@@ -97,11 +97,11 @@
     <div class="col-md-12">
         <div class="card">
             <div class="content-header sty-one">
-                <h1>Lab Booking Receive</h1>
+                <h1>Lab Dip No Declare</h1>
                 <ol class="breadcrumb">
                     <li><a href="#">Basic Data Configuration</a></li>
                     <li><a href="#"><i class="fa fa-angle-right"></i> Lab Basic Setup</a></li>
-                    <li><i class="fa fa-angle-right"></i> Lab Booking Receive</li>
+                    <li><i class="fa fa-angle-right"></i> Lab Dip Declare</li>
                 </ol>
             </div>
 
@@ -110,13 +110,13 @@
                 <div class="row row-cols-md-auto align-items-center mb-5">
                     <!--1st row with Buyer, Job, Style, Order-->
                     <section class="col-md-12 row mb-3 ml-3">
-                        <div class="col-md-4 col-4">
+                        <div class="col-md-4">
                             <div class="row">
-                                <label class="control-label col-md-3 ">
+                                <label class="control-label col-md-4 ">
                                     Unit:
                                     <span class="required" style="color:red"> * </span>
                                 </label>
-                                <select class="form-control input-height col-md-9" select2="" name="Unit"
+                                <select class="form-control input-height col-md-8" select2="" name="Unit"
                                         ng-change="LoadProcessData()"
                                         ng-model="Unit"
                                         ng-options="item as item.Name for item in UnitList">
@@ -124,19 +124,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4">
                             <div class="row">
-                                <label class="control-label col-md-6">From Date</label>
-                                <md-datepicker ng-model="FromDate" ng-class="col-md-6" ng-change="LoadProcessData()" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                <label class="control-label col-md-4">From Date</label>
+                                <md-datepicker ng-model="FromDate" ng-class="col-md-8" ng-change="LoadProcessData()" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4">
                             <div class="row">
-                                <label class="control-label col-md-6">To Date</label>
-                                <md-datepicker ng-model="ToDate" ng-class="col-md-6" ng-change="LoadProcessData()" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
+                                <label class="control-label col-md-4">To Date</label>
+                                <md-datepicker ng-model="ToDate" ng-class="col-md-8" ng-change="LoadProcessData()" md-placeholder="To Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker>
                             </div>
                         </div>
-                        
+
                     </section>
                     <!--2nd Row lab booking No-->
                     <section class="row col-md-12 ml-3">
@@ -153,9 +153,14 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-2">
+                        <div class="col-md-4 col-2">
                             <div class="row">
-                            
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-2">
+                            <div class="row">
+
                             </div>
                         </div>
                     </section>
@@ -221,7 +226,27 @@
                                 <td>{{dataModel.ColorCode}}</td>
                                 <td>{{dataModel.ColorStandard}}</td>
                                 <td>{{dataModel.Pantone}}</td>
-                                <td>{{dataModel.LabDipBookingNo}}</td>
+                                <td>
+                                    <textarea class="form-control"
+                                              id="remarks"
+                                              rows="2"
+                                              placeholder="Type here..."
+                                              ng-model="dataModel.LDNo"
+                                              ng-keydown="$event.keyCode == 32 && $event.preventDefault()"
+                                              ng-blur="checkLDNo(dataModel)"
+                                              maxlength="50">
+                                    </textarea>
+                                    <small class="text-danger"
+                                           ng-show="dataModel.IsDuplicate">
+                                        LD No already exists.
+                                    </small>
+                                    <small class="text-muted d-block text-right">
+                                        {{ dataModel.Comments.length || 0 }}/50 characters
+                                    </small>
+                                    <small class="text-danger" ng-show="dataModel.Comments.length >= 50">
+                                        You have reached the maximum character limit.
+                                    </small>
+                                </td>
                                 <td><md-datepicker ng-model="dataModel.LabStartDate" ng-class="col-md-6" md-placeholder="From Date" md-hide-icons="calendar" md-open-on-focus></md-datepicker></td>
 
                             </tr>

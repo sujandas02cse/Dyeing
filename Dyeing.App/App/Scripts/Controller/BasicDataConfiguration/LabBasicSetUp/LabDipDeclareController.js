@@ -6,7 +6,7 @@
     $scope.allCheck = false;
 
     LabDipDeclare.GetUnitAll($rootScope.UserId, function (data) {
- 
+
         $scope.UnitList = data;
         if ($scope.UnitList.length == 1)
             $scope.Unit = $scope.UnitList[0];
@@ -16,13 +16,17 @@
     $scope.LoadProcessData = function () {
 
         if (!$scope.Unit || !$scope.FromDate || !$scope.ToDate || $scope.FromDate > $scope.ToDate) return;
-  
+
         $rootScope.ShowLoader('Loading Info Data');
 
         LabDipDeclare.GetLabDipDeclare($scope.Unit.UnitId, formatDateForSQL($scope.FromDate), formatDateForSQL($scope.ToDate), function (data) {
             $scope.labBookingReceiveList = data.m_Item1;
             $scope.BookingNoList = data.m_Item2;
             $rootScope.HideLoader();
+
+            angular.forEach($scope.labBookingReceiveList, function (item) {
+                item.IsDuplicate = false;
+            });
         });
         $rootScope.HideLoader();
 
@@ -62,6 +66,7 @@
                 LabReceivedId: item.LabReceiveId,
                 LabStartDate: formatDateForSQL(item.LabStartDate),
                 LabDipBookingNo: item.LabDipBookingNo,
+                LDNo: item.LDNo,
                 UserId: $rootScope.UserId,
                 UserIp: $rootScope.UserIp
             };
@@ -103,10 +108,10 @@
     function objData(action) {
         var obj = [];
         if (action == "Save") {
-            obj = {Mode: "Save",btnText: "Yes",Header: "Save Confirmation",message: "Do you want to save Batch Data?"};
+            obj = { Mode: "Save", btnText: "Yes", Header: "Save Confirmation", message: "Do you want to save Batch Data?" };
         }
         else if (action == "Update") {
-            obj = {Mode: "Update",btnText: "Yes",Header: "Update Confirmation",message: "Do you want to update Batch Data?"};
+            obj = { Mode: "Update", btnText: "Yes", Header: "Update Confirmation", message: "Do you want to update Batch Data?" };
         }
         return obj;
     }
@@ -119,7 +124,7 @@
         LabDipDeclare.SaveUpdateLabDipDeclare($scope.selectList, function (data) {
             debugger
             if (data[0].Msg && data[0].Msg !== '') {
-                
+
                 $rootScope.alert("Data Saved Successfully");
             } else {
                 $rootScope.alert("Error occurred while saving data");
@@ -129,12 +134,12 @@
     }
 
     $scope.Refresh = function () {
-        
+
         //$scope.Unit === undefined;
         $scope.Job === undefined;
         $scope.Style === undefined;
         $scope.Order === undefined;
-
+        $scope.allCheck = false;
         $scope.BuyerList = [];
         $scope.StyleList = [];
         $scope.OrderList = [];
@@ -143,13 +148,42 @@
         $scope.Revise = '';
         $scope.FromDate = '';
         $scope.ToDate = '';
-        LabBookingReceive.GetUnitAll($rootScope.UserId,function (data) {
+        LabBookingReceive.GetUnitAll($rootScope.UserId, function (data) {
             //$scope.OFabOpList = data;
             $scope.UnitList = data;
-
         });
 
     }
+
+    //LabDip No Check in Database
+    $scope.checkLDNo = function (item) {
+        debugger
+        item.IsDuplicate = false;
+
+        if (!item.LDNo)
+            return;
+
+        // Check duplicate in current list
+        var duplicate = $scope.labBookingReceiveList.filter(function (x) {
+            return x.LDNo === item.LDNo;
+        });
+
+        if (duplicate.length > 1) {
+            item.IsDuplicate = true;
+            return;
+        }
+
+        // Check duplicate in database
+        LabDipDeclare.CheckLabDip(item.LDNo, function (response) {
+
+            if (response[0].msg === 'Duplicate') {
+                item.IsDuplicate = true;
+            }
+            else {
+                item.IsDuplicate = false;
+            }
+        });
+    };
 
 
     function formatDateForSQL(dateString) {

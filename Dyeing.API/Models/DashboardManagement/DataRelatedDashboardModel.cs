@@ -692,6 +692,18 @@ namespace Dyeing.API.Models.DashboardManagement
             return DatabaseHub.QueryAsync<object>(
                     storedProcedureName: @"[dbo].[Usp_rpt_FourPointInspection]", parameters: parameters, dbName: DyeingDB);
         }
+
+        public Task<IEnumerable<object>> GetInspectionDataNewFormat(int BpmId, int CompTime,string OperationIds, string Part)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@CompTime", value: CompTime, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@OperationIds", value: OperationIds, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameters.Add(name: "@Part", value: Part, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            return DatabaseHub.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[Usp_rpt_FourPointInspection_NewFormat]", parameters: parameters, dbName: DyeingDB);
+        }
         #endregion
     }
 }

@@ -496,8 +496,11 @@ namespace Dyeing.API.Models
         {
             var parameter = new DynamicParameters();
             parameter.Add(name: "@BatchNo", value: BatchNo, dbType: DbType.String, direction: ParameterDirection.Input);
+            //return DatabaseHubRpt.QueryAsync<object>(
+            //        storedProcedureName: @"[dbo].[usp_get_SourceInspectionDetails]", parameters: parameter, dbName: DyeingDB);
+
             return DatabaseHubRpt.QueryAsync<object>(
-                    storedProcedureName: @"[dbo].[usp_get_SourceInspectionDetails]", parameters: parameter, dbName: DyeingDB);
+                   storedProcedureName: @"[dbo].[usp_get_SourceInspectionDetails_New]", parameters: parameter, dbName: DyeingDB);
         }
 
         public Task<IEnumerable<object>> GetRollListByQRCode(string QRCode)
@@ -525,5 +528,14 @@ namespace Dyeing.API.Models
                     storedProcedureName: @"[dbo].[usp_get_DestinationInspectionDetails]", parameters: parameter, dbName: DyeingDB);
         }
 
+       
+
+        public Task<IEnumerable<object>> GetInspectionOperationList(int BpmId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add(name: "@BpmId", value: BpmId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            return DatabaseHubRpt.QueryAsync<object>(
+                    storedProcedureName: @"[dbo].[usp_GetInspectionOperationList]", parameters: parameter, dbName: DyeingDB);
+        }
     }
 }

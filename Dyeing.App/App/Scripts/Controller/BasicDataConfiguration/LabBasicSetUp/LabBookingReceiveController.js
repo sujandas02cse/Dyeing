@@ -6,7 +6,7 @@
     $scope.allCheck = false;
 
     LabBookingReceive.GetUnitAll($rootScope.UserId, function (data) {
- 
+
         $scope.UnitList = data;
         if ($scope.UnitList.length == 1)
             $scope.Unit = $scope.UnitList[0];
@@ -106,10 +106,10 @@
     function objData(action) {
         var obj = [];
         if (action == "Save") {
-            obj = {Mode: "Save",btnText: "Yes",Header: "Save Confirmation",message: "Do you want to save Batch Data?"};
+            obj = { Mode: "Save", btnText: "Yes", Header: "Save Confirmation", message: "Do you want to save Batch Data?" };
         }
         else if (action == "Update") {
-            obj = {Mode: "Update",btnText: "Yes",Header: "Update Confirmation",message: "Do you want to update Batch Data?"};
+            obj = { Mode: "Update", btnText: "Yes", Header: "Update Confirmation", message: "Do you want to update Batch Data?" };
         }
         return obj;
     }
@@ -122,7 +122,7 @@
         LabBookingReceive.SaveLabBookingReceive($scope.selectList, function (data) {
             debugger
             if (data[0].Msg && data[0].Msg !== '') {
-                
+
                 $rootScope.alert("Data Saved Successfully");
             } else {
                 $rootScope.alert("Error occurred while saving data");
@@ -132,7 +132,7 @@
     }
 
     $scope.Refresh = function () {
-        
+
         //$scope.Unit === undefined;
         $scope.Job === undefined;
         $scope.Style === undefined;
@@ -144,7 +144,7 @@
         $scope.selectList = [];
         $scope.labBookingReceiveList = [];
         $scope.Revise = '';
-        LabBookingReceive.GetUnitAll($rootScope.UserId,function (data) {
+        LabBookingReceive.GetUnitAll($rootScope.UserId, function (data) {
             //$scope.OFabOpList = data;
             $scope.UnitList = data;
 

@@ -146,6 +146,15 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
             return DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMInfoNew]", parameters: parameters, dbName: DyeingDB).FirstOrDefault();
         }
 
+        public object GetBatchWiseGSMInfoNewFormat(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+           
+            return DatabaseHub.Query<object>(storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMInfoNew_Format]", parameters: parameters, dbName: DyeingDB).FirstOrDefault();
+        }
+
+
         public async Task<object> GetBatchWiseGSMDetailsInfoNew(int BpmId, int CompTime)
         {
             var parameters = new DynamicParameters();
@@ -157,6 +166,15 @@ namespace Dyeing.API.Models.EnterpriseDataConfiguration.BatchConfiguration
 
             return await DatabaseHub.MultiQueryAsync<object, object>(
                   storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMDetailsInfo_New]", parameters: parameters, dbName: DyeingDB);
+        }
+
+
+        public async Task<object> GetBatchWiseGSMDetailsInfoNewFormat(int BpmId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add(name: "@BpmId", value: BpmId, dbType: DbType.String, direction: ParameterDirection.Input);
+            return await DatabaseHub.MultiQueryAsync<object, object>(
+                  storedProcedureName: @"[dbo].[usp_Get_BatchWiseGSMDetailsInfo_NewFormat]", parameters: parameters, dbName: DyeingDB);
         }
 
         public  Task<long> BatchWiseGSM_SaveUpdateNew(BatchGSMWrapper _obj)
